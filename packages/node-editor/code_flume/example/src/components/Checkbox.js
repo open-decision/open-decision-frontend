@@ -1,5 +1,5 @@
 import React from "react";
-import nanoid from "nanoid";
+import { nanoid } from "nanoid";
 
 export default ({ label, value, onChange }) => {
   const id = React.useRef(nanoid(10));
@@ -14,7 +14,9 @@ export default ({ label, value, onChange }) => {
         onChange={e => onChange(e.target.checked)}
       />
       <label htmlFor={id.current} className="checkbox-box"></label>
-      <label htmlFor={id.current} className="checkbox-label">{label}</label>
+      <label htmlFor={id.current} className="checkbox-label">
+        {label}
+      </label>
     </div>
   );
 };

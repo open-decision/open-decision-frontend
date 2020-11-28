@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Checkbox.css";
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure/index";
 
 const Checkbox = ({ label, data, onChange }) => {
   const id = React.useRef(nanoid(10));
@@ -13,7 +13,7 @@ const Checkbox = ({ label, data, onChange }) => {
         id={id}
         value={data}
         checked={data}
-        onChange={e => onChange(e.target.checked)}
+        onChange={(e) => onChange(e.target.checked)}
       />
       <label className={styles.label} htmlFor={id}>
         {label}

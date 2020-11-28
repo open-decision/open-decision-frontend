@@ -1,11 +1,11 @@
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure/index";
 
 const setComment = (comments, id, merge) => ({
   ...comments,
   [id]: {
     ...comments[id],
-    ...merge
-  }
+    ...merge,
+  },
 });
 
 export default (comments = {}, action) => {
@@ -19,18 +19,18 @@ export default (comments = {}, action) => {
         width: 200,
         height: 30,
         color: "blue",
-        isNew: true
+        isNew: true,
       };
       return {
         ...comments,
-        [comment.id]: comment
+        [comment.id]: comment,
       };
     }
     case "REMOVE_COMMENT_NEW":
       const { isNew: toDelete, ...comment } = comments[action.id];
       return {
         ...comments,
-        [action.id]: comment
+        [action.id]: comment,
       };
     case "SET_COMMENT_COORDINATES": {
       return setComment(comments, action.id, { x: action.x, y: action.y });
@@ -38,7 +38,7 @@ export default (comments = {}, action) => {
     case "SET_COMMENT_DIMENSIONS": {
       return setComment(comments, action.id, {
         width: action.width,
-        height: action.height
+        height: action.height,
       });
     }
     case "SET_COMMENT_TEXT": {

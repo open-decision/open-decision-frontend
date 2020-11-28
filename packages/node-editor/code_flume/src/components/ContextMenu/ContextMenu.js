@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContextMenu.css";
 import clamp from "lodash/clamp";
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure/index";
 
 const ContextMenu = ({
   x,
@@ -12,7 +12,7 @@ const ContextMenu = ({
   label,
   hideHeader,
   hideFilter,
-  emptyText
+  emptyText,
 }) => {
   const menuWrapper = React.useRef();
   const menuOptionsWrapper = React.useRef();
@@ -22,13 +22,13 @@ const ContextMenu = ({
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const menuId = React.useRef(nanoid(10));
 
-  const handleOptionSelected = option => {
+  const handleOptionSelected = (option) => {
     onOptionSelected(option);
     onRequestClose();
   };
 
   const testClickOutside = React.useCallback(
-    e => {
+    (e) => {
       if (menuWrapper.current && !menuWrapper.current.contains(e.target)) {
         onRequestClose();
         document.removeEventListener("click", testClickOutside);
@@ -39,7 +39,7 @@ const ContextMenu = ({
   );
 
   const testEscape = React.useCallback(
-    e => {
+    (e) => {
       if (e.keyCode === 27) {
         onRequestClose();
         document.removeEventListener("keydown", testEscape);
@@ -66,23 +66,25 @@ const ContextMenu = ({
   const filteredOptions = React.useMemo(() => {
     if (!filter) return options;
     const lowerFilter = filter.toLowerCase();
-    return options.filter(opt => opt.label.toLowerCase().includes(lowerFilter));
+    return options.filter((opt) =>
+      opt.label.toLowerCase().includes(lowerFilter)
+    );
   }, [filter, options]);
 
-  const handleFilterChange = e => {
+  const handleFilterChange = (e) => {
     const value = e.target.value;
     setFilter(value);
     setSelectedIndex(0);
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     // Up pressed
     if (e.which === 38) {
       e.preventDefault();
       if (selectedIndex === null) {
         setSelectedIndex(0);
       } else if (selectedIndex > 0) {
-        setSelectedIndex(i => i - 1);
+        setSelectedIndex((i) => i - 1);
       }
     }
     // Down pressed
@@ -91,7 +93,7 @@ const ContextMenu = ({
       if (selectedIndex === null) {
         setSelectedIndex(0);
       } else if (selectedIndex < filteredOptions.length - 1) {
-        setSelectedIndex(i => i + 1);
+        setSelectedIndex((i) => i + 1);
       }
     }
     // Enter pressed
@@ -128,12 +130,12 @@ const ContextMenu = ({
   return (
     <div
       className={styles.menuWrapper}
-      onMouseDown={e => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
       onKeyDown={handleKeyDown}
       style={{
         left: x,
         top: y,
-        width: filter ? menuWidth : "auto"
+        width: filter ? menuWidth : "auto",
       }}
       ref={menuWrapper}
       tabIndex={0}
@@ -189,7 +191,7 @@ const ContextOption = ({
   children,
   onClick,
   selected,
-  onMouseEnter
+  onMouseEnter,
 }) => {
   return (
     <div

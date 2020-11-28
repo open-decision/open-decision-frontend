@@ -1,10 +1,11 @@
 import React from "react";
 import { PreviewFieldsDispatchContext } from "./Form";
-import resolveLogic from './resolveLogic'
-import nanoid from "nanoid/non-secure/index";
+import resolveLogic from "./resolveLogic";
+import { nanoid } from "nanoid/non-secure/index";
 
 export default ({ field, fields }) => {
-  const { label, value, disabled, visible, required } = resolveLogic(field, fields) || {};
+  const { label, value, disabled, visible, required } =
+    resolveLogic(field, fields) || {};
   const dispatchPreviewFields = React.useContext(PreviewFieldsDispatchContext);
 
   const handleChange = value => {
@@ -53,8 +54,7 @@ export default ({ field, fields }) => {
     }
   };
 
-  return (
-    visible ?
+  return visible ? (
     <FieldWrapper
       disabled={disabled}
       required={required}
@@ -63,8 +63,7 @@ export default ({ field, fields }) => {
     >
       {getFieldByType()}
     </FieldWrapper>
-    : null
-  );
+  ) : null;
 };
 
 const FieldWrapper = ({ children, label, hideLabel, disabled, required }) => (

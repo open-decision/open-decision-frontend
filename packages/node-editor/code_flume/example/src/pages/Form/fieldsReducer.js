@@ -1,4 +1,4 @@
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure/index";
 
 const getAttributes = attributes =>
   attributes.reduce((obj, attr) => {
@@ -12,14 +12,14 @@ const removeFieldByFieldId = (state, fieldId) => {
   return {
     fields,
     fieldsOrder: state.fieldsOrder.filter(f => f !== fieldId)
-  }
-}
+  };
+};
 
 const fieldsReducer = (state, action) => {
   switch (action.type) {
     case "POPULATE_FIELDS": {
       const { fields, fieldsOrder } = action;
-      return {...state, fields, fieldsOrder}
+      return { ...state, fields, fieldsOrder };
     }
 
     case "ADD_FIELD": {
@@ -42,7 +42,7 @@ const fieldsReducer = (state, action) => {
 
     case "REMOVE_FIELD": {
       const { fieldId } = action;
-      return removeFieldByFieldId(state, fieldId)
+      return removeFieldByFieldId(state, fieldId);
     }
 
     case "SET_ATTRIBUTE_VALUE": {
@@ -61,7 +61,7 @@ const fieldsReducer = (state, action) => {
     }
 
     case "CLEAR_FORM": {
-      return { fields: {}, fieldsOrder: [] }
+      return { fields: {}, fieldsOrder: [] };
     }
 
     default:
