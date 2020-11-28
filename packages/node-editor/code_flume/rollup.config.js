@@ -1,10 +1,10 @@
-import babel from "rollup-plugin-babel";
 import commonjs from "rollup-plugin-commonjs";
 import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import resolve from "rollup-plugin-node-resolve";
 import url from "rollup-plugin-url";
 import svgr from "@svgr/rollup";
+import typescript from "rollup-plugin-typescript2";
 
 import pkg from "./package.json";
 
@@ -25,15 +25,19 @@ export default {
   external: ["react", "react-dom"],
   plugins: [
     external(),
-    postcss({
-      modules: true,
-      plugins: [require("postcss-preset-env")],
-    }),
     url(),
     svgr(),
-    babel({
-      exclude: "node_modules/**",
-      plugins: ["external-helpers"],
+    typescript(),
+    postcss({
+      modules: true,
+      plugins: [
+        require("postcss-preset-env")({
+          stage: 3,
+          features: {
+            "nesting-rules": true,
+          },
+        }),
+      ],
     }),
     resolve(),
     commonjs(),

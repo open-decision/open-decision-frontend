@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "declaration": true,
+    "module": "esnext",
+    "lib": ["es6", "dom", "es2016", "es2017"],
+    // "noImplicitAny": true,
+    "declarationDir": "dist/types",
+    "outDir": "dist/lib",
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "baseUrl": "./src",
+    "paths": { "@globalTypes/*": ["types/*"] }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
