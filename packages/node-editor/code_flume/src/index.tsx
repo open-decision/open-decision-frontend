@@ -28,7 +28,7 @@ import usePrevious from "./hooks/usePrevious";
 import clamp from "lodash/clamp";
 import Cache from "./Cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
-import styles from "./styles.css";
+import styles from "./styles.module.css";
 
 const defaultContext = {};
 
