@@ -1,14 +1,14 @@
 import React from "react";
-import styles from "./Stage.css";
+import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import { NodeTypesContext, NodeDispatchContext } from "../../context";
 import Draggable from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
-import { STAGE_ID } from '../../constants'
+import { STAGE_ID } from "../../constants";
 
-const Stage = ({
+const Stage: React.FC = ({
   scale,
   translate,
   editorId,
@@ -21,7 +21,7 @@ const Stage = ({
   dispatchComments,
   disableComments,
   disablePan,
-  disableZoom
+  disableZoom,
 }) => {
   const nodeTypes = React.useContext(NodeTypesContext);
   const dispatchNodes = React.useContext(NodeDispatchContext);
@@ -45,7 +45,7 @@ const Stage = ({
   }, [stageRef, setStageRect]);
 
   const handleWheel = React.useCallback(
-    e => {
+    (e) => {
       if (e.target.nodeName === "TEXTAREA" || e.target.dataset.comment) {
         if (e.target.clientHeight < e.target.scrollHeight) return;
       }
@@ -54,22 +54,22 @@ const Stage = ({
         const delta = e.deltaY;
         dispatchStageState(({ scale }) => ({
           type: "SET_SCALE",
-          scale: clamp(scale - clamp(delta, -10, 10) * 0.005, 0.1, 7)
+          scale: clamp(scale - clamp(delta, -10, 10) * 0.005, 0.1, 7),
         }));
       }
     },
     [dispatchStageState, numNodes]
   );
 
-  const handleDragDelayStart = e => {
+  const handleDragDelayStart = (e) => {
     wrapper.current.focus();
   };
 
-  const handleDragStart = e => {
+  const handleDragStart = (e) => {
     e.preventDefault();
     dragData.current = {
       x: e.clientX,
-      y: e.clientY
+      y: e.clientY,
     };
   };
 
@@ -81,7 +81,7 @@ const Stage = ({
     )}px, ${-(translate.y + yDistance)}px)`;
   };
 
-  const handleDragEnd = e => {
+  const handleDragEnd = (e) => {
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
     dragData.current.x = e.clientX;
@@ -90,12 +90,12 @@ const Stage = ({
       type: "SET_TRANSLATE",
       translate: {
         x: tran.x + xDistance,
-        y: tran.y + yDistance
-      }
+        y: tran.y + yDistance,
+      },
     }));
   };
 
-  const handleContextMenu = e => {
+  const handleContextMenu = (e) => {
     e.preventDefault();
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
     setMenuOpen(true);
@@ -106,7 +106,7 @@ const Stage = ({
     setMenuOpen(false);
   };
 
-  const byScale = value => (1 / scale) * value;
+  const byScale = (value) => (1 / scale) * value;
 
   const addNode = ({ node, internalType }) => {
     const wrapperRect = wrapper.current.getBoundingClientRect();
@@ -120,26 +120,26 @@ const Stage = ({
       dispatchComments({
         type: "ADD_COMMENT",
         x,
-        y
+        y,
       });
     } else {
       dispatchNodes({
         type: "ADD_NODE",
         x,
         y,
-        nodeType: node.type
+        nodeType: node.type,
       });
     }
   };
 
-  const handleDocumentKeyUp = e => {
+  const handleDocumentKeyUp = (e) => {
     if (e.which === 32) {
       setSpaceIsPressed(false);
       document.removeEventListener("keyup", handleDocumentKeyUp);
     }
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.which === 32 && document.activeElement === wrapper.current) {
       e.preventDefault();
       e.stopPropagation();
@@ -155,7 +155,7 @@ const Stage = ({
   };
 
   React.useEffect(() => {
-    if(!disableZoom){
+    if (!disableZoom) {
       let stageWrapper = wrapper.current;
       stageWrapper.addEventListener("wheel", handleWheel);
       return () => {
@@ -164,27 +164,29 @@ const Stage = ({
     }
   }, [handleWheel, disableZoom]);
 
-  const menuOptions = React.useMemo(
-    () => {
-      const options = orderBy(
-        Object.values(nodeTypes)
-          .filter(node => node.addable !== false)
-          .map(node => ({
-            value: node.type,
-            label: node.label,
-            description: node.description,
-            sortIndex: node.sortIndex,
-            node
-          })),
-        ["sortIndex", "label"]
-      )
-      if(!disableComments){
-        options.push({ value: "comment", label: "Comment", description: "A comment for documenting nodes", internalType: "comment" })
-      }
-      return options
-    },
-    [nodeTypes, disableComments]
-  );
+  const menuOptions = React.useMemo(() => {
+    const options = orderBy(
+      Object.values(nodeTypes)
+        .filter((node) => node.addable !== false)
+        .map((node) => ({
+          value: node.type,
+          label: node.label,
+          description: node.description,
+          sortIndex: node.sortIndex,
+          node,
+        })),
+      ["sortIndex", "label"]
+    );
+    if (!disableComments) {
+      options.push({
+        value: "comment",
+        label: "Comment",
+        description: "A comment for documenting nodes",
+        internalType: "comment",
+      });
+    }
+    return options;
+  }, [nodeTypes, disableComments]);
 
   return (
     <Draggable

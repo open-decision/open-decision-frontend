@@ -165,24 +165,17 @@ export let NodeEditor = (
                           <React.Fragment>
                             {debug && (
                               <div className={styles.debugWrapper}>
-                                <button
-                                  className={styles.debugButton}
-                                  onClick={() => console.log(nodes)}
-                                >
+                                <button onClick={() => console.log(nodes)}>
                                   Log Nodes
                                 </button>
                                 <button
-                                  className={styles.debugButton}
                                   onClick={() =>
                                     console.log(JSON.stringify(nodes))
                                   }
                                 >
                                   Export Nodes
                                 </button>
-                                <button
-                                  className={styles.debugButton}
-                                  onClick={() => console.log(comments)}
-                                >
+                                <button onClick={() => console.log(comments)}>
                                   Log Comments
                                 </button>
                               </div>
