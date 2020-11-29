@@ -1,8 +1,8 @@
 import React from "react";
 import { useId } from "@reach/auto-id";
 import Stage from "./components/Stage/Stage";
-import Node from "./components/Node/Node";
-import Comment from "./components/Comment/Comment";
+import { Node } from "./components/Node/Node";
+import { Comment } from "./components/Comment/Comment";
 import Toaster from "./components/Toaster/Toaster";
 import Connections from "./components/Connections/Connections";
 import {
