@@ -21,7 +21,7 @@ import nodesReducer, {
   connectNodesReducer,
   getInitialNodes,
 } from "./nodesReducer";
-import commentsReducer from "./commentsReducer";
+import { commentsReducer } from "./commentsReducer";
 import toastsReducer from "./toastsReducer";
 import stageReducer from "./stageReducer";
 import usePrevious from "./hooks/usePrevious";
@@ -29,10 +29,30 @@ import clamp from "lodash/clamp";
 import Cache from "./Cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./index.module.css";
+import { comments, nodes } from "./types";
 
 const defaultContext = {};
 
-export let NodeEditor = (
+type NodeEditorProps = {
+  comments: comments;
+  nodes: nodes;
+  nodeTypes: {};
+  portTypes: {};
+  defaultNodes: [];
+  context: {};
+  onChange;
+  onCommentsChange;
+  initialScale;
+  spaceToPan: boolean;
+  hideComments: boolean;
+  disableComments: boolean;
+  disableZoom: boolean;
+  disablePan: boolean;
+  circularBehavior;
+  debug;
+};
+
+export const NodeEditor: React.FC<NodeEditorProps> = (
   {
     comments: initialComments,
     nodes: initialNodes,
@@ -56,8 +76,11 @@ export let NodeEditor = (
   const editorId = useId();
   const cache = React.useRef(new Cache());
   const stage = React.useRef();
+
   const [sideEffectToasts, setSideEffectToasts] = React.useState();
+
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
+
   const [nodes, dispatchNodes] = React.useReducer(
     connectNodesReducer(
       nodesReducer,
@@ -68,17 +91,21 @@ export let NodeEditor = (
     () =>
       getInitialNodes(initialNodes, defaultNodes, nodeTypes, portTypes, context)
   );
+
   const [comments, dispatchComments] = React.useReducer(
     commentsReducer,
     initialComments || {}
   );
+
   React.useEffect(() => {
     dispatchNodes({ type: "HYDRATE_DEFAULT_NODES" });
   }, []);
+
   const [
     shouldRecalculateConnections,
     setShouldRecalculateConnections,
   ] = React.useState(true);
+
   const [stageState, dispatchStageState] = React.useReducer(stageReducer, {
     scale: typeof initialScale === "number" ? clamp(initialScale, 0.1, 7) : 1,
     translate: { x: 0, y: 0 },
