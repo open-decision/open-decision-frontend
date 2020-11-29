@@ -9,6 +9,7 @@ import typescript from "rollup-plugin-typescript2";
 import pkg from "./package.json";
 
 export default {
+  preserveModules: true,
   input: "src/index.tsx",
   output: [
     {
@@ -27,9 +28,11 @@ export default {
     external(),
     url(),
     svgr(),
-    typescript(),
+    typescript({ typescript: require("typescript") }),
     postcss({
-      modules: true,
+      extract: true,
+      sourceMap: true,
+      minimize: true,
       plugins: [
         require("postcss-preset-env")({
           stage: 3,
@@ -38,6 +41,7 @@ export default {
           },
         }),
       ],
+      use: ["scss"],
     }),
     resolve(),
     commonjs(),
