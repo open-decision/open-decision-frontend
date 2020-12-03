@@ -432,6 +432,6 @@ const nodesReducer = (
 export const connectNodesReducer = (reducer, environment, dispatchToasts) => (
   state,
   action
-) => reducer(state, action, environment, dispatchToasts);
+): nodes => reducer(state, action, environment, dispatchToasts);
 
 export default nodesReducer;

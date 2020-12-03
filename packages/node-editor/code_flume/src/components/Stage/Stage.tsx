@@ -8,7 +8,23 @@ import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { STAGE_ID } from "../../constants";
 
-const Stage: React.FC = ({
+type StageProps = {
+  scale;
+  translate;
+  editorId;
+  dispatchStageState;
+  children;
+  outerStageChildren;
+  numNodes;
+  stageRef;
+  spaceToPan;
+  dispatchComments;
+  disableComments;
+  disablePan;
+  disableZoom;
+};
+
+const Stage: React.FC<StageProps> = ({
   scale,
   translate,
   editorId,

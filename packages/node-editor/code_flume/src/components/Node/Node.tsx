@@ -12,7 +12,23 @@ import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import Draggable from "../Draggable/Draggable";
 
-export const Node: React.FC = ({
+type NodeProps = {
+  id?;
+  width?;
+  height?;
+  x?;
+  y?;
+  delay?;
+  stageRect?;
+  connections?;
+  type?;
+  inputData?;
+  onDragStart?;
+  onDragEnd?;
+  onDrag?;
+};
+
+export const Node: React.FC<NodeProps> = ({
   id,
   width,
   height,
@@ -26,6 +42,7 @@ export const Node: React.FC = ({
   onDragStart,
   onDragEnd,
   onDrag,
+  ...props
 }) => {
   const cache = React.useContext(CacheContext);
   const nodeTypes = React.useContext(NodeTypesContext);
@@ -170,6 +187,7 @@ export const Node: React.FC = ({
       onContextMenu={handleContextMenu}
       stageState={stageState}
       stageRect={stageRect}
+      {...props}
     >
       <h2 className={styles.label}>{label}</h2>
       <IoPorts

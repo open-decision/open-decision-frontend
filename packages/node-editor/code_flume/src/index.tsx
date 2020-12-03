@@ -75,7 +75,7 @@ export let NodeEditor: React.FC<NodeEditorProps> = (
 ) => {
   const editorId = useId();
   const cache = React.useRef(new Cache());
-  const stage = React.useRef();
+  const stage = React.useRef<any>();
 
   const [sideEffectToasts, setSideEffectToasts] = React.useState();
 

@@ -7,7 +7,21 @@ import { StageContext } from "../../context";
 import { Portal } from "react-portal";
 import clamp from "lodash/clamp";
 
-export const Comment: React.FC = ({
+type CommentProps = {
+  dispatch;
+  id?;
+  x?;
+  y?;
+  width?;
+  height?;
+  color?;
+  text?;
+  stageRect?;
+  onDragStart?;
+  isNew?;
+};
+
+export const Comment: React.FC<CommentProps> = ({
   dispatch,
   id,
   x,
