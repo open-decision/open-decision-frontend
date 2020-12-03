@@ -24,31 +24,31 @@ const Control = ({
   getOptions,
   setValue,
   defaultValue,
-  isMonoControl
+  isMonoControl,
 }) => {
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const executionContext = React.useContext(ContextContext);
 
   const calculatedLabel = isMonoControl ? inputLabel : label;
 
-  const onChange = data => {
+  const onChange = (data) => {
     nodesDispatch({
       type: "SET_PORT_DATA",
       data,
       nodeId,
       portName,
       controlName: name,
-      setValue
+      setValue,
     });
     triggerRecalculation();
   };
 
-  const getControlByType = type => {
+  const getControlByType = (type) => {
     const commonProps = {
       triggerRecalculation,
       updateNodeConnections,
       onChange,
-      data
+      data,
     };
     switch (type) {
       case "select":
@@ -65,7 +65,12 @@ const Control = ({
         return <TextInput {...commonProps} placeholder={placeholder} />;
       case "number":
         return (
-          <TextInput {...commonProps} step={step} type="number" placeholder={placeholder} />
+          <TextInput
+            {...commonProps}
+            step={step}
+            type="number"
+            placeholder={placeholder}
+          />
         );
       case "checkbox":
         return <Checkbox {...commonProps} label={calculatedLabel} />;
@@ -82,13 +87,20 @@ const Control = ({
           />
         );
       case "custom":
-        return render(data, onChange, executionContext, triggerRecalculation, {
-          label,
-          name,
-          portName,
-          inputLabel,
-          defaultValue
-        }, allData);
+        return render(
+          data,
+          onChange,
+          executionContext,
+          triggerRecalculation,
+          {
+            label,
+            name,
+            portName,
+            inputLabel,
+            defaultValue,
+          },
+          allData
+        );
       default:
         return <div>Control</div>;
     }

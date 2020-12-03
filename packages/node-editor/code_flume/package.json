@@ -74,6 +74,7 @@
   "dependencies": {
     "@reach/auto-id": "^0.12.1",
     "d3-shape": "^2.0.0",
+    "immer": "^8.0.0",
     "lodash": "^4.17.20",
     "nanoid": "^2.1.11",
     "react-portal": "^4.2.1"

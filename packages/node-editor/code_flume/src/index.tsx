@@ -29,16 +29,16 @@ import clamp from "lodash/clamp";
 import Cache from "./Cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./index.module.css";
-import { comments, nodes } from "./types";
+import { comments, defaultNode, nodes, NodeTypes, PortTypes } from "./types";
 
 const defaultContext = {};
 
 type NodeEditorProps = {
   comments: comments;
   nodes: nodes;
-  nodeTypes: {};
-  portTypes: {};
-  defaultNodes: [];
+  nodeTypes: NodeTypes;
+  portTypes: PortTypes;
+  defaultNodes: defaultNode[];
   context: {};
   onChange;
   onCommentsChange;
@@ -52,7 +52,7 @@ type NodeEditorProps = {
   debug;
 };
 
-export const NodeEditor: React.FC<NodeEditorProps> = (
+export let NodeEditor: React.FC<NodeEditorProps> = (
   {
     comments: initialComments,
     nodes: initialNodes,

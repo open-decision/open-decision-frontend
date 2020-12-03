@@ -4,102 +4,77 @@ import {
 } from "./connectionCalculator";
 import { checkForCircularNodes } from "./utilities";
 import nanoid from "nanoid/non-secure/index";
+import {
+  nodes,
+  Node,
+  Connection,
+  connections,
+  connection,
+  NodeType,
+  PortTypes,
+  NodeTypes,
+  defaultNode,
+} from "./types";
+import produce from "immer";
 
-const addConnection = (nodes, input, output, portTypes) => {
-  const newNodes = {
-    ...nodes,
-    [input.nodeId]: {
-      ...nodes[input.nodeId],
-      connections: {
-        ...nodes[input.nodeId].connections,
-        inputs: {
-          ...nodes[input.nodeId].connections.inputs,
-          [input.portName]: [
-            ...(nodes[input.nodeId].connections.inputs[input.portName] || []),
-            {
-              nodeId: output.nodeId,
-              portName: output.portName,
-            },
-          ],
-        },
-      },
-    },
-    [output.nodeId]: {
-      ...nodes[output.nodeId],
-      connections: {
-        ...nodes[output.nodeId].connections,
-        outputs: {
-          ...nodes[output.nodeId].connections.outputs,
-          [output.portName]: [
-            ...(nodes[output.nodeId].connections.outputs[output.portName] ||
-              []),
-            {
-              nodeId: input.nodeId,
-              portName: input.portName,
-            },
-          ],
-        },
-      },
-    },
-  };
-  return newNodes;
-};
+const addConnection = (nodes: nodes, input: Connection, output: Connection) =>
+  produce(nodes, (draft) => {
+    const connections = draft[output.nodeId].connections;
 
-const removeConnection = (nodes, input, output) => {
-  const inputNode = nodes[input.nodeId];
-  const {
-    [input.portName]: removedInputPort,
-    ...newInputNodeConnectionsInputs
-  } = inputNode.connections.inputs;
-  const newInputNode = {
-    ...inputNode,
-    connections: {
-      ...inputNode.connections,
-      inputs: newInputNodeConnectionsInputs,
-    },
-  };
+    connections.inputs[input.portName].push({
+      nodeId: output.nodeId,
+      portName: output.portName,
+    });
 
-  const outputNode = nodes[output.nodeId];
-  const filteredOutputNodes = outputNode.connections.outputs[
-    output.portName
-  ].filter((cnx) => {
-    return cnx.nodeId === input.nodeId ? cnx.portName !== input.portName : true;
+    connections.outputs[output.portName].push({
+      nodeId: input.nodeId,
+      portName: input.portName,
+    });
   });
-  const newOutputNode = {
-    ...outputNode,
-    connections: {
-      ...outputNode.connections,
-      outputs: {
-        ...outputNode.connections.outputs,
-        [output.portName]: filteredOutputNodes,
-      },
-    },
-  };
 
-  return {
-    ...nodes,
-    [input.nodeId]: newInputNode,
-    [output.nodeId]: newOutputNode,
-  };
-};
+const removeConnection = (
+  nodes: nodes,
+  input: Connection,
+  output: Connection
+) =>
+  produce(nodes, (draft) => {
+    //Lookup the connected nodes
+    const inputNode = draft[input.nodeId];
+    const outputNode = draft[output.nodeId];
 
-const getFilteredTransputs = (transputs, nodeId) =>
+    //remove the input from the inputNode
+    delete inputNode.connections.inputs[input.portName];
+
+    const filteredOutputNodes = outputNode.connections.outputs[
+      output.portName
+    ].filter((cnx) => {
+      return cnx.nodeId === input.nodeId
+        ? cnx.portName !== input.portName
+        : true;
+    });
+
+    outputNode.connections.outputs[output.portName] = filteredOutputNodes;
+  });
+
+const getFilteredTransputs = (transputs: connection, nodeId: string): nodes =>
   Object.entries(transputs).reduce((obj, [portName, transput]) => {
     const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
     if (newTransputs.length) {
       obj[portName] = newTransputs;
     }
+
     return obj;
   }, {});
 
-const removeConnections = (connections, nodeId) => ({
+const removeConnections = (connections: connections, nodeId: string) => ({
   inputs: getFilteredTransputs(connections.inputs, nodeId),
   outputs: getFilteredTransputs(connections.outputs, nodeId),
 });
 
-const removeNode = (startNodes, nodeId) => {
-  let { [nodeId]: deletedNode, ...nodes } = startNodes;
-  nodes = Object.values(nodes).reduce((obj, node) => {
+const removeNode = produce((draft: nodes, nodeId: string) => {
+  delete draft[nodeId];
+
+  draft = Object.values(draft).reduce((obj, node) => {
     obj[node.id] = {
       ...node,
       connections: removeConnections(node.connections, nodeId),
@@ -107,55 +82,58 @@ const removeNode = (startNodes, nodeId) => {
 
     return obj;
   }, {});
+
+  //This is a side effect that actually removes the connections from the DOM
   deleteConnectionsByNodeId(nodeId);
-  return nodes;
-};
+});
 
-const reconcileNodes = (initialNodes, nodeTypes, portTypes, context) => {
-  let nodes = { ...initialNodes };
-
-  // Delete extraneous nodes
-  let nodesToDelete = Object.values(nodes)
-    .map((node) => (!nodeTypes[node.type] ? node.id : undefined))
-    .filter((x) => x);
-
-  nodesToDelete.forEach((nodeId) => {
-    nodes = nodesReducer(
+const reconcileNodes = (
+  nodes: nodes,
+  nodeTypes: NodeTypes,
+  portTypes: PortTypes,
+  context: any
+) => {
+  const deleteNode = (nodeId: string) =>
+    nodesReducer(
       nodes,
-      {
-        type: "REMOVE_NODE",
-        nodeId,
-      },
+      { type: "REMOVE_NODE", nodeId },
       { nodeTypes, portTypes, context }
     );
-  });
+
+  // Delete extraneous nodes
+  Object.values(nodes).map((node) =>
+    !nodeTypes[node.type] ? deleteNode(node.id) : undefined
+  );
 
   // Reconcile input data for each node
-  let reconciledNodes = Object.values(nodes).reduce((nodesObj, node) => {
+  let reconciledNodes: nodes = Object.values(nodes).reduce((nodesObj, node) => {
     const nodeType = nodeTypes[node.type];
+
     const defaultInputData = getDefaultData({
       node,
       nodeType,
       portTypes,
       context,
     });
+
     const currentInputData = Object.entries(node.inputData).reduce(
-      (dataObj, [key, data]) => {
-        if (defaultInputData[key] !== undefined) {
-          dataObj[key] = data;
-        }
-        return dataObj;
+      (obj, [key, data]) => {
+        if (defaultInputData[key] !== undefined) obj[key] = data;
+        return obj;
       },
       {}
     );
+
     const newInputData = {
       ...defaultInputData,
       ...currentInputData,
     };
+
     nodesObj[node.id] = {
       ...node,
       inputData: newInputData,
     };
+
     return nodesObj;
   }, {});
 
@@ -163,6 +141,7 @@ const reconcileNodes = (initialNodes, nodeTypes, portTypes, context) => {
   reconciledNodes = Object.values(reconciledNodes).reduce((nodesObj, node) => {
     let newNode = { ...node };
     const nodeType = nodeTypes[node.type];
+
     if (nodeType.root !== node.root) {
       if (nodeType.root && !node.root) {
         newNode.root = nodeType.root;
@@ -178,11 +157,11 @@ const reconcileNodes = (initialNodes, nodeTypes, portTypes, context) => {
 };
 
 export const getInitialNodes = (
-  initialNodes = {},
-  defaultNodes = [],
-  nodeTypes,
-  portTypes,
-  context
+  initialNodes: nodes = {},
+  defaultNodes: defaultNode[] = [],
+  nodeTypes: NodeTypes,
+  portTypes: PortTypes,
+  context: any
 ) => {
   const reconciledNodes = reconcileNodes(
     initialNodes,
@@ -197,6 +176,7 @@ export const getInitialNodes = (
       const nodeNotAdded = !Object.values(initialNodes).find(
         (n) => n.type === dNode.type
       );
+
       if (nodeNotAdded) {
         nodes = nodesReducer(
           nodes,
@@ -216,12 +196,24 @@ export const getInitialNodes = (
   };
 };
 
-const getDefaultData = ({ node, nodeType, portTypes, context }) => {
+const getDefaultData = ({
+  node,
+  nodeType,
+  portTypes,
+  context,
+}: {
+  node: Node;
+  nodeType: any;
+  portTypes: any;
+  context: any;
+}) => {
   const inputs = Array.isArray(nodeType.inputs)
     ? nodeType.inputs
     : nodeType.inputs(node.inputData, node.connections, context);
+
   return inputs.reduce((obj, input) => {
     const inputType = portTypes[input.type];
+
     obj[input.name || inputType.name] = (
       input.controls ||
       inputType.controls ||
@@ -230,15 +222,56 @@ const getDefaultData = ({ node, nodeType, portTypes, context }) => {
       obj2[control.name] = control.defaultValue;
       return obj2;
     }, {});
+
     return obj;
   }, {});
 };
 
+type action =
+  | {
+      type: "ADD_CONNECTION";
+      input: Connection;
+      output: Connection;
+    }
+  | { type: "REMOVE_CONNECTION"; input: Connection; output: Connection }
+  | { type: "DESTROY_TRANSPUT"; transput: Connection; transputType: string }
+  | {
+      type: "ADD_NODE";
+      x: number;
+      y: number;
+      nodeType: string;
+      id: string;
+      defaultNode: boolean;
+    }
+  | { type: "REMOVE_NODE"; nodeId: string }
+  | { type: "HYDRATE_DEFAULT_NODES"; nodeId: string }
+  | {
+      type: "SET_PORT_DATA";
+      nodeId: string;
+      portName: string;
+      controlName: string;
+      data: any;
+      setValue: any;
+    }
+  | { type: "SET_NODE_COORDINATES"; nodeId: string; x: number; y: number };
+
 const nodesReducer = (
-  nodes,
-  action = {},
-  { nodeTypes, portTypes, cache, circularBehavior, context },
-  dispatchToasts
+  nodes: nodes,
+  action: action,
+  {
+    nodeTypes,
+    portTypes,
+    cache,
+    circularBehavior,
+    context,
+  }: {
+    nodeTypes: NodeTypes;
+    portTypes: PortTypes;
+    cache?: any;
+    circularBehavior?: string;
+    context: any;
+  },
+  dispatchToasts?
 ) => {
   switch (action.type) {
     case "ADD_CONNECTION": {
@@ -249,7 +282,7 @@ const nodesReducer = (
       if (inputIsNotConnected) {
         const allowCircular =
           circularBehavior === "warn" || circularBehavior === "allow";
-        const newNodes = addConnection(nodes, input, output, portTypes);
+        const newNodes = addConnection(nodes, input, output);
         const isCircular = checkForCircularNodes(newNodes, output.nodeId);
         if (isCircular && !allowCircular) {
           dispatchToasts({
@@ -319,6 +352,8 @@ const nodesReducer = (
           outputs: {},
         },
         inputData: {},
+        defaultNode: false,
+        root: false,
       };
       newNode.inputData = getDefaultData({
         node: newNode,
