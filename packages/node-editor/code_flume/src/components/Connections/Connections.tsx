@@ -1,6 +1,6 @@
 import React from "react";
 import { CONNECTIONS_ID } from "../../constants";
-import styles from "./Connections.css";
+import styles from "./Connections.module.css";
 
 const Connections = ({ nodes, editorId }) => {
   return (

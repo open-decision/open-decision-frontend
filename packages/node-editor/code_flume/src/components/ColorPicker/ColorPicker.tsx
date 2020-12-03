@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./ColorPicker.css";
+import styles from "./ColorPicker.module.css";
 import { Colors } from "../../typeBuilders";
 
 export default ({ x, y, onColorPicked, onRequestClose }) => {
   const wrapper = React.useRef();
 
   const testClickOutside = React.useCallback(
-    e => {
+    (e) => {
       if (!wrapper.current.contains(e.target)) {
         onRequestClose();
         document.removeEventListener("click", testClickOutside);
@@ -17,7 +17,7 @@ export default ({ x, y, onColorPicked, onRequestClose }) => {
   );
 
   const testEscape = React.useCallback(
-    e => {
+    (e) => {
       if (e.keyCode === 27) {
         onRequestClose();
         document.removeEventListener("keydown", testEscape);
@@ -43,10 +43,10 @@ export default ({ x, y, onColorPicked, onRequestClose }) => {
       className={styles.wrapper}
       style={{
         left: x,
-        top: y
+        top: y,
       }}
     >
-      {Object.values(Colors).map(color => (
+      {Object.values(Colors).map((color) => (
         <ColorButton
           onSelected={() => {
             onColorPicked(color);

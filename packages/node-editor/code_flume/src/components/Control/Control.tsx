@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Control.css";
+import styles from "./Control.module.css";
 import Checkbox from "../Checkbox/Checkbox";
 import TextInput from "../TextInput/TextInput";
 import Select from "../Select/Select";

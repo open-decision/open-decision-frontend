@@ -10,7 +10,7 @@ import { getPortRect, calculateCurve } from "../../connectionCalculator";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
-import Draggable from "../Draggable/Draggable";
+import { Draggable } from "../Draggable/Draggable";
 
 type NodeProps = {
   id?;

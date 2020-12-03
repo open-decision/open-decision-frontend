@@ -1,6 +1,6 @@
 import React from "react";
-import {calculateCurve} from '../../connectionCalculator'
-import styles from "./Connection.css";
+import { calculateCurve } from "../../connectionCalculator";
+import styles from "./Connection.module.css";
 
 const Connection = ({
   from,
@@ -10,9 +10,9 @@ const Connection = ({
   outputNodeId,
   outputPortName,
   inputNodeId,
-  inputPortName
+  inputPortName,
 }) => {
-  const curve = calculateCurve(from, to)
+  const curve = calculateCurve(from, to);
   return (
     <svg className={styles.svg}>
       <path

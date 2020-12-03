@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Toaster.css";
+import styles from "./Toaster.module.css";
 
 export default ({ toasts = [], dispatchToasts }) => {
   const setHeight = React.useCallback(
@@ -7,27 +7,27 @@ export default ({ toasts = [], dispatchToasts }) => {
       dispatchToasts({
         type: "SET_HEIGHT",
         id,
-        height
+        height,
       });
     },
     [dispatchToasts]
   );
 
   const startExit = React.useCallback(
-    id => {
+    (id) => {
       dispatchToasts({
         type: "SET_EXITING",
-        id
+        id,
       });
     },
     [dispatchToasts]
   );
 
   const removeToast = React.useCallback(
-    id => {
+    (id) => {
       dispatchToasts({
         type: "REMOVE_TOAST",
-        id
+        id,
       });
     },
     [dispatchToasts]
@@ -61,7 +61,7 @@ const Toast = ({
   y,
   onHeightReceived,
   onExitRequested,
-  onRemoveRequested
+  onRemoveRequested,
 }) => {
   const [paused, setPaused] = React.useState(false);
   const wrapper = React.useRef();
@@ -105,21 +105,24 @@ const Toast = ({
       onMouseLeave={resumeTimer}
       role="alert"
     >
-      {
-        title ? <span className={styles.title}>{title}</span> : null
-      }
+      {title ? <span className={styles.title}>{title}</span> : null}
       <p>{message}</p>
       {!paused && (
         <div
           className={styles.timer}
           style={{ animationDuration: `${duration}ms` }}
-          onAnimationEnd={e => e.stopPropagation()}
+          onAnimationEnd={(e) => e.stopPropagation()}
         />
       )}
-      <button className={styles.exitButton} onClick={() => {
-        stopTimer()
-        onExitRequested(id)
-      }}>✕</button>
+      <button
+        className={styles.exitButton}
+        onClick={() => {
+          stopTimer();
+          onExitRequested(id);
+        }}
+      >
+        ✕
+      </button>
     </div>
   );
 };
