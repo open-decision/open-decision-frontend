@@ -3,7 +3,7 @@ import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import { NodeTypesContext, NodeDispatchContext } from "../../context";
-import Draggable from "../Draggable/Draggable";
+import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { STAGE_ID } from "../../constants";
@@ -41,8 +41,8 @@ const Stage: React.FC<StageProps> = ({
 }) => {
   const nodeTypes = React.useContext(NodeTypesContext);
   const dispatchNodes = React.useContext(NodeDispatchContext);
-  const wrapper = React.useRef();
-  const translateWrapper = React.useRef();
+  const wrapper = React.useRef<HTMLDivElement>();
+  const translateWrapper = React.useRef<HTMLDivElement>();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
   const dragData = React.useRef({ x: 0, y: 0 });

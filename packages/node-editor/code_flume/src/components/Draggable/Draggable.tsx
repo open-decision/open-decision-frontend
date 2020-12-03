@@ -1,6 +1,24 @@
 import React from "react";
 
-export default ({
+//onDrag is a prop of an HTML div element, to avoid the type collision it is ommited here
+type DivProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag">;
+
+type DraggableProps = DivProps & {
+  children?;
+  stageState?;
+  stageRect?;
+  onDragDelayStart?;
+  onDragStart?;
+  onDrag?;
+  onDragEnd?;
+  onMouseDown?;
+  onTouchStart?;
+  disabled?;
+  delay?;
+  innerRef?;
+};
+
+export const Draggable: React.FC<DraggableProps> = ({
   children,
   stageState,
   stageRect,
@@ -13,15 +31,15 @@ export default ({
   disabled,
   delay = 6,
   innerRef,
-  ...rest
+  ...props
 }) => {
   const startCoordinates = React.useRef(null);
-  const offset = React.useRef();
-  const wrapper = React.useRef();
+  const offset = React.useRef<any>();
+  const wrapper = React.useRef<HTMLDivElement>();
 
-  const byScale = value => (1 / stageState.scale) * value;
+  const byScale = (value) => (1 / stageState.scale) * value;
 
-  const getScaledCoordinates = e => {
+  const getScaledCoordinates = (e) => {
     const x =
       byScale(
         e.clientX -
@@ -39,14 +57,14 @@ export default ({
     return { x, y };
   };
 
-  const updateCoordinates = e => {
+  const updateCoordinates = (e) => {
     const coordinates = getScaledCoordinates(e);
     if (onDrag) {
       onDrag(coordinates, e);
     }
   };
 
-  const stopDrag = e => {
+  const stopDrag = (e) => {
     const coordinates = getScaledCoordinates(e);
     if (onDragEnd) {
       onDragEnd(e, coordinates);
@@ -55,20 +73,20 @@ export default ({
     window.removeEventListener("mousemove", updateCoordinates);
   };
 
-  const startDrag = e => {
+  const startDrag = (e) => {
     if (onDragStart) {
       onDragStart(e);
     }
     const nodeRect = wrapper.current.getBoundingClientRect();
     offset.current = {
       x: startCoordinates.current.x - nodeRect.left,
-      y: startCoordinates.current.y - nodeRect.top
+      y: startCoordinates.current.y - nodeRect.top,
     };
     window.addEventListener("mouseup", stopDrag);
     window.addEventListener("mousemove", updateCoordinates);
   };
 
-  const checkDragDelay = e => {
+  const checkDragDelay = (e) => {
     let x;
     let y;
     if ("ontouchstart" in window && e.touches) {
@@ -95,7 +113,7 @@ export default ({
     startCoordinates.current = null;
   };
 
-  const startDragDelay = e => {
+  const startDragDelay = (e) => {
     if (onDragDelayStart) {
       onDragDelayStart(e);
     }
@@ -117,7 +135,7 @@ export default ({
 
   return (
     <div
-      onMouseDown={e => {
+      onMouseDown={(e) => {
         if (!disabled) {
           startDragDelay(e);
         }
@@ -125,7 +143,7 @@ export default ({
           onMouseDown(e);
         }
       }}
-      onTouchStart={e => {
+      onTouchStart={(e) => {
         if (!disabled) {
           startDragDelay(e);
         }
@@ -133,17 +151,17 @@ export default ({
           onTouchStart(e);
         }
       }}
-      onDragStart={e => {
+      onDragStart={(e) => {
         e.preventDefault();
         e.stopPropagation();
       }}
-      ref={ref => {
+      ref={(ref) => {
         wrapper.current = ref;
         if (innerRef) {
           innerRef.current = ref;
         }
       }}
-      {...rest}
+      {...props}
     >
       {children}
     </div>

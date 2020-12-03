@@ -3,7 +3,19 @@ import styles from "./ContextMenu.css";
 import clamp from "lodash/clamp";
 import nanoid from "nanoid/non-secure/index";
 
-const ContextMenu = ({
+type ContextMenuProps = {
+  x?;
+  y?;
+  options?;
+  onRequestClose?;
+  onOptionSelected?;
+  label?;
+  hideHeader?;
+  hideFilter?;
+  emptyText?;
+};
+
+const ContextMenu: React.FC<ContextMenuProps> = ({
   x,
   y,
   options = [],

@@ -227,7 +227,7 @@ const getDefaultData = ({
   }, {});
 };
 
-type action =
+export type nodesActions =
   | {
       type: "ADD_CONNECTION";
       input: Connection;
@@ -240,11 +240,11 @@ type action =
       x: number;
       y: number;
       nodeType: string;
-      id: string;
-      defaultNode: boolean;
+      id?: string;
+      defaultNode?: boolean;
     }
   | { type: "REMOVE_NODE"; nodeId: string }
-  | { type: "HYDRATE_DEFAULT_NODES"; nodeId: string }
+  | { type: "HYDRATE_DEFAULT_NODES"; nodeId?: string }
   | {
       type: "SET_PORT_DATA";
       nodeId: string;
@@ -257,7 +257,7 @@ type action =
 
 const nodesReducer = (
   nodes: nodes,
-  action: action,
+  action: nodesActions,
   {
     nodeTypes,
     portTypes,
@@ -430,8 +430,8 @@ const nodesReducer = (
 };
 
 export const connectNodesReducer = (reducer, environment, dispatchToasts) => (
-  state,
-  action
+  state: nodes,
+  action: nodesActions
 ): nodes => reducer(state, action, environment, dispatchToasts);
 
 export default nodesReducer;
