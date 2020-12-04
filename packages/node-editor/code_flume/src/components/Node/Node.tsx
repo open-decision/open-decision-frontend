@@ -11,18 +11,19 @@ import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import { Draggable } from "../Draggable/Draggable";
+import { connection, connections } from "@globalTypes/types";
 
 type NodeProps = {
-  id?;
-  width?;
-  height?;
-  x?;
-  y?;
-  delay?;
-  stageRect?;
-  connections?;
-  type?;
-  inputData?;
+  id?: string;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  delay?: number;
+  stageRect?: any;
+  connections?: connections;
+  type?: string;
+  inputData?: any;
   onDragStart?;
   onDragEnd?;
   onDrag?;
@@ -50,13 +51,16 @@ export const Node: React.FC<NodeProps> = ({
   const stageState = React.useContext(StageContext);
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
 
-  const nodeWrapper = React.useRef();
+  const nodeWrapper = React.useRef<HTMLDivElement>();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
   const byScale = (value) => (1 / stageState.scale) * value;
 
-  const updateConnectionsByTransput = (transput = {}, isOutput) => {
+  const updateConnectionsByTransput = (
+    transput: connection,
+    isOutput?: boolean
+  ) => {
     Object.entries(transput).forEach(([portName, outputs]) => {
       outputs.forEach((output) => {
         const toRect = getPortRect(
@@ -65,27 +69,35 @@ export const Node: React.FC<NodeProps> = ({
           isOutput ? "output" : "input",
           cache
         );
+
         const fromRect = getPortRect(
           output.nodeId,
           output.portName,
           isOutput ? "input" : "output",
           cache
         );
+
         const portHalf = fromRect.width / 2;
+
         let combined;
+
         if (isOutput) {
           combined = id + portName + output.nodeId + output.portName;
         } else {
           combined = output.nodeId + output.portName + id + portName;
         }
+
         let cnx;
+
         const cachedConnection = cache.current.connections[combined];
+
         if (cachedConnection) {
           cnx = cachedConnection;
         } else {
           cnx = document.querySelector(`[data-connection-id="${combined}"]`);
           cache.current.connections[combined] = cnx;
         }
+
         const from = {
           x:
             byScale(
@@ -102,6 +114,7 @@ export const Node: React.FC<NodeProps> = ({
                 stageRect.current.height / 2
             ) + byScale(stageState.translate.y),
         };
+
         const to = {
           x:
             byScale(
@@ -118,6 +131,7 @@ export const Node: React.FC<NodeProps> = ({
                 stageRect.current.height / 2
             ) + byScale(stageState.translate.y),
         };
+
         cnx.setAttribute("d", calculateCurve(from, to));
       });
     });

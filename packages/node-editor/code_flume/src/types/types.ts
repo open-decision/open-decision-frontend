@@ -48,8 +48,8 @@ export type connection = {
 // | [];
 
 export type connections = {
-  inputs: connection;
-  outputs: connection;
+  inputs?: connection;
+  outputs?: connection;
 };
 
 export type Node = nodeBase & {
@@ -78,12 +78,16 @@ export type NodeTypes = {
   [id: string]: NodeType;
 };
 
+export type port =
+  | ((ports: PortTypes) => PortBuilderType[])
+  | PortBuilderType[];
+
 export type NodeType = {
   type: string;
   label?: string;
   initialWidth?: number;
-  inputs?: ((ports: PortTypes) => PortBuilderType[]) | PortBuilderType[];
-  outputs?: ((ports: PortTypes) => PortBuilderType[]) | PortBuilderType[];
+  inputs?: port;
+  outputs?: port;
   root?: boolean;
   addable?: boolean;
   deletable?: boolean;

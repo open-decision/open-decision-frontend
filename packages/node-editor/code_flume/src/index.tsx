@@ -29,7 +29,13 @@ import clamp from "lodash/clamp";
 import Cache from "./Cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./index.module.css";
-import { comments, defaultNode, nodes, NodeTypes, PortTypes } from "./types";
+import {
+  comments,
+  defaultNode,
+  nodes,
+  NodeTypes,
+  PortTypes,
+} from "./types/types";
 
 const defaultContext = {};
 

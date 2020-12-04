@@ -14,7 +14,7 @@ import {
   PortTypes,
   NodeTypes,
   defaultNode,
-} from "./types";
+} from "./types/types";
 import produce from "immer";
 
 const addConnection = (nodes: nodes, input: Connection, output: Connection) =>

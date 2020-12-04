@@ -1,7 +1,10 @@
 import React from "react";
 
 //onDrag is a prop of an HTML div element, to avoid the type collision it is ommited here
-type DivProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag">;
+type DivProps = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onDrag" | "onDragEnd"
+>;
 
 type DraggableProps = DivProps & {
   children?;

@@ -1,4 +1,4 @@
-import styles from "./components/Connection/Connection.css";
+import styles from "./components/Connection/Connection.module.css";
 import { CONNECTIONS_ID } from "./constants";
 import { line, curveBasis } from "d3-shape";
 

@@ -14,6 +14,7 @@ import { PortTypesContext } from "../../context";
 import usePrevious from "../../hooks/usePrevious";
 import { calculateCurve, getPortRect } from "../../connectionCalculator";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "../../constants";
+import { port } from "@globalTypes/types";
 
 function useTransputs(
   transputsFn,
@@ -55,7 +56,16 @@ function useTransputs(
   return transputs;
 }
 
-const IoPorts = ({
+type IoPortsProps = {
+  nodeId;
+  inputs: port;
+  outputs: port;
+  connections;
+  inputData;
+  updateNodeConnections;
+};
+
+const IoPorts: React.FC<IoPortsProps> = ({
   nodeId,
   inputs = [],
   outputs = [],
@@ -120,7 +130,23 @@ const IoPorts = ({
 
 export default IoPorts;
 
-const Input = ({
+type InputProps = {
+  type;
+  label;
+  name;
+  nodeId;
+  data;
+  controls;
+  inputTypes;
+  noControls;
+  triggerRecalculation;
+  updateNodeConnections;
+  isConnected;
+  inputData;
+  hidePort;
+};
+
+const Input: React.FC<InputProps> = ({
   type,
   label,
   name,
@@ -223,7 +249,16 @@ const Output = ({
   );
 };
 
-const Port = ({
+type PortProps = {
+  color: string;
+  name: string;
+  type;
+  isInput?;
+  nodeId;
+  triggerRecalculation;
+};
+
+const Port: React.FC<PortProps> = ({
   color = "grey",
   name = "",
   type,
@@ -242,9 +277,9 @@ const Port = ({
     y: 0,
   });
   const dragStartCoordinatesCache = React.useRef(dragStartCoordinates);
-  const port = React.useRef();
-  const line = React.useRef();
-  const lineInToPort = React.useRef();
+  const port = React.useRef<HTMLDivElement>();
+  const line = React.useRef<SVGElement>();
+  const lineInToPort = React.useRef<SVGElement>();
 
   const byScale = (value) => (1 / stageState.scale) * value;
 

@@ -1,5 +1,5 @@
 import nanoid from "nanoid/non-secure/index";
-import { comments } from "./types";
+import { comments } from "./types/types";
 
 const setComment = (comments, id, merge) => ({
   ...comments,
