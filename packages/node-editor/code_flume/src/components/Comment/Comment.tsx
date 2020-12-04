@@ -35,8 +35,8 @@ export const Comment: React.FC<CommentProps> = ({
   isNew,
 }) => {
   const stageState = React.useContext(StageContext);
-  const wrapper = React.useRef();
-  const textarea = React.useRef();
+  const wrapper = React.useRef<HTMLDivElement>();
+  const textarea = React.useRef<HTMLTextAreaElement>();
   const [isEditing, setIsEditing] = React.useState(false);
   const [isPickingColor, setIsPickingColor] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -152,7 +152,7 @@ export const Comment: React.FC<CommentProps> = ({
         transform: `translate(${x}px,${y}px)`,
         width,
         height,
-        zIndex: isEditing ? 999 : "",
+        zIndex: isEditing ? 999 : 0,
       }}
       stageState={stageState}
       stageRect={stageRect}
