@@ -118,7 +118,7 @@ export const createSVG = ({
 export const getStageRef = (editorId) =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
-export const createConnections = (nodes, { scale, stageId }, editorId) => {
+export const createConnections = (nodes, { scale }, editorId) => {
   const stageRef = getStageRef(editorId);
   if (stageRef) {
     const stage = stageRef.getBoundingClientRect();
