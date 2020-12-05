@@ -9,7 +9,10 @@ export type stageState = {
   translate: translate;
 };
 
-export default (state: state, incomingAction: action | ((state) => action)) => {
+export default (
+  state: stageState,
+  incomingAction: action | ((state) => action)
+) => {
   let action =
     typeof incomingAction === "function"
       ? incomingAction(state)

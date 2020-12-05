@@ -1,4 +1,5 @@
 class LoopError extends Error {
+  code: any;
   constructor(message, code) {
     super(message);
     this.code = code;
@@ -14,7 +15,7 @@ class RootEngine {
     this.loops = 0;
     this.maxLoops = 1000;
   }
-  resetLoops = maxLoops => {
+  resetLoops = (maxLoops) => {
     this.maxLoops = maxLoops !== undefined ? maxLoops : 1000;
     this.loops = 0;
   };
@@ -28,8 +29,8 @@ class RootEngine {
       this.loops++;
     }
   };
-  getRootNode = nodes => {
-    const roots = Object.values(nodes).filter(n => n.root);
+  getRootNode = (nodes) => {
+    const roots = Object.values(nodes).filter((n) => n.root);
     if (roots.length > 1) {
       throw new Error(
         "The root engine must not be called with more than one root node."
@@ -44,9 +45,9 @@ class RootEngine {
       return obj;
     }, {});
   resolveInputValues = (node, nodeType, nodes, context) => {
-    let inputs = nodeType.inputs
-    if (typeof inputs === 'function') {
-      inputs = inputs(node.inputData, node.connections, context)
+    let inputs = nodeType.inputs;
+    if (typeof inputs === "function") {
+      inputs = inputs(node.inputData, node.connections, context);
     }
     return inputs.reduce((obj, input) => {
       const inputConnections = node.connections.inputs[input.name] || [];
@@ -90,20 +91,21 @@ class RootEngine {
       : this.getRootNode(nodes);
     if (rootNode) {
       let inputs = this.config.nodeTypes[rootNode.type].inputs;
-      if (typeof inputs === 'function') {
-        inputs = inputs(rootNode.inputData, rootNode.connections, options.context);
+      if (typeof inputs === "function") {
+        inputs = inputs(
+          rootNode.inputData,
+          rootNode.connections,
+          options.context
+        );
       }
-      const controlValues = inputs.reduce(
-        (obj, input) => {
-          obj[input.name] = this.resolveInputControls(
-            input.type,
-            rootNode.inputData[input.name] || {},
-            options.context
-          );
-          return obj;
-        },
-        {}
-      );
+      const controlValues = inputs.reduce((obj, input) => {
+        obj[input.name] = this.resolveInputControls(
+          input.type,
+          rootNode.inputData[input.name] || {},
+          options.context
+        );
+        return obj;
+      }, {});
       const inputValues = this.reduceRootInputs(
         rootNode.connections.inputs,
         (inputName, connection) => {
@@ -117,14 +119,16 @@ class RootEngine {
             );
           } catch (e) {
             if (e.code === LoopError.maxLoopsExceeded) {
-              console.error(`${e.message} Circular nodes detected in ${inputName} port.`);
+              console.error(
+                `${e.message} Circular nodes detected in ${inputName} port.`
+              );
             } else {
-              console.error(e)
+              console.error(e);
             }
           } finally {
             return {
               name: inputName,
-              value
+              value,
             };
           }
         }

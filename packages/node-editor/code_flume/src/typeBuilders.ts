@@ -1,70 +1,80 @@
+import {
+  ControlConfigs,
+  ControlTypeBuilder,
+  Node,
+  NodeTypes,
+  PortBuilderType,
+  PortTypes,
+} from "@globalTypes/types";
+
 const define = (value, defaultValue) =>
   value !== undefined ? value : defaultValue;
 
 const buildControlType = (
-  defaultConfig,
-  validate = () => {},
-  setup = () => ({})
-) => config => {
-  validate(config);
+  defaultConfig: any,
+  validate?: (config?: ControlConfigs) => void,
+  setup?: any
+) => (config: ControlConfigs) => {
+  validate && validate(config);
+
   return {
     type: defaultConfig.type,
     label: define(config.label, defaultConfig.label || ""),
     name: define(config.name, defaultConfig.name || ""),
     defaultValue: define(config.defaultValue, defaultConfig.defaultValue),
     setValue: define(config.setValue, undefined),
-    ...setup(config)
+    ...setup(config),
   };
 };
 
-export const Controls = {
+export const Controls: ControlTypeBuilder = {
   text: buildControlType({
     type: "text",
     name: "text",
-    defaultValue: ""
+    defaultValue: "",
   }),
   select: buildControlType(
     {
       type: "select",
       name: "select",
       options: [],
-      defaultValue: ""
+      defaultValue: "",
     },
     () => {},
-    config => ({
+    (config) => ({
       options: define(config.options, []),
       getOptions: define(config.getOptions, undefined),
-      placeholder: define(config.placeholder, undefined)
+      placeholder: define(config.placeholder, undefined),
     })
   ),
   number: buildControlType(
     {
       type: "number",
       name: "number",
-      defaultValue: 0
+      defaultValue: 0,
     },
     () => {},
-    config => ({
-      step: define(config.step, undefined)
+    (config) => ({
+      step: define(config.step, undefined),
     })
   ),
   checkbox: buildControlType({
     type: "checkbox",
     name: "checkbox",
-    defaultValue: false
+    defaultValue: false,
   }),
   multiselect: buildControlType(
     {
       type: "multiselect",
       name: "multiselect",
       options: [],
-      defaultValue: []
+      defaultValue: [],
     },
     () => {},
-    config => ({
+    (config) => ({
       options: define(config.options, []),
       getOptions: define(config.getOptions, undefined),
-      placeholder: define(config.placeholder, undefined)
+      placeholder: define(config.placeholder, undefined),
     })
   ),
   custom: buildControlType(
@@ -72,13 +82,13 @@ export const Controls = {
       type: "custom",
       name: "custom",
       render: () => {},
-      defaultValue: undefined
+      defaultValue: undefined,
     },
     () => {},
-    config => ({
-      render: define(config.render, () => {})
+    (config) => ({
+      render: define(config.render, () => {}),
     })
-  )
+  ),
 };
 
 export const Colors = {
@@ -89,12 +99,12 @@ export const Colors = {
   purple: "purple",
   blue: "blue",
   green: "green",
-  grey: "grey"
+  grey: "grey",
 };
 
-export const getPortBuilders = ports =>
+export const getPortBuilders = (ports: PortBuilderType[]) =>
   Object.values(ports).reduce((obj, port) => {
-    obj[port.type] = (config = {}) => {
+    obj[port.type] = (config: PortBuilderType = {}) => {
       return {
         type: port.type,
         name: config.name || port.name,
@@ -102,13 +112,16 @@ export const getPortBuilders = ports =>
         noControls: define(config.noControls, false),
         color: config.color || port.color,
         hidePort: define(config.hidePort, port.hidePort),
-        controls: define(config.controls, port.controls)
+        controls: define(config.controls, port.controls),
       };
     };
     return obj;
   }, {});
 
 export class FlumeConfig {
+  nodeTypes: NodeTypes;
+  portTypes: PortTypes;
+
   constructor(config) {
     if (config) {
       this.nodeTypes = { ...config.nodeTypes };
@@ -123,8 +136,8 @@ export class FlumeConfig {
       ...config,
       root: true,
       addable: false,
-      deletable: false
-    })
+      deletable: false,
+    });
     return this;
   }
   addNodeType(config) {
@@ -151,12 +164,12 @@ export class FlumeConfig {
         `A node with type "${config.type}" has already been declared.`
       );
     }
-    const node = {
+    const node: Node = {
       type: config.type,
       label: define(config.label, ""),
       description: define(config.description, ""),
       addable: define(config.addable, true),
-      deletable: define(config.deletable, true)
+      deletable: define(config.deletable, true),
     };
     if (config.initialWidth) {
       node.initialWidth = config.initialWidth;
@@ -166,7 +179,7 @@ export class FlumeConfig {
     }
     if (typeof config.inputs === "function") {
       const inputs = config.inputs(getPortBuilders(this.portTypes));
-      if (!Array.isArray(inputs) && typeof config.inputs !== 'function') {
+      if (!Array.isArray(inputs) && typeof config.inputs !== "function") {
         throw new Error(
           `When providing a function to the "inputs" key, you must return either an array or a function.`
         );
@@ -182,7 +195,7 @@ export class FlumeConfig {
 
     if (typeof config.outputs === "function") {
       const outputs = config.outputs(getPortBuilders(this.portTypes));
-      if (!Array.isArray(outputs) && typeof config.outputs !== 'function') {
+      if (!Array.isArray(outputs) && typeof config.outputs !== "function") {
         throw new Error(
           `When providing a function to the "outputs" key, you must return either an array or a function.`
         );
@@ -243,7 +256,7 @@ export class FlumeConfig {
       name: config.name,
       label: define(config.label, ""),
       color: define(config.color, Colors.grey),
-      hidePort: define(config.hidePort, false)
+      hidePort: define(config.hidePort, false),
     };
 
     if (config.acceptTypes === undefined) {
@@ -271,27 +284,27 @@ export class FlumeConfig {
     } else {
       if (!skipDynamicNodesCheck) {
         const dynamicNodes = Object.values(this.nodeTypes).filter(
-          node =>
-            typeof node.inputs === 'function' ||
-            typeof node.outputs === 'function'
+          (node) =>
+            typeof node.inputs === "function" ||
+            typeof node.outputs === "function"
         );
         if (dynamicNodes.length) {
           console.warn(
             `We've detected that one or more of your nodes is using dynamic inputs/outputs. This is a potentially dangerous operation as we are unable to detect if this portType is being used in one of those nodes. You can quiet this message by passing { skipDynamicNodesCheck: true } in as the second argument.`
           );
-        }  
+        }
       }
       const affectedNodes = Object.values(this.nodeTypes).filter(
-        node =>
+        (node) =>
           (Array.isArray(node.inputs) &&
-            node.inputs.find(p => p.type === type)) ||
+            node.inputs.find((p) => p.type === type)) ||
           (Array.isArray(node.outputs) &&
-            node.outputs.find(p => p.type === type))
+            node.outputs.find((p) => p.type === type))
       );
       if (affectedNodes.length) {
         throw new Error(
           `Cannot delete port type "${type}" without first deleting all node types using these ports: [${affectedNodes
-            .map(n => `${n.type}`)
+            .map((n) => `${n.type}`)
             .join(", ")}]`
         );
       } else {

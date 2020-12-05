@@ -1,8 +1,8 @@
 type nodeBase = {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
+  id?: string;
+  x?: number;
+  y?: number;
+  width?: number;
   height?: number;
   color?: string;
 };
@@ -21,7 +21,7 @@ export type Connection = {
   portName: string;
 };
 
-type PortBuilderType = {
+export type PortBuilderType = {
   type?: string;
   name?: string;
   label?: string;
@@ -56,13 +56,13 @@ export type Node = nodeBase & {
   type: string;
   label?: string;
   initialWidth?: number;
-  connections: connections;
+  connections?: connections;
   root?: boolean;
   addable?: boolean;
   deletable?: boolean;
   description?: string;
   sortIndex?: number;
-  inputData: any;
+  inputData?: any;
   defaultNode?: boolean;
 };
 
@@ -96,3 +96,59 @@ export type NodeType = {
 };
 
 export type defaultNode = { type: string; x: number; y: number };
+
+export type Control = {
+  type: string;
+  label: string;
+  name: string;
+  defaultValue: string;
+  setValue: (oldData: any, newData: any) => any;
+};
+
+interface BaseControlConfig {
+  type: string;
+  name: string;
+  label: string;
+  defaultValue?: unknown;
+  setValue?: (oldData: any, newData: any) => any;
+}
+
+interface TextControlConfig extends BaseControlConfig {
+  placeholder?: string;
+}
+
+interface SelectControlConfig extends BaseControlConfig {
+  options: { value: string; label: string; description?: string }[];
+}
+
+interface NumberControlConfig extends BaseControlConfig {
+  step?: number;
+}
+
+interface CustomControlConfig extends BaseControlConfig {
+  render: (
+    data: any,
+    onChange: (data: any) => void,
+    context: any,
+    redraw: () => void,
+    portProps: PortProps,
+    inputData: any
+  ) => JSX.Element;
+}
+
+export type ControlConfigs =
+  | TextControlConfig
+  | SelectControlConfig
+  | NumberControlConfig
+  | CustomControlConfig;
+
+export type ControlTypeBuilder = any;
+
+type PortProps = {
+  label: string;
+  inputLabel: string;
+  name: string;
+  portName: string;
+  defaultValue: any;
+  inputData: any;
+};

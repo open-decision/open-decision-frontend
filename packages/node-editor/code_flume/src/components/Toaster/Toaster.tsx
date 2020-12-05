@@ -64,8 +64,8 @@ const Toast = ({
   onRemoveRequested,
 }) => {
   const [paused, setPaused] = React.useState(false);
-  const wrapper = React.useRef();
-  const timer = React.useRef();
+  const wrapper = React.useRef<HTMLDivElement>();
+  const timer = React.useRef<NodeJS.Timeout>();
 
   const stopTimer = React.useCallback(() => {
     setPaused(true);

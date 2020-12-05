@@ -1,6 +1,7 @@
 import styles from "./components/Connection/Connection.module.css";
 import { CONNECTIONS_ID } from "./constants";
 import { line, curveBasis } from "d3-shape";
+import { nodes } from "@globalTypes/types";
 
 const getPort = (nodeId, portName, transputType = "input") =>
   document.querySelector(
@@ -8,10 +9,10 @@ const getPort = (nodeId, portName, transputType = "input") =>
   );
 
 export const getPortRect = (
-  nodeId,
-  portName,
+  nodeId: string,
+  portName: string,
   transputType = "input",
-  cache
+  cache?: any
 ) => {
   if (cache) {
     const portCacheName = nodeId + portName + transputType;
@@ -29,33 +30,33 @@ export const getPortRect = (
   }
 };
 
-export const getPortRectsByNodes = (nodes, forEachConnection) =>
-  Object.values(nodes).reduce((obj, node) => {
-    if (node.connections && node.connections.inputs) {
-      Object.entries(node.connections.inputs).forEach(
-        ([inputName, outputs]) => {
-          outputs.forEach((output) => {
-            const toRect = getPortRect(node.id, inputName);
-            const fromRect = getPortRect(
-              output.nodeId,
-              output.portName,
-              "output"
-            );
-            if (forEachConnection) {
-              forEachConnection({
-                to: toRect,
-                from: fromRect,
-                name: output.nodeId + output.portName + node.id + inputName,
-              });
-            }
-            obj[node.id + inputName] = toRect;
-            obj[output.nodeId + output.portName] = fromRect;
-          });
-        }
-      );
-    }
-    return obj;
-  }, {});
+// export const getPortRectsByNodes = (nodes: nodes, forEachConnection) =>
+//   Object.values(nodes).reduce((obj, node) => {
+//     if (node.connections && node.connections.inputs) {
+//       Object.entries(node.connections.inputs).forEach(
+//         ([inputName, outputs]) => {
+//           outputs.forEach((output) => {
+//             const toRect = getPortRect(node.id, inputName);
+//             const fromRect = getPortRect(
+//               output.nodeId,
+//               output.portName,
+//               "output"
+//             );
+//             if (forEachConnection) {
+//               forEachConnection({
+//                 to: toRect,
+//                 from: fromRect,
+//                 name: output.nodeId + output.portName + node.id + inputName,
+//               });
+//             }
+//             obj[node.id + inputName] = toRect;
+//             obj[output.nodeId + output.portName] = fromRect;
+//           });
+//         }
+//       );
+//     }
+//     return obj;
+//   }, {});
 
 export const calculateCurve = (from, to) => {
   const length = to.x - from.x;
@@ -118,7 +119,7 @@ export const createSVG = ({
 export const getStageRef = (editorId) =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
-export const createConnections = (nodes, { scale }, editorId) => {
+export const createConnections = (nodes: nodes, { scale }, editorId) => {
   const stageRef = getStageRef(editorId);
   if (stageRef) {
     const stage = stageRef.getBoundingClientRect();
