@@ -30,6 +30,7 @@ export default {
     svgr(),
     typescript({ typescript: require("typescript") }),
     postcss({
+      modules: true,
       extract: true,
       sourceMap: true,
       minimize: true,
@@ -41,7 +42,6 @@ export default {
           },
         }),
       ],
-      use: ["scss"],
     }),
     resolve(),
     commonjs(),
