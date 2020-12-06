@@ -268,8 +268,3 @@ export const NodeEditor: React.FC<NodeEditorProps> = React.forwardRef(
     );
   }
 );
-
-export { FlumeConfig, Controls, Colors } from "./typeBuilders";
-export * as RootEngine from "./RootEngine";
-export const useRootEngine = (nodes, engine, context) =>
-  Object.keys(nodes).length ? engine.resolveRootNode(nodes, { context }) : {};

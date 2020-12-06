@@ -1,9 +1,19 @@
 import React from "react";
 import styles from "./ColorPicker.module.css";
-import { Colors } from "../../typeBuilders";
+
+const Colors = {
+  yellow: "yellow",
+  orange: "orange",
+  red: "red",
+  pink: "pink",
+  purple: "purple",
+  blue: "blue",
+  green: "green",
+  grey: "grey",
+};
 
 export default ({ x, y, onColorPicked, onRequestClose }) => {
-  const wrapper = React.useRef();
+  const wrapper = React.useRef<HTMLDivElement>();
 
   const testClickOutside = React.useCallback(
     (e) => {
