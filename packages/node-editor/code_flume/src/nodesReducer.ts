@@ -139,7 +139,7 @@ const reconcileNodes = (
 
   // Reconcile node attributes for each node
   reconciledNodes = Object.values(reconciledNodes).reduce((nodesObj, node) => {
-    let newNode = { ...node };
+    const newNode = { ...node };
     const nodeType = nodeTypes[node.type];
 
     if (nodeType.root !== node.root) {
@@ -162,7 +162,7 @@ export const getInitialNodes = (
   nodeTypes: NodeTypes,
   portTypes: PortTypes,
   context: any
-) => {
+): nodes => {
   const reconciledNodes = reconcileNodes(
     initialNodes,
     nodeTypes,
@@ -271,8 +271,8 @@ const nodesReducer = (
     circularBehavior?: string;
     context: any;
   },
-  dispatchToasts?
-) => {
+  dispatchToasts?: any
+): nodes => {
   switch (action.type) {
     case "ADD_CONNECTION": {
       const { input, output } = action;

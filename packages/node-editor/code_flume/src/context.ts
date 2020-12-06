@@ -1,4 +1,5 @@
 import { NodeTypes, PortTypes } from "@globalTypes/types";
+import { cache } from "cache";
 import React from "react";
 import { stageState } from "stageReducer";
 import { nodesActions } from "./nodesReducer";
@@ -11,6 +12,8 @@ export const NodeDispatchContext = React.createContext<
 export const ConnectionRecalculateContext = React.createContext(() => null);
 export const ContextContext = React.createContext({});
 export const StageContext = React.createContext<stageState>(undefined);
-export const CacheContext = React.createContext<any>(undefined);
+export const CacheContext = React.createContext<React.MutableRefObject<cache>>(
+  undefined
+);
 export const RecalculateStageRectContext = React.createContext(() => null);
 export const EditorIdContext = React.createContext("");

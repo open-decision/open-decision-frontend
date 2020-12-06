@@ -7,21 +7,21 @@ import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { STAGE_ID } from "../../constants";
+import { coordinates } from "@globalTypes/types";
 
 type StageProps = {
-  scale;
-  translate;
-  editorId;
-  dispatchStageState;
-  children;
-  outerStageChildren;
-  numNodes;
-  stageRef;
-  spaceToPan;
-  dispatchComments;
-  disableComments;
-  disablePan;
-  disableZoom;
+  scale: number;
+  translate: coordinates;
+  editorId: string;
+  dispatchStageState: any;
+  outerStageChildren: React.ReactNode;
+  dispatchComments: any;
+  numNodes: number;
+  stageRef: React.MutableRefObject<DOMRect>;
+  spaceToPan: boolean;
+  disableComments: boolean;
+  disablePan: boolean;
+  disableZoom: boolean;
 };
 
 const Stage: React.FC<StageProps> = ({
@@ -50,7 +50,7 @@ const Stage: React.FC<StageProps> = ({
 
   const setStageRect = React.useCallback(() => {
     stageRef.current = wrapper.current.getBoundingClientRect();
-  }, []);
+  }, [stageRef]);
 
   React.useEffect(() => {
     stageRef.current = wrapper.current.getBoundingClientRect();
@@ -68,7 +68,7 @@ const Stage: React.FC<StageProps> = ({
       e.preventDefault();
       if (numNodes > 0) {
         const delta = e.deltaY;
-        dispatchStageState(({ scale }) => ({
+        dispatchStageState(({ scale }: { scale: number }) => ({
           type: "SET_SCALE",
           scale: clamp(scale - clamp(delta, -10, 10) * 0.005, 0.1, 7),
         }));
@@ -77,11 +77,11 @@ const Stage: React.FC<StageProps> = ({
     [dispatchStageState, numNodes]
   );
 
-  const handleDragDelayStart = (e) => {
+  const handleDragDelayStart = () => {
     wrapper.current.focus();
   };
 
-  const handleDragStart = (e) => {
+  const handleDragStart = (e: React.DragEvent) => {
     e.preventDefault();
     dragData.current = {
       x: e.clientX,

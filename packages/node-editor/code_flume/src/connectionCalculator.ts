@@ -1,9 +1,10 @@
 import styles from "./components/Connection/Connection.module.css";
 import { CONNECTIONS_ID } from "./constants";
 import { line, curveBasis } from "d3-shape";
-import { nodes } from "@globalTypes/types";
+import { coordinates, nodes } from "@globalTypes/types";
+import { cache } from "cache";
 
-const getPort = (nodeId, portName, transputType = "input") =>
+const getPort = (nodeId: string, portName: string, transputType = "input") =>
   document.querySelector(
     `[data-node-id="${nodeId}"] [data-port-name="${portName}"][data-port-transput-type="${transputType}"]`
   );
@@ -12,8 +13,8 @@ export const getPortRect = (
   nodeId: string,
   portName: string,
   transputType = "input",
-  cache?: any
-) => {
+  cache?: React.MutableRefObject<cache>
+): DOMRect => {
   if (cache) {
     const portCacheName = nodeId + portName + transputType;
     const cachedPort = cache.current.ports[portCacheName];
@@ -30,35 +31,7 @@ export const getPortRect = (
   }
 };
 
-// export const getPortRectsByNodes = (nodes: nodes, forEachConnection) =>
-//   Object.values(nodes).reduce((obj, node) => {
-//     if (node.connections && node.connections.inputs) {
-//       Object.entries(node.connections.inputs).forEach(
-//         ([inputName, outputs]) => {
-//           outputs.forEach((output) => {
-//             const toRect = getPortRect(node.id, inputName);
-//             const fromRect = getPortRect(
-//               output.nodeId,
-//               output.portName,
-//               "output"
-//             );
-//             if (forEachConnection) {
-//               forEachConnection({
-//                 to: toRect,
-//                 from: fromRect,
-//                 name: output.nodeId + output.portName + node.id + inputName,
-//               });
-//             }
-//             obj[node.id + inputName] = toRect;
-//             obj[output.nodeId + output.portName] = fromRect;
-//           });
-//         }
-//       );
-//     }
-//     return obj;
-//   }, {});
-
-export const calculateCurve = (from, to) => {
+export const calculateCurve = (from: coordinates, to: coordinates): string => {
   const length = to.x - from.x;
   const thirdLength = length / 3;
   const curve = line().curve(curveBasis)([
@@ -70,20 +43,28 @@ export const calculateCurve = (from, to) => {
   return curve;
 };
 
-export const deleteConnection = ({ id }) => {
+export const deleteConnection = (id: string): void => {
   const line = document.querySelector(`[data-connection-id="${id}"]`);
   if (line) line.parentElement.remove();
 };
 
-export const deleteConnectionsByNodeId = (nodeId) => {
+export const deleteConnectionsByNodeId = (nodeId: string): void => {
   const lines = document.querySelectorAll(
     `[data-output-node-id="${nodeId}"], [data-input-node-id="${nodeId}"]`
   );
 
-  lines.forEach(line.parentNode.remove());
+  lines.forEach((line) => line.parentElement.remove());
 };
 
-export const updateConnection = ({ line, from, to }) => {
+export const updateConnection = ({
+  line,
+  from,
+  to,
+}: {
+  line: Element;
+  from: coordinates;
+  to: coordinates;
+}): void => {
   line.setAttribute("d", calculateCurve(from, to));
 };
 
@@ -96,7 +77,16 @@ export const createSVG = ({
   outputPortName,
   inputNodeId,
   inputPortName,
-}) => {
+}: {
+  from: coordinates;
+  to: coordinates;
+  stage: HTMLElement;
+  id: string;
+  outputNodeId: string;
+  outputPortName: string;
+  inputNodeId: string;
+  inputPortName: string;
+}): SVGSVGElement => {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("class", styles.svg);
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -116,22 +106,26 @@ export const createSVG = ({
   return svg;
 };
 
-export const getStageRef = (editorId) =>
+export const getStageRef = (editorId: string): HTMLElement =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
-export const createConnections = (nodes: nodes, { scale }, editorId) => {
+export const createConnections = (
+  nodes: nodes,
+  { scale }: { scale: number },
+  editorId: string
+): void => {
   const stageRef = getStageRef(editorId);
   if (stageRef) {
     const stage = stageRef.getBoundingClientRect();
     const stageHalfWidth = stage.width / 2;
     const stageHalfHeight = stage.height / 2;
 
-    const byScale = (value) => (1 / scale) * value;
+    const byScale = (value: number) => (1 / scale) * value;
 
     Object.values(nodes).forEach((node) => {
       if (node.connections && node.connections.inputs) {
         Object.entries(node.connections.inputs).forEach(
-          ([inputName, outputs], k) => {
+          ([inputName, outputs]) => {
             outputs.forEach((output) => {
               const fromPort = getPortRect(
                 output.nodeId,

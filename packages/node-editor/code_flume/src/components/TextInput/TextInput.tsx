@@ -2,7 +2,15 @@ import React from "react";
 import styles from "./TextInput.module.css";
 import { RecalculateStageRectContext } from "../../context";
 
-const TextInput = ({
+type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  placeholder: string;
+  updateNodeConnections: any;
+  onChange: any;
+  data: any;
+  step?: string;
+};
+
+const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   updateNodeConnections,
   onChange,
@@ -10,7 +18,7 @@ const TextInput = ({
   step,
   type,
 }) => {
-  const numberInput = React.useRef();
+  const numberInput = React.useRef<HTMLInputElement>();
   const recalculateStageRect = React.useContext(RecalculateStageRectContext);
 
   const handleDragEnd = () => {
@@ -43,19 +51,19 @@ const TextInput = ({
           onChange={(e) => {
             const inputValue = e.target.value.replace(/[^0-9.]+/g, "");
             if (!!inputValue) {
-              const value = parseFloat(inputValue, 10);
+              const value = parseFloat(inputValue);
               if (Number.isNaN(value)) {
                 onChange(0);
               } else {
                 onChange(value);
-                numberInput.current.value = value;
+                numberInput.current.value = value.toString();
               }
             }
           }}
           onBlur={(e) => {
             if (!e.target.value) {
               onChange(0);
-              numberInput.current.value = 0;
+              numberInput.current.value = "0";
             }
           }}
           step={step || "1"}
@@ -71,7 +79,6 @@ const TextInput = ({
         <textarea
           onChange={(e) => onChange(e.target.value)}
           onMouseDown={handlePossibleResize}
-          type="text"
           placeholder={placeholder}
           className={styles.input}
           value={data}

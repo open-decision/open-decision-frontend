@@ -10,12 +10,12 @@ const Checkbox = ({ label, data, onChange }) => {
       <input
         className={styles.checkbox}
         type="checkbox"
-        id={id}
+        id={id.current}
         value={data}
         checked={data}
         onChange={(e) => onChange(e.target.checked)}
       />
-      <label className={styles.label} htmlFor={id}>
+      <label className={styles.label} htmlFor={id.current}>
         {label}
       </label>
     </div>

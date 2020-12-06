@@ -5,11 +5,23 @@ import styles from "./Select.module.css";
 
 const MAX_LABEL_LENGTH = 50;
 
-const Select = ({
+type option = { label: string; description: string; value: string };
+
+type SelectProps = {
+  options: option[];
+  placeholder: string;
+  onChange: any;
+  data: any;
+  label?: string;
+  allowMultiple?: boolean;
+};
+
+const Select: React.FC<SelectProps> = ({
   options = [],
-  placeholder = "[Select an option]",
+  placeholder = "Select an option",
   onChange,
   data,
+  label,
   allowMultiple,
 }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -17,7 +29,7 @@ const Select = ({
     x: 0,
     y: 0,
   });
-  const wrapper = React.useRef();
+  const wrapper = React.useRef<HTMLDivElement>();
 
   const closeDrawer = () => {
     setDrawerOpen(false);
@@ -48,11 +60,11 @@ const Select = ({
 
   const getFilteredOptions = () =>
     allowMultiple
-      ? options.filter((opt) => !data.includes(opt.value))
+      ? options.filter((option) => !data.includes(option.value))
       : options;
 
   const selectedOption = React.useMemo(() => {
-    const option = options.find((o) => o.value === data);
+    const option = options.find((option) => option.value === data);
     if (option) {
       return {
         ...option,
@@ -71,7 +83,8 @@ const Select = ({
           <div className={styles.chipsWrapper}>
             {data.map((val, i) => {
               const optLabel =
-                (options.find((opt) => opt.value === val) || {}).label || "";
+                (options.find((option) => option.value === val) || {}).label ||
+                "";
               return (
                 <OptionChip
                   onRequestDelete={() => handleOptionDeleted(i)}
@@ -91,11 +104,7 @@ const Select = ({
         />
       ) : null}
       {(allowMultiple || !data) && (
-        <div
-          className={selectStyles.wrapper}
-          ref={wrapper}
-          onClick={openDrawer}
-        >
+        <div ref={wrapper} onClick={openDrawer}>
           {placeholder}
         </div>
       )}
@@ -117,14 +126,20 @@ const Select = ({
 
 export default Select;
 
-const SelectedOption = ({
-  option: { label, description } = {},
+type SeclectOptionProps = {
+  option: option;
+  wrapperRef: React.MutableRefObject<HTMLDivElement>;
+  onClick: () => void;
+};
+
+const SelectedOption: React.FC<SeclectOptionProps> = ({
+  option = {},
   wrapperRef,
   onClick,
 }) => (
   <div className={styles.selectedWrapper} onClick={onClick} ref={wrapperRef}>
-    <label>{label}</label>
-    {description ? <p>{description}</p> : null}
+    <label>{option.label}</label>
+    {option.description ? <p>{option.description}</p> : null}
   </div>
 );
 

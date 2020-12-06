@@ -153,3 +153,5 @@ type PortProps = {
   defaultValue: any;
   inputData: any;
 };
+
+export type coordinates = { x: number; y: number };

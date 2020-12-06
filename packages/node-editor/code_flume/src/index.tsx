@@ -26,7 +26,7 @@ import toastsReducer from "./toastsReducer";
 import stageReducer from "./stageReducer";
 import usePrevious from "./hooks/usePrevious";
 import clamp from "lodash/clamp";
-import Cache from "./Cache";
+import { cache } from "./cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./index.module.css";
 import {
@@ -45,19 +45,20 @@ type NodeEditorProps = {
   nodeTypes: NodeTypes;
   portTypes: PortTypes;
   defaultNodes: defaultNode[];
-  context: {};
-  onChange;
-  onCommentsChange;
-  initialScale;
+  context: any;
+  onChange: any;
+  onCommentsChange: any;
+  initialScale?: number;
   spaceToPan: boolean;
   hideComments: boolean;
   disableComments: boolean;
   disableZoom: boolean;
   disablePan: boolean;
-  circularBehavior;
-  debug;
+  circularBehavior?: boolean;
+  debug?: boolean;
 };
 
+export { comments, nodes };
 export const NodeEditor: React.FC<NodeEditorProps> = React.forwardRef(
   (
     {
@@ -81,11 +82,10 @@ export const NodeEditor: React.FC<NodeEditorProps> = React.forwardRef(
     ref
   ) => {
     const editorId = useId();
-    const cache = React.useRef(new Cache());
+    const cacheRef = React.useRef(cache);
     const stage = React.useRef<any>();
 
     const [sideEffectToasts, setSideEffectToasts] = React.useState();
-
     const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
     const [nodes, dispatchNodes] = React.useReducer(
@@ -188,7 +188,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = React.forwardRef(
             <ConnectionRecalculateContext.Provider value={triggerRecalculation}>
               <ContextContext.Provider value={context}>
                 <StageContext.Provider value={stageState}>
-                  <CacheContext.Provider value={cache}>
+                  <CacheContext.Provider value={cacheRef}>
                     <EditorIdContext.Provider value={editorId}>
                       <RecalculateStageRectContext.Provider
                         value={recalculateStageRect}
