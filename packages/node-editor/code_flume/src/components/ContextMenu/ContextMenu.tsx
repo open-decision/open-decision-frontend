@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContextMenu.module.css";
 import clamp from "lodash/clamp";
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure";
 
 type ContextMenuProps = {
   x?;
@@ -26,9 +26,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   hideFilter,
   emptyText,
 }) => {
-  const menuWrapper = React.useRef();
-  const menuOptionsWrapper = React.useRef();
-  const filterInput = React.useRef();
+  const menuWrapper = React.useRef<HTMLDivElement>();
+  const menuOptionsWrapper = React.useRef<HTMLDivElement>();
+  const filterInput = React.useRef<HTMLInputElement>();
   const [filter, setFilter] = React.useState("");
   const [menuWidth, setMenuWidth] = React.useState(0);
   const [selectedIndex, setSelectedIndex] = React.useState(0);

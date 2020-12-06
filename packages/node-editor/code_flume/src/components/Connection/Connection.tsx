@@ -2,7 +2,18 @@ import React from "react";
 import { calculateCurve } from "../../connectionCalculator";
 import styles from "./Connection.module.css";
 
-const Connection = ({
+type ConnectionProps = {
+  from;
+  to;
+  id?;
+  lineRef;
+  outputNodeId?;
+  outputPortName?;
+  inputNodeId?;
+  inputPortName?;
+};
+
+const Connection: React.FC<ConnectionProps> = ({
   from,
   to,
   id,

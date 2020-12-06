@@ -29,6 +29,7 @@ export type PortBuilderType = {
   color?: string;
   hidePort?: boolean;
   controls?: boolean;
+  acceptTypes?: string[];
 };
 
 type PortConfig = {
@@ -71,18 +72,18 @@ export type nodes = {
 };
 
 export type PortTypes = {
-  [id: string]: (config?: PortConfig) => PortBuilderType;
+  [id: string]: PortBuilderType;
 };
 
 export type NodeTypes = {
-  [id: string]: NodeType;
+  [id: string]: NodeConfig;
 };
 
 export type port =
   | ((ports: PortTypes) => PortBuilderType[])
   | PortBuilderType[];
 
-export type NodeType = {
+export type NodeConfig = {
   type: string;
   label?: string;
   initialWidth?: number;

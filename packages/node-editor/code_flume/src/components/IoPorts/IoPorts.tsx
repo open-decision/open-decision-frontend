@@ -30,10 +30,12 @@ function useTransputs(
     if (Array.isArray(transputsFn)) return transputsFn;
     return transputsFn(inputData, connections, executionContext);
   }, [transputsFn, inputData, connections, executionContext]);
+
   const prevTransputs = usePrevious(transputs);
 
   React.useEffect(() => {
     if (!prevTransputs || Array.isArray(transputsFn)) return;
+
     for (const transput of prevTransputs) {
       const current = transputs.find(({ name }) => transput.name === name);
       if (!current) {
@@ -392,7 +394,7 @@ const Port: React.FC<PortProps> = ({
       );
       const portIsConnected = !!lineInToPort.current;
       if (portIsConnected) {
-        lineInToPort.current.parentNode.style.zIndex = 9999;
+        lineInToPort.current.parentElement.style.zIndex = "9999";
         const outputPort = getPortRect(
           lineInToPort.current.dataset.outputNodeId,
           lineInToPort.current.dataset.outputPortName,
