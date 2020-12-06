@@ -3,14 +3,14 @@ import {
   deleteConnectionsByNodeId,
 } from "./connectionCalculator";
 import { checkForCircularNodes } from "./utilities";
-import nanoid from "nanoid/non-secure/index";
+import { nanoid } from "nanoid/non-secure";
 import {
   nodes,
   Node,
   Connection,
   connections,
   connection,
-  NodeType,
+  NodeConfig,
   PortTypes,
   NodeTypes,
   defaultNode,
