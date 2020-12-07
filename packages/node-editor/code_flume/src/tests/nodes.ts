@@ -1,4 +1,6 @@
-export const exampleNodes = {
+import { nodes } from "@globalTypes/types";
+
+export const exampleNodes: nodes = {
   "5nCLb85WDw": {
     id: "5nCLb85WDw",
     x: 134.5,
@@ -8,11 +10,11 @@ export const exampleNodes = {
     connections: {
       inputs: {
         num1: [],
-        num2: []
+        num2: [],
       },
-      outputs: {}
+      outputs: {},
     },
-    inputData: { num1: { number: 0 }, num2: { number: 0 } }
+    inputData: { num1: { number: 0 }, num2: { number: 0 } },
   },
   vRPQ06k4nT: {
     id: "vRPQ06k4nT",
@@ -22,9 +24,9 @@ export const exampleNodes = {
     width: 150,
     connections: {
       inputs: {},
-      outputs: { number: [] }
+      outputs: { number: [] },
     },
-    inputData: { number: { number: 0 } }
+    inputData: { number: { number: 0 } },
   },
   BDhQ98lTfw: {
     id: "BDhQ98lTfw",
@@ -34,10 +36,10 @@ export const exampleNodes = {
     width: 150,
     connections: {
       inputs: {},
-      outputs: { number: [] }
+      outputs: { number: [] },
     },
-    inputData: { number: { number: 0 } }
-  }
+    inputData: { number: { number: 0 } },
+  },
 };
 
 export const portTypes = {
@@ -51,10 +53,10 @@ export const portTypes = {
         type: "number",
         name: "number",
         label: "Number",
-        defaultValue: 0
-      }
-    ]
-  }
+        defaultValue: 0,
+      },
+    ],
+  },
 };
 
 export const nodeTypes = {
@@ -66,9 +68,9 @@ export const nodeTypes = {
     outputs: [
       {
         type: "number",
-        name: "number"
-      }
-    ]
+        name: "number",
+      },
+    ],
   },
   addNumbers: {
     type: "addNumbers",
@@ -77,13 +79,13 @@ export const nodeTypes = {
     inputs: [
       {
         type: "number",
-        name: "num1"
+        name: "num1",
       },
       {
         type: "number",
-        name: "num2"
-      }
+        name: "num2",
+      },
     ],
-    outputs: [{ type: "number", name: "result" }]
-  }
+    outputs: [{ type: "number", name: "result" }],
+  },
 };
