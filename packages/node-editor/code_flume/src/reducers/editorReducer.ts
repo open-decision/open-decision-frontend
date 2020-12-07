@@ -1,19 +1,21 @@
-type translate = { x: number; y: number };
+import { coordinates } from "@globalTypes/types";
 
 type action =
   | { type: "SET_SCALE"; scale: number }
-  | { type: "SET_TRANSLATE"; translate: translate };
+  | { type: "SET_TRANSLATE"; translate: coordinates };
 
-export type stageState = {
+export type EditorState = {
+  id: string;
   scale: number;
-  translate: translate;
+  translate: coordinates;
+  executionContext: Record<string, unknown>;
 };
 
-export default (
-  state: stageState,
-  incomingAction: action | ((state) => action)
-) => {
-  let action =
+export const editorReducer = (
+  state: EditorState,
+  incomingAction: action | ((state: EditorState) => action)
+): EditorState => {
+  const action =
     typeof incomingAction === "function"
       ? incomingAction(state)
       : incomingAction;
