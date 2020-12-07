@@ -100,7 +100,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   context = {},
   onNodesChange,
   onCommentsChange,
-  initialZoom,
+  initialZoom = 1,
   spaceToPan = false,
   hideComments = false,
   disableComments = false,
@@ -142,7 +142,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 
   const [editorState, dispatchEditorState] = React.useReducer(editorReducer, {
     id: editorId,
-    scale: typeof initialZoom === "number" ? clamp(initialZoom, 0.1, 7) : 1,
+    scale: clamp(initialZoom, 0.1, 7),
     translate: { x: 0, y: 0 },
     executionContext: context,
   });
