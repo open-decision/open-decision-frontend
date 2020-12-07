@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
-import { NodeTypesContext, NodeDispatchContext } from "../../context";
+import { NodeDispatchContext } from "../../context";
 import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { STAGE_ID } from "../../constants";
-import { coordinates } from "@globalTypes/types";
+import { coordinates, NodeTypes } from "@globalTypes/types";
 
 type StageProps = {
   scale: number;
@@ -22,6 +22,7 @@ type StageProps = {
   disableComments: boolean;
   disablePan: boolean;
   disableZoom: boolean;
+  nodeTypes: NodeTypes;
 };
 
 const Stage: React.FC<StageProps> = ({
@@ -38,8 +39,8 @@ const Stage: React.FC<StageProps> = ({
   disableComments,
   disablePan,
   disableZoom,
+  nodeTypes,
 }) => {
-  const nodeTypes = React.useContext(NodeTypesContext);
   const dispatchNodes = React.useContext(NodeDispatchContext);
   const wrapper = React.useRef<HTMLDivElement>();
   const translateWrapper = React.useRef<HTMLDivElement>();

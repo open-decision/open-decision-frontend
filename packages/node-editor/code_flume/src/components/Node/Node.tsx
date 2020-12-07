@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./Node.module.css";
-import {
-  NodeTypesContext,
-  NodeDispatchContext,
-  StageContext,
-  CacheContext,
-} from "../../context";
+import { NodeDispatchContext, StageContext, CacheContext } from "../../context";
 import { getPortRect, calculateCurve } from "../../connectionCalculator";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import { Draggable } from "../Draggable/Draggable";
-import { connection, connections } from "@globalTypes/types";
+import {
+  connection,
+  connections,
+  NodeTypes,
+  PortTypes,
+} from "@globalTypes/types";
 
 type NodeProps = {
   id?: string;
@@ -27,6 +27,9 @@ type NodeProps = {
   onDragStart?;
   onDragEnd?;
   onDrag?;
+  nodeTypes: NodeTypes;
+  portTypes: PortTypes;
+  recalculate: () => void;
 };
 
 export const Node: React.FC<NodeProps> = ({
@@ -43,10 +46,12 @@ export const Node: React.FC<NodeProps> = ({
   onDragStart,
   onDragEnd,
   onDrag,
+  nodeTypes,
+  portTypes,
+  recalculate,
   ...props
 }) => {
   const cache = React.useContext(CacheContext);
-  const nodeTypes = React.useContext(NodeTypesContext);
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const stageState = React.useContext(StageContext);
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
@@ -211,6 +216,8 @@ export const Node: React.FC<NodeProps> = ({
         connections={connections}
         updateNodeConnections={updateNodeConnections}
         inputData={inputData}
+        inputTypes={portTypes}
+        recalculate={recalculate}
       />
       {menuOpen ? (
         <Portal>

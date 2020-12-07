@@ -3,18 +3,16 @@ import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
 import {
   NodeDispatchContext,
-  ConnectionRecalculateContext,
   StageContext,
   ContextContext,
   EditorIdContext,
 } from "../../context";
-import Control from "../Control/Control";
+import { Control } from "../Control/Control";
 import Connection from "../Connection/Connection";
-import { PortTypesContext } from "../../context";
 import usePrevious from "../../hooks/usePrevious";
 import { calculateCurve, getPortRect } from "../../connectionCalculator";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "../../constants";
-import { port } from "@globalTypes/types";
+import { port, PortTypes } from "@globalTypes/types";
 
 function useTransputs(
   transputsFn,
@@ -65,6 +63,9 @@ type IoPortsProps = {
   connections;
   inputData;
   updateNodeConnections;
+  inputTypes: PortTypes;
+  recalculate: () => void;
+  recalculateStageRect: () => void;
 };
 
 const IoPorts: React.FC<IoPortsProps> = ({
@@ -74,9 +75,9 @@ const IoPorts: React.FC<IoPortsProps> = ({
   connections,
   inputData,
   updateNodeConnections,
+  inputTypes,
+  recalculate,
 }) => {
-  const inputTypes = React.useContext(PortTypesContext);
-  const triggerRecalculation = React.useContext(ConnectionRecalculateContext);
   const resolvedInputs = useTransputs(
     inputs,
     "input",
@@ -101,7 +102,7 @@ const IoPorts: React.FC<IoPortsProps> = ({
               {...input}
               data={inputData[input.name] || {}}
               isConnected={!!connections.inputs[input.name]}
-              triggerRecalculation={triggerRecalculation}
+              triggerRecalculation={recalculate}
               updateNodeConnections={updateNodeConnections}
               inputTypes={inputTypes}
               nodeId={nodeId}
@@ -116,7 +117,7 @@ const IoPorts: React.FC<IoPortsProps> = ({
           {resolvedOutputs.map((output) => (
             <Output
               {...output}
-              triggerRecalculation={triggerRecalculation}
+              triggerRecalculation={recalculate}
               inputTypes={inputTypes}
               nodeId={nodeId}
               inputData={inputData}
@@ -139,9 +140,10 @@ type InputProps = {
   nodeId;
   data;
   controls;
-  inputTypes;
+  inputTypes: PortTypes;
   noControls;
-  triggerRecalculation;
+  recalculate: () => void;
+  recalculateStageRect: () => void;
   updateNodeConnections;
   isConnected;
   inputData;
@@ -157,7 +159,8 @@ const Input: React.FC<InputProps> = ({
   controls: localControls,
   inputTypes,
   noControls,
-  triggerRecalculation,
+  recalculate,
+  recalculateStageRect,
   updateNodeConnections,
   isConnected,
   inputData,
@@ -171,9 +174,9 @@ const Input: React.FC<InputProps> = ({
 
   React.useEffect(() => {
     if (isConnected !== prevConnected) {
-      triggerRecalculation();
+      recalculate();
     }
-  }, [isConnected, prevConnected, triggerRecalculation]);
+  }, [isConnected, prevConnected, recalculate]);
 
   return (
     <div
@@ -191,7 +194,8 @@ const Input: React.FC<InputProps> = ({
           name={name}
           nodeId={nodeId}
           isInput
-          triggerRecalculation={triggerRecalculation}
+          recalculate={recalculate}
+          inputTypes={inputTypes}
         />
       ) : null}
       {(!controls.length || noControls || isConnected) && (
@@ -204,7 +208,7 @@ const Input: React.FC<InputProps> = ({
               {...control}
               nodeId={nodeId}
               portName={name}
-              triggerRecalculation={triggerRecalculation}
+              recalculate={recalculate}
               updateNodeConnections={updateNodeConnections}
               inputLabel={label}
               data={data[control.name]}
@@ -212,6 +216,7 @@ const Input: React.FC<InputProps> = ({
               key={control.name}
               inputData={inputData}
               isMonoControl={controls.length === 1}
+              recalculateStageRect={recalculateStageRect}
             />
           ))}
         </div>
@@ -220,13 +225,22 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-const Output = ({
+type OutputProps = {
+  inputTypes: PortTypes;
+  label;
+  name;
+  nodeId;
+  type;
+  recalculate: () => void;
+};
+
+const Output: React.FC<OutputProps> = ({
   label,
   name,
   nodeId,
   type,
   inputTypes,
-  triggerRecalculation,
+  recalculate,
 }) => {
   const { label: defaultLabel, color } = inputTypes[type] || {};
 
@@ -245,7 +259,8 @@ const Output = ({
         name={name}
         color={color}
         nodeId={nodeId}
-        triggerRecalculation={triggerRecalculation}
+        recalculate={recalculate}
+        inputTypes={inputTypes}
       />
     </div>
   );
@@ -257,7 +272,8 @@ type PortProps = {
   type;
   isInput?;
   nodeId;
-  triggerRecalculation;
+  recalculate;
+  inputTypes: PortTypes;
 };
 
 const Port: React.FC<PortProps> = ({
@@ -266,13 +282,13 @@ const Port: React.FC<PortProps> = ({
   type,
   isInput,
   nodeId,
-  triggerRecalculation,
+  recalculate,
+  inputTypes,
 }) => {
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const stageState = React.useContext(StageContext);
   const editorId = React.useContext(EditorIdContext);
   const stageId = `${STAGE_ID}${editorId}`;
-  const inputTypes = React.useContext(PortTypesContext);
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragStartCoordinates, setDragStartCoordinates] = React.useState({
     x: 0,
@@ -372,7 +388,7 @@ const Port: React.FC<PortProps> = ({
               output: { nodeId, portName: name },
               input: { nodeId: inputNodeId, portName: inputPortName },
             });
-            triggerRecalculation();
+            recalculate();
           }
         }
       }

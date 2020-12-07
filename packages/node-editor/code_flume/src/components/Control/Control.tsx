@@ -5,7 +5,30 @@ import TextInput from "../TextInput/TextInput";
 import Select from "../Select/Select";
 import { NodeDispatchContext, ContextContext } from "../../context";
 
-const Control = ({
+type ControlProps = {
+  type;
+  name;
+  nodeId;
+  portName;
+  label;
+  inputLabel;
+  data;
+  allData;
+  render;
+  step;
+  options;
+  placeholder;
+  inputData;
+  recalculate;
+  updateNodeConnections;
+  getOptions;
+  setValue;
+  defaultValue;
+  isMonoControl;
+  recalculateStageRect: () => void;
+};
+
+export const Control: React.FC<ControlProps> = ({
   type,
   name,
   nodeId,
@@ -19,12 +42,13 @@ const Control = ({
   options = [],
   placeholder,
   inputData,
-  triggerRecalculation,
+  recalculate,
   updateNodeConnections,
   getOptions,
   setValue,
   defaultValue,
   isMonoControl,
+  recalculateStageRect,
 }) => {
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const executionContext = React.useContext(ContextContext);
@@ -40,12 +64,12 @@ const Control = ({
       controlName: name,
       setValue,
     });
-    triggerRecalculation();
+    recalculate();
   };
 
   const getControlByType = (type) => {
     const commonProps = {
-      triggerRecalculation,
+      recalculate,
       updateNodeConnections,
       onChange,
       data,
@@ -62,7 +86,13 @@ const Control = ({
           />
         );
       case "text":
-        return <TextInput {...commonProps} placeholder={placeholder} />;
+        return (
+          <TextInput
+            {...commonProps}
+            placeholder={placeholder}
+            recalculateStageRect={recalculateStageRect}
+          />
+        );
       case "number":
         return (
           <TextInput
@@ -70,6 +100,7 @@ const Control = ({
             step={step}
             type="number"
             placeholder={placeholder}
+            recalculateStageRect={recalculateStageRect}
           />
         );
       case "checkbox":
@@ -91,7 +122,7 @@ const Control = ({
           data,
           onChange,
           executionContext,
-          triggerRecalculation,
+          recalculate,
           {
             label,
             name,
@@ -115,5 +146,3 @@ const Control = ({
     </div>
   );
 };
-
-export default Control;
