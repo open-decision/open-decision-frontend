@@ -1,16 +1,24 @@
 import { nodes } from "@globalTypes/types";
 
-export const checkForCircularNodes = (nodes: nodes, startNodeId) => {
+export const checkForCircularNodes = (
+  nodes: nodes,
+  startNodeId: string
+): boolean => {
   let isCircular = false;
-  const walk = (nodeId) => {
+
+  const walk = (nodeId: string) => {
     const outputs = Object.values(nodes[nodeId].connections.outputs);
-    for (var i = 0; i < outputs.length; i++) {
+
+    for (let i = 0; i < outputs.length; i++) {
       if (isCircular) {
         break;
       }
+
       const outputConnections = outputs[i];
-      for (var k = 0; k < outputConnections.length; k++) {
+
+      for (let k = 0; k < outputConnections.length; k++) {
         const connectedTo = outputConnections[k];
+
         if (connectedTo.nodeId === startNodeId) {
           isCircular = true;
           break;
@@ -20,6 +28,8 @@ export const checkForCircularNodes = (nodes: nodes, startNodeId) => {
       }
     }
   };
+
   walk(startNodeId);
+
   return isCircular;
 };

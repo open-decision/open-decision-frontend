@@ -63,7 +63,7 @@ export type Node = nodeBase & {
   deletable?: boolean;
   description?: string;
   sortIndex?: number;
-  inputData?: any;
+  inputData?: { [portName: string]: { [controlName: string]: any } };
   defaultNode?: boolean;
 };
 
