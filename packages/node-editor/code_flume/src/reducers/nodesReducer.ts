@@ -13,6 +13,7 @@ import {
   NodeTypes,
   defaultNode,
   NodeConfig,
+  ControlConfigs,
 } from "@globalTypes/types";
 import produce, { original } from "immer";
 
@@ -163,15 +164,18 @@ const getDefaultData = ({
     ? nodeType.inputs
     : nodeType.inputs(node.inputData, node.connections, context);
 
-  return inputs.reduce((obj, input) => {
+  return inputs.reduce((obj: any, input) => {
     const inputType = portTypes[input.type];
 
     obj[input.name || inputType.name] = (
       input.controls ||
       inputType.controls ||
       []
-    ).reduce((obj2, control) => {
-      obj2[control.name] = control.defaultValue;
+    ).reduce((obj2: { [id: string]: unknown }, control) => {
+      if ("defaultValue" in control) {
+        obj2[control.name] = control.defaultValue;
+      }
+
       return obj2;
     }, {});
 

@@ -3,7 +3,7 @@ import styles from "./Control.module.css";
 import Checkbox from "../Checkbox/Checkbox";
 import TextInput from "../TextInput/TextInput";
 import Select from "../Select/Select";
-import { NodeDispatchContext, ContextContext } from "../../context";
+import { EditorContext, NodeDispatchContext } from "../../context";
 
 type ControlProps = {
   type;
@@ -51,7 +51,7 @@ export const Control: React.FC<ControlProps> = ({
   recalculateStageRect,
 }) => {
   const nodesDispatch = React.useContext(NodeDispatchContext);
-  const executionContext = React.useContext(ContextContext);
+  const { executionContext } = React.useContext(EditorContext);
 
   const calculatedLabel = isMonoControl ? inputLabel : label;
 
@@ -67,13 +67,14 @@ export const Control: React.FC<ControlProps> = ({
     recalculate();
   };
 
-  const getControlByType = (type) => {
+  const getControlByType = (type: string) => {
     const commonProps = {
       recalculate,
       updateNodeConnections,
       onChange,
       data,
     };
+
     switch (type) {
       case "select":
         return (

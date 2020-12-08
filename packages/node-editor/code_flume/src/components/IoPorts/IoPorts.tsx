@@ -1,28 +1,23 @@
 import React from "react";
 import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
-import {
-  NodeDispatchContext,
-  StageContext,
-  ContextContext,
-  EditorIdContext,
-} from "../../context";
+import { NodeDispatchContext, EditorContext } from "../../context";
 import { Control } from "../Control/Control";
 import Connection from "../Connection/Connection";
 import usePrevious from "../../hooks/usePrevious";
 import { calculateCurve, getPortRect } from "../../connectionCalculator";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "../../constants";
-import { port, PortTypes } from "@globalTypes/types";
+import { connections, port, PortTypes } from "@globalTypes/types";
 
 function useTransputs(
-  transputsFn,
-  transputType,
-  nodeId,
-  inputData,
-  connections
+  transputsFn: port,
+  transputType: "input" | "output",
+  nodeId: string,
+  inputData: any,
+  connections: connections
 ) {
   const nodesDispatch = React.useContext(NodeDispatchContext);
-  const executionContext = React.useContext(ContextContext);
+  const { executionContext } = React.useContext(EditorContext);
 
   const transputs = React.useMemo(() => {
     if (Array.isArray(transputsFn)) return transputsFn;
@@ -60,8 +55,8 @@ type IoPortsProps = {
   nodeId: string;
   inputs: port;
   outputs: port;
-  connections;
-  inputData;
+  connections: connections;
+  inputData: any;
   updateNodeConnections;
   inputTypes: PortTypes;
   recalculate: () => void;
@@ -102,7 +97,7 @@ const IoPorts: React.FC<IoPortsProps> = ({
               {...input}
               data={inputData[input.name] || {}}
               isConnected={!!connections.inputs[input.name]}
-              triggerRecalculation={recalculate}
+              recalculate={recalculate}
               updateNodeConnections={updateNodeConnections}
               inputTypes={inputTypes}
               nodeId={nodeId}
@@ -286,7 +281,7 @@ const Port: React.FC<PortProps> = ({
   inputTypes,
 }) => {
   const nodesDispatch = React.useContext(NodeDispatchContext);
-  const stageState = React.useContext(StageContext);
+  const stageState = React.useContext(EditorContext);
   const editorId = React.useContext(EditorIdContext);
   const stageId = `${STAGE_ID}${editorId}`;
   const [isDragging, setIsDragging] = React.useState(false);

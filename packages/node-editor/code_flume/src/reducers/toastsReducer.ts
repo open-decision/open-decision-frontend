@@ -1,5 +1,5 @@
 import { toast, toastType } from "components/Toaster/Toaster";
-import produce from "immer";
+import produce, { Draft } from "immer";
 import { nanoid } from "nanoid/non-secure";
 
 export type toastActions =
@@ -15,7 +15,7 @@ export type toastActions =
   | { type: "REMOVE_TOAST"; id: string };
 
 export const toastsReducer = produce(
-  (draft: toast[] = [], action: toastActions) => {
+  (draft: Draft<toast[]> = [], action: toastActions) => {
     switch (action.type) {
       case "ADD_TOAST":
         draft.push({

@@ -28,7 +28,7 @@ export type PortBuilderType = {
   noControls?: boolean;
   color?: string;
   hidePort?: boolean;
-  controls?: boolean;
+  controls?: ControlConfigs[];
   acceptTypes?: string[];
 };
 
@@ -80,7 +80,11 @@ export type NodeTypes = {
 };
 
 export type port =
-  | ((ports: PortTypes) => PortBuilderType[])
+  | ((
+      ports: PortTypes,
+      connections: connections,
+      context: any
+    ) => PortBuilderType[])
   | PortBuilderType[];
 
 export type NodeConfig = {
@@ -110,20 +114,31 @@ interface BaseControlConfig {
   type: string;
   name: string;
   label: string;
-  defaultValue?: unknown;
   setValue?: (oldData: any, newData: any) => any;
 }
 
 interface TextControlConfig extends BaseControlConfig {
   placeholder?: string;
+  defaultValue: string;
 }
 
 interface SelectControlConfig extends BaseControlConfig {
   options: { value: string; label: string; description?: string }[];
+  defaultValue: string;
+}
+
+interface MultiSelectControlConfig extends BaseControlConfig {
+  options: { value: string; label: string; description?: string }[];
+  defaultValue: string[];
 }
 
 interface NumberControlConfig extends BaseControlConfig {
   step?: number;
+  defaultValue: number;
+}
+
+interface CheckboxControlConfig extends BaseControlConfig {
+  defaultValue: boolean;
 }
 
 interface CustomControlConfig extends BaseControlConfig {
@@ -140,10 +155,10 @@ interface CustomControlConfig extends BaseControlConfig {
 export type ControlConfigs =
   | TextControlConfig
   | SelectControlConfig
+  | MultiSelectControlConfig
   | NumberControlConfig
+  | CheckboxControlConfig
   | CustomControlConfig;
-
-export type ControlTypeBuilder = any;
 
 type PortProps = {
   label: string;
