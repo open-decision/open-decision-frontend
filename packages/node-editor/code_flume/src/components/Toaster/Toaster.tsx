@@ -3,7 +3,7 @@ import styles from "./Toaster.module.css";
 import { toastActions } from "../../reducers";
 
 type ToasterProps = {
-  toasts: toast[];
+  toasts: readonly toast[];
   dispatchToasts: React.Dispatch<toastActions>;
 };
 
@@ -63,13 +63,13 @@ export const Toaster: React.FC<ToasterProps> = ({
 
 export type toastType = "warning" | "info" | "danger" | "success";
 export type toast = {
-  id: string;
-  title: string;
-  message: string;
-  duration: number;
-  height: number;
-  type: toastType;
-  exiting?: boolean;
+  readonly id: string;
+  readonly title: string;
+  readonly message: string;
+  readonly duration: number;
+  readonly height: number;
+  readonly type: toastType;
+  readonly exiting?: boolean;
 };
 
 type ToastProps = {
