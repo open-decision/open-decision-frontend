@@ -1,10 +1,24 @@
+import { toast, toastType } from "components/Toaster/Toaster";
+import produce from "immer";
 import { nanoid } from "nanoid/non-secure";
 
-export const toastsReducer = (toasts = [], action) => {
-  switch (action.type) {
-    case "ADD_TOAST":
-      return [
-        {
+export type toastActions =
+  | {
+      type: "ADD_TOAST";
+      title: string;
+      message: string;
+      toastType: toastType;
+      duration: number;
+    }
+  | { type: "SET_HEIGHT"; height: number; id: string }
+  | { type: "SET_EXITING"; id: string }
+  | { type: "REMOVE_TOAST"; id: string };
+
+export const toastsReducer = produce(
+  (draft: toast[] = [], action: toastActions) => {
+    switch (action.type) {
+      case "ADD_TOAST":
+        draft.push({
           id: nanoid(5),
           title: action.title,
           message: action.message,
@@ -12,36 +26,26 @@ export const toastsReducer = (toasts = [], action) => {
           duration: action.duration || 10000,
           height: 0,
           exiting: false,
-        },
-        ...toasts,
-      ];
-    case "SET_HEIGHT": {
-      const index = toasts.findIndex((t) => t.id === action.id);
-      return [
-        ...toasts.slice(0, index),
-        {
-          ...toasts[index],
-          height: action.height,
-        },
-        ...toasts.slice(index + 1),
-      ];
+        });
+        break;
+
+      case "SET_HEIGHT": {
+        const index = draft.findIndex((t) => t.id === action.id);
+        draft[index].height = action.height;
+        break;
+      }
+
+      case "SET_EXITING": {
+        const index = draft.findIndex((t) => t.id === action.id);
+        draft[index].exiting = true;
+        break;
+      }
+
+      case "REMOVE_TOAST": {
+        const index = draft.findIndex((t) => t.id === action.id);
+        draft.splice(index, 1);
+        break;
+      }
     }
-    case "SET_EXITING": {
-      const index = toasts.findIndex((t) => t.id === action.id);
-      return [
-        ...toasts.slice(0, index),
-        {
-          ...toasts[index],
-          exiting: true,
-        },
-        ...toasts.slice(index + 1),
-      ];
-    }
-    case "REMOVE_TOAST": {
-      const index = toasts.findIndex((t) => t.id === action.id);
-      return [...toasts.slice(0, index), ...toasts.slice(index + 1)];
-    }
-    default:
-      return toasts;
   }
-};
+);
