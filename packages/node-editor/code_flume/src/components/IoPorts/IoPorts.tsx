@@ -57,7 +57,7 @@ function useTransputs(
 }
 
 type IoPortsProps = {
-  nodeId;
+  nodeId: string;
   inputs: port;
   outputs: port;
   connections;
@@ -65,7 +65,7 @@ type IoPortsProps = {
   updateNodeConnections;
   inputTypes: PortTypes;
   recalculate: () => void;
-  recalculateStageRect: () => void;
+  recalculateStageRect?: () => void;
 };
 
 const IoPorts: React.FC<IoPortsProps> = ({

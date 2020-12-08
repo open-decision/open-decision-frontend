@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
-import ContextMenu from "../ContextMenu/ContextMenu";
+import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import { NodeDispatchContext } from "../../context";
 import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { STAGE_ID } from "../../constants";
-import { coordinates, NodeTypes } from "@globalTypes/types";
+import { coordinates, Node, NodeConfig, NodeTypes } from "@globalTypes/types";
 
 type StageProps = {
   scale: number;
@@ -25,7 +25,7 @@ type StageProps = {
   nodeTypes: NodeTypes;
 };
 
-const Stage: React.FC<StageProps> = ({
+export const Stage: React.FC<StageProps> = ({
   scale,
   translate,
   editorId,
@@ -82,7 +82,7 @@ const Stage: React.FC<StageProps> = ({
     wrapper.current.focus();
   };
 
-  const handleDragStart = (e: React.DragEvent) => {
+  const handleDragStart = (e: MouseEvent) => {
     e.preventDefault();
     dragData.current = {
       x: e.clientX,
@@ -90,7 +90,7 @@ const Stage: React.FC<StageProps> = ({
     };
   };
 
-  const handleMouseDrag = (coords, e) => {
+  const handleMouseDrag = (_coordinates: coordinates, e: MouseEvent) => {
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
     translateWrapper.current.style.transform = `translate(${-(
@@ -98,21 +98,23 @@ const Stage: React.FC<StageProps> = ({
     )}px, ${-(translate.y + yDistance)}px)`;
   };
 
-  const handleDragEnd = (e) => {
+  const handleDragEnd = (_coordinates: coordinates, e: MouseEvent) => {
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
     dragData.current.x = e.clientX;
     dragData.current.y = e.clientY;
-    dispatchStageState(({ translate: tran }) => ({
+    dispatchStageState(({ translate }: { translate: coordinates }) => ({
       type: "SET_TRANSLATE",
       translate: {
-        x: tran.x + xDistance,
-        y: tran.y + yDistance,
+        x: translate.x + xDistance,
+        y: translate.y + yDistance,
       },
     }));
   };
 
-  const handleContextMenu = (e) => {
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     e.preventDefault();
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
     setMenuOpen(true);
@@ -123,17 +125,20 @@ const Stage: React.FC<StageProps> = ({
     setMenuOpen(false);
   };
 
-  const byScale = (value) => (1 / scale) * value;
+  const byScale = (value: number) => (1 / scale) * value;
 
-  const addNode = ({ node, internalType }) => {
+  const addNode = (option: menuOption) => {
     const wrapperRect = wrapper.current.getBoundingClientRect();
+
     const x =
       byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
       byScale(translate.x);
+
     const y =
       byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
       byScale(translate.y);
-    if (internalType === "comment") {
+
+    if (option.internalType === "comment") {
       dispatchComments({
         type: "ADD_COMMENT",
         x,
@@ -144,19 +149,19 @@ const Stage: React.FC<StageProps> = ({
         type: "ADD_NODE",
         x,
         y,
-        nodeType: node.type,
+        nodeType: option.node.type,
       });
     }
   };
 
-  const handleDocumentKeyUp = (e) => {
+  const handleDocumentKeyUp = (e: KeyboardEvent) => {
     if (e.which === 32) {
       setSpaceIsPressed(false);
       document.removeEventListener("keyup", handleDocumentKeyUp);
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.which === 32 && document.activeElement === wrapper.current) {
       e.preventDefault();
       e.stopPropagation();
@@ -173,7 +178,7 @@ const Stage: React.FC<StageProps> = ({
 
   React.useEffect(() => {
     if (!disableZoom) {
-      let stageWrapper = wrapper.current;
+      const stageWrapper = wrapper.current;
       stageWrapper.addEventListener("wheel", handleWheel);
       return () => {
         stageWrapper.removeEventListener("wheel", handleWheel);
@@ -185,13 +190,15 @@ const Stage: React.FC<StageProps> = ({
     const options = orderBy(
       Object.values(nodeTypes)
         .filter((node) => node.addable !== false)
-        .map((node) => ({
-          value: node.type,
-          label: node.label,
-          description: node.description,
-          sortIndex: node.sortIndex,
-          node,
-        })),
+        .map(
+          (node): menuOption => ({
+            value: node.type,
+            label: node.label,
+            description: node.description,
+            sortIndex: node.sortIndex,
+            node,
+          })
+        ),
       ["sortIndex", "label"]
     );
     if (!disableComments) {
@@ -218,7 +225,6 @@ const Stage: React.FC<StageProps> = ({
       onDragEnd={handleDragEnd}
       onKeyDown={handleKeyDown}
       tabIndex={-1}
-      stageState={{ scale, translate }}
       style={{ cursor: spaceIsPressed && spaceToPan ? "grab" : "" }}
       disabled={disablePan || (spaceToPan && !spaceIsPressed)}
     >
@@ -250,4 +256,3 @@ const Stage: React.FC<StageProps> = ({
     </Draggable>
   );
 };
-export default Stage;

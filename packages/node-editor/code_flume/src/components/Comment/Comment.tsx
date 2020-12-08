@@ -1,24 +1,26 @@
 import React from "react";
 import styles from "./Comment.module.css";
 import { Draggable } from "../Draggable/Draggable";
-import ContextMenu from "../ContextMenu/ContextMenu";
+import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import ColorPicker from "../ColorPicker/ColorPicker";
-import { StageContext } from "../../context";
+import { EditorContext } from "../../context";
 import { Portal } from "react-portal";
 import clamp from "lodash/clamp";
+import { commentsAction } from "reducers";
+import { coordinates } from "@globalTypes/types";
 
 type CommentProps = {
-  dispatch;
-  id?;
-  x?;
-  y?;
-  width?;
-  height?;
-  color?;
-  text?;
-  stageRect?;
-  onDragStart?;
-  isNew?;
+  dispatch: React.Dispatch<commentsAction>;
+  id?: string;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  color?: string;
+  text?: string;
+  stageRect?: React.MutableRefObject<DOMRect>;
+  onDragStart?: () => void;
+  isNew?: boolean;
 };
 
 export const Comment: React.FC<CommentProps> = ({
@@ -34,7 +36,7 @@ export const Comment: React.FC<CommentProps> = ({
   onDragStart,
   isNew,
 }) => {
-  const stageState = React.useContext(StageContext);
+  const editorState = React.useContext(EditorContext);
   const wrapper = React.useRef<HTMLDivElement>();
   const textarea = React.useRef<HTMLTextAreaElement>();
   const [isEditing, setIsEditing] = React.useState(false);
@@ -46,7 +48,9 @@ export const Comment: React.FC<CommentProps> = ({
     y: 0,
   });
 
-  const handleContextMenu = (e) => {
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     e.preventDefault();
     e.stopPropagation();
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
@@ -56,31 +60,31 @@ export const Comment: React.FC<CommentProps> = ({
 
   const closeContextMenu = () => setMenuOpen(false);
 
-  const startDrag = (e) => {
+  const startDrag = (e: MouseEvent) => {
     onDragStart();
   };
 
-  const handleDrag = ({ x, y }) => {
-    wrapper.current.style.transform = `translate(${x}px,${y}px)`;
+  const handleDrag = (coordinates: coordinates, _e: MouseEvent) => {
+    wrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`;
   };
 
-  const handleDragEnd = (_, { x, y }) => {
+  const handleDragEnd = (coordinates: coordinates, _e: MouseEvent) => {
     dispatch({
       type: "SET_COMMENT_COORDINATES",
       id,
-      x,
-      y,
+      x: coordinates.x,
+      y: coordinates.y,
     });
   };
 
-  const handleResize = (coordinates) => {
+  const handleResize = (coordinates: coordinates, _e: MouseEvent) => {
     const width = clamp(coordinates.x - x + 10, 80, 10000);
     const height = clamp(coordinates.y - y + 10, 30, 10000);
     wrapper.current.style.width = `${width}px`;
     wrapper.current.style.height = `${height}px`;
   };
 
-  const handleResizeEnd = (_, coordinates) => {
+  const handleResizeEnd = (coordinates: coordinates, _e: MouseEvent) => {
     const width = clamp(coordinates.x - x + 10, 80, 10000);
     const height = clamp(coordinates.y - y + 10, 30, 10000);
     dispatch({
@@ -91,21 +95,24 @@ export const Comment: React.FC<CommentProps> = ({
     });
   };
 
-  const handleMenuOption = (option, e) => {
+  const handleMenuOption = (option: menuOption) => {
     switch (option.value) {
       case "edit":
         startTextEdit();
         break;
+
       case "color":
         setColorPickerCoordinates(menuCoordinates);
         setIsPickingColor(true);
         break;
+
       case "delete":
         dispatch({
           type: "DELETE_COMMENT",
           id,
         });
         break;
+
       default:
     }
   };
@@ -118,7 +125,7 @@ export const Comment: React.FC<CommentProps> = ({
     setIsEditing(false);
   };
 
-  const handleTextChange = (e) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch({
       type: "SET_COMMENT_TEXT",
       id,
@@ -126,7 +133,7 @@ export const Comment: React.FC<CommentProps> = ({
     });
   };
 
-  const handleColorPicked = (color) => {
+  const handleColorPicked = (color: string) => {
     dispatch({
       type: "SET_COMMENT_COLOR",
       id,
@@ -154,7 +161,6 @@ export const Comment: React.FC<CommentProps> = ({
         height,
         zIndex: isEditing ? 999 : 0,
       }}
-      stageState={stageState}
       stageRect={stageRect}
       onDragStart={startDrag}
       onDrag={handleDrag}
@@ -182,7 +188,6 @@ export const Comment: React.FC<CommentProps> = ({
       )}
       <Draggable
         className={styles.resizeThumb}
-        stageState={stageState}
         stageRect={stageRect}
         onDrag={handleResize}
         onDragEnd={handleResizeEnd}

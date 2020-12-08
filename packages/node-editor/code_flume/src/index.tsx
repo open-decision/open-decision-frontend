@@ -9,18 +9,17 @@ import {
   commentsReducer,
   toastsReducer,
   editorReducer,
-  connectNodesReducer,
   getInitialNodes,
   nodesReducer,
 } from "./reducers";
 import { cache } from "./cache";
 
 //Components
-import Stage from "./components/Stage/Stage";
+import { Stage } from "./components/Stage/Stage";
 import { Node } from "./components/Node/Node";
 import { Comment } from "./components/Comment/Comment";
-import Toaster from "./components/Toaster/Toaster";
-import Connections from "./components/Connections/Connections";
+import { Toaster } from "./components/Toaster/Toaster";
+import { Connections } from "./components/Connections/Connections";
 
 //Functions
 import { createConnections } from "./connectionCalculator";
@@ -111,7 +110,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 }) => {
   const editorId = useId();
   const cacheRef = React.useRef(cache);
-  const stage = React.useRef<any>();
+  const stage = React.useRef<DOMRect>();
 
   const [sideEffectToasts, setSideEffectToasts] = React.useState();
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
@@ -249,7 +248,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
                 recalculate={triggerRecalculation}
               />
             ))}
-            <Connections nodes={nodes} editorId={editorId} />
+            <Connections editorId={editorId} />
             <div
               className={styles.dragWrapper}
               id={`${DRAG_CONNECTION_ID}${editorId}`}

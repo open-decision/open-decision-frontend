@@ -1,29 +1,32 @@
+import { coordinates } from "@globalTypes/types";
+import { EditorContext } from "context";
 import React from "react";
 
 //onDrag is a prop of an HTML div element, to avoid the type collision it is ommited here
 type DivProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
-  "onDrag" | "onDragEnd"
+  "onDrag" | "onDragEnd" | "onDragStart"
 >;
 
 type DraggableProps = DivProps & {
-  children?;
-  stageState?;
-  stageRect?;
-  onDragDelayStart?;
-  onDragStart?;
-  onDrag?;
-  onDragEnd?;
-  onMouseDown?;
-  onTouchStart?;
-  disabled?;
-  delay?;
-  innerRef?;
+  stageRect?: React.MutableRefObject<DOMRect>;
+  onDragDelayStart?: (
+    e:
+      | React.TouchEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+  onDragStart?: (e: MouseEvent) => void;
+  onDrag?: (coordinates: coordinates, e: MouseEvent) => void;
+  onDragEnd?: (coordinates: coordinates, e: MouseEvent) => void;
+  onMouseDown?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onTouchStart?: (e: React.TouchEvent<HTMLDivElement>) => void;
+  disabled?: boolean;
+  delay?: number;
+  innerRef?: React.MutableRefObject<HTMLDivElement>;
 };
 
 export const Draggable: React.FC<DraggableProps> = ({
   children,
-  stageState,
   stageRect,
   onDragDelayStart,
   onDragStart,
@@ -36,47 +39,48 @@ export const Draggable: React.FC<DraggableProps> = ({
   innerRef,
   ...props
 }) => {
+  const editorState = React.useContext(EditorContext);
   const startCoordinates = React.useRef(null);
   const offset = React.useRef<any>();
   const wrapper = React.useRef<HTMLDivElement>();
 
-  const byScale = (value) => (1 / stageState.scale) * value;
+  const byScale = (value: number) => (1 / editorState.scale) * value;
 
-  const getScaledCoordinates = (e) => {
+  const getScaledCoordinates = (e: MouseEvent) => {
     const x =
       byScale(
         e.clientX -
           (stageRect ? stageRect.current.left : 0) -
           offset.current.x -
           (stageRect ? stageRect.current.width : 0) / 2
-      ) + byScale(stageState.translate.x);
+      ) + byScale(editorState.translate.x);
     const y =
       byScale(
         e.clientY -
           (stageRect ? stageRect.current.top : 0) -
           offset.current.y -
           (stageRect ? stageRect.current.height : 0) / 2
-      ) + byScale(stageState.translate.y);
+      ) + byScale(editorState.translate.y);
     return { x, y };
   };
 
-  const updateCoordinates = (e) => {
+  const updateCoordinates = (e: MouseEvent) => {
     const coordinates = getScaledCoordinates(e);
     if (onDrag) {
       onDrag(coordinates, e);
     }
   };
 
-  const stopDrag = (e) => {
+  const stopDrag = (e: MouseEvent) => {
     const coordinates = getScaledCoordinates(e);
     if (onDragEnd) {
-      onDragEnd(e, coordinates);
+      onDragEnd(coordinates, e);
     }
     window.removeEventListener("mouseup", stopDrag);
     window.removeEventListener("mousemove", updateCoordinates);
   };
 
-  const startDrag = (e) => {
+  const startDrag = (e: MouseEvent) => {
     if (onDragStart) {
       onDragStart(e);
     }
@@ -89,21 +93,14 @@ export const Draggable: React.FC<DraggableProps> = ({
     window.addEventListener("mousemove", updateCoordinates);
   };
 
-  const checkDragDelay = (e) => {
-    let x;
-    let y;
-    if ("ontouchstart" in window && e.touches) {
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
-    } else {
-      e.preventDefault();
-      x = e.clientX;
-      y = e.clientY;
-    }
-    let a = Math.abs(startCoordinates.current.x - x);
-    let b = Math.abs(startCoordinates.current.y - y);
-    let distance = Math.round(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)));
-    let dragDistance = delay;
+  const checkDragDelay = (e: MouseEvent) => {
+    e.preventDefault();
+
+    const a = Math.abs(startCoordinates.current.x - e.clientX);
+    const b = Math.abs(startCoordinates.current.y - e.clientY);
+    const distance = Math.round(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)));
+    const dragDistance = delay;
+
     if (distance >= dragDistance) {
       startDrag(e);
       endDragDelay();
@@ -116,27 +113,36 @@ export const Draggable: React.FC<DraggableProps> = ({
     startCoordinates.current = null;
   };
 
-  const startDragDelay = (e) => {
+  const startDragDelay = (
+    e:
+      | React.TouchEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     if (onDragDelayStart) {
       onDragDelayStart(e);
     }
+
     e.stopPropagation();
+
     let x;
     let y;
-    if ("ontouchstart" in window && e.touches) {
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
+
+    if (e.nativeEvent instanceof TouchEvent) {
+      x = e.nativeEvent.touches[0].clientX;
+      y = e.nativeEvent.touches[0].clientY;
     } else {
       e.preventDefault();
-      x = e.clientX;
-      y = e.clientY;
+      x = e.nativeEvent.clientX;
+      y = e.nativeEvent.clientY;
     }
+
     startCoordinates.current = { x, y };
     document.addEventListener("mouseup", endDragDelay);
     document.addEventListener("mousemove", checkDragDelay);
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       onMouseDown={(e) => {
         if (!disabled) {

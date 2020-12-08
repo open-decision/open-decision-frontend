@@ -1,5 +1,5 @@
 import { cache } from "cache";
-import { EditorState } from "editorReducer";
+import { EditorState } from "./reducers";
 import React from "react";
 import { nodesActions } from "./nodesReducer";
 

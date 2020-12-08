@@ -2,17 +2,27 @@ import React from "react";
 import styles from "./ContextMenu.module.css";
 import clamp from "lodash/clamp";
 import { nanoid } from "nanoid/non-secure";
+import { NodeConfig } from "@globalTypes/types";
+
+export type menuOption = {
+  value: string;
+  label: string;
+  description: string;
+  sortIndex?: number;
+  node?: NodeConfig;
+  internalType?: "comment";
+};
 
 type ContextMenuProps = {
-  x?;
-  y?;
-  options?;
-  onRequestClose?;
-  onOptionSelected?;
-  label?;
-  hideHeader?;
-  hideFilter?;
-  emptyText?;
+  x?: number;
+  y?: number;
+  options?: menuOption[];
+  onRequestClose?: () => void;
+  onOptionSelected?: (option: menuOption) => void;
+  label?: string;
+  hideHeader?: boolean;
+  hideFilter?: boolean;
+  emptyText?: string;
 };
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
@@ -34,7 +44,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const menuId = React.useRef(nanoid(10));
 
-  const handleOptionSelected = (option) => {
+  const handleOptionSelected = (option: menuOption) => {
     onOptionSelected(option);
     onRequestClose();
   };
@@ -83,13 +93,13 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     );
   }, [filter, options]);
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFilter(value);
     setSelectedIndex(0);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     // Up pressed
     if (e.which === 38) {
       e.preventDefault();
@@ -197,7 +207,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   );
 };
 
-const ContextOption = ({
+type ContextOptionProps = {
+  menuId: string;
+  index: number;
+  selected: boolean;
+  onClick: () => void;
+  onMouseEnter: () => void;
+};
+
+const ContextOption: React.FC<ContextOptionProps> = ({
   menuId,
   index,
   children,

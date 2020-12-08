@@ -1,14 +1,19 @@
 import React from "react";
 import styles from "./Node.module.css";
-import { NodeDispatchContext, StageContext, CacheContext } from "../../context";
+import {
+  NodeDispatchContext,
+  EditorContext,
+  CacheContext,
+} from "../../context";
 import { getPortRect, calculateCurve } from "../../connectionCalculator";
 import { Portal } from "react-portal";
-import ContextMenu from "../ContextMenu/ContextMenu";
+import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import { Draggable } from "../Draggable/Draggable";
 import {
   connection,
   connections,
+  coordinates,
   NodeTypes,
   PortTypes,
 } from "@globalTypes/types";
@@ -20,13 +25,13 @@ type NodeProps = {
   x?: number;
   y?: number;
   delay?: number;
-  stageRect?: any;
+  stageRect?: React.MutableRefObject<DOMRect>;
   connections?: connections;
   type?: string;
   inputData?: any;
-  onDragStart?;
-  onDragEnd?;
-  onDrag?;
+  onDragStart?: (e: MouseEvent) => void;
+  onDragEnd?: (coordinates: coordinates, e: MouseEvent) => void;
+  onDrag?: (coordinates: coordinates, e: MouseEvent) => void;
   nodeTypes: NodeTypes;
   portTypes: PortTypes;
   recalculate: () => void;
@@ -53,14 +58,14 @@ export const Node: React.FC<NodeProps> = ({
 }) => {
   const cache = React.useContext(CacheContext);
   const nodesDispatch = React.useContext(NodeDispatchContext);
-  const stageState = React.useContext(StageContext);
+  const editorState = React.useContext(EditorContext);
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
 
   const nodeWrapper = React.useRef<HTMLDivElement>();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
-  const byScale = (value) => (1 / stageState.scale) * value;
+  const byScale = (value: number) => (1 / editorState.scale) * value;
 
   const updateConnectionsByTransput = (
     transput: connection,
@@ -110,14 +115,14 @@ export const Node: React.FC<NodeProps> = ({
                 stageRect.current.x +
                 portHalf -
                 stageRect.current.width / 2
-            ) + byScale(stageState.translate.x),
+            ) + byScale(editorState.translate.x),
           y:
             byScale(
               toRect.y -
                 stageRect.current.y +
                 portHalf -
                 stageRect.current.height / 2
-            ) + byScale(stageState.translate.y),
+            ) + byScale(editorState.translate.y),
         };
 
         const to = {
@@ -127,14 +132,14 @@ export const Node: React.FC<NodeProps> = ({
                 stageRect.current.x +
                 portHalf -
                 stageRect.current.width / 2
-            ) + byScale(stageState.translate.x),
+            ) + byScale(editorState.translate.x),
           y:
             byScale(
               fromRect.y -
                 stageRect.current.y +
                 portHalf -
                 stageRect.current.height / 2
-            ) + byScale(stageState.translate.y),
+            ) + byScale(editorState.translate.y),
         };
 
         cnx.setAttribute("d", calculateCurve(from, to));
@@ -149,7 +154,7 @@ export const Node: React.FC<NodeProps> = ({
     }
   };
 
-  const stopDrag = (e, coordinates) => {
+  const stopDrag = (coordinates: coordinates, _e: MouseEvent) => {
     nodesDispatch({
       type: "SET_NODE_COORDINATES",
       ...coordinates,
@@ -157,16 +162,18 @@ export const Node: React.FC<NodeProps> = ({
     });
   };
 
-  const handleDrag = ({ x, y }) => {
-    nodeWrapper.current.style.transform = `translate(${x}px,${y}px)`;
+  const handleDrag = (coordinates: coordinates, _e: MouseEvent) => {
+    nodeWrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`;
     updateNodeConnections();
   };
 
-  const startDrag = (e) => {
-    onDragStart();
+  const startDrag = (e: MouseEvent) => {
+    onDragStart(e);
   };
 
-  const handleContextMenu = (e) => {
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     e.preventDefault();
     e.stopPropagation();
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
@@ -178,7 +185,7 @@ export const Node: React.FC<NodeProps> = ({
     setMenuOpen(false);
   };
 
-  const handleMenuOption = ({ value }) => {
+  const handleMenuOption = ({ value }: menuOption) => {
     switch (value) {
       case "deleteNode":
         nodesDispatch({
@@ -204,7 +211,6 @@ export const Node: React.FC<NodeProps> = ({
       innerRef={nodeWrapper}
       data-node-id={id}
       onContextMenu={handleContextMenu}
-      stageState={stageState}
       stageRect={stageRect}
       {...props}
     >

@@ -1,6 +1,6 @@
 import { coordinates } from "@globalTypes/types";
 
-type action =
+type editorAction =
   | { type: "SET_SCALE"; scale: number }
   | { type: "SET_TRANSLATE"; translate: coordinates };
 
@@ -13,7 +13,7 @@ export type EditorState = {
 
 export const editorReducer = (
   state: EditorState,
-  incomingAction: action | ((state: EditorState) => action)
+  incomingAction: editorAction | ((state: EditorState) => editorAction)
 ): EditorState => {
   const action =
     typeof incomingAction === "function"
