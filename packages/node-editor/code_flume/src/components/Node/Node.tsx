@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Node.module.css";
 import {
-  NodeDispatchContext,
+  getPortRect,
+  calculateCurve,
   EditorContext,
-  CacheContext,
-} from "../../context";
-import { getPortRect, calculateCurve } from "../../connectionCalculator";
+  EditorDispatchContext,
+} from "@utilities/index";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
@@ -25,7 +25,7 @@ type NodeProps = {
   x?: number;
   y?: number;
   delay?: number;
-  stageRect?: React.MutableRefObject<DOMRect>;
+  stageRect?: DOMRect;
   connections?: connections;
   type?: string;
   inputData?: any;
@@ -56,16 +56,15 @@ export const Node: React.FC<NodeProps> = ({
   recalculate,
   ...props
 }) => {
-  const cache = React.useContext(CacheContext);
-  const nodesDispatch = React.useContext(NodeDispatchContext);
-  const editorState = React.useContext(EditorContext);
+  const dispatch = React.useContext(EditorDispatchContext);
+  const { position, zoom } = React.useContext(EditorContext);
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
 
   const nodeWrapper = React.useRef<HTMLDivElement>();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
-  const byScale = (value: number) => (1 / editorState.scale) * value;
+  const byScale = (value: number) => (1 / zoom) * value;
 
   const updateConnectionsByTransput = (
     transput: connection,
@@ -73,18 +72,12 @@ export const Node: React.FC<NodeProps> = ({
   ) => {
     Object.entries(transput).forEach(([portName, outputs]) => {
       outputs.forEach((output) => {
-        const toRect = getPortRect(
-          id,
-          portName,
-          isOutput ? "output" : "input",
-          cache
-        );
+        const toRect = getPortRect(id, portName, isOutput ? "output" : "input");
 
         const fromRect = getPortRect(
           output.nodeId,
           output.portName,
-          isOutput ? "input" : "output",
-          cache
+          isOutput ? "input" : "output"
         );
 
         const portHalf = fromRect.width / 2;
@@ -99,47 +92,25 @@ export const Node: React.FC<NodeProps> = ({
 
         let cnx;
 
-        const cachedConnection = cache.current.connections[combined];
-
-        if (cachedConnection) {
-          cnx = cachedConnection;
-        } else {
-          cnx = document.querySelector(`[data-connection-id="${combined}"]`);
-          cache.current.connections[combined] = cnx;
-        }
+        cnx = document.querySelector(`[data-connection-id="${combined}"]`);
 
         const from = {
           x:
-            byScale(
-              toRect.x -
-                stageRect.current.x +
-                portHalf -
-                stageRect.current.width / 2
-            ) + byScale(editorState.translate.x),
+            byScale(toRect.x - stageRect.x + portHalf - stageRect.width / 2) +
+            byScale(position.x),
           y:
-            byScale(
-              toRect.y -
-                stageRect.current.y +
-                portHalf -
-                stageRect.current.height / 2
-            ) + byScale(editorState.translate.y),
+            byScale(toRect.y - stageRect.y + portHalf - stageRect.height / 2) +
+            byScale(position.y),
         };
 
         const to = {
           x:
-            byScale(
-              fromRect.x -
-                stageRect.current.x +
-                portHalf -
-                stageRect.current.width / 2
-            ) + byScale(editorState.translate.x),
+            byScale(fromRect.x - stageRect.x + portHalf - stageRect.width / 2) +
+            byScale(position.x),
           y:
             byScale(
-              fromRect.y -
-                stageRect.current.y +
-                portHalf -
-                stageRect.current.height / 2
-            ) + byScale(editorState.translate.y),
+              fromRect.y - stageRect.y + portHalf - stageRect.height / 2
+            ) + byScale(position.y),
         };
 
         cnx.setAttribute("d", calculateCurve(from, to));
@@ -155,7 +126,7 @@ export const Node: React.FC<NodeProps> = ({
   };
 
   const stopDrag = (coordinates: coordinates, _e: MouseEvent) => {
-    nodesDispatch({
+    dispatch({
       type: "SET_NODE_COORDINATES",
       ...coordinates,
       nodeId: id,
@@ -188,7 +159,7 @@ export const Node: React.FC<NodeProps> = ({
   const handleMenuOption = ({ value }: menuOption) => {
     switch (value) {
       case "deleteNode":
-        nodesDispatch({
+        dispatch({
           type: "REMOVE_NODE",
           nodeId: id,
         });

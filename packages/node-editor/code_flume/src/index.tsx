@@ -4,15 +4,12 @@ import { useId } from "@reach/auto-id";
 import clamp from "lodash/clamp";
 
 //State Management
-import { NodeDispatchContext, CacheContext, EditorContext } from "./context";
 import {
-  commentsReducer,
   toastsReducer,
   editorReducer,
   getInitialNodes,
-  nodesReducer,
+  EditorState,
 } from "./reducers";
-import { cache } from "./cache";
 
 //Components
 import { Stage } from "./components/Stage/Stage";
@@ -22,55 +19,37 @@ import { Toaster } from "./components/Toaster/Toaster";
 import { Connections } from "./components/Connections/Connections";
 
 //Functions
-import { createConnections } from "./connectionCalculator";
 import usePrevious from "./hooks/usePrevious";
 
 // Types, Constants and Styles
-import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./index.module.css";
+import { Comments, defaultNode, EditorConfig, Nodes } from "@globalTypes/types";
 import {
-  comments,
-  defaultNode,
-  nodes,
-  NodeTypes,
-  PortTypes,
-} from "@globalTypes/types";
+  EditorDispatchContext,
+  EditorContext,
+  createConnections,
+  DRAG_CONNECTION_ID,
+} from "@utilities/index";
+import { useDOMRect } from "hooks/useDOMRect";
 
 type NodeEditorProps = {
   /**
-   * The state of the comments in the Editor.
+   * The state of the content in the Editor.
    */
-  comments: comments;
+  state: EditorState;
   /**
-   * The state of the nodes in the Editor.
+   * The preconfigured nodes and ports. This determines which nodes are avaliable when working with the Editor.
    */
-  nodes: nodes;
-  /**
-   * The preconfigured node types. This determines which nodes are avaliable when working with the Editor.
-   */
-  nodeTypes: NodeTypes;
-  /**
-   * The preconfigured port types. This determines which ports are avaliable when working with the Editor.
-   */
-  portTypes: PortTypes;
+  config: EditorConfig;
   /**
    * To always start the Editor off with a set of nodes provide them as defaultNodes.
    */
   defaultNodes: defaultNode[];
   /**
-   * @deprecated - The Editor should not be dependent on context. This is reserved for the Interpreter.
-   */
-  context: Record<string, unknown>;
-  /**
    * @description - This function is called every time the nodes update. This is helpful when managing the editor state externally.
-   * @param nodes - The nodes are provided as a parameter.
+   * @param state - The state of the Editor.
    */
-  onNodesChange: (nodes: nodes) => void;
-  /**
-   * @description - This function is called every time the nodes update. This is helpful when managing the editor state externally.
-   * @param comments - The nodes are provided as a parameter.
-   */
-  onCommentsChange: (comments: comments) => void;
+  onChange: (state: EditorState) => void;
   /**
    * Provide an optional initialZoom. By default the zoom is 1.
    */
@@ -91,47 +70,38 @@ type NodeEditorProps = {
 };
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
-  comments: initialComments,
-  nodes: initialNodes,
-  nodeTypes = {},
-  portTypes = {},
-  defaultNodes = [],
-  context = {},
-  onNodesChange,
-  onCommentsChange,
-  initialZoom = 1,
+  state,
+  config = { settings: { hideComments: false, zoom: 1 }, defaultNodes: [] },
+  onChange,
   spaceToPan = false,
-  hideComments = false,
   disableComments = false,
   disableZoom = false,
   disablePan = false,
   circularBehavior = "prevent",
   debug = false,
 }) => {
+  //These Refs allow us to preserve state across component renders without causing a rerender.
   const editorId = useId();
-  const cacheRef = React.useRef(cache);
-  const stage = React.useRef<DOMRect>();
+  const [stage, recalculateRect] = useDOMRect(editorId);
 
-  const [sideEffectToasts, setSideEffectToasts] = React.useState();
+  //----------------------------------------------------------------
+
+  //The following is used for state management
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
-  const [nodes, dispatchNodes] = React.useReducer(
-    nodesReducer(
-      { nodeTypes, portTypes, cache, circularBehavior, context },
-      setSideEffectToasts
-    ),
-    {},
-    () =>
-      getInitialNodes(initialNodes, defaultNodes, nodeTypes, portTypes, context)
-  );
+  const [editorState, dispatchEditorState] = React.useReducer(editorReducer, {
+    id: editorId,
+    zoom: clamp(config.settings.zoom, 0.1, 7),
+    position: { x: 0, y: 0 },
+    nodes: state.nodes,
+    comments: state.comments,
+  });
 
-  const [comments, dispatchComments] = React.useReducer(
-    commentsReducer,
-    initialComments || {}
-  );
+  //----------------------------------------------------------------
 
+  //These functions are used to update the stage imperatively across the codebase when necessary. They also track whether something should be recalculated.
   React.useEffect(() => {
-    dispatchNodes({ type: "HYDRATE_DEFAULT_NODES" });
+    dispatchEditorState({ type: "HYDRATE_DEFAULT_NODES" });
   }, []);
 
   const [
@@ -139,22 +109,13 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     setShouldRecalculateConnections,
   ] = React.useState(true);
 
-  const [editorState, dispatchEditorState] = React.useReducer(editorReducer, {
-    id: editorId,
-    scale: clamp(initialZoom, 0.1, 7),
-    translate: { x: 0, y: 0 },
-    executionContext: context,
-  });
+  const triggerRecalculation = () => {
+    setShouldRecalculateConnections(true);
+  };
 
   const recalculateConnections = React.useCallback(() => {
-    createConnections(nodes, editorState, editorId);
-  }, [nodes, editorId, editorState]);
-
-  const recalculateStageRect = () => {
-    stage.current = document
-      .getElementById(`${STAGE_ID}${editorId}`)
-      .getBoundingClientRect();
-  };
+    createConnections(editorState, editorId);
+  }, [editorState.nodes, editorId, editorState]);
 
   React.useLayoutEffect(() => {
     if (shouldRecalculateConnections) {
@@ -163,101 +124,59 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     }
   }, [shouldRecalculateConnections, recalculateConnections]);
 
-  const triggerRecalculation = () => {
-    setShouldRecalculateConnections(true);
-  };
-
-  const previousNodes = usePrevious(nodes);
-
+  const previousNodes = usePrevious(editorState);
   React.useEffect(() => {
-    if (previousNodes && onNodesChange && nodes !== previousNodes) {
-      onNodesChange(nodes);
+    if (previousNodes && onChange && editorState !== previousNodes) {
+      onChange(editorState);
     }
-  }, [nodes, previousNodes, onNodesChange]);
+  }, [editorState.nodes, previousNodes, onChange]);
 
-  const previousComments = usePrevious(comments);
-
-  React.useEffect(() => {
-    if (previousComments && onCommentsChange && comments !== previousComments) {
-      onCommentsChange(comments);
-    }
-  }, [comments, previousComments, onCommentsChange]);
-
-  React.useEffect(() => {
-    if (sideEffectToasts) {
-      dispatchToasts(sideEffectToasts);
-      setSideEffectToasts(null);
-    }
-  }, [sideEffectToasts]);
+  //----------------------------------------------------------------
 
   return (
-    <NodeDispatchContext.Provider value={dispatchNodes}>
-      <CacheContext.Provider value={cacheRef}>
-        <EditorContext.Provider value={editorState}>
-          <Stage
-            editorId={editorId}
-            scale={editorState.scale}
-            translate={editorState.translate}
-            spaceToPan={spaceToPan}
-            disablePan={disablePan}
-            disableZoom={disableZoom}
-            dispatchStageState={dispatchEditorState}
-            dispatchComments={dispatchComments}
-            disableComments={disableComments || hideComments}
-            stageRef={stage}
-            numNodes={Object.keys(nodes).length}
-            nodeTypes={nodeTypes}
-            outerStageChildren={
-              <React.Fragment>
-                {debug && (
-                  <div className={styles.debugWrapper}>
-                    <button onClick={() => console.log(nodes)}>
-                      Log Nodes
-                    </button>
-                    <button onClick={() => console.log(JSON.stringify(nodes))}>
-                      Export Nodes
-                    </button>
-                    <button onClick={() => console.log(comments)}>
-                      Log Comments
-                    </button>
-                  </div>
-                )}
-                <Toaster toasts={toasts} dispatchToasts={dispatchToasts} />
-              </React.Fragment>
-            }
-          >
-            {!hideComments &&
-              Object.values(comments).map((comment) => (
-                <Comment
-                  {...comment}
-                  stageRect={stage}
-                  dispatch={dispatchComments}
-                  onDragStart={recalculateStageRect}
-                  key={comment.id}
-                />
-              ))}
-            {Object.values(nodes).map((node) => (
-              <Node
-                {...node}
+    <EditorDispatchContext.Provider value={dispatchEditorState}>
+      <EditorContext.Provider value={editorState}>
+        <Stage
+          spaceToPan={spaceToPan}
+          disablePan={disablePan}
+          disableZoom={disableZoom}
+          disableComments={disableComments || config.settings.hideComments}
+          stageRect={stage}
+          numNodes={Object.keys(editorState.nodes).length}
+          outerStageChildren={
+            <React.Fragment>
+              <Toaster toasts={toasts} dispatchToasts={dispatchToasts} />
+            </React.Fragment>
+          }
+        >
+          {!config.settings.hideComments &&
+            Object.values(editorState.comments).map((comment) => (
+              <Comment
+                {...comment}
                 stageRect={stage}
-                onDragEnd={triggerRecalculation}
-                onDragStart={recalculateStageRect}
-                key={node.id}
-                nodeTypes={nodeTypes}
-                portTypes={portTypes}
-                recalculate={triggerRecalculation}
+                onDragStart={recalculateRect}
+                key={comment.id}
               />
             ))}
-            <Connections editorId={editorId} />
-            <div
-              className={styles.dragWrapper}
-              id={`${DRAG_CONNECTION_ID}${editorId}`}
-            ></div>
-          </Stage>
-        </EditorContext.Provider>
-      </CacheContext.Provider>
-    </NodeDispatchContext.Provider>
+          {Object.values(editorState.nodes).map((node) => (
+            <Node
+              {...node}
+              stageRect={stage}
+              onDragEnd={triggerRecalculation}
+              onDragStart={recalculateRect}
+              key={node.id}
+              recalculate={triggerRecalculation}
+            />
+          ))}
+          <Connections editorId={editorId} />
+          <div
+            className={styles.dragWrapper}
+            id={`${DRAG_CONNECTION_ID}${editorId}`}
+          ></div>
+        </Stage>
+      </EditorContext.Provider>
+    </EditorDispatchContext.Provider>
   );
 };
 
-export { comments, nodes };
+export { Comments, Nodes };

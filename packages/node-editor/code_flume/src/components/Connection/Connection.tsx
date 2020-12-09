@@ -1,5 +1,5 @@
 import React from "react";
-import { calculateCurve } from "../../connectionCalculator";
+import { calculateCurve } from "@utilities/index";
 import styles from "./Connection.module.css";
 
 type ConnectionProps = {

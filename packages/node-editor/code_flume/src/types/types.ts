@@ -1,24 +1,34 @@
+/**This utility type is used to easily create an id based object of objects.*/
+type Dictionary<T> = { readonly [id: string]: T };
+
+export type EditorConfig = {
+  nodes: NodeTypes;
+  ports: PortTypes;
+  settings: {
+    zoom: number;
+    hideComments: boolean;
+  };
+  defaultNodes: defaultNode[];
+};
+
 type nodeBase = {
-  id?: string;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  color?: string;
+  readonly id?: string;
+  readonly coordinates?: { x?: number; y?: number };
+  readonly width?: number;
+  readonly height?: number;
+  readonly color?: string;
 };
 
 export type comment = nodeBase & {
-  text: string;
-  isNew?: boolean;
+  readonly text: string;
+  readonly isNew?: boolean;
 };
 
-export type comments = {
-  [id: string]: comment;
-};
+export type Comments = Dictionary<comment>;
 
 export type Connection = {
-  nodeId: string;
-  portName: string;
+  readonly nodeId: string;
+  readonly portName: string;
 };
 
 export type PortBuilderType = {
@@ -28,63 +38,38 @@ export type PortBuilderType = {
   noControls?: boolean;
   color?: string;
   hidePort?: boolean;
-  controls?: ControlConfigs[];
   acceptTypes?: string[];
 };
 
-type PortConfig = {
-  name?: string;
-  label?: string;
-  hidePort?: boolean;
-  color?: string;
-  controls?: any;
-  noControls?: boolean;
-};
-
-export type connection = {
-  [id: string]: Connection[];
-};
-// | ((ports: PortTypes) => PortBuilderType[])
-// | PortBuilderType[]
-// | [];
+export type connection = Dictionary<readonly Connection[]>;
 
 export type connections = {
-  inputs?: connection;
-  outputs?: connection;
+  readonly inputs?: connection;
+  readonly outputs?: connection;
 };
 
 export type Node = nodeBase & {
-  type: string;
-  label?: string;
-  initialWidth?: number;
-  connections?: connections;
-  root?: boolean;
-  addable?: boolean;
-  deletable?: boolean;
-  description?: string;
-  sortIndex?: number;
-  inputData?: { [portName: string]: { [controlName: string]: any } };
-  defaultNode?: boolean;
+  readonly type: string;
+  readonly label?: string;
+  readonly initialWidth?: number;
+  readonly connections?: connections;
+  readonly root?: boolean;
+  readonly addable?: boolean;
+  readonly deletable?: boolean;
+  readonly description?: string;
+  readonly sortIndex?: number;
+  readonly inputData?: { [portName: string]: { [controlName: string]: any } };
+  readonly defaultNode?: boolean;
 };
 
-export type nodes = {
-  [id: string]: Node;
-};
+export type Nodes = Dictionary<Node>;
 
-export type PortTypes = {
-  [id: string]: PortBuilderType;
-};
+export type PortTypes = Dictionary<PortBuilderType>;
 
-export type NodeTypes = {
-  [id: string]: NodeConfig;
-};
+export type NodeTypes = Dictionary<NodeConfig>;
 
 export type port =
-  | ((
-      ports: PortTypes,
-      connections: connections,
-      context: any
-    ) => PortBuilderType[])
+  | ((ports: PortTypes, connections: connections) => PortBuilderType[])
   | PortBuilderType[];
 
 export type NodeConfig = {
@@ -100,73 +85,9 @@ export type NodeConfig = {
   sortIndex?: number;
 };
 
-export type defaultNode = { type: string; x: number; y: number };
-
-export type Control = {
-  type: string;
-  label: string;
-  name: string;
-  defaultValue: string;
-  setValue: (oldData: any, newData: any) => any;
+export type defaultNode = {
+  readonly type: string;
+  readonly coordinates?: { readonly x: number; readonly y: number };
 };
 
-interface BaseControlConfig {
-  type: string;
-  name: string;
-  label: string;
-  setValue?: (oldData: any, newData: any) => any;
-}
-
-interface TextControlConfig extends BaseControlConfig {
-  placeholder?: string;
-  defaultValue: string;
-}
-
-interface SelectControlConfig extends BaseControlConfig {
-  options: { value: string; label: string; description?: string }[];
-  defaultValue: string;
-}
-
-interface MultiSelectControlConfig extends BaseControlConfig {
-  options: { value: string; label: string; description?: string }[];
-  defaultValue: string[];
-}
-
-interface NumberControlConfig extends BaseControlConfig {
-  step?: number;
-  defaultValue: number;
-}
-
-interface CheckboxControlConfig extends BaseControlConfig {
-  defaultValue: boolean;
-}
-
-interface CustomControlConfig extends BaseControlConfig {
-  render: (
-    data: any,
-    onChange: (data: any) => void,
-    context: any,
-    redraw: () => void,
-    portProps: PortProps,
-    inputData: any
-  ) => JSX.Element;
-}
-
-export type ControlConfigs =
-  | TextControlConfig
-  | SelectControlConfig
-  | MultiSelectControlConfig
-  | NumberControlConfig
-  | CheckboxControlConfig
-  | CustomControlConfig;
-
-type PortProps = {
-  label: string;
-  inputLabel: string;
-  name: string;
-  portName: string;
-  defaultValue: any;
-  inputData: any;
-};
-
-export type coordinates = { x: number; y: number };
+export type coordinates = { readonly x: number; readonly y: number };

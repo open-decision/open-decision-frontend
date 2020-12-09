@@ -1,5 +1,5 @@
 import { coordinates } from "@globalTypes/types";
-import { EditorContext } from "context";
+import { EditorContext } from "@utilities/index";
 import React from "react";
 
 //onDrag is a prop of an HTML div element, to avoid the type collision it is ommited here
@@ -9,7 +9,7 @@ type DivProps = Omit<
 >;
 
 type DraggableProps = DivProps & {
-  stageRect?: React.MutableRefObject<DOMRect>;
+  stageRect?: DOMRect;
   onDragDelayStart?: (
     e:
       | React.TouchEvent<HTMLDivElement>
@@ -44,23 +44,23 @@ export const Draggable: React.FC<DraggableProps> = ({
   const offset = React.useRef<any>();
   const wrapper = React.useRef<HTMLDivElement>();
 
-  const byScale = (value: number) => (1 / editorState.scale) * value;
+  const byScale = (value: number) => (1 / editorState.zoom) * value;
 
   const getScaledCoordinates = (e: MouseEvent) => {
     const x =
       byScale(
         e.clientX -
-          (stageRect ? stageRect.current.left : 0) -
+          (stageRect ? stageRect.left : 0) -
           offset.current.x -
-          (stageRect ? stageRect.current.width : 0) / 2
-      ) + byScale(editorState.translate.x);
+          (stageRect ? stageRect.width : 0) / 2
+      ) + byScale(editorState.position.x);
     const y =
       byScale(
         e.clientY -
-          (stageRect ? stageRect.current.top : 0) -
+          (stageRect ? stageRect.top : 0) -
           offset.current.y -
-          (stageRect ? stageRect.current.height : 0) / 2
-      ) + byScale(editorState.translate.y);
+          (stageRect ? stageRect.height : 0) / 2
+      ) + byScale(editorState.position.y);
     return { x, y };
   };
 

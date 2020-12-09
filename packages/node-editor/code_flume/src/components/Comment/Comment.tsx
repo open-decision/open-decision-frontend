@@ -3,14 +3,12 @@ import styles from "./Comment.module.css";
 import { Draggable } from "../Draggable/Draggable";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import ColorPicker from "../ColorPicker/ColorPicker";
-import { EditorContext } from "../../context";
 import { Portal } from "react-portal";
 import clamp from "lodash/clamp";
-import { commentsAction } from "reducers";
 import { coordinates } from "@globalTypes/types";
+import { EditorDispatchContext } from "@utilities/index";
 
 type CommentProps = {
-  dispatch: React.Dispatch<commentsAction>;
   id?: string;
   x?: number;
   y?: number;
@@ -18,13 +16,12 @@ type CommentProps = {
   height?: number;
   color?: string;
   text?: string;
-  stageRect?: React.MutableRefObject<DOMRect>;
+  stageRect?: DOMRect;
   onDragStart?: () => void;
   isNew?: boolean;
 };
 
 export const Comment: React.FC<CommentProps> = ({
-  dispatch,
   id,
   x,
   y,
@@ -36,7 +33,7 @@ export const Comment: React.FC<CommentProps> = ({
   onDragStart,
   isNew,
 }) => {
-  const editorState = React.useContext(EditorContext);
+  const dispatch = React.useContext(EditorDispatchContext);
   const wrapper = React.useRef<HTMLDivElement>();
   const textarea = React.useRef<HTMLTextAreaElement>();
   const [isEditing, setIsEditing] = React.useState(false);

@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": "./src",
-    "paths": { "@globalTypes/*": ["types/*"] }
+    "paths": { "@globalTypes/*": ["types/*"], "@utilities/*": ["utilities/*"] }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

@@ -2,22 +2,20 @@ import React from "react";
 import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import { NodeDispatchContext } from "../../context";
+import {
+  EditorDispatchContext,
+  EditorContext,
+  STAGE_ID,
+} from "@utilities/index";
 import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
-import { STAGE_ID } from "../../constants";
-import { coordinates, Node, NodeConfig, NodeTypes } from "@globalTypes/types";
+import { coordinates, NodeTypes } from "@globalTypes/types";
 
 type StageProps = {
-  scale: number;
-  translate: coordinates;
-  editorId: string;
-  dispatchStageState: any;
   outerStageChildren: React.ReactNode;
-  dispatchComments: any;
   numNodes: number;
-  stageRef: React.MutableRefObject<DOMRect>;
+  stageRect: DOMRect;
   spaceToPan: boolean;
   disableComments: boolean;
   disablePan: boolean;
@@ -26,56 +24,51 @@ type StageProps = {
 };
 
 export const Stage: React.FC<StageProps> = ({
-  scale,
-  translate,
-  editorId,
-  dispatchStageState,
   children,
   outerStageChildren,
   numNodes,
-  stageRef,
+  stageRect,
   spaceToPan,
-  dispatchComments,
   disableComments,
   disablePan,
   disableZoom,
   nodeTypes,
 }) => {
-  const dispatchNodes = React.useContext(NodeDispatchContext);
+  const dispatch = React.useContext(EditorDispatchContext);
+  const { zoom, position, id } = React.useContext(EditorContext);
+
   const wrapper = React.useRef<HTMLDivElement>();
   const translateWrapper = React.useRef<HTMLDivElement>();
+
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
   const dragData = React.useRef({ x: 0, y: 0 });
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
 
   const setStageRect = React.useCallback(() => {
-    stageRef.current = wrapper.current.getBoundingClientRect();
-  }, [stageRef]);
+    stageRect = wrapper.current.getBoundingClientRect();
+  }, [stageRect]);
 
   React.useEffect(() => {
-    stageRef.current = wrapper.current.getBoundingClientRect();
+    stageRect = wrapper.current.getBoundingClientRect();
     window.addEventListener("resize", setStageRect);
     return () => {
       window.removeEventListener("resize", setStageRect);
     };
-  }, [stageRef, setStageRect]);
+  }, [stageRect, setStageRect]);
 
   const handleWheel = React.useCallback(
-    (e) => {
-      if (e.target.nodeName === "TEXTAREA" || e.target.dataset.comment) {
-        if (e.target.clientHeight < e.target.scrollHeight) return;
-      }
+    (e: WheelEvent) => {
       e.preventDefault();
       if (numNodes > 0) {
         const delta = e.deltaY;
-        dispatchStageState(({ scale }: { scale: number }) => ({
+        dispatch({
           type: "SET_SCALE",
-          scale: clamp(scale - clamp(delta, -10, 10) * 0.005, 0.1, 7),
-        }));
+          zoom: clamp(zoom - clamp(delta, -10, 10) * 0.005, 0.1, 7),
+        });
       }
     },
-    [dispatchStageState, numNodes]
+    [dispatch, numNodes]
   );
 
   const handleDragDelayStart = () => {
@@ -94,8 +87,8 @@ export const Stage: React.FC<StageProps> = ({
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
     translateWrapper.current.style.transform = `translate(${-(
-      translate.x + xDistance
-    )}px, ${-(translate.y + yDistance)}px)`;
+      position.x + xDistance
+    )}px, ${-(position.y + yDistance)}px)`;
   };
 
   const handleDragEnd = (_coordinates: coordinates, e: MouseEvent) => {
@@ -103,13 +96,13 @@ export const Stage: React.FC<StageProps> = ({
     const yDistance = dragData.current.y - e.clientY;
     dragData.current.x = e.clientX;
     dragData.current.y = e.clientY;
-    dispatchStageState(({ translate }: { translate: coordinates }) => ({
+    dispatch({
       type: "SET_TRANSLATE",
-      translate: {
-        x: translate.x + xDistance,
-        y: translate.y + yDistance,
+      position: {
+        x: position.x + xDistance,
+        y: position.y + yDistance,
       },
-    }));
+    });
   };
 
   const handleContextMenu = (
@@ -125,27 +118,27 @@ export const Stage: React.FC<StageProps> = ({
     setMenuOpen(false);
   };
 
-  const byScale = (value: number) => (1 / scale) * value;
+  const byScale = (value: number) => (1 / zoom) * value;
 
   const addNode = (option: menuOption) => {
     const wrapperRect = wrapper.current.getBoundingClientRect();
 
     const x =
       byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
-      byScale(translate.x);
+      byScale(position.x);
 
     const y =
       byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
-      byScale(translate.y);
+      byScale(position.y);
 
     if (option.internalType === "comment") {
-      dispatchComments({
+      dispatch({
         type: "ADD_COMMENT",
         x,
         y,
       });
     } else {
-      dispatchNodes({
+      dispatch({
         type: "ADD_NODE",
         x,
         y,
@@ -214,7 +207,7 @@ export const Stage: React.FC<StageProps> = ({
 
   return (
     <Draggable
-      id={`${STAGE_ID}${editorId}`}
+      id={`${STAGE_ID}${id}`}
       className={styles.wrapper}
       innerRef={wrapper}
       onContextMenu={handleContextMenu}
@@ -243,11 +236,11 @@ export const Stage: React.FC<StageProps> = ({
       <div
         ref={translateWrapper}
         className={styles.transformWrapper}
-        style={{ transform: `translate(${-translate.x}px, ${-translate.y}px)` }}
+        style={{ transform: `translate(${-position.x}px, ${-position.y}px)` }}
       >
         <div
           className={styles.scaleWrapper}
-          style={{ transform: `scale(${scale})` }}
+          style={{ transform: `scale(${zoom})` }}
         >
           {children}
         </div>

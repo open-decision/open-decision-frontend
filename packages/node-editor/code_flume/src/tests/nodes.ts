@@ -1,10 +1,9 @@
-import { nodes } from "@globalTypes/types";
+import { Nodes } from "@globalTypes/types";
 
-export const exampleNodes: nodes = {
+export const exampleNodes: Nodes = {
   "5nCLb85WDw": {
     id: "5nCLb85WDw",
-    x: 134.5,
-    y: -90,
+    coordinates: { x: 134.5, y: -90 },
     type: "addNumbers",
     width: 150,
     connections: {
@@ -18,8 +17,7 @@ export const exampleNodes: nodes = {
   },
   vRPQ06k4nT: {
     id: "vRPQ06k4nT",
-    x: -182.5,
-    y: -176,
+    coordinates: { x: -182.5, y: -176 },
     type: "number",
     width: 150,
     connections: {
@@ -30,8 +28,7 @@ export const exampleNodes: nodes = {
   },
   BDhQ98lTfw: {
     id: "BDhQ98lTfw",
-    x: -181.5,
-    y: -42,
+    coordinates: { x: -181.5, y: -42 },
     type: "number",
     width: 150,
     connections: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { CONNECTIONS_ID } from "../../constants";
+import { CONNECTIONS_ID } from "@utilities/index";
 import styles from "./Connections.module.css";
 
 export const Connections: React.FC<{ editorId: string }> = ({ editorId }) => {

@@ -1,8 +1,8 @@
 import styles from "./components/Connection/Connection.module.css";
-import { CONNECTIONS_ID } from "./constants";
 import { line, curveBasis } from "d3-shape";
-import { coordinates, nodes } from "@globalTypes/types";
-import { cache } from "cache";
+import { coordinates, Nodes } from "@globalTypes/types";
+import { CONNECTIONS_ID } from "@utilities/index";
+import { EditorState } from "reducers";
 
 const getPort = (nodeId: string, portName: string, transputType = "input") =>
   document.querySelector(
@@ -12,24 +12,9 @@ const getPort = (nodeId: string, portName: string, transputType = "input") =>
 export const getPortRect = (
   nodeId: string,
   portName: string,
-  transputType = "input",
-  cache?: React.MutableRefObject<cache>
-): DOMRect => {
-  if (cache) {
-    const portCacheName = nodeId + portName + transputType;
-    const cachedPort = cache.current.ports[portCacheName];
-    if (cachedPort) {
-      return cachedPort.getBoundingClientRect();
-    } else {
-      const port = getPort(nodeId, portName, transputType);
-      cache.current.ports[portCacheName] = port;
-      return port && port.getBoundingClientRect();
-    }
-  } else {
-    const port = getPort(nodeId, portName, transputType);
-    return port && port.getBoundingClientRect();
-  }
-};
+  transputType = "input"
+): DOMRect | undefined =>
+  getPort(nodeId, portName, transputType)?.getBoundingClientRect() ?? undefined;
 
 export const calculateCurve = (from: coordinates, to: coordinates): string => {
   const length = to.x - from.x;
@@ -110,8 +95,7 @@ export const getStageRef = (editorId: string): HTMLElement =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
 export const createConnections = (
-  nodes: nodes,
-  { scale }: { scale: number },
+  { nodes, zoom }: EditorState,
   editorId: string
 ): void => {
   const stageRef = getStageRef(editorId);
@@ -120,7 +104,7 @@ export const createConnections = (
     const stageHalfWidth = stage.width / 2;
     const stageHalfHeight = stage.height / 2;
 
-    const byScale = (value: number) => (1 / scale) * value;
+    const byScale = (value: number) => (1 / zoom) * value;
 
     Object.values(nodes).forEach((node) => {
       if (node.connections && node.connections.inputs) {
