@@ -4,12 +4,7 @@ import { useId } from "@reach/auto-id";
 import clamp from "lodash/clamp";
 
 //State Management
-import {
-  toastsReducer,
-  editorReducer,
-  getInitialNodes,
-  EditorState,
-} from "./reducers";
+import { toastsReducer, editorReducer, EditorState } from "./reducers";
 
 //Components
 import { Stage } from "./components/Stage/Stage";
@@ -71,7 +66,12 @@ type NodeEditorProps = {
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
-  config = { settings: { hideComments: false, zoom: 1 }, defaultNodes: [] },
+  config = {
+    settings: { hideComments: false, zoom: 1 },
+    defaultNodes: [],
+    nodes: {},
+    ports: {},
+  },
   onChange,
   spaceToPan = false,
   disableComments = false,
@@ -89,13 +89,16 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //The following is used for state management
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
-  const [editorState, dispatchEditorState] = React.useReducer(editorReducer, {
-    id: editorId,
-    zoom: clamp(config.settings.zoom, 0.1, 7),
-    position: { x: 0, y: 0 },
-    nodes: state.nodes,
-    comments: state.comments,
-  });
+  const [editorState, dispatchEditorState] = React.useReducer(
+    editorReducer(config, dispatchToasts),
+    {
+      id: editorId,
+      zoom: clamp(config.settings.zoom, 0.1, 7),
+      position: { x: 0, y: 0 },
+      nodes: state.nodes,
+      comments: state.comments,
+    }
+  );
 
   //----------------------------------------------------------------
 
@@ -137,6 +140,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     <EditorDispatchContext.Provider value={dispatchEditorState}>
       <EditorContext.Provider value={editorState}>
         <Stage
+          nodeTypes={config.nodes}
           spaceToPan={spaceToPan}
           disablePan={disablePan}
           disableZoom={disableZoom}
@@ -166,6 +170,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
               onDragStart={recalculateRect}
               key={node.id}
               recalculate={triggerRecalculation}
+              nodeTypes={config.nodes}
+              portTypes={config.ports}
             />
           ))}
           <Connections editorId={editorId} />

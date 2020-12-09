@@ -1,19 +1,20 @@
 import React from "react";
 import { calculateCurve } from "@utilities/index";
 import styles from "./Connection.module.css";
+import { coordinates } from "@globalTypes/types";
 
 type ConnectionProps = {
-  from;
-  to;
-  id?;
-  lineRef;
-  outputNodeId?;
-  outputPortName?;
-  inputNodeId?;
-  inputPortName?;
+  from: coordinates;
+  to: coordinates;
+  id?: string;
+  lineRef: React.LegacyRef<SVGPathElement>;
+  outputNodeId?: string;
+  outputPortName?: string;
+  inputNodeId?: string;
+  inputPortName?: string;
 };
 
-const Connection: React.FC<ConnectionProps> = ({
+export const Connection: React.FC<ConnectionProps> = ({
   from,
   to,
   id,
@@ -42,5 +43,3 @@ const Connection: React.FC<ConnectionProps> = ({
     </svg>
   );
 };
-
-export default Connection;

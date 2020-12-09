@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
-import Connection from "../Connection/Connection";
+import { Connection } from "../Connection/Connection";
 import usePrevious from "../../hooks/usePrevious";
 import {
   calculateCurve,
   getPortRect,
   STAGE_ID,
   DRAG_CONNECTION_ID,
-  NodeDispatchContext,
   EditorContext,
+  EditorDispatchContext,
 } from "@utilities/index";
 import { connections, port, PortTypes } from "@globalTypes/types";
 
@@ -20,13 +20,12 @@ function useTransputs(
   inputData: any,
   connections: connections
 ) {
-  const nodesDispatch = React.useContext(NodeDispatchContext);
-  const { executionContext } = React.useContext(EditorContext);
+  const dispatch = React.useContext(EditorDispatchContext);
 
   const transputs = React.useMemo(() => {
     if (Array.isArray(transputsFn)) return transputsFn;
-    return transputsFn(inputData, connections, executionContext);
-  }, [transputsFn, inputData, connections, executionContext]);
+    return transputsFn(inputData, connections);
+  }, [transputsFn, inputData, connections]);
 
   const prevTransputs = usePrevious(transputs);
 
@@ -36,21 +35,14 @@ function useTransputs(
     for (const transput of prevTransputs) {
       const current = transputs.find(({ name }) => transput.name === name);
       if (!current) {
-        nodesDispatch({
+        dispatch({
           type: "DESTROY_TRANSPUT",
           transputType,
           transput: { nodeId, portName: "" + transput.name },
         });
       }
     }
-  }, [
-    transputsFn,
-    transputs,
-    prevTransputs,
-    nodesDispatch,
-    nodeId,
-    transputType,
-  ]);
+  }, [transputsFn, transputs, prevTransputs, dispatch, nodeId, transputType]);
 
   return transputs;
 }
@@ -99,13 +91,10 @@ const IoPorts: React.FC<IoPortsProps> = ({
           {resolvedInputs.map((input) => (
             <Input
               {...input}
-              data={inputData[input.name] || {}}
               isConnected={!!connections.inputs[input.name]}
               recalculate={recalculate}
-              updateNodeConnections={updateNodeConnections}
               inputTypes={inputTypes}
               nodeId={nodeId}
-              inputData={inputData}
               key={input.name}
             />
           ))}
@@ -131,20 +120,14 @@ const IoPorts: React.FC<IoPortsProps> = ({
 export default IoPorts;
 
 type InputProps = {
-  type?;
-  label?;
-  name?;
-  nodeId?;
-  data?;
-  controls?;
+  type?: string;
+  label?: string;
+  name?: string;
+  nodeId?: string;
   inputTypes?: PortTypes;
-  noControls?;
   recalculate?: () => void;
   recalculateStageRect?: () => void;
-  updateNodeConnections?;
-  isConnected?;
-  inputData?;
-  hidePort?;
+  isConnected?: boolean;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -152,22 +135,12 @@ const Input: React.FC<InputProps> = ({
   label,
   name,
   nodeId,
-  data,
-  controls: localControls,
   inputTypes,
-  noControls,
   recalculate,
-  recalculateStageRect,
-  updateNodeConnections,
   isConnected,
-  inputData,
-  hidePort,
 }) => {
-  const { label: defaultLabel, color, controls: defaultControls = [] } =
-    inputTypes[type] || {};
+  const { label: defaultLabel, color } = inputTypes[type] || {};
   const prevConnected = usePrevious(isConnected);
-
-  const controls = localControls || defaultControls;
 
   React.useEffect(() => {
     if (isConnected !== prevConnected) {
@@ -178,36 +151,31 @@ const Input: React.FC<InputProps> = ({
   return (
     <div
       className={styles.transput}
-      data-controlless={isConnected || noControls || !controls.length}
       onDragStart={(e) => {
         e.preventDefault();
         e.stopPropagation();
       }}
     >
-      {!hidePort ? (
-        <Port
-          type={type}
-          color={color}
-          name={name}
-          nodeId={nodeId}
-          isInput
-          recalculate={recalculate}
-          inputTypes={inputTypes}
-        />
-      ) : null}
-      {(!controls.length || noControls || isConnected) && (
-        <label className={styles.portLabel}>{label || defaultLabel}</label>
-      )}
+      <Port
+        type={type}
+        color={color}
+        name={name}
+        nodeId={nodeId}
+        isInput
+        recalculate={recalculate}
+        inputTypes={inputTypes}
+      />
+      <label className={styles.portLabel}>{label || defaultLabel}</label>
     </div>
   );
 };
 
 type OutputProps = {
   inputTypes?: PortTypes;
-  label?;
-  name?;
-  nodeId?;
-  type?;
+  label?: string;
+  name?: string;
+  nodeId?: string;
+  type?: string;
   recalculate?: () => void;
 };
 
@@ -246,10 +214,10 @@ const Output: React.FC<OutputProps> = ({
 type PortProps = {
   color: string;
   name: string;
-  type;
-  isInput?;
-  nodeId;
-  recalculate;
+  type: string;
+  isInput?: boolean;
+  nodeId: string;
+  recalculate: () => void;
   inputTypes: PortTypes;
 };
 
@@ -262,10 +230,9 @@ const Port: React.FC<PortProps> = ({
   recalculate,
   inputTypes,
 }) => {
-  const nodesDispatch = React.useContext(NodeDispatchContext);
-  const stageState = React.useContext(EditorContext);
-  const editorId = React.useContext(EditorIdContext);
-  const stageId = `${STAGE_ID}${editorId}`;
+  const dispatch = React.useContext(EditorDispatchContext);
+  const { id, zoom, position } = React.useContext(EditorContext);
+  const stageId = `${STAGE_ID}${id}`;
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragStartCoordinates, setDragStartCoordinates] = React.useState({
     x: 0,
@@ -273,22 +240,19 @@ const Port: React.FC<PortProps> = ({
   });
   const dragStartCoordinatesCache = React.useRef(dragStartCoordinates);
   const port = React.useRef<HTMLDivElement>();
-  const line = React.useRef<SVGElement>();
+  const line = React.useRef<SVGPathElement>();
   const lineInToPort = React.useRef<SVGElement>();
 
-  const byScale = (value) => (1 / stageState.zoom) * value;
+  const byScale = (value: number) => (1 / zoom) * value;
 
-  const handleDrag = (e) => {
+  const handleDrag = (e: MouseEvent) => {
     const stage = document.getElementById(stageId).getBoundingClientRect();
 
     if (isInput) {
       const to = {
-        x:
-          byScale(e.clientX - stage.x - stage.width / 2) +
-          byScale(stageState.translate.x),
+        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
         y:
-          byScale(e.clientY - stage.y - stage.height / 2) +
-          byScale(stageState.translate.y),
+          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
       };
       lineInToPort.current.setAttribute(
         "d",
@@ -296,12 +260,9 @@ const Port: React.FC<PortProps> = ({
       );
     } else {
       const to = {
-        x:
-          byScale(e.clientX - stage.x - stage.width / 2) +
-          byScale(stageState.translate.x),
+        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
         y:
-          byScale(e.clientY - stage.y - stage.height / 2) +
-          byScale(stageState.translate.y),
+          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
       };
       line.current.setAttribute(
         "d",
@@ -310,7 +271,8 @@ const Port: React.FC<PortProps> = ({
     }
   };
 
-  const handleDragEnd = (e) => {
+  const handleDragEnd = (e: MouseEvent) => {
+    if (!(e.target instanceof HTMLDivElement)) return;
     const droppedOnPort = !!e.target.dataset.portName;
 
     if (isInput) {
@@ -320,7 +282,7 @@ const Port: React.FC<PortProps> = ({
         outputNodeId,
         outputPortName,
       } = lineInToPort.current.dataset;
-      nodesDispatch({
+      dispatch({
         type: "REMOVE_CONNECTION",
         input: { nodeId: inputNodeId, portName: inputPortName },
         output: { nodeId: outputNodeId, portName: outputPortName },
@@ -338,7 +300,7 @@ const Port: React.FC<PortProps> = ({
             connectToPortType
           ].acceptTypes.includes(type);
           if (inputWillAcceptConnection) {
-            nodesDispatch({
+            dispatch({
               type: "ADD_CONNECTION",
               input: { nodeId: connectToNodeId, portName: connectToPortName },
               output: { nodeId: outputNodeId, portName: outputPortName },
@@ -360,7 +322,7 @@ const Port: React.FC<PortProps> = ({
             inputNodeType
           ].acceptTypes.includes(type);
           if (inputWillAcceptConnection) {
-            nodesDispatch({
+            dispatch({
               type: "ADD_CONNECTION",
               output: { nodeId, portName: name },
               input: { nodeId: inputNodeId, portName: inputPortName },
@@ -375,7 +337,7 @@ const Port: React.FC<PortProps> = ({
     document.removeEventListener("mousemove", handleDrag);
   };
 
-  const handleDragStart = (e) => {
+  const handleDragStart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
     const startPort = port.current.getBoundingClientRect();
@@ -397,11 +359,11 @@ const Port: React.FC<PortProps> = ({
           x:
             byScale(
               outputPort.x - stage.x + outputPort.width / 2 - stage.width / 2
-            ) + byScale(stageState.translate.x),
+            ) + byScale(position.x),
           y:
             byScale(
               outputPort.y - stage.y + outputPort.width / 2 - stage.height / 2
-            ) + byScale(stageState.translate.y),
+            ) + byScale(position.y),
         };
         setDragStartCoordinates(coordinates);
         dragStartCoordinatesCache.current = coordinates;
@@ -414,11 +376,11 @@ const Port: React.FC<PortProps> = ({
         x:
           byScale(
             startPort.x - stage.x + startPort.width / 2 - stage.width / 2
-          ) + byScale(stageState.translate.x),
+          ) + byScale(position.x),
         y:
           byScale(
             startPort.y - stage.y + startPort.width / 2 - stage.height / 2
-          ) + byScale(stageState.translate.y),
+          ) + byScale(position.y),
       };
       setDragStartCoordinates(coordinates);
       dragStartCoordinatesCache.current = coordinates;
@@ -446,9 +408,7 @@ const Port: React.FC<PortProps> = ({
         ref={port}
       />
       {isDragging && !isInput ? (
-        <Portal
-          node={document.getElementById(`${DRAG_CONNECTION_ID}${editorId}`)}
-        >
+        <Portal node={document.getElementById(`${DRAG_CONNECTION_ID}${id}`)}>
           <Connection
             from={dragStartCoordinates}
             to={dragStartCoordinates}

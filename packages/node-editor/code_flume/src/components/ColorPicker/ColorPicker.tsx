@@ -12,7 +12,19 @@ const Colors = {
   grey: "grey",
 };
 
-export default ({ x, y, onColorPicked, onRequestClose }) => {
+type ColorPickerProps = {
+  x: number;
+  y: number;
+  onColorPicked: (color: string) => void;
+  onRequestClose: () => void;
+};
+
+export const ColorPicker: React.FC<ColorPickerProps> = ({
+  x,
+  y,
+  onColorPicked,
+  onRequestClose,
+}) => {
   const wrapper = React.useRef<HTMLDivElement>();
 
   const testClickOutside = React.useCallback(
@@ -70,7 +82,12 @@ export default ({ x, y, onColorPicked, onRequestClose }) => {
   );
 };
 
-const ColorButton = ({ color, onSelected }) => (
+type ColorButtonProps = {
+  color: string;
+  onSelected: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+};
+
+const ColorButton: React.FC<ColorButtonProps> = ({ color, onSelected }) => (
   <div className={styles.colorButtonWrapper}>
     <button
       className={styles.colorButton}

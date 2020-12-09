@@ -5,10 +5,11 @@ export type EditorConfig = {
   nodes: NodeTypes;
   ports: PortTypes;
   settings: {
-    zoom: number;
-    hideComments: boolean;
+    zoom?: number;
+    hideComments?: boolean;
   };
-  defaultNodes: defaultNode[];
+  defaultNodes?: defaultNode[];
+  circularBehavior?: "prevent" | "warn" | "allow";
 };
 
 type nodeBase = {

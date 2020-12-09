@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Comment.module.css";
 import { Draggable } from "../Draggable/Draggable";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import ColorPicker from "../ColorPicker/ColorPicker";
+import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { Portal } from "react-portal";
 import clamp from "lodash/clamp";
 import { coordinates } from "@globalTypes/types";

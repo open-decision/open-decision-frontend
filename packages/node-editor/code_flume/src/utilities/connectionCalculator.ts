@@ -1,6 +1,6 @@
-import styles from "./components/Connection/Connection.module.css";
+import styles from "../components/Connection/Connection.module.css";
 import { line, curveBasis } from "d3-shape";
-import { coordinates, Nodes } from "@globalTypes/types";
+import { coordinates } from "@globalTypes/types";
 import { CONNECTIONS_ID } from "@utilities/index";
 import { EditorState } from "reducers";
 

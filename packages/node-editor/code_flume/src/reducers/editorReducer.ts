@@ -3,6 +3,7 @@ import {
   connection,
   Connection,
   coordinates,
+  EditorConfig,
   Nodes,
   NodeTypes,
   PortTypes,
@@ -92,16 +93,8 @@ export type EditorState = {
   readonly comments?: Comments;
 };
 
-type config = {
-  nodeTypes: NodeTypes;
-  portTypes: PortTypes;
-  cache?: any;
-  circularBehavior?: string;
-  context?: any;
-};
-
-export const editorReducer = produce(
-  (draft: Draft<EditorState>, action: editorActions) => {
+export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
+  produce((draft: Draft<EditorState>, action: editorActions) => {
     switch (action.type) {
       case "SET_SCALE":
         draft.zoom = action.zoom;
@@ -336,5 +329,4 @@ export const editorReducer = produce(
         delete draft.comments[action.id];
         break;
     }
-  }
-);
+  });
