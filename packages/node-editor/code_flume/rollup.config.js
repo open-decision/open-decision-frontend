@@ -12,17 +12,12 @@ export default {
   input: "src/index.tsx",
   output: [
     {
-      file: pkg.main,
-      format: "cjs",
-      sourcemap: true,
-    },
-    {
       file: pkg.module,
-      format: "es",
+      format: "esm",
       sourcemap: true,
     },
   ],
-  external: ["react", "react-dom"],
+  external: ["react"],
   plugins: [
     external(),
     url(),

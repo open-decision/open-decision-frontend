@@ -86,7 +86,7 @@ export type editorActions =
   | { type: "DELETE_COMMENT"; id: string };
 
 export type EditorState = {
-  readonly id: string;
+  readonly id?: string;
   readonly zoom?: number;
   readonly position?: coordinates;
   readonly nodes?: Nodes;

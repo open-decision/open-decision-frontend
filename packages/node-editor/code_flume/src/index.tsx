@@ -39,21 +39,16 @@ type NodeEditorProps = {
   /**
    * To always start the Editor off with a set of nodes provide them as defaultNodes.
    */
-  defaultNodes: defaultNode[];
+  defaultNodes?: defaultNode[];
   /**
    * @description - This function is called every time the nodes update. This is helpful when managing the editor state externally.
    * @param state - The state of the Editor.
    */
   onChange: (state: EditorState) => void;
   /**
-   * Provide an optional initialZoom. By default the zoom is 1.
-   */
-  initialZoom?: number;
-  /**
    * Similar to Photoshop it is possible to pan the Editor when holding the space key.
    */
   spaceToPan?: boolean;
-  hideComments?: boolean;
   disableComments?: boolean;
   disableZoom?: boolean;
   disablePan?: boolean;
@@ -185,4 +180,4 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   );
 };
 
-export { Comments, Nodes };
+export { EditorState };
