@@ -5,7 +5,8 @@
     "lerna": "^3.22.1"
   },
   "workspaces": [
-    "packages/*"
+    "packages/open-decision-frontend/*",
+    "packages/node-editor/*"
   ],
   "volta": {
     "node": "14.15.1",
