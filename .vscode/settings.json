@@ -71,5 +71,8 @@
     "postcss*": true,
     "yarn.lock": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "conventionalCommits.scopes": [
+    "App"
+  ]
 }
