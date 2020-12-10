@@ -73,6 +73,7 @@
   },
   "explorerExclude.backup": null,
   "conventionalCommits.scopes": [
-    "App"
+    "App",
+    "node-editor"
   ]
 }
