@@ -7,6 +7,9 @@
     "not IE_Mob 11",
     "maintained node versions"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "",
   "scripts": {
     "dev": "snowpack dev",
