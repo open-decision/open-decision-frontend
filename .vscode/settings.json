@@ -63,13 +63,13 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "node_modules": true,
+    "node_modules": false,
     ".*": false,
-    "snowpack*": true,
+    "snowpack*": false,
     "tailwind*": false,
     "tsconfig*": false,
-    "postcss*": true,
-    "yarn.lock": true
+    "postcss*": false,
+    "yarn.lock": false
   },
   "explorerExclude.backup": null,
   "conventionalCommits.scopes": [
