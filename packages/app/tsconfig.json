@@ -1,26 +1,15 @@
 {
-  "include": ["src"],
+  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
-    "moduleResolution": "node",
     "jsx": "preserve",
     "baseUrl": "./src",
-    /* paths - If you configure Snowpack import aliases, add them here. */
     "paths": {
       "@internalTypes/*": ["types/*"],
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
       "@utils/*": ["utils/*"]
     },
-    /* noEmit - Snowpack builds (emits) files, not tsc. */
-    "noEmit": true,
-    /* Additional Options */
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "importsNotUsedAsValues": "remove"
-  }
+    "noEmit": true
+  },
+  "include": ["src"]
 }

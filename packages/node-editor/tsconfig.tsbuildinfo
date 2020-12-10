@@ -1,0 +1,3849 @@
+{
+  "program": {
+    "fileInfos": {
+      "../../node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "69f0c334b0ee4235f6219b22f42e4fa04b414535c782b4dda793ed1918cc835c",
+        "signature": "69f0c334b0ee4235f6219b22f42e4fa04b414535c782b4dda793ed1918cc835c",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "signature": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "signature": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/typescript/lib/lib.es2017.d.ts": {
+        "version": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "signature": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/typescript/lib/lib.es2018.d.ts": {
+        "version": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "signature": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "signature": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.dom.iterable.d.ts": {
+        "version": "d42f4141bd9ce82b4e2902f26acb00c183e321be19a38bbc0e76a922c1724c94",
+        "signature": "d42f4141bd9ce82b4e2902f26acb00c183e321be19a38bbc0e76a922c1724c94",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "signature": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "signature": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "signature": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "signature": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "signature": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "signature": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "signature": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "signature": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "signature": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "signature": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "signature": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "signature": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2017.object.d.ts": {
+        "version": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "signature": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+        "version": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "signature": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2017.string.d.ts": {
+        "version": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "signature": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+        "version": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "signature": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+        "version": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "signature": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+        "version": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "signature": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+        "version": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "signature": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+        "version": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "signature": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+        "version": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "signature": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+        "version": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "signature": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/typescript/lib/lib.es2018.full.d.ts": {
+        "version": "32b8443be144970b813b9dd72dcdba2059fbdfdae4d3a50c4d8a158ed6057bbe",
+        "signature": "32b8443be144970b813b9dd72dcdba2059fbdfdae4d3a50c4d8a158ed6057bbe",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/@types/react/global.d.ts": {
+        "version": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "signature": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/csstype/index.d.ts": {
+        "version": "ea58e4cbcf3d760a15f9300978a360c46360f544b355c737b60c733a385b8858",
+        "signature": "ea58e4cbcf3d760a15f9300978a360c46360f544b355c737b60c733a385b8858",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/@types/prop-types/index.d.ts": {
+        "version": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "signature": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/@types/react/index.d.ts": {
+        "version": "5eec5df7493ec6ad30cd641228d5ec7a5cc46d86e04a7f5d4f3cc239c6fa05bc",
+        "signature": "5eec5df7493ec6ad30cd641228d5ec7a5cc46d86e04a7f5d4f3cc239c6fa05bc",
+        "affectsGlobalScope": true
+      },
+      "../../node_modules/@reach/auto-id/dist/index.d.ts": {
+        "version": "d3a85568bbbe29a511093b3f65bbb7728f22d21d63eb9114da1e4f1cbba8d44d",
+        "signature": "d3a85568bbbe29a511093b3f65bbb7728f22d21d63eb9114da1e4f1cbba8d44d",
+        "affectsGlobalScope": false
+      },
+      "./src/types/types.ts": {
+        "version": "d93e5527646cb334c3404c543031ce133b13af660271ca172bbede95b9688afc",
+        "signature": "e09e81acb392dfc7144ff108aa556c09d535a358881273d613085523578926df",
+        "affectsGlobalScope": false
+      },
+      "./src/utilities/connectionCalculator.ts": {
+        "version": "6f303bbccfdbb3b994c1b331cc0036569b9988228b8e61e5bf961648ea701788",
+        "signature": "208e462de1887daf31e3ddf370e30496590f2b463d6980f9a9b6830cfc308165",
+        "affectsGlobalScope": false
+      },
+      "./src/utilities/constants.ts": {
+        "version": "f8fe4a2aa9c800660774e17134318d57ca8dcd5cb9f7844b1d79a6c6124e457f",
+        "signature": "7c44fb3f4ba642b664c6ab321fcb86083ad8a95bcb3e7927cb0b2d5738c7d162",
+        "affectsGlobalScope": false
+      },
+      "./src/utilities/context.ts": {
+        "version": "feb3c477903e333a7b0026a3971f7763b69ed62fe2756b1211b1e01615fd7f4d",
+        "signature": "9760e2e608d4c162da63da8586b9ec2000460cfd3aa93c0f6d30fd49a4e9fa0d",
+        "affectsGlobalScope": false
+      },
+      "./src/utilities/utilities.ts": {
+        "version": "bcf45fa18d6cf55b4da2fd052b29ed4ec5a0b76b303eeaa1b60f3fedbd634fe0",
+        "signature": "ed1f417ee7d8f475449c11f9de4b67940b606fc9bc8f2c9f372ad89833c0b5c4",
+        "affectsGlobalScope": false
+      },
+      "./src/utilities/index.ts": {
+        "version": "f534b4cfcc8f991e1a6b6787b8baae4f8f39690dc54d869bbc35d72f74a0e13e",
+        "signature": "f534b4cfcc8f991e1a6b6787b8baae4f8f39690dc54d869bbc35d72f74a0e13e",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/nanoid/non-secure/index.d.ts": {
+        "version": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
+        "signature": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Toaster/Toaster.tsx": {
+        "version": "11f820d6ceca159ee2e5c996fecf2b3d03c8bee0b9aae5a7ce0da63a0722d85e",
+        "signature": "2008ad8c82aa2e016ecd0ad4022bc5418ce75cd48a8350d5f5a7696746f73d19",
+        "affectsGlobalScope": false
+      },
+      "./src/reducers/toastsReducer.ts": {
+        "version": "ef7316c2734cae9019324a2709fc1e64ab033eb082a3fc60111e32955db7e86e",
+        "signature": "f6cafbf7e91f13c16aeef3512fb28495787e7aa61ec7f92bb69f84e8fc06b11c",
+        "affectsGlobalScope": false
+      },
+      "./src/reducers/editorReducer.ts": {
+        "version": "8ecc292bd9258dd94f64ee570987ffa8e08591660ead08b6110197f267064582",
+        "signature": "71bb1df8ab3f92054592f6de874fef3c204edb5199398420fb43479111cc256a",
+        "affectsGlobalScope": false
+      },
+      "./src/reducers/index.ts": {
+        "version": "60aad2c70fe0fc2bb95b83cd6d3f795005b6034107b1a5030a905944ab835078",
+        "signature": "60aad2c70fe0fc2bb95b83cd6d3f795005b6034107b1a5030a905944ab835078",
+        "affectsGlobalScope": false
+      },
+      "./src/components/ContextMenu/ContextMenu.tsx": {
+        "version": "617289408b7e7b5b938e9a65b67c41ab4ae86094d0145eb58734a7f0b41e0b3c",
+        "signature": "e24ea733f0e884fe8e320b125f3d0ea995ca8a86203f2f0390f6b418750832fb",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Draggable/Draggable.tsx": {
+        "version": "844565e1480b3a413f9a8326a6041627dd395db41d7b8cf2dee2fbb24f532f9e",
+        "signature": "9214e4e40ac06e980bb103b25d541ed4cf5bf6a6a1100bea47d223276261aee4",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Stage/Stage.tsx": {
+        "version": "98a641b945d0e26fcbf59e8f9eb8f351df850d4aa17bad256820d11fc949b9be",
+        "signature": "d493b0dcd6c488a580423e4708930d1a25f3f258a374760f0631d0aa7bf518e7",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Connection/Connection.tsx": {
+        "version": "3855846bec0cf8f0f1920b9f67cb47279f10e6e8b97eb28b8eacd9486a397b53",
+        "signature": "be9da0d194f1506dbad6fe3ac8fa196e54a629a789f709b7ed749bc16feca72f",
+        "affectsGlobalScope": false
+      },
+      "./src/hooks/usePrevious.ts": {
+        "version": "60f83bd66b2f977562b5f2fcff7ba92ee39df77ffe47f34a4e14ccf603410569",
+        "signature": "00b64309c12354661aa282b06d1852d35ef3aa96da247a6de0422993abb24502",
+        "affectsGlobalScope": false
+      },
+      "./src/components/IoPorts/IoPorts.tsx": {
+        "version": "1b12e640d3cecfbd387c13c4de8176c264d0b881e04e13709ba5519f2057df90",
+        "signature": "b9cfe45560371ca7bed4a3044c36bd2e9d3c29d23345bb9be642d6123634b462",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Node/Node.tsx": {
+        "version": "d9eb0c79eace7cfcc44634f253184140fdcea4982e60a34a5ed17395e1157832",
+        "signature": "8b1cd45adeffe4e5385fb2d6e375482bf697b536237a5c81d96c78e658049f6d",
+        "affectsGlobalScope": false
+      },
+      "./src/components/ColorPicker/ColorPicker.tsx": {
+        "version": "6cac4bfd56bb3504dacc4587a49829979e5f11ac6d5c7671eddbbf8f20df4bdb",
+        "signature": "372d2a69fe2ffd2a20c6e668cd828406deccf7783fb11bfe1485bb503ff91f81",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Comment/Comment.tsx": {
+        "version": "830b77a7678a6a449fe8e6dd96da17ef5f3a96fe60f41a7ae8fe16c68ba488a4",
+        "signature": "560f54f2cc059794778d0a006cee00753dfd20b896663490cdfd9a02996b9026",
+        "affectsGlobalScope": false
+      },
+      "./src/components/Connections/Connections.tsx": {
+        "version": "dcc7dd7a0a0930e77d6897af08e0a49a921216edb381d2f6f69479e70d72d9f2",
+        "signature": "e9a2f0c3fe4ebba9ac7f1a606ca95b3374cd24311a2ba224e94b46f2de2be6b2",
+        "affectsGlobalScope": false
+      },
+      "./src/hooks/useDOMRect.ts": {
+        "version": "d36f1bd881c988545a458c4f2c894d983813dfd6e0676f0cf6a6736e0e50fa52",
+        "signature": "4cec3a7051a8a3fd89771c1d2968f996f8fe53eebdfc87ff218e672777c44428",
+        "affectsGlobalScope": false
+      },
+      "./src/index.tsx": {
+        "version": "b80b45934eb45d76d203d3798fcd9f8e4e32fc4f577230da9963ea3607f42878",
+        "signature": "65e445782d3e49cffdd3680797ad045810084522f0fd15cbcdb9348cad895f29",
+        "affectsGlobalScope": false
+      },
+      "./src/tests/nodes.ts": {
+        "version": "5c6802334022997622d0ab5d48f23bc8c0a62c3f67590d87f2233ac5499c5fd3",
+        "signature": "32e3a590cbfe04d22e54c80d783be209630100ae06554d54843791bc92e1a479",
+        "affectsGlobalScope": false
+      },
+      "./src/types/styles.d.ts": {
+        "version": "7eecf5264abd4537c411e24ef8867c3cf48634bac80ad2578b7fb6ed57391cbc",
+        "signature": "7eecf5264abd4537c411e24ef8867c3cf48634bac80ad2578b7fb6ed57391cbc",
+        "affectsGlobalScope": false
+      }
+    },
+    "options": {
+      "module": 1,
+      "types": [],
+      "sourceMap": true,
+      "target": 5,
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "declaration": true,
+      "allowSyntheticDefaultImports": true,
+      "composite": true,
+      "rootDir": "./src",
+      "jsx": 2,
+      "declarationDir": "./dist/types",
+      "outDir": "./dist",
+      "plugins": [
+        {
+          "name": "typescript-plugin-css-modules"
+        }
+      ],
+      "baseUrl": "./src",
+      "paths": {
+        "@globalTypes/*": [
+          "types/*"
+        ],
+        "@utilities/*": [
+          "utilities/*"
+        ]
+      },
+      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision/packages/node-editor",
+      "configFilePath": "./tsconfig.json"
+    },
+    "referencedMap": {
+      "../../node_modules/@types/react/index.d.ts": [
+        "../../node_modules/@types/prop-types/index.d.ts",
+        "../../node_modules/@types/react/global.d.ts",
+        "../../node_modules/csstype/index.d.ts"
+      ],
+      "./src/components/ColorPicker/ColorPicker.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/styles.d.ts"
+      ],
+      "./src/components/Comment/Comment.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/components/ColorPicker/ColorPicker.tsx",
+        "./src/components/ContextMenu/ContextMenu.tsx",
+        "./src/components/Draggable/Draggable.tsx",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/Connection/Connection.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/Connections/Connections.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/styles.d.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/ContextMenu/ContextMenu.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "../../node_modules/nanoid/non-secure/index.d.ts",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Draggable/Draggable.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/IoPorts/IoPorts.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/components/Connection/Connection.tsx",
+        "./src/hooks/usePrevious.ts",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/Node/Node.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/components/ContextMenu/ContextMenu.tsx",
+        "./src/components/Draggable/Draggable.tsx",
+        "./src/components/IoPorts/IoPorts.tsx",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/Stage/Stage.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/components/ContextMenu/ContextMenu.tsx",
+        "./src/components/Draggable/Draggable.tsx",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/components/Toaster/Toaster.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/reducers/index.ts",
+        "./src/types/styles.d.ts"
+      ],
+      "./src/hooks/useDOMRect.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/hooks/usePrevious.ts": [
+        "../../node_modules/@types/react/index.d.ts"
+      ],
+      "./src/index.tsx": [
+        "../../node_modules/@reach/auto-id/dist/index.d.ts",
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/components/Comment/Comment.tsx",
+        "./src/components/Connections/Connections.tsx",
+        "./src/components/Node/Node.tsx",
+        "./src/components/Stage/Stage.tsx",
+        "./src/components/Toaster/Toaster.tsx",
+        "./src/hooks/useDOMRect.ts",
+        "./src/hooks/usePrevious.ts",
+        "./src/reducers/index.ts",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/reducers/editorReducer.ts": [
+        "../../node_modules/nanoid/non-secure/index.d.ts",
+        "./src/reducers/toastsReducer.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/reducers/index.ts": [
+        "./src/reducers/editorReducer.ts",
+        "./src/reducers/toastsReducer.ts"
+      ],
+      "./src/reducers/toastsReducer.ts": [
+        "../../node_modules/nanoid/non-secure/index.d.ts",
+        "./src/components/Toaster/Toaster.tsx"
+      ],
+      "./src/tests/nodes.ts": [
+        "./src/types/types.ts"
+      ],
+      "./src/utilities/connectionCalculator.ts": [
+        "./src/reducers/index.ts",
+        "./src/types/styles.d.ts",
+        "./src/types/types.ts",
+        "./src/utilities/index.ts"
+      ],
+      "./src/utilities/context.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/reducers/index.ts"
+      ],
+      "./src/utilities/index.ts": [
+        "./src/utilities/connectionCalculator.ts",
+        "./src/utilities/constants.ts",
+        "./src/utilities/context.ts",
+        "./src/utilities/utilities.ts"
+      ],
+      "./src/utilities/utilities.ts": [
+        "./src/types/types.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "../../node_modules/@types/react/index.d.ts": [
+        "../../node_modules/@types/prop-types/index.d.ts",
+        "../../node_modules/@types/react/global.d.ts",
+        "../../node_modules/csstype/index.d.ts"
+      ],
+      "./src/components/ColorPicker/ColorPicker.tsx": [
+        "../../node_modules/@types/react/index.d.ts"
+      ],
+      "./src/components/Comment/Comment.tsx": [
+        "../../node_modules/@types/react/index.d.ts"
+      ],
+      "./src/components/Connection/Connection.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Connections/Connections.tsx": [
+        "../../node_modules/@types/react/index.d.ts"
+      ],
+      "./src/components/ContextMenu/ContextMenu.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Draggable/Draggable.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/IoPorts/IoPorts.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Node/Node.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Stage/Stage.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/components/Toaster/Toaster.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/reducers/index.ts"
+      ],
+      "./src/index.tsx": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/reducers/index.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/reducers/editorReducer.ts": [
+        "./src/types/types.ts"
+      ],
+      "./src/reducers/index.ts": [
+        "./src/reducers/editorReducer.ts",
+        "./src/reducers/toastsReducer.ts"
+      ],
+      "./src/reducers/toastsReducer.ts": [
+        "./src/components/Toaster/Toaster.tsx"
+      ],
+      "./src/tests/nodes.ts": [
+        "./src/types/types.ts"
+      ],
+      "./src/utilities/connectionCalculator.ts": [
+        "./src/reducers/index.ts",
+        "./src/types/types.ts"
+      ],
+      "./src/utilities/context.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "./src/reducers/index.ts"
+      ],
+      "./src/utilities/index.ts": [
+        "./src/utilities/connectionCalculator.ts",
+        "./src/utilities/constants.ts",
+        "./src/utilities/context.ts",
+        "./src/utilities/utilities.ts"
+      ],
+      "./src/utilities/utilities.ts": [
+        "./src/types/types.ts"
+      ]
+    },
+    "semanticDiagnosticsPerFile": [
+      "../../node_modules/@reach/auto-id/dist/index.d.ts",
+      "../../node_modules/@types/prop-types/index.d.ts",
+      "../../node_modules/@types/react/global.d.ts",
+      "../../node_modules/@types/react/index.d.ts",
+      "../../node_modules/csstype/index.d.ts",
+      "../../node_modules/nanoid/non-secure/index.d.ts",
+      "../../node_modules/typescript/lib/lib.dom.d.ts",
+      "../../node_modules/typescript/lib/lib.dom.iterable.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../../node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../../node_modules/typescript/lib/lib.es2016.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.full.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../../node_modules/typescript/lib/lib.es5.d.ts",
+      "../../node_modules/typescript/lib/lib.scripthost.d.ts",
+      "../../node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      [
+        "./src/components/ColorPicker/ColorPicker.tsx",
+        [
+          {
+            "file": "./src/components/ColorPicker/ColorPicker.tsx",
+            "start": 596,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/ColorPicker/ColorPicker.tsx",
+            "start": 1543,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/components/Comment/Comment.tsx",
+        [
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 273,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'react-portal'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/react-portal/lib/index.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/react-portal` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-portal';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 307,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'lodash/clamp'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/lodash/clamp.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash/clamp';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 1645,
+            "length": 1,
+            "messageText": "'e' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 1669,
+            "length": 11,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 1763,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 1987,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2164,
+            "length": 1,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2225,
+            "length": 1,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2249,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2297,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2463,
+            "length": 1,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2524,
+            "length": 1,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2603,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 2994,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 3305,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 3454,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 3615,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 3697,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'MutableRefObject<HTMLDivElement>'.",
+            "relatedInformation": [
+              {
+                "file": "./src/components/Draggable/Draggable.tsx",
+                "start": 869,
+                "length": 8,
+                "messageText": "The expected type comes from property 'innerRef' which is declared here on type 'IntrinsicAttributes & Pick<HTMLAttributes<HTMLDivElement>, \"hidden\" | \"color\" | \"style\" | \"translate\" | \"prefix\" | ... 245 more ... | \"onTransitionEndCapture\"> & { ...; } & { ...; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Comment/Comment.tsx",
+            "start": 4451,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLTextAreaElement | undefined>' is not assignable to type 'string | ((instance: HTMLTextAreaElement | null) => void) | RefObject<HTMLTextAreaElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLTextAreaElement | undefined>' is not assignable to type 'RefObject<HTMLTextAreaElement>'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Types of property 'current' are incompatible.",
+                      "category": 1,
+                      "code": 2326,
+                      "next": [
+                        {
+                          "messageText": "Type 'HTMLTextAreaElement | undefined' is not assignable to type 'HTMLTextAreaElement | null'.",
+                          "category": 1,
+                          "code": 2322,
+                          "next": [
+                            {
+                              "messageText": "Type 'undefined' is not assignable to type 'HTMLTextAreaElement | null'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      "./src/components/Connection/Connection.tsx",
+      "./src/components/Connections/Connections.tsx",
+      [
+        "./src/components/ContextMenu/ContextMenu.tsx",
+        [
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 92,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'lodash/clamp'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/lodash/clamp.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash/clamp';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 1232,
+            "length": 16,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 1262,
+            "length": 14,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 1429,
+            "length": 14,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 1729,
+            "length": 14,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 1965,
+            "length": 19,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 3681,
+            "length": 19,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 3918,
+            "length": 26,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 4499,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 5081,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLInputElement | undefined>' is not assignable to type 'string | ((instance: HTMLInputElement | null) => void) | RefObject<HTMLInputElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLInputElement | undefined>' is not assignable to type 'RefObject<HTMLInputElement>'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Types of property 'current' are incompatible.",
+                      "category": 1,
+                      "code": 2326,
+                      "next": [
+                        {
+                          "messageText": "Type 'HTMLInputElement | undefined' is not assignable to type 'HTMLInputElement | null'.",
+                          "category": 1,
+                          "code": 2322,
+                          "next": [
+                            {
+                              "messageText": "Type 'undefined' is not assignable to type 'HTMLInputElement | null'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 5246,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 5326,
+            "length": 1,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/ContextMenu/ContextMenu.tsx",
+            "start": 5610,
+            "length": 4,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type 'null' is not assignable to parameter of type 'SetStateAction<number>'."
+          }
+        ]
+      ],
+      [
+        "./src/components/Draggable/Draggable.tsx",
+        [
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 1381,
+            "length": 16,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 1650,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 1864,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 2459,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 2532,
+            "length": 24,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 2585,
+            "length": 24,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 2846,
+            "length": 24,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 2910,
+            "length": 24,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 3846,
+            "length": 24,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type '{ x: number; y: number; }' is not assignable to type 'null'."
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 4552,
+            "length": 15,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'HTMLDivElement | null' is not assignable to type 'HTMLDivElement | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'null' is not assignable to type 'HTMLDivElement | undefined'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Draggable/Draggable.tsx",
+            "start": 4609,
+            "length": 16,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'HTMLDivElement | null' is not assignable to type 'HTMLDivElement'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'null' is not assignable to type 'HTMLDivElement'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      [
+        "./src/components/IoPorts/IoPorts.tsx",
+        [
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 93,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'react-portal'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/react-portal/lib/index.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/react-portal` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-portal';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 1741,
+            "length": 21,
+            "messageText": "'updateNodeConnections' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 2266,
+            "length": 18,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 2285,
+            "length": 10,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3282,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3293,
+            "length": 4,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3430,
+            "length": 11,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3675,
+            "length": 4,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4772,
+                "length": 4,
+                "messageText": "The expected type comes from property 'type' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3717,
+            "length": 4,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4756,
+                "length": 4,
+                "messageText": "The expected type comes from property 'name' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3737,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4809,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3777,
+            "length": 11,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type '(() => void) | undefined' is not assignable to type '() => void'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type '() => void'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4827,
+                "length": 11,
+                "messageText": "The expected type comes from property 'recalculate' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 3811,
+            "length": 10,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'Dictionary<PortBuilderType> | undefined' is not assignable to type 'Dictionary<PortBuilderType>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'Dictionary<PortBuilderType>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4854,
+                "length": 10,
+                "messageText": "The expected type comes from property 'inputTypes' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4242,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4253,
+            "length": 4,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4545,
+            "length": 4,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4772,
+                "length": 4,
+                "messageText": "The expected type comes from property 'type' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4565,
+            "length": 4,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4756,
+                "length": 4,
+                "messageText": "The expected type comes from property 'name' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4607,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4809,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4631,
+            "length": 11,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type '(() => void) | undefined' is not assignable to type '() => void'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type '() => void'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4827,
+                "length": 11,
+                "messageText": "The expected type comes from property 'recalculate' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 4665,
+            "length": 10,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'Dictionary<PortBuilderType> | undefined' is not assignable to type 'Dictionary<PortBuilderType>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'Dictionary<PortBuilderType>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 4854,
+                "length": 10,
+                "messageText": "The expected type comes from property 'inputTypes' which is declared here on type 'IntrinsicAttributes & PortProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 5601,
+            "length": 4,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 5677,
+            "length": 32,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 5842,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 5934,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 5962,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6181,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6273,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6301,
+            "length": 12,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6713,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6812,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 709,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6833,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 736,
+                "length": 8,
+                "messageText": "The expected type comes from property 'portName' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6878,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 709,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 6900,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 736,
+                "length": 8,
+                "messageText": "The expected type comes from property 'portName' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 7374,
+            "length": 17,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 7559,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 709,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 7584,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 736,
+                "length": 8,
+                "messageText": "The expected type comes from property 'portName' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 7639,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 709,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 7661,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 736,
+                "length": 8,
+                "messageText": "The expected type comes from property 'portName' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8154,
+            "length": 13,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8385,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 709,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8406,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/types/types.ts",
+                "start": 736,
+                "length": 8,
+                "messageText": "The expected type comes from property 'portName' which is declared here on type 'Connection'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8815,
+            "length": 12,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8871,
+            "length": 32,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 8955,
+            "length": 20,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'Element | null' is not assignable to type 'SVGElement | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'null' is not assignable to type 'SVGElement | undefined'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9177,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9177,
+            "length": 34,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9285,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9285,
+            "length": 41,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'string | undefined' is not assignable to parameter of type 'string'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9338,
+            "length": 20,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9491,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9516,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9579,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9640,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9665,
+            "length": 10,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 9729,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 10181,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 10321,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 11038,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/IoPorts/IoPorts.tsx",
+            "start": 11282,
+            "length": 7,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<SVGPathElement | undefined>' is not assignable to type 'LegacyRef<SVGPathElement>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<SVGPathElement | undefined>' is not assignable to type 'RefObject<SVGPathElement>'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Types of property 'current' are incompatible.",
+                      "category": 1,
+                      "code": 2326,
+                      "next": [
+                        {
+                          "messageText": "Type 'SVGPathElement | undefined' is not assignable to type 'SVGPathElement | null'.",
+                          "category": 1,
+                          "code": 2322,
+                          "next": [
+                            {
+                              "messageText": "Type 'undefined' is not assignable to type 'SVGPathElement | null'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/Connection/Connection.tsx",
+                "start": 257,
+                "length": 7,
+                "messageText": "The expected type comes from property 'lineRef' which is declared here on type 'IntrinsicAttributes & ConnectionProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/components/Node/Node.tsx",
+        [
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 201,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'react-portal'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/react-portal/lib/index.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/react-portal` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-portal';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 1371,
+            "length": 4,
+            "messageText": "Type 'undefined' cannot be used as an index type.",
+            "category": 1,
+            "code": 2538
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 1613,
+            "length": 4,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 1862,
+            "length": 2,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'string | undefined' is not assignable to parameter of type 'string'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2076,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2463,
+            "length": 6,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2474,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2499,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2542,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2588,
+            "length": 6,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2599,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2624,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2668,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2747,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2760,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2785,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2828,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2889,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2902,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2927,
+            "length": 9,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 2972,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3005,
+            "length": 3,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3175,
+            "length": 18,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'Dictionary<readonly Connection[]> | undefined' is not assignable to parameter of type 'Dictionary<readonly Connection[]>'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'Dictionary<readonly Connection[]>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3230,
+            "length": 19,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'Dictionary<readonly Connection[]> | undefined' is not assignable to parameter of type 'Dictionary<readonly Connection[]>'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'Dictionary<readonly Connection[]>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3416,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3515,
+            "length": 19,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 3685,
+            "length": 11,
+            "messageText": "Cannot invoke an object which is possibly 'undefined'.",
+            "category": 1,
+            "code": 2722
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 4177,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 4494,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'MutableRefObject<HTMLDivElement>'.",
+            "relatedInformation": [
+              {
+                "file": "./src/components/Draggable/Draggable.tsx",
+                "start": 869,
+                "length": 8,
+                "messageText": "The expected type comes from property 'innerRef' which is declared here on type 'IntrinsicAttributes & Pick<HTMLAttributes<HTMLDivElement>, \"hidden\" | \"color\" | \"style\" | \"translate\" | \"prefix\" | ... 245 more ... | \"onTransitionEndCapture\"> & { ...; } & { ...; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 4703,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 1402,
+                "length": 6,
+                "messageText": "The expected type comes from property 'nodeId' which is declared here on type 'IntrinsicAttributes & IoPortsProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Node/Node.tsx",
+            "start": 4773,
+            "length": 11,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'connections | undefined' is not assignable to type 'connections'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'connections'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/IoPorts/IoPorts.tsx",
+                "start": 1453,
+                "length": 11,
+                "messageText": "The expected type comes from property 'connections' which is declared here on type 'IntrinsicAttributes & IoPortsProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/components/Stage/Stage.tsx",
+        [
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 91,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'react-portal'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/react-portal/lib/index.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/react-portal` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-portal';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 339,
+            "length": 16,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'lodash/orderBy'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/lodash/orderBy.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash/orderBy';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 375,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'lodash/clamp'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/lodash/clamp.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash/clamp';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 1426,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 1529,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 1961,
+            "length": 4,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2109,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2475,
+            "length": 24,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2540,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2577,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2938,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 2973,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 3345,
+            "length": 4,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 3429,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 3574,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 3692,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 3925,
+            "length": 11,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 4500,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 4558,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 4613,
+            "length": 7,
+            "messageText": "Not all code paths return a value.",
+            "category": 1,
+            "code": 7030
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 4695,
+            "length": 12,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 4777,
+            "length": 12,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 5128,
+            "length": 5,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/ContextMenu/ContextMenu.tsx",
+                "start": 248,
+                "length": 5,
+                "messageText": "The expected type comes from property 'label' which is declared here on type 'menuOption'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 5159,
+            "length": 11,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/ContextMenu/ContextMenu.tsx",
+                "start": 265,
+                "length": 11,
+                "messageText": "The expected type comes from property 'description' which is declared here on type 'menuOption'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 5665,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'MutableRefObject<HTMLDivElement>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'HTMLDivElement | undefined' is not assignable to type 'HTMLDivElement'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Type 'undefined' is not assignable to type 'HTMLDivElement'.",
+                      "category": 1,
+                      "code": 2322
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/Draggable/Draggable.tsx",
+                "start": 869,
+                "length": 8,
+                "messageText": "The expected type comes from property 'innerRef' which is declared here on type 'IntrinsicAttributes & Pick<HTMLAttributes<HTMLDivElement>, \"hidden\" | \"color\" | \"style\" | \"translate\" | \"prefix\" | ... 245 more ... | \"onTransitionEndCapture\"> & { ...; } & { ...; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 6439,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 6548,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Stage/Stage.tsx",
+            "start": 6566,
+            "length": 8,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          }
+        ]
+      ],
+      [
+        "./src/components/Toaster/Toaster.tsx",
+        [
+          {
+            "file": "./src/components/Toaster/Toaster.tsx",
+            "start": 2000,
+            "length": 6,
+            "messageText": "Cannot find namespace 'NodeJS'.",
+            "category": 1,
+            "code": 2503
+          },
+          {
+            "file": "./src/components/Toaster/Toaster.tsx",
+            "start": 2389,
+            "length": 15,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/components/Toaster/Toaster.tsx",
+            "start": 2742,
+            "length": 3,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'string | ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'MutableRefObject<HTMLDivElement | undefined>' is not assignable to type 'RefObject<HTMLDivElement>'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Types of property 'current' are incompatible.",
+                      "category": 1,
+                      "code": 2326,
+                      "next": [
+                        {
+                          "messageText": "Type 'HTMLDivElement | undefined' is not assignable to type 'HTMLDivElement | null'.",
+                          "category": 1,
+                          "code": 2322,
+                          "next": [
+                            {
+                              "messageText": "Type 'undefined' is not assignable to type 'HTMLDivElement | null'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 6060,
+                "length": 3,
+                "messageText": "The expected type comes from property 'ref' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/hooks/useDOMRect.ts",
+        [
+          {
+            "file": "./src/hooks/useDOMRect.ts",
+            "start": 388,
+            "length": 50,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/hooks/useDOMRect.ts",
+            "start": 483,
+            "length": 12,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'DOMRect | undefined' is not assignable to type 'DOMRect'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'DOMRect'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      "./src/hooks/usePrevious.ts",
+      [
+        "./src/index.tsx",
+        [
+          {
+            "file": "./src/index.tsx",
+            "start": 106,
+            "length": 14,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'lodash/clamp'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/lodash/clamp.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash/clamp';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 647,
+            "length": 8,
+            "messageText": "'Comments' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 684,
+            "length": 5,
+            "messageText": "'Nodes' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 2215,
+            "length": 16,
+            "messageText": "'circularBehavior' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 2247,
+            "length": 5,
+            "messageText": "'debug' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 2439,
+            "length": 8,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'string | undefined' is not assignable to parameter of type 'string'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 3200,
+            "length": 33,
+            "messageText": "Expected 0 arguments, but got 1.",
+            "category": 1,
+            "code": 2554
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 3526,
+            "length": 11,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type 'unknown' is not assignable to parameter of type 'EditorState'."
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 3556,
+            "length": 11,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 3981,
+            "length": 11,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type 'unknown' is not assignable to parameter of type 'EditorState'."
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4007,
+            "length": 11,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4230,
+            "length": 5,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type 'unknown' is not assignable to type 'EditorState'.",
+            "relatedInformation": [
+              {
+                "file": "../../node_modules/@types/react/index.d.ts",
+                "start": 14383,
+                "length": 5,
+                "messageText": "The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & ProviderProps<EditorState>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4415,
+            "length": 15,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'boolean | undefined' is not assignable to type 'boolean'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'boolean'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/Stage/Stage.tsx",
+                "start": 579,
+                "length": 15,
+                "messageText": "The expected type comes from property 'disableComments' which is declared here on type 'IntrinsicAttributes & StageProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4541,
+            "length": 11,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4651,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type 'unknown' is not assignable to type 'readonly toast[]'.",
+            "relatedInformation": [
+              {
+                "file": "./src/components/Toaster/Toaster.tsx",
+                "start": 142,
+                "length": 6,
+                "messageText": "The expected type comes from property 'toasts' which is declared here on type 'IntrinsicAttributes & ToasterProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 4824,
+            "length": 11,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 5018,
+            "length": 7,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 5088,
+            "length": 11,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 5307,
+            "length": 4,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/index.tsx",
+            "start": 5495,
+            "length": 8,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/Connections/Connections.tsx",
+                "start": 163,
+                "length": 8,
+                "messageText": "The expected type comes from property 'editorId' which is declared here on type 'IntrinsicAttributes & { editorId: string; } & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/reducers/editorReducer.ts",
+        [
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 91,
+            "length": 9,
+            "messageText": "'NodeTypes' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 104,
+            "length": 9,
+            "messageText": "'PortTypes' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 279,
+            "length": 8,
+            "messageText": "'original' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 295,
+            "length": 7,
+            "messageText": "Cannot find module 'immer' or its corresponding type declarations.",
+            "category": 1,
+            "code": 2307
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 348,
+            "length": 47,
+            "messageText": "'toastActions' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 821,
+            "length": 3,
+            "messageText": "Parameter 'cnx' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 3577,
+            "length": 4,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 3604,
+            "length": 7,
+            "messageText": "Spread types may only be created from object types.",
+            "category": 1,
+            "code": 2698
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 4107,
+            "length": 21,
+            "messageText": "'removeConnectionsById' is declared but its value is never read.",
+            "category": 1,
+            "code": 6133,
+            "reportsUnnecessary": true
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 4356,
+            "length": 8,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 4373,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 7066,
+            "length": 5,
+            "messageText": "Parameter 'nodes' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/reducers/editorReducer.ts",
+            "start": 7073,
+            "length": 3,
+            "messageText": "Parameter 'cnx' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          }
+        ]
+      ],
+      "./src/reducers/index.ts",
+      [
+        "./src/reducers/toastsReducer.ts",
+        [
+          {
+            "file": "./src/reducers/toastsReducer.ts",
+            "start": 94,
+            "length": 7,
+            "messageText": "Cannot find module 'immer' or its corresponding type declarations.",
+            "category": 1,
+            "code": 2307
+          },
+          {
+            "file": "./src/reducers/toastsReducer.ts",
+            "start": 936,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/reducers/toastsReducer.ts",
+            "start": 1099,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/reducers/toastsReducer.ts",
+            "start": 1255,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          }
+        ]
+      ],
+      "./src/tests/nodes.ts",
+      "./src/types/styles.d.ts",
+      "./src/types/types.ts",
+      [
+        "./src/utilities/connectionCalculator.ts",
+        [
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 102,
+            "length": 10,
+            "code": 7016,
+            "category": 1,
+            "messageText": {
+              "messageText": "Could not find a declaration file for module 'd3-shape'. '/home/philipp/Projects/open-decision/code_open-decision/node_modules/d3-shape/dist/d3-shape.js' implicitly has an 'any' type.",
+              "category": 1,
+              "code": 7016,
+              "next": [
+                {
+                  "messageText": "Try `npm i --save-dev @types/d3-shape` if it exists or add a new declaration (.d.ts) file containing `declare module 'd3-shape';`",
+                  "category": 1,
+                  "code": 7035
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 1141,
+            "length": 18,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 1392,
+            "length": 18,
+            "messageText": "Object is possibly 'null'.",
+            "category": 1,
+            "code": 2531
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 2808,
+            "length": 55,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'HTMLElement | null' is not assignable to type 'HTMLElement'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'null' is not assignable to type 'HTMLElement'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 3212,
+            "length": 4,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 3246,
+            "length": 5,
+            "code": 2769,
+            "category": 1,
+            "messageText": {
+              "messageText": "No overload matches this call.",
+              "category": 1,
+              "code": 2769,
+              "next": [
+                {
+                  "messageText": "Overload 1 of 2, '(o: { [s: string]: Node; } | ArrayLike<Node>): Node[]', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type 'Dictionary<Node> | undefined' is not assignable to parameter of type '{ [s: string]: Node; } | ArrayLike<Node>'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Type 'undefined' is not assignable to type '{ [s: string]: Node; } | ArrayLike<Node>'.",
+                          "category": 1,
+                          "code": 2322
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "messageText": "Overload 2 of 2, '(o: {}): any[]', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type 'Dictionary<Node> | undefined' is not assignable to parameter of type '{}'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Type 'undefined' is not assignable to type '{}'.",
+                          "category": 1,
+                          "code": 2322
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": []
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 3658,
+            "length": 7,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type 'string | undefined' is not assignable to parameter of type 'string'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/utilities/connectionCalculator.ts",
+            "start": 4985,
+            "length": 11,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'string | undefined' is not assignable to type 'string'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'undefined' is not assignable to type 'string'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/utilities/connectionCalculator.ts",
+                "start": 1871,
+                "length": 11,
+                "messageText": "The expected type comes from property 'inputNodeId' which is declared here on type '{ from: coordinates; to: coordinates; stage: HTMLElement; id: string; outputNodeId: string; outputPortName: string; inputNodeId: string; inputPortName: string; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      "./src/utilities/constants.ts",
+      "./src/utilities/context.ts",
+      "./src/utilities/index.ts",
+      [
+        "./src/utilities/utilities.ts",
+        [
+          {
+            "file": "./src/utilities/utilities.ts",
+            "start": 236,
+            "length": 25,
+            "messageText": "Object is possibly 'undefined'.",
+            "category": 1,
+            "code": 2532
+          },
+          {
+            "file": "./src/utilities/utilities.ts",
+            "start": 236,
+            "length": 33,
+            "code": 2769,
+            "category": 1,
+            "messageText": {
+              "messageText": "No overload matches this call.",
+              "category": 1,
+              "code": 2769,
+              "next": [
+                {
+                  "messageText": "Overload 1 of 2, '(o: ArrayLike<readonly Connection[]> | { [s: string]: readonly Connection[]; }): (readonly Connection[])[]', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type 'Dictionary<readonly Connection[]> | undefined' is not assignable to parameter of type 'ArrayLike<readonly Connection[]> | { [s: string]: readonly Connection[]; }'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Type 'undefined' is not assignable to type 'ArrayLike<readonly Connection[]> | { [s: string]: readonly Connection[]; }'.",
+                          "category": 1,
+                          "code": 2322
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "messageText": "Overload 2 of 2, '(o: {}): any[]', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type 'Dictionary<readonly Connection[]> | undefined' is not assignable to parameter of type '{}'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Type 'undefined' is not assignable to type '{}'.",
+                          "category": 1,
+                          "code": 2322
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": []
+          }
+        ]
+      ]
+    ],
+    "affectedFilesPendingEmit": [
+      [
+        "../../node_modules/@reach/auto-id/dist/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/@types/prop-types/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/@types/react/global.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/@types/react/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/csstype/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/nanoid/non-secure/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/typescript/lib/lib.es2015.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/typescript/lib/lib.es2016.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/typescript/lib/lib.es2017.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/typescript/lib/lib.es2018.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/typescript/lib/lib.es2018.full.d.ts",
+        1
+      ],
+      [
+        "./src/components/ColorPicker/ColorPicker.tsx",
+        1
+      ],
+      [
+        "./src/components/Comment/Comment.tsx",
+        1
+      ],
+      [
+        "./src/components/Connection/Connection.tsx",
+        1
+      ],
+      [
+        "./src/components/Connections/Connections.tsx",
+        1
+      ],
+      [
+        "./src/components/ContextMenu/ContextMenu.tsx",
+        1
+      ],
+      [
+        "./src/components/Draggable/Draggable.tsx",
+        1
+      ],
+      [
+        "./src/components/IoPorts/IoPorts.tsx",
+        1
+      ],
+      [
+        "./src/components/Node/Node.tsx",
+        1
+      ],
+      [
+        "./src/components/Stage/Stage.tsx",
+        1
+      ],
+      [
+        "./src/components/Toaster/Toaster.tsx",
+        1
+      ],
+      [
+        "./src/hooks/useDOMRect.ts",
+        1
+      ],
+      [
+        "./src/hooks/usePrevious.ts",
+        1
+      ],
+      [
+        "./src/index.tsx",
+        1
+      ],
+      [
+        "./src/reducers/editorReducer.ts",
+        1
+      ],
+      [
+        "./src/reducers/index.ts",
+        1
+      ],
+      [
+        "./src/reducers/toastsReducer.ts",
+        1
+      ],
+      [
+        "./src/tests/nodes.ts",
+        1
+      ],
+      [
+        "./src/types/styles.d.ts",
+        1
+      ],
+      [
+        "./src/types/types.ts",
+        1
+      ],
+      [
+        "./src/utilities/connectionCalculator.ts",
+        1
+      ],
+      [
+        "./src/utilities/constants.ts",
+        1
+      ],
+      [
+        "./src/utilities/context.ts",
+        1
+      ],
+      [
+        "./src/utilities/index.ts",
+        1
+      ],
+      [
+        "./src/utilities/utilities.ts",
+        1
+      ]
+    ]
+  },
+  "version": "4.1.2"
+}

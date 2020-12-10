@@ -2,11 +2,11 @@
   "name": "open-decision",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "rimraf": "^3.0.2"
   },
   "workspaces": [
-    "packages/open-decision-frontend/*",
-    "packages/node-editor/*"
+    "packages/*"
   ],
   "volta": {
     "node": "14.15.1",

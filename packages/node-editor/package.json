@@ -12,11 +12,15 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom && npx cypress run",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "clean": "rimraf dist *.tsbuildinfo"
   },
   "peerDependencies": {
     "react": "file:../code_open-decision-builder/node_modules/React",

@@ -13,12 +13,11 @@
   "description": "",
   "scripts": {
     "dev": "snowpack dev",
-    "build": "npm run codegen && snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "build": "yarn codegen && snowpack build",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "codegen": "graphql-codegen --config .codegen.yml",
-    "bundlesize": "bundlesize"
+    "clean": "rimraf dist *.tsbuildinfo"
   },
   "keywords": [],
   "author": "Philipp Garbowsky <phil.garbowsky@philtech.dev>",
