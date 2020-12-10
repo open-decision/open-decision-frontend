@@ -1,31 +1,15 @@
 import React from "react";
-import { Comments, NodeEditor, Nodes } from "flume";
-import config from "./config";
+import { NodeEditor, EditorState } from "builder";
 import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 
-type EditorState = {
-  nodes: Nodes;
-  comments: Comments;
-};
-
 const Editor: React.FC<{
   initialData?: EditorState;
-  setNodes?: any;
+  onChange?: any;
   setComments?: any;
-}> = ({ initialData = { nodes: {}, comments: {} }, setNodes, setComments }) => {
-  console.log(config);
-  return (
-    <NodeEditor
-      portTypes={config.portTypes}
-      nodeTypes={config.nodeTypes}
-      nodes={initialData.nodes}
-      onChange={setNodes}
-      comments={initialData.comments}
-      onCommentsChange={setComments}
-    />
-  );
+}> = ({ initialData = { nodes: {}, comments: {} }, onChange }) => {
+  return <NodeEditor config={{}} state={initialData} onChange={onChange} />;
 };
 
 export const Builder: React.FC = () => {
@@ -60,9 +44,8 @@ export const Builder: React.FC = () => {
             </div>
             <Editor
               initialData={data}
-              setNodes={(value: Nodes) => setData({ ...data, nodes: value })}
-              setComments={(value: Comments) =>
-                setData({ ...data, comments: value })
+              onChange={(value: EditorState) =>
+                setData({ ...data, nodes: value })
               }
             />
           </>
