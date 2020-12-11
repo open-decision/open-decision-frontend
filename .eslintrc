@@ -24,8 +24,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {

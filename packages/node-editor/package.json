@@ -11,12 +11,10 @@
     "access": "public"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom && npx cypress run",
-    "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "clean": "rimraf dist *.tsbuildinfo",
-    "lint": "eslint src --ext js,ts"
+    "lint": "eslint src --ext ts,js,tsx,jsx"
   },
   "peerDependencies": {
     "react": "file:../code_open-decision-builder/node_modules/React",
@@ -24,14 +22,10 @@
   },
   "devDependencies": {
     "@svgr/rollup": "^5.5.0",
-    "@testing-library/dom": "^7.28.1",
-    "@testing-library/react": "^11.2.2",
     "@types/d3-shape": "^2.0.0",
     "@types/lodash": "^4.14.165",
     "@types/react": "^17.0.0",
     "@types/react-portal": "^4.0.2",
-    "@typescript-eslint/eslint-plugin": "4.x",
-    "@typescript-eslint/parser": "4.x",
     "babel-core": "^6.26.3",
     "babel-eslint": "10.x",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -39,18 +33,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^7.0.3",
-    "eslint": "7.x",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-config-standard-react": "^11.0.1",
-    "eslint-plugin-flowtype": "5.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-standard": "^4.1.0",
     "postcss-preset-env": "^6.7.0",
     "react-scripts": "^4.0.1",
     "rollup": "^2.34.2",
@@ -60,6 +42,7 @@
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-url": "^1.4.0",
+    "scripty": "^2.0.0",
     "tslib": "^2.0.3",
     "typescript": "^4.1.2",
     "typescript-plugin-css-modules": "^3.0.1"
