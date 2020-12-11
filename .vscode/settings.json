@@ -63,17 +63,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "node_modules": false,
-    ".*": false,
-    "snowpack*": false,
-    "tailwind*": false,
-    "tsconfig*": false,
-    "postcss*": false,
-    "yarn.lock": false
+    "**/node_modules": true
   },
-  "explorerExclude.backup": null,
-  "conventionalCommits.scopes": [
-    "App",
-    "node-editor"
-  ]
+  "conventionalCommits.scopes": ["App", "node-editor"]
 }

@@ -1,16 +1,12 @@
 {
   "name": "@open-decision/frontend",
-  "version": "1.0.0",
-  "browserslist": [
-    "defaults",
-    "not IE 11",
-    "not IE_Mob 11",
-    "maintained node versions"
-  ],
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Philipp Garbowsky <phil.garbowsky@philtech.dev>",
   "publishConfig": {
     "access": "public"
   },
-  "description": "",
   "scripts": {
     "dev": "snowpack dev",
     "build": "yarn codegen && snowpack build",
@@ -19,9 +15,6 @@
     "codegen": "graphql-codegen --config .codegen.yml",
     "clean": "rimraf dist *.tsbuildinfo"
   },
-  "keywords": [],
-  "author": "Philipp Garbowsky <phil.garbowsky@philtech.dev>",
-  "license": "ISC",
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "@graphql-codegen/cli": "1.19.3",
@@ -75,7 +68,6 @@
     "tailwindcss": "^2.0.1",
     "urql": "^1.11.3"
   },
-  "prettier": {},
   "graphql": {
     "schema": "https://builder.open-decision.org/graphql",
     "documents": "src/**/*.graphql.ts",
