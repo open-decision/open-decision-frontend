@@ -1,5 +1,5 @@
 {
-  "name": "open-decision-frontend",
+  "name": "@open-decision/frontend",
   "version": "1.0.0",
   "browserslist": [
     "defaults",
@@ -15,7 +15,7 @@
     "dev": "snowpack dev",
     "build": "yarn codegen && snowpack build",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint src --ext js,ts",
     "codegen": "graphql-codegen --config .codegen.yml",
     "clean": "rimraf dist *.tsbuildinfo"
   },
@@ -74,57 +74,6 @@
     "remeda": "0.0.27",
     "tailwindcss": "^2.0.1",
     "urql": "^1.11.3"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "prettier",
-      "prettier/react",
-      "prettier/@typescript-eslint",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:jsx-a11y/recommended",
-      "plugin:react-hooks/recommended"
-    ],
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-    },
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-      "@typescript-eslint/no-explicit-any": "off"
-    },
-    "settings": {
-      "react": {
-        "pragma": "React",
-        "version": "detect"
-      }
-    },
-    "ignorePatterns": [
-      "src/types/generated/*",
-      "*.config*"
-    ]
   },
   "prettier": {},
   "graphql": {

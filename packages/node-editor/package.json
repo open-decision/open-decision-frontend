@@ -1,5 +1,5 @@
 {
-  "name": "builder",
+  "name": "@open-decision/node-editor",
   "version": "0.0.1",
   "description": "A node editor for React",
   "author": "philgarb",
@@ -20,7 +20,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "clean": "rimraf dist *.tsbuildinfo"
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint src --ext js,ts"
   },
   "peerDependencies": {
     "react": "file:../code_open-decision-builder/node_modules/React",
