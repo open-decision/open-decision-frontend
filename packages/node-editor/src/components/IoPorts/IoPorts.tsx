@@ -11,8 +11,8 @@ import {
   DRAG_CONNECTION_ID,
   EditorContext,
   EditorDispatchContext,
-} from "@utilities/index";
-import { connections, port, PortTypes } from "@globalTypes/types";
+} from "../../utilities";
+import { connections, port, PortTypes } from "../../types";
 
 function useTransputs(
   transputsFn: port,

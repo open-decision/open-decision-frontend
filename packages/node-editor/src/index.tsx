@@ -18,13 +18,13 @@ import usePrevious from "./hooks/usePrevious";
 
 // Types, Constants and Styles
 import styles from "./index.module.css";
-import { defaultNode, EditorConfig } from "@globalTypes/types";
+import { defaultNode, EditorConfig } from "./types";
 import {
   EditorDispatchContext,
   EditorContext,
   createConnections,
   DRAG_CONNECTION_ID,
-} from "@utilities/index";
+} from "./utilities";
 import { useDOMRect } from "hooks/useDOMRect";
 
 type NodeEditorProps = {

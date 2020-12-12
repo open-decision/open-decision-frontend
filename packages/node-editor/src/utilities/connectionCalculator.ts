@@ -1,7 +1,7 @@
 import styles from "../components/Connection/Connection.module.css";
 import { line, curveBasis } from "d3-shape";
-import { coordinates } from "@globalTypes/types";
-import { CONNECTIONS_ID } from "@utilities/index";
+import { coordinates } from "../types";
+import { CONNECTIONS_ID } from "./constants";
 import { EditorState } from "reducers";
 
 const getPort = (nodeId: string, portName: string, transputType = "input") =>

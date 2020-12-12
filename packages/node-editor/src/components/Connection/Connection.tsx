@@ -1,7 +1,7 @@
 import React from "react";
-import { calculateCurve } from "@utilities/index";
+import { calculateCurve } from "../../utilities";
 import styles from "./Connection.module.css";
-import { coordinates } from "@globalTypes/types";
+import { coordinates } from "../../types";
 
 type ConnectionProps = {
   from: coordinates;

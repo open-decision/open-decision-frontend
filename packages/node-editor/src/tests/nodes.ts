@@ -1,4 +1,4 @@
-import { Nodes } from "@globalTypes/types";
+import { Nodes } from "../types";
 
 export const exampleNodes: Nodes = {
   "5nCLb85WDw": {

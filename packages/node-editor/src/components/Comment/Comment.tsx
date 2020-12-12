@@ -5,8 +5,8 @@ import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { Portal } from "react-portal";
 import clamp from "lodash/clamp";
-import { coordinates } from "@globalTypes/types";
-import { EditorDispatchContext } from "@utilities/index";
+import { coordinates } from "../../types";
+import { EditorDispatchContext } from "../../utilities";
 
 type CommentProps = {
   id: string;

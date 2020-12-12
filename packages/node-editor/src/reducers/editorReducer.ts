@@ -7,12 +7,12 @@ import {
   Nodes,
   NodeTypes,
   PortTypes,
-} from "@globalTypes/types";
+} from "../types";
 import {
   checkForCircularNodes,
   deleteConnection,
   deleteConnectionsByNodeId,
-} from "@utilities/index";
+} from "../utilities";
 import produce, { Draft, original } from "immer";
 import { nanoid } from "nanoid/non-secure";
 import { toastActions } from "./toastsReducer";

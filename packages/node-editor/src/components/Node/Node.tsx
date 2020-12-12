@@ -5,7 +5,7 @@ import {
   calculateCurve,
   EditorContext,
   EditorDispatchContext,
-} from "@utilities/index";
+} from "../../utilities";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
@@ -16,7 +16,7 @@ import {
   coordinates,
   NodeTypes,
   PortTypes,
-} from "@globalTypes/types";
+} from "../../types";
 
 type NodeProps = {
   id: string;

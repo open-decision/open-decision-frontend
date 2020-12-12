@@ -1,4 +1,4 @@
-import { toast, toastType } from "components/Toaster/Toaster";
+import { toast, toastType } from "../components/Toaster/Toaster";
 import produce, { Draft } from "immer";
 import { nanoid } from "nanoid/non-secure";
 

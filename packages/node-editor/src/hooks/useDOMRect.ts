@@ -1,4 +1,4 @@
-import { STAGE_ID } from "@utilities/index";
+import { STAGE_ID } from "../utilities";
 import React from "react";
 
 export const useDOMRect = (

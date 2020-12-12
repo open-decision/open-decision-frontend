@@ -6,11 +6,11 @@ import {
   EditorDispatchContext,
   EditorContext,
   STAGE_ID,
-} from "@utilities/index";
+} from "../../utilities";
 import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
-import { coordinates, NodeTypes } from "@globalTypes/types";
+import { coordinates, NodeTypes } from "../../types";
 
 type StageProps = {
   outerStageChildren: React.ReactNode;

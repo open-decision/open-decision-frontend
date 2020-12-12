@@ -1,5 +1,5 @@
-import { coordinates } from "@globalTypes/types";
-import { EditorContext } from "@utilities/index";
+import { coordinates } from "../../types";
+import { EditorContext } from "../../utilities";
 import React from "react";
 
 //onDrag is a prop of an HTML div element, to avoid the type collision it is ommited here
