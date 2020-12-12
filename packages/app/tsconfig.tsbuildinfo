@@ -986,14 +986,24 @@
         "signature": "79b0191eb96a866ef31db2bc6803f4912da0c7a7482987f093a3770f50f505a9",
         "affectsGlobalScope": false
       },
+      "../node-editor/dist/types/index.d.ts": {
+        "version": "f660f73dbde1ef47c3f48bc63da0d0b1a406d0ab55fdb61da3d5f75c85263c2e",
+        "signature": "f660f73dbde1ef47c3f48bc63da0d0b1a406d0ab55fdb61da3d5f75c85263c2e",
+        "affectsGlobalScope": false
+      },
       "../node-editor/dist/reducers/editorReducer.d.ts": {
-        "version": "656871d1b0ad6d2cac1925fd001fa0f25c216a395c63c0d6dd7878fc64bc6d8e",
-        "signature": "656871d1b0ad6d2cac1925fd001fa0f25c216a395c63c0d6dd7878fc64bc6d8e",
+        "version": "cafce6da9f8a409f4d19c6d2dd5a13f3394e54c480f4a7257198b564d4529929",
+        "signature": "cafce6da9f8a409f4d19c6d2dd5a13f3394e54c480f4a7257198b564d4529929",
+        "affectsGlobalScope": false
+      },
+      "../node-editor/dist/components/Toaster/Toaster.d.ts": {
+        "version": "46320d8b071e39c70cc0fc736cc9f3e09d95e48ce145bb9ea522e9c7092ba3ec",
+        "signature": "46320d8b071e39c70cc0fc736cc9f3e09d95e48ce145bb9ea522e9c7092ba3ec",
         "affectsGlobalScope": false
       },
       "../node-editor/dist/reducers/toastsReducer.d.ts": {
-        "version": "0b469e3c7d56f8f44bf23eb376715a1695e41970540857b0d4dc066439f4277f",
-        "signature": "0b469e3c7d56f8f44bf23eb376715a1695e41970540857b0d4dc066439f4277f",
+        "version": "e704932cdeeaa0ce6b5275fcd7110d126ae96876146bf3d6f4b79c86054a37f9",
+        "signature": "e704932cdeeaa0ce6b5275fcd7110d126ae96876146bf3d6f4b79c86054a37f9",
         "affectsGlobalScope": false
       },
       "../node-editor/dist/reducers/index.d.ts": {
@@ -1002,8 +1012,8 @@
         "affectsGlobalScope": false
       },
       "../node-editor/dist/index.d.ts": {
-        "version": "1c2fcb59ac238e657dbc9d8a21455d1f04df1509fda38797529f3a2725660675",
-        "signature": "1c2fcb59ac238e657dbc9d8a21455d1f04df1509fda38797529f3a2725660675",
+        "version": "fe5599db4ca45b15aea2684a8f7aa8be81b83a38cd36721620021a4a1a4ceaec",
+        "signature": "fe5599db4ca45b15aea2684a8f7aa8be81b83a38cd36721620021a4a1a4ceaec",
         "affectsGlobalScope": false
       },
       "../../node_modules/@graywolfai/react-heroicons/dist/index.d.ts": {
@@ -1022,7 +1032,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/Builder.tsx": {
-        "version": "b3ad6cb6f2c179b3b6d59a2fd923450487507eb83e45fce6dbc7591bf5a15092",
+        "version": "5cdae2b2c46810e82f544857f97ee138d4a71440c694cf9cc46b324cd5dbf1f4",
         "signature": "8afcf7f15772471b81796d8b06d9f2623e1e13cef17dd0443ce396e6cb423d57",
         "affectsGlobalScope": false
       },
@@ -1577,7 +1587,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Dashboard/Filter.tsx": {
-        "version": "fc023f57a2003917c7bcb403128c59a31bb0c80331e1582385894541005b8f8f",
+        "version": "46e1cb78c559e97e09580770d9cd7a16ebd2195012f2112ad64c5028c38a116a",
         "signature": "2675d1495ab2bed8ce58eee2d85df269691231e8f50b0c1e665215d270166a3a",
         "affectsGlobalScope": false
       },
@@ -2245,11 +2255,6 @@
         "version": "fb6c3651201401ecfe0b11e849604d344b7d97884932d393b86ee0e90b1051b0",
         "signature": "c4972698c3f33091ce5648c3b1588f67103ce70946f0a605f01a87f227f5270b",
         "affectsGlobalScope": false
-      },
-      "./src/types/flume.d.ts": {
-        "version": "8a691ecd1b9dad0a3967ab5d685c62ed509fcf3d02481f15728b12a365790013",
-        "signature": "8a691ecd1b9dad0a3967ab5d685c62ed509fcf3d02481f15728b12a365790013",
-        "affectsGlobalScope": false
       }
     },
     "options": {
@@ -2279,7 +2284,7 @@
         ]
       },
       "noEmit": true,
-      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision-frontend/packages/app",
+      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision/packages/app",
       "watch": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -4730,9 +4735,6 @@
         "./src/features/Auth/AuthContext.tsx",
         "./src/features/Data/DataFetchingClient.ts"
       ],
-      "./src/types/flume.d.ts": [
-        "../../node_modules/date-fns/typings.d.ts"
-      ],
       "./src/types/generated/graphql.tsx": [
         "../../node_modules/date-fns/typings.d.ts",
         "../../node_modules/graphql-tag/index.d.ts",
@@ -4750,13 +4752,20 @@
         "../../node_modules/date-fns/typings.d.ts",
         "./src/utils/hooks.ts"
       ],
-      "../node-editor/dist/index.d.ts": [
+      "../node-editor/dist/components/Toaster/Toaster.d.ts": [
         "../../node_modules/@types/react/index.d.ts",
         "../../node_modules/date-fns/typings.d.ts",
         "../node-editor/dist/reducers/index.d.ts"
       ],
+      "../node-editor/dist/index.d.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/reducers/index.d.ts",
+        "../node-editor/dist/types/index.d.ts"
+      ],
       "../node-editor/dist/reducers/editorReducer.d.ts": [
-        "../../node_modules/date-fns/typings.d.ts"
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/types/index.d.ts"
       ],
       "../node-editor/dist/reducers/index.d.ts": [
         "../../node_modules/date-fns/typings.d.ts",
@@ -4764,6 +4773,10 @@
         "../node-editor/dist/reducers/toastsReducer.d.ts"
       ],
       "../node-editor/dist/reducers/toastsReducer.d.ts": [
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/components/Toaster/Toaster.d.ts"
+      ],
+      "../node-editor/dist/types/index.d.ts": [
         "../../node_modules/date-fns/typings.d.ts"
       ]
     },
@@ -7114,9 +7127,6 @@
         "./src/features/LoginCard.tsx",
         "./src/features/Routing/ProtectedRoute.tsx"
       ],
-      "./src/types/flume.d.ts": [
-        "../../node_modules/date-fns/typings.d.ts"
-      ],
       "./src/types/generated/graphql.tsx": [
         "../../node_modules/graphql/index.d.ts",
         "../../node_modules/urql/dist/types/index.d.ts"
@@ -7130,13 +7140,20 @@
       "./src/utils/index.ts": [
         "./src/utils/hooks.ts"
       ],
-      "../node-editor/dist/index.d.ts": [
+      "../node-editor/dist/components/Toaster/Toaster.d.ts": [
         "../../node_modules/@types/react/index.d.ts",
         "../../node_modules/date-fns/typings.d.ts",
         "../node-editor/dist/reducers/index.d.ts"
       ],
+      "../node-editor/dist/index.d.ts": [
+        "../../node_modules/@types/react/index.d.ts",
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/reducers/index.d.ts",
+        "../node-editor/dist/types/index.d.ts"
+      ],
       "../node-editor/dist/reducers/editorReducer.d.ts": [
-        "../../node_modules/date-fns/typings.d.ts"
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/types/index.d.ts"
       ],
       "../node-editor/dist/reducers/index.d.ts": [
         "../../node_modules/date-fns/typings.d.ts",
@@ -7144,6 +7161,10 @@
         "../node-editor/dist/reducers/toastsReducer.d.ts"
       ],
       "../node-editor/dist/reducers/toastsReducer.d.ts": [
+        "../../node_modules/date-fns/typings.d.ts",
+        "../node-editor/dist/components/Toaster/Toaster.d.ts"
+      ],
+      "../node-editor/dist/types/index.d.ts": [
         "../../node_modules/date-fns/typings.d.ts"
       ]
     },
@@ -7576,44 +7597,9 @@
       "./src/features/Auth/LoginButton.tsx",
       "./src/features/Auth/LogoutButton.tsx",
       "./src/features/Auth/SignupButton.tsx",
-      [
-        "./src/features/Builder/Builder.tsx",
-        [
-          {
-            "file": "./src/features/Builder/Builder.tsx",
-            "start": 1927,
-            "length": 27,
-            "code": 2345,
-            "category": 1,
-            "messageText": {
-              "messageText": "Argument of type '{ nodes: {}; comments: {}; }' is not assignable to parameter of type 'SetStateAction<EditorState | undefined>'.",
-              "category": 1,
-              "code": 2345,
-              "next": [
-                {
-                  "messageText": "Type '{ nodes: {}; comments: {}; }' is missing the following properties from type 'EditorState': id, zoom, position",
-                  "category": 1,
-                  "code": 2739
-                }
-              ]
-            }
-          }
-        ]
-      ],
+      "./src/features/Builder/Builder.tsx",
       "./src/features/Dashboard/Dashboard.tsx",
-      [
-        "./src/features/Dashboard/Filter.tsx",
-        [
-          {
-            "file": "./src/features/Dashboard/Filter.tsx",
-            "start": 1361,
-            "length": 80,
-            "code": 2578,
-            "category": 1,
-            "messageText": "Unused '@ts-expect-error' directive."
-          }
-        ]
-      ],
+      "./src/features/Dashboard/Filter.tsx",
       "./src/features/Dashboard/TreeList.tsx",
       "./src/features/Dashboard/dataValidation.ts",
       "./src/features/Dashboard/testData.ts",
@@ -7624,63 +7610,16 @@
       "./src/features/Routing/ProtectedRoute.tsx",
       "./src/features/index.ts",
       "./src/index.tsx",
-      [
-        "./src/types/flume.d.ts",
-        [
-          {
-            "file": "./src/types/flume.d.ts",
-            "start": 3858,
-            "length": 8,
-            "messageText": "Cannot find name 'Dispatch'.",
-            "category": 1,
-            "code": 2304
-          }
-        ]
-      ],
       "./src/types/generated/graphql.tsx",
       "./src/types/types.ts",
       "./src/utils/hooks.ts",
       "./src/utils/index.ts",
-      [
-        "../node-editor/dist/index.d.ts",
-        [
-          {
-            "file": "../node-editor/dist/index.d.ts",
-            "start": 113,
-            "length": 20,
-            "messageText": "Cannot find module '@globalTypes/types' or its corresponding type declarations.",
-            "category": 1,
-            "code": 2307
-          }
-        ]
-      ],
-      [
-        "../node-editor/dist/reducers/editorReducer.d.ts",
-        [
-          {
-            "file": "../node-editor/dist/reducers/editorReducer.d.ts",
-            "start": 71,
-            "length": 20,
-            "messageText": "Cannot find module '@globalTypes/types' or its corresponding type declarations.",
-            "category": 1,
-            "code": 2307
-          }
-        ]
-      ],
+      "../node-editor/dist/components/Toaster/Toaster.d.ts",
+      "../node-editor/dist/index.d.ts",
+      "../node-editor/dist/reducers/editorReducer.d.ts",
       "../node-editor/dist/reducers/index.d.ts",
-      [
-        "../node-editor/dist/reducers/toastsReducer.d.ts",
-        [
-          {
-            "file": "../node-editor/dist/reducers/toastsReducer.d.ts",
-            "start": 26,
-            "length": 28,
-            "messageText": "Cannot find module 'components/Toaster/Toaster' or its corresponding type declarations.",
-            "category": 1,
-            "code": 2307
-          }
-        ]
-      ]
+      "../node-editor/dist/reducers/toastsReducer.d.ts",
+      "../node-editor/dist/types/index.d.ts"
     ],
     "affectedFilesPendingEmit": [
       [
@@ -9348,10 +9287,6 @@
         1
       ],
       [
-        "./src/types/flume.d.ts",
-        1
-      ],
-      [
         "./src/types/generated/graphql.tsx",
         1
       ],
@@ -9368,6 +9303,10 @@
         1
       ],
       [
+        "../node-editor/dist/components/Toaster/Toaster.d.ts",
+        1
+      ],
+      [
         "../node-editor/dist/index.d.ts",
         1
       ],
@@ -9381,6 +9320,14 @@
       ],
       [
         "../node-editor/dist/reducers/toastsReducer.d.ts",
+        1
+      ],
+      [
+        "../node-editor/dist/types/index.d.ts",
+        1
+      ],
+      [
+        "../node-editor/dist/types/types.d.ts",
         1
       ]
     ]

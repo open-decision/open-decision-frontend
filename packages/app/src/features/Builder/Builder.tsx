@@ -18,7 +18,13 @@ const Editor: React.FC<{
   },
   onChange,
 }) => {
-  return <NodeEditor config={{}} state={initialData} onChange={onChange} />;
+  return (
+    <NodeEditor
+      config={{ nodes: {}, ports: {} }}
+      state={initialData}
+      onChange={onChange}
+    />
+  );
 };
 
 export const Builder: React.FC = () => {
@@ -62,10 +68,7 @@ export const Builder: React.FC = () => {
               <h1 className="text-5xl">Starte mit Testen!</h1>
               <p className="mt-6 text-xl">
                 Um den Builder auszuprobieren klicke auf{" "}
-                <Button
-                  onClick={() => setData({ nodes: {}, comments: {}, ...data })}
-                  className="mx-2"
-                >
+                <Button onClick={() => setData(undefined)} className="mx-2">
                   <ChevronRightOutline className="w-6" />
                   Starten
                 </Button>
