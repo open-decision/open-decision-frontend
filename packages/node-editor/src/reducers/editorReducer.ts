@@ -54,12 +54,10 @@ export type editorActions =
       y: number;
       nodeType: string;
       id?: string;
-      defaultNode?: boolean;
       width?: number;
       root?: boolean;
     }
   | { type: "REMOVE_NODE"; nodeId: string }
-  | { type: "HYDRATE_DEFAULT_NODES"; nodeId?: string }
   | {
       type: "SET_PORT_DATA";
       nodeId: string;
@@ -109,7 +107,7 @@ export const editorReducer = (
         break;
 
       case "ADD_NODE": {
-        const { x, y, nodeType, id, defaultNode, width, root } = action;
+        const { x, y, nodeType, id, width, root } = action;
 
         const newNodeId = id || nanoid(10);
 
@@ -122,7 +120,6 @@ export const editorReducer = (
             inputs: {},
             outputs: {},
           },
-          defaultNode: defaultNode ? true : false,
           root: root ? root : false,
         };
         break;
@@ -254,20 +251,6 @@ export const editorReducer = (
 
           return removeConnection(nodes, input, output);
         }, draft.nodes);
-
-        break;
-      }
-
-      case "HYDRATE_DEFAULT_NODES": {
-        for (const key in draft) {
-          if (draft.nodes[key].defaultNode) {
-            const newNodeId = nanoid(10);
-
-            draft.nodes[newNodeId].id = newNodeId;
-            delete draft.nodes[newNodeId].defaultNode;
-            delete draft.nodes[key];
-          }
-        }
 
         break;
       }

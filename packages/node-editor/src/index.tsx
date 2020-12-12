@@ -18,7 +18,7 @@ import usePrevious from "./hooks/usePrevious";
 
 // Types, Constants and Styles
 import styles from "./index.module.css";
-import { defaultNode, EditorConfig } from "./types";
+import { EditorConfig } from "./types";
 import {
   EditorDispatchContext,
   EditorContext,
@@ -36,10 +36,6 @@ type NodeEditorProps = {
    * The preconfigured nodes and ports. This determines which nodes are avaliable when working with the Editor.
    */
   config: EditorConfig;
-  /**
-   * To always start the Editor off with a set of nodes provide them as defaultNodes.
-   */
-  defaultNodes?: defaultNode[];
   /**
    * @description - This function is called every time the nodes update. This is helpful when managing the editor state externally.
    * @param state - The state of the Editor.
@@ -73,7 +69,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   hideComments = false,
   zoom = 1,
   circularBehavior = "prevent",
-  // defaultNodes = [],
   onChange,
   spaceToPan = false,
   disableComments = false,
@@ -103,9 +98,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //----------------------------------------------------------------
 
   //These functions are used to update the stage imperatively across the codebase when necessary. They also track whether something should be recalculated.
-  React.useEffect(() => {
-    dispatchEditorState({ type: "HYDRATE_DEFAULT_NODES" });
-  }, []);
 
   const [
     shouldRecalculateConnections,

@@ -54,7 +54,6 @@ export type Node = nodeBase & {
   readonly description?: string;
   readonly sortIndex?: number;
   readonly inputData?: { [portName: string]: { [controlName: string]: any } };
-  readonly defaultNode?: boolean;
 };
 
 export type Nodes = Dictionary<Node>;
@@ -78,11 +77,6 @@ export type NodeConfig = {
   deletable?: boolean;
   description?: string;
   sortIndex?: number;
-};
-
-export type defaultNode = {
-  readonly type: string;
-  readonly coordinates?: { readonly x: number; readonly y: number };
 };
 
 export type coordinates = { readonly x: number; readonly y: number };
