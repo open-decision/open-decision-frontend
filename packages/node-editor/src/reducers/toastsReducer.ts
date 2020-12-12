@@ -15,7 +15,7 @@ export type toastActions =
   | { type: "REMOVE_TOAST"; id: string };
 
 export const toastsReducer = produce(
-  (draft: Draft<toast[]> = [], action: toastActions) => {
+  (draft: Draft<toast[]>, action: toastActions) => {
     switch (action.type) {
       case "ADD_TOAST":
         draft.push({

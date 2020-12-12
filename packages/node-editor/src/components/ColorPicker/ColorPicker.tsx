@@ -25,11 +25,11 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   onColorPicked,
   onRequestClose,
 }) => {
-  const wrapper = React.useRef<HTMLDivElement>();
+  const wrapper = React.useRef<HTMLDivElement>(null);
 
   const testClickOutside = React.useCallback(
     (e) => {
-      if (!wrapper.current.contains(e.target)) {
+      if (!wrapper?.current?.contains(e.target)) {
         onRequestClose();
         document.removeEventListener("click", testClickOutside);
         document.removeEventListener("contextmenu", testClickOutside);

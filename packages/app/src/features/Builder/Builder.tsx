@@ -1,5 +1,5 @@
 import React from "react";
-import { NodeEditor, EditorState } from "builder";
+import { NodeEditor, EditorState } from "@open-decision/node-editor";
 import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";

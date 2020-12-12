@@ -15,7 +15,7 @@ import { coordinates, NodeTypes } from "@globalTypes/types";
 type StageProps = {
   outerStageChildren: React.ReactNode;
   numNodes: number;
-  stageRect: DOMRect;
+  stageRect: React.MutableRefObject<DOMRect | null>;
   spaceToPan: boolean;
   disableComments: boolean;
   disablePan: boolean;
@@ -37,8 +37,8 @@ export const Stage: React.FC<StageProps> = ({
   const dispatch = React.useContext(EditorDispatchContext);
   const { zoom, position, id } = React.useContext(EditorContext);
 
-  const wrapper = React.useRef<HTMLDivElement>();
-  const translateWrapper = React.useRef<HTMLDivElement>();
+  const wrapper = React.useRef<HTMLDivElement>(null);
+  const translateWrapper = React.useRef<HTMLDivElement>(null);
 
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
@@ -46,16 +46,16 @@ export const Stage: React.FC<StageProps> = ({
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
 
   const setStageRect = React.useCallback(() => {
-    stageRect = wrapper.current.getBoundingClientRect();
-  }, [stageRect]);
+    stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
+  }, [stageRect.current]);
 
   React.useEffect(() => {
-    stageRect = wrapper.current.getBoundingClientRect();
+    stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
     window.addEventListener("resize", setStageRect);
     return () => {
       window.removeEventListener("resize", setStageRect);
     };
-  }, [stageRect, setStageRect]);
+  }, [stageRect.current, setStageRect]);
 
   const handleWheel = React.useCallback(
     (e: WheelEvent) => {
@@ -68,11 +68,11 @@ export const Stage: React.FC<StageProps> = ({
         });
       }
     },
-    [dispatch, numNodes]
+    [dispatch, numNodes, zoom]
   );
 
   const handleDragDelayStart = () => {
-    wrapper.current.focus();
+    wrapper?.current?.focus();
   };
 
   const handleDragStart = (e: MouseEvent) => {
@@ -86,9 +86,11 @@ export const Stage: React.FC<StageProps> = ({
   const handleMouseDrag = (_coordinates: coordinates, e: MouseEvent) => {
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
-    translateWrapper.current.style.transform = `translate(${-(
-      position.x + xDistance
-    )}px, ${-(position.y + yDistance)}px)`;
+    translateWrapper.current
+      ? (translateWrapper.current.style.transform = `translate(${-(
+          position.x + xDistance
+        )}px, ${-(position.y + yDistance)}px)`)
+      : null;
   };
 
   const handleDragEnd = (_coordinates: coordinates, e: MouseEvent) => {
@@ -121,7 +123,7 @@ export const Stage: React.FC<StageProps> = ({
   const byScale = (value: number) => (1 / zoom) * value;
 
   const addNode = (option: menuOption) => {
-    const wrapperRect = wrapper.current.getBoundingClientRect();
+    const wrapperRect = wrapper.current!.getBoundingClientRect();
 
     const x =
       byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
@@ -142,7 +144,7 @@ export const Stage: React.FC<StageProps> = ({
         type: "ADD_NODE",
         x,
         y,
-        nodeType: option.node.type,
+        nodeType: option.node!.type,
       });
     }
   };
@@ -164,17 +166,17 @@ export const Stage: React.FC<StageProps> = ({
   };
 
   const handleMouseEnter = () => {
-    if (!wrapper.current.contains(document.activeElement)) {
-      wrapper.current.focus();
+    if (!wrapper?.current?.contains(document.activeElement)) {
+      wrapper?.current?.focus();
     }
   };
 
   React.useEffect(() => {
     if (!disableZoom) {
       const stageWrapper = wrapper.current;
-      stageWrapper.addEventListener("wheel", handleWheel);
+      stageWrapper?.addEventListener("wheel", handleWheel);
       return () => {
-        stageWrapper.removeEventListener("wheel", handleWheel);
+        stageWrapper?.removeEventListener("wheel", handleWheel);
       };
     }
   }, [handleWheel, disableZoom]);
@@ -186,8 +188,8 @@ export const Stage: React.FC<StageProps> = ({
         .map(
           (node): menuOption => ({
             value: node.type,
-            label: node.label,
-            description: node.description,
+            label: node.label!,
+            description: node.description!,
             sortIndex: node.sortIndex,
             node,
           })

@@ -86,14 +86,18 @@ export type editorActions =
   | { type: "DELETE_COMMENT"; id: string };
 
 export type EditorState = {
-  readonly id?: string;
-  readonly zoom?: number;
-  readonly position?: coordinates;
-  readonly nodes?: Nodes;
-  readonly comments?: Comments;
+  readonly id: string;
+  readonly zoom: number;
+  readonly position: coordinates;
+  readonly nodes: Nodes;
+  readonly comments: Comments;
 };
 
-export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
+export const editorReducer = (
+  config: EditorConfig,
+  circularBehavior: "warn" | "prevent" | "allow",
+  dispatchToasts?: any
+) =>
   produce((draft: Draft<EditorState>, action: editorActions) => {
     switch (action.type) {
       case "SET_SCALE":
@@ -179,8 +183,7 @@ export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
 
         if (inputIsNotConnected) {
           const allowCircular =
-            config.circularBehavior === "warn" ||
-            config.circularBehavior === "allow";
+            circularBehavior === "warn" || circularBehavior === "allow";
 
           const connections = draft.nodes[output.nodeId].connections;
 
@@ -205,7 +208,7 @@ export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
               toastType: "warning",
               duration: 5000,
             });
-          } else if (isCircular && config.circularBehavior === "warn") {
+          } else if (isCircular && circularBehavior === "warn") {
             dispatchToasts({
               type: "ADD_TOAST",
               title: "Circular Connection Detected",
@@ -255,16 +258,6 @@ export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
         break;
       }
 
-      case "REMOVE_CONNECTION": {
-        const { input, output } = action;
-        const id =
-          output.nodeId + output.portName + input.nodeId + input.portName;
-
-        deleteConnection(id);
-        removeConnection(draft.nodes, input, output);
-        break;
-      }
-
       case "HYDRATE_DEFAULT_NODES": {
         for (const key in draft) {
           if (draft.nodes[key].defaultNode) {
@@ -282,7 +275,7 @@ export const editorReducer = (config: EditorConfig, dispatchToasts?: any) =>
       case "SET_PORT_DATA": {
         const { nodeId, portName, controlName, data } = action;
 
-        draft.nodes[nodeId].inputData[portName][controlName] = data;
+        draft.nodes[nodeId].inputData![portName][controlName] = data;
         break;
       }
 

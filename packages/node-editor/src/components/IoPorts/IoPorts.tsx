@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
@@ -120,12 +121,12 @@ const IoPorts: React.FC<IoPortsProps> = ({
 export default IoPorts;
 
 type InputProps = {
-  type?: string;
+  type: string;
   label?: string;
-  name?: string;
-  nodeId?: string;
-  inputTypes?: PortTypes;
-  recalculate?: () => void;
+  name: string;
+  nodeId: string;
+  inputTypes: PortTypes;
+  recalculate: () => void;
   recalculateStageRect?: () => void;
   isConnected?: boolean;
 };
@@ -171,12 +172,12 @@ const Input: React.FC<InputProps> = ({
 };
 
 type OutputProps = {
-  inputTypes?: PortTypes;
+  inputTypes: PortTypes;
   label?: string;
-  name?: string;
-  nodeId?: string;
-  type?: string;
-  recalculate?: () => void;
+  name: string;
+  nodeId: string;
+  type: string;
+  recalculate: () => void;
 };
 
 const Output: React.FC<OutputProps> = ({
@@ -239,35 +240,45 @@ const Port: React.FC<PortProps> = ({
     y: 0,
   });
   const dragStartCoordinatesCache = React.useRef(dragStartCoordinates);
-  const port = React.useRef<HTMLDivElement>();
-  const line = React.useRef<SVGPathElement>();
-  const lineInToPort = React.useRef<SVGElement>();
+  const port = React.useRef<HTMLDivElement>(null);
+  const line = React.useRef<SVGPathElement>(null);
+  const lineInToPort = React.useRef<SVGElement | null>(null);
 
   const byScale = (value: number) => (1 / zoom) * value;
 
   const handleDrag = (e: MouseEvent) => {
-    const stage = document.getElementById(stageId).getBoundingClientRect();
+    const stage = document?.getElementById(stageId)?.getBoundingClientRect();
 
     if (isInput) {
       const to = {
-        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
+        x:
+          byScale(e.clientX - stage!.x - stage!.width / 2) +
+          byScale(position.x),
         y:
-          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
+          byScale(e.clientY - stage!.y - stage!.height / 2) +
+          byScale(position.y),
       };
-      lineInToPort.current.setAttribute(
-        "d",
-        calculateCurve(dragStartCoordinatesCache.current, to)
-      );
+      lineInToPort.current
+        ? lineInToPort.current.setAttribute(
+            "d",
+            calculateCurve(dragStartCoordinatesCache.current, to)
+          )
+        : null;
     } else {
       const to = {
-        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
+        x:
+          byScale(e.clientX - stage!.x - stage!.width / 2) +
+          byScale(position.x),
         y:
-          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
+          byScale(e.clientY - stage!.y - stage!.height / 2) +
+          byScale(position.y),
       };
-      line.current.setAttribute(
-        "d",
-        calculateCurve(dragStartCoordinatesCache.current, to)
-      );
+      line.current
+        ? line.current.setAttribute(
+            "d",
+            calculateCurve(dragStartCoordinatesCache.current, to)
+          )
+        : null;
     }
   };
 
@@ -281,12 +292,14 @@ const Port: React.FC<PortProps> = ({
         inputPortName,
         outputNodeId,
         outputPortName,
-      } = lineInToPort.current.dataset;
+      } = lineInToPort!.current!.dataset;
+
       dispatch({
         type: "REMOVE_CONNECTION",
-        input: { nodeId: inputNodeId, portName: inputPortName },
-        output: { nodeId: outputNodeId, portName: outputPortName },
+        input: { nodeId: inputNodeId!, portName: inputPortName! },
+        output: { nodeId: outputNodeId!, portName: outputPortName! },
       });
+
       if (droppedOnPort) {
         const {
           portName: connectToPortName,
@@ -294,16 +307,19 @@ const Port: React.FC<PortProps> = ({
           portType: connectToPortType,
           portTransputType: connectToTransputType,
         } = e.target.dataset;
+
         const isNotSameNode = outputNodeId !== connectToNodeId;
+
         if (isNotSameNode && connectToTransputType !== "output") {
-          const inputWillAcceptConnection = inputTypes[
-            connectToPortType
-          ].acceptTypes.includes(type);
+          const inputWillAcceptConnection = connectToPortType
+            ? inputTypes[connectToPortType]?.acceptTypes?.includes(type)
+            : null;
+
           if (inputWillAcceptConnection) {
             dispatch({
               type: "ADD_CONNECTION",
-              input: { nodeId: connectToNodeId, portName: connectToPortName },
-              output: { nodeId: outputNodeId, portName: outputPortName },
+              input: { nodeId: connectToNodeId!, portName: connectToPortName! },
+              output: { nodeId: outputNodeId!, portName: outputPortName! },
             });
           }
         }
@@ -316,16 +332,19 @@ const Port: React.FC<PortProps> = ({
           portType: inputNodeType,
           portTransputType: inputTransputType,
         } = e.target.dataset;
+
         const isNotSameNode = inputNodeId !== nodeId;
+
         if (isNotSameNode && inputTransputType !== "output") {
-          const inputWillAcceptConnection = inputTypes[
-            inputNodeType
-          ].acceptTypes.includes(type);
+          const inputWillAcceptConnection = inputNodeType
+            ? inputTypes[inputNodeType]?.acceptTypes?.includes(type)
+            : null;
+
           if (inputWillAcceptConnection) {
             dispatch({
               type: "ADD_CONNECTION",
               output: { nodeId, portName: name },
-              input: { nodeId: inputNodeId, portName: inputPortName },
+              input: { nodeId: inputNodeId!, portName: inputPortName! },
             });
             recalculate();
           }
@@ -340,29 +359,44 @@ const Port: React.FC<PortProps> = ({
   const handleDragStart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
-    const startPort = port.current.getBoundingClientRect();
-    const stage = document.getElementById(stageId).getBoundingClientRect();
+
+    const startPort = port?.current?.getBoundingClientRect();
+    const stage = document?.getElementById(stageId)?.getBoundingClientRect();
 
     if (isInput) {
       lineInToPort.current = document.querySelector(
         `[data-input-node-id="${nodeId}"][data-input-port-name="${name}"]`
       );
+
       const portIsConnected = !!lineInToPort.current;
+
       if (portIsConnected) {
-        lineInToPort.current.parentElement.style.zIndex = "9999";
-        const outputPort = getPortRect(
-          lineInToPort.current.dataset.outputNodeId,
-          lineInToPort.current.dataset.outputPortName,
-          "output"
-        );
+        lineInToPort.current?.parentElement
+          ? (lineInToPort.current.parentElement.style.zIndex = "9999")
+          : null;
+
+        const outputPort = lineInToPort?.current
+          ? getPortRect(
+              lineInToPort.current.dataset.outputNodeId!,
+              lineInToPort.current.dataset.outputPortName!,
+              "output"
+            )
+          : null;
+
         const coordinates = {
           x:
             byScale(
-              outputPort.x - stage.x + outputPort.width / 2 - stage.width / 2
+              outputPort!.x -
+                stage!.x +
+                outputPort!.width / 2 -
+                stage!.width / 2
             ) + byScale(position.x),
           y:
             byScale(
-              outputPort.y - stage.y + outputPort.width / 2 - stage.height / 2
+              outputPort!.y -
+                stage!.y +
+                outputPort!.width / 2 -
+                stage!.height / 2
             ) + byScale(position.y),
         };
         setDragStartCoordinates(coordinates);
@@ -375,11 +409,11 @@ const Port: React.FC<PortProps> = ({
       const coordinates = {
         x:
           byScale(
-            startPort.x - stage.x + startPort.width / 2 - stage.width / 2
+            startPort!.x - stage!.x + startPort!.width / 2 - stage!.width / 2
           ) + byScale(position.x),
         y:
           byScale(
-            startPort.y - stage.y + startPort.width / 2 - stage.height / 2
+            startPort!.y - stage!.y + startPort!.width / 2 - stage!.height / 2
           ) + byScale(position.y),
       };
       setDragStartCoordinates(coordinates);

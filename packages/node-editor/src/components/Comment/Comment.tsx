@@ -9,22 +9,22 @@ import { coordinates } from "@globalTypes/types";
 import { EditorDispatchContext } from "@utilities/index";
 
 type CommentProps = {
-  id?: string;
+  id: string;
   x?: number;
   y?: number;
   width?: number;
   height?: number;
   color?: string;
   text?: string;
-  stageRect?: DOMRect;
-  onDragStart?: () => void;
+  stageRect?: React.MutableRefObject<DOMRect | null>;
+  onDragStart: () => void;
   isNew?: boolean;
 };
 
 export const Comment: React.FC<CommentProps> = ({
   id,
-  x,
-  y,
+  x = 0,
+  y = 0,
   width,
   height,
   color,
@@ -34,8 +34,8 @@ export const Comment: React.FC<CommentProps> = ({
   isNew,
 }) => {
   const dispatch = React.useContext(EditorDispatchContext);
-  const wrapper = React.useRef<HTMLDivElement>();
-  const textarea = React.useRef<HTMLTextAreaElement>();
+  const wrapper = React.useRef<HTMLDivElement>(null);
+
   const [isEditing, setIsEditing] = React.useState(false);
   const [isPickingColor, setIsPickingColor] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -57,12 +57,14 @@ export const Comment: React.FC<CommentProps> = ({
 
   const closeContextMenu = () => setMenuOpen(false);
 
-  const startDrag = (e: MouseEvent) => {
+  const startDrag = (_e: MouseEvent) => {
     onDragStart();
   };
 
   const handleDrag = (coordinates: coordinates, _e: MouseEvent) => {
-    wrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`;
+    wrapper.current
+      ? (wrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`)
+      : null;
   };
 
   const handleDragEnd = (coordinates: coordinates, _e: MouseEvent) => {
@@ -77,8 +79,8 @@ export const Comment: React.FC<CommentProps> = ({
   const handleResize = (coordinates: coordinates, _e: MouseEvent) => {
     const width = clamp(coordinates.x - x + 10, 80, 10000);
     const height = clamp(coordinates.y - y + 10, 30, 10000);
-    wrapper.current.style.width = `${width}px`;
-    wrapper.current.style.height = `${height}px`;
+    wrapper.current ? (wrapper.current.style.width = `${width}px`) : null;
+    wrapper.current ? (wrapper.current.style.height = `${height}px`) : null;
   };
 
   const handleResizeEnd = (coordinates: coordinates, _e: MouseEvent) => {
@@ -174,9 +176,7 @@ export const Comment: React.FC<CommentProps> = ({
           onMouseDown={(e) => e.stopPropagation()}
           onBlur={endTextEdit}
           placeholder="Text of the comment..."
-          autoFocus
           value={text}
-          ref={textarea}
         />
       ) : (
         <div data-comment={true} className={styles.text}>

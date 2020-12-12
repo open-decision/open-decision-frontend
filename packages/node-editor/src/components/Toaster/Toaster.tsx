@@ -88,8 +88,8 @@ const Toast: React.FC<ToastProps> = ({
   onRemoveRequested,
 }) => {
   const [paused, setPaused] = React.useState(false);
-  const wrapper = React.useRef<HTMLDivElement>();
-  const timer = React.useRef<NodeJS.Timeout>();
+  const wrapper = React.useRef<HTMLDivElement>(null);
+  const timer = React.useRef<any>();
 
   const stopTimer = React.useCallback(() => {
     setPaused(true);
@@ -102,8 +102,8 @@ const Toast: React.FC<ToastProps> = ({
   }, [toast.id, toast.duration, onExitRequested]);
 
   React.useLayoutEffect(() => {
-    const { height } = wrapper.current.getBoundingClientRect();
-    onHeightReceived(toast.id, height);
+    const height = wrapper?.current?.getBoundingClientRect().height;
+    onHeightReceived(toast.id, height!);
   }, [onHeightReceived, toast.id]);
 
   React.useEffect(() => {

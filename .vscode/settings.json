@@ -69,5 +69,6 @@
   "eslint.workingDirectories": [
     { "directory": "packages/app", "changeProcessCWD": true },
     { "directory": "packages/node-editor", "changeProcessCWD": true }
-  ]
+  ],
+  "explorerExclude.backup": null
 }

@@ -4,16 +4,10 @@ type Dictionary<T> = { readonly [id: string]: T };
 export type EditorConfig = {
   nodes: NodeTypes;
   ports: PortTypes;
-  settings: {
-    zoom?: number;
-    hideComments?: boolean;
-  };
-  defaultNodes?: defaultNode[];
-  circularBehavior?: "prevent" | "warn" | "allow";
 };
 
 type nodeBase = {
-  readonly id?: string;
+  readonly id: string;
   readonly coordinates?: { x?: number; y?: number };
   readonly width?: number;
   readonly height?: number;
@@ -25,7 +19,7 @@ export type comment = nodeBase & {
   readonly isNew?: boolean;
 };
 
-export type Comments = Dictionary<comment>;
+export type Comments = Record<string, comment>;
 
 export type Connection = {
   readonly nodeId: string;
@@ -33,11 +27,11 @@ export type Connection = {
 };
 
 export type PortBuilderType = {
-  type?: string;
-  name?: string;
+  type: string;
+  name: string;
   label?: string;
   noControls?: boolean;
-  color?: string;
+  color: string;
   hidePort?: boolean;
   acceptTypes?: string[];
 };
@@ -45,16 +39,16 @@ export type PortBuilderType = {
 export type connection = Dictionary<readonly Connection[]>;
 
 export type connections = {
-  readonly inputs?: connection;
-  readonly outputs?: connection;
+  readonly inputs: connection;
+  readonly outputs: connection;
 };
 
 export type Node = nodeBase & {
   readonly type: string;
   readonly label?: string;
   readonly initialWidth?: number;
-  readonly connections?: connections;
-  readonly root?: boolean;
+  readonly connections: connections;
+  readonly root: boolean;
   readonly addable?: boolean;
   readonly deletable?: boolean;
   readonly description?: string;

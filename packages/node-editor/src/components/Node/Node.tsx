@@ -19,18 +19,18 @@ import {
 } from "@globalTypes/types";
 
 type NodeProps = {
-  id?: string;
+  id: string;
   width?: number;
   height?: number;
   x?: number;
   y?: number;
   delay?: number;
-  stageRect?: DOMRect;
-  connections?: connections;
-  type?: string;
+  stageRect: React.MutableRefObject<DOMRect | null>;
+  connections: connections;
+  type: string;
   inputData?: any;
-  onDragStart?: (e: MouseEvent) => void;
-  onDragEnd?: (coordinates: coordinates, e: MouseEvent) => void;
+  onDragStart: (e: MouseEvent) => void;
+  onDragEnd: (coordinates: coordinates, e: MouseEvent) => void;
   onDrag?: (coordinates: coordinates, e: MouseEvent) => void;
   nodeTypes: NodeTypes;
   portTypes: PortTypes;
@@ -60,7 +60,7 @@ export const Node: React.FC<NodeProps> = ({
   const { position, zoom } = React.useContext(EditorContext);
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
 
-  const nodeWrapper = React.useRef<HTMLDivElement>();
+  const nodeWrapper = React.useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
@@ -80,7 +80,7 @@ export const Node: React.FC<NodeProps> = ({
           isOutput ? "input" : "output"
         );
 
-        const portHalf = fromRect.width / 2;
+        const portHalf = fromRect!.width / 2;
 
         let combined;
 
@@ -90,30 +90,45 @@ export const Node: React.FC<NodeProps> = ({
           combined = output.nodeId + output.portName + id + portName;
         }
 
-        let cnx;
-
-        cnx = document.querySelector(`[data-connection-id="${combined}"]`);
+        const cnx = document.querySelector(
+          `[data-connection-id="${combined}"]`
+        );
 
         const from = {
           x:
-            byScale(toRect.x - stageRect.x + portHalf - stageRect.width / 2) +
-            byScale(position.x),
+            byScale(
+              toRect!.x -
+                stageRect.current!.x +
+                portHalf -
+                stageRect.current!.width / 2
+            ) + byScale(position.x),
           y:
-            byScale(toRect.y - stageRect.y + portHalf - stageRect.height / 2) +
-            byScale(position.y),
+            byScale(
+              toRect!.y -
+                stageRect.current!.y +
+                portHalf -
+                stageRect.current!.height / 2
+            ) + byScale(position.y),
         };
 
         const to = {
           x:
-            byScale(fromRect.x - stageRect.x + portHalf - stageRect.width / 2) +
-            byScale(position.x),
+            byScale(
+              fromRect!.x -
+                stageRect.current!.x +
+                portHalf -
+                stageRect.current!.width / 2
+            ) + byScale(position.x),
           y:
             byScale(
-              fromRect.y - stageRect.y + portHalf - stageRect.height / 2
+              fromRect!.y -
+                stageRect.current!.y +
+                portHalf -
+                stageRect.current!.height / 2
             ) + byScale(position.y),
         };
 
-        cnx.setAttribute("d", calculateCurve(from, to));
+        cnx?.setAttribute("d", calculateCurve(from, to));
       });
     });
   };
@@ -134,7 +149,9 @@ export const Node: React.FC<NodeProps> = ({
   };
 
   const handleDrag = (coordinates: coordinates, _e: MouseEvent) => {
-    nodeWrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`;
+    nodeWrapper.current
+      ? (nodeWrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`)
+      : null;
     updateNodeConnections();
   };
 

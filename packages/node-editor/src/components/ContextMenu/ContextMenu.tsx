@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React from "react";
 import styles from "./ContextMenu.module.css";
 import clamp from "lodash/clamp";
@@ -14,11 +16,11 @@ export type menuOption = {
 };
 
 type ContextMenuProps = {
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   options?: menuOption[];
-  onRequestClose?: () => void;
-  onOptionSelected?: (option: menuOption) => void;
+  onRequestClose: () => void;
+  onOptionSelected: (option: menuOption) => void;
   label?: string;
   hideHeader?: boolean;
   hideFilter?: boolean;
@@ -36,9 +38,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   hideFilter,
   emptyText,
 }) => {
-  const menuWrapper = React.useRef<HTMLDivElement>();
-  const menuOptionsWrapper = React.useRef<HTMLDivElement>();
-  const filterInput = React.useRef<HTMLInputElement>();
+  const menuWrapper = React.useRef<HTMLDivElement>(null);
+  const menuOptionsWrapper = React.useRef<HTMLDivElement>(null);
+  const filterInput = React.useRef<HTMLInputElement>(null);
   const [filter, setFilter] = React.useState("");
   const [menuWidth, setMenuWidth] = React.useState(0);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -74,7 +76,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     if (filterInput.current) {
       filterInput.current.focus();
     }
-    setMenuWidth(menuWrapper.current.getBoundingClientRect().width);
+    menuWrapper.current
+      ? setMenuWidth(menuWrapper?.current?.getBoundingClientRect().width)
+      : null;
     document.addEventListener("keydown", testEscape);
     document.addEventListener("click", testClickOutside);
     document.addEventListener("contextmenu", testClickOutside);
@@ -129,7 +133,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 
   React.useEffect(() => {
     if (hideFilter || hideHeader) {
-      menuWrapper.current.focus();
+      menuWrapper?.current?.focus();
     }
   }, [hideFilter, hideHeader]);
 
@@ -138,11 +142,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       `${menuId.current}-${selectedIndex}`
     );
     if (menuOption) {
-      const menuRect = menuOptionsWrapper.current.getBoundingClientRect();
+      const menuRect = menuOptionsWrapper?.current?.getBoundingClientRect();
       const optionRect = menuOption.getBoundingClientRect();
       if (
-        optionRect.y + optionRect.height > menuRect.y + menuRect.height ||
-        optionRect.y < menuRect.y
+        optionRect.y + optionRect.height > menuRect!.y + menuRect!.height ||
+        optionRect.y < menuRect!.y
       ) {
         menuOption.scrollIntoView({ block: "nearest" });
       }
@@ -174,7 +178,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               value={filter}
               onChange={handleFilterChange}
               className={styles.menuFilter}
-              autoFocus
               ref={filterInput}
             />
           ) : null}
@@ -191,7 +194,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             menuId={menuId.current}
             selected={selectedIndex === i}
             onClick={() => handleOptionSelected(option)}
-            onMouseEnter={() => setSelectedIndex(null)}
+            onMouseEnter={() => setSelectedIndex(0)}
             index={i}
             key={option.value + i}
           >

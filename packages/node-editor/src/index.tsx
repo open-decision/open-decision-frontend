@@ -1,7 +1,7 @@
 //External Libraries
 import React from "react";
-import { useId } from "@reach/auto-id";
 import clamp from "lodash/clamp";
+import { nanoid } from "nanoid/non-secure";
 
 //State Management
 import { toastsReducer, editorReducer, EditorState } from "./reducers";
@@ -18,7 +18,7 @@ import usePrevious from "./hooks/usePrevious";
 
 // Types, Constants and Styles
 import styles from "./index.module.css";
-import { Comments, defaultNode, EditorConfig, Nodes } from "@globalTypes/types";
+import { defaultNode, EditorConfig } from "@globalTypes/types";
 import {
   EditorDispatchContext,
   EditorContext,
@@ -57,27 +57,32 @@ type NodeEditorProps = {
    */
   circularBehavior?: "prevent" | "warn" | "allow";
   debug?: boolean;
+  /**
+   * The zoom of the Editor. Ranges from 0.1 to 7.
+   */
+  zoom?: number;
+  /**
+   * Comments can be hidden dynamically.
+   */
+  hideComments?: boolean;
 };
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
-  config = {
-    settings: { hideComments: false, zoom: 1 },
-    defaultNodes: [],
-    nodes: {},
-    ports: {},
-  },
+  config,
+  hideComments = false,
+  zoom = 1,
+  circularBehavior = "prevent",
+  // defaultNodes = [],
   onChange,
   spaceToPan = false,
   disableComments = false,
   disableZoom = false,
   disablePan = false,
-  circularBehavior = "prevent",
-  debug = false,
 }) => {
   //These Refs allow us to preserve state across component renders without causing a rerender.
-  const editorId = useId();
-  const [stage, recalculateRect] = useDOMRect(editorId);
+  const editorId = nanoid(10);
+  const [stageRef, recalculateRect] = useDOMRect(editorId);
 
   //----------------------------------------------------------------
 
@@ -85,10 +90,10 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
   const [editorState, dispatchEditorState] = React.useReducer(
-    editorReducer(config, dispatchToasts),
+    editorReducer(config, circularBehavior, dispatchToasts),
     {
       id: editorId,
-      zoom: clamp(config.settings.zoom, 0.1, 7),
+      zoom: clamp(zoom, 0.1, 7),
       position: { x: 0, y: 0 },
       nodes: state.nodes,
       comments: state.comments,
@@ -113,7 +118,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 
   const recalculateConnections = React.useCallback(() => {
     createConnections(editorState, editorId);
-  }, [editorState.nodes, editorId, editorState]);
+  }, [editorId, editorState]);
 
   React.useLayoutEffect(() => {
     if (shouldRecalculateConnections) {
@@ -127,7 +132,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     if (previousNodes && onChange && editorState !== previousNodes) {
       onChange(editorState);
     }
-  }, [editorState.nodes, previousNodes, onChange]);
+  }, [editorState, previousNodes, onChange]);
 
   //----------------------------------------------------------------
 
@@ -139,8 +144,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
           spaceToPan={spaceToPan}
           disablePan={disablePan}
           disableZoom={disableZoom}
-          disableComments={disableComments || config.settings.hideComments}
-          stageRect={stage}
+          disableComments={disableComments || hideComments}
+          stageRect={stageRef}
           numNodes={Object.keys(editorState.nodes).length}
           outerStageChildren={
             <React.Fragment>
@@ -148,11 +153,11 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
             </React.Fragment>
           }
         >
-          {!config.settings.hideComments &&
+          {!hideComments &&
             Object.values(editorState.comments).map((comment) => (
               <Comment
                 {...comment}
-                stageRect={stage}
+                stageRect={stageRef}
                 onDragStart={recalculateRect}
                 key={comment.id}
               />
@@ -160,7 +165,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
           {Object.values(editorState.nodes).map((node) => (
             <Node
               {...node}
-              stageRect={stage}
+              stageRect={stageRef}
               onDragEnd={triggerRecalculation}
               onDragStart={recalculateRect}
               key={node.id}

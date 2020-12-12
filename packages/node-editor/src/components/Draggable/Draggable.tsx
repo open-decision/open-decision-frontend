@@ -9,7 +9,7 @@ type DivProps = Omit<
 >;
 
 type DraggableProps = DivProps & {
-  stageRect?: DOMRect;
+  stageRect?: React.MutableRefObject<DOMRect | null>;
   onDragDelayStart?: (
     e:
       | React.TouchEvent<HTMLDivElement>
@@ -22,7 +22,7 @@ type DraggableProps = DivProps & {
   onTouchStart?: (e: React.TouchEvent<HTMLDivElement>) => void;
   disabled?: boolean;
   delay?: number;
-  innerRef?: React.MutableRefObject<HTMLDivElement>;
+  innerRef?: React.MutableRefObject<HTMLDivElement | null>;
 };
 
 export const Draggable: React.FC<DraggableProps> = ({
@@ -40,9 +40,9 @@ export const Draggable: React.FC<DraggableProps> = ({
   ...props
 }) => {
   const editorState = React.useContext(EditorContext);
-  const startCoordinates = React.useRef(null);
-  const offset = React.useRef<any>();
-  const wrapper = React.useRef<HTMLDivElement>();
+  const startCoordinates = React.useRef({ x: 0, y: 0 });
+  const offset = React.useRef({ x: 0, y: 0 });
+  const wrapper = React.useRef<HTMLDivElement | null>(null);
 
   const byScale = (value: number) => (1 / editorState.zoom) * value;
 
@@ -50,16 +50,16 @@ export const Draggable: React.FC<DraggableProps> = ({
     const x =
       byScale(
         e.clientX -
-          (stageRect ? stageRect.left : 0) -
+          (stageRect?.current?.left ?? 0) -
           offset.current.x -
-          (stageRect ? stageRect.width : 0) / 2
+          (stageRect?.current?.width ?? 0) / 2
       ) + byScale(editorState.position.x);
     const y =
       byScale(
         e.clientY -
-          (stageRect ? stageRect.top : 0) -
+          (stageRect?.current?.top ?? 0) -
           offset.current.y -
-          (stageRect ? stageRect.height : 0) / 2
+          (stageRect?.current?.height ?? 0) / 2
       ) + byScale(editorState.position.y);
     return { x, y };
   };
@@ -84,10 +84,10 @@ export const Draggable: React.FC<DraggableProps> = ({
     if (onDragStart) {
       onDragStart(e);
     }
-    const nodeRect = wrapper.current.getBoundingClientRect();
+    const nodeRect = wrapper?.current?.getBoundingClientRect();
     offset.current = {
-      x: startCoordinates.current.x - nodeRect.left,
-      y: startCoordinates.current.y - nodeRect.top,
+      x: startCoordinates.current.x - nodeRect!.left,
+      y: startCoordinates.current.y - nodeRect!.top,
     };
     window.addEventListener("mouseup", stopDrag);
     window.addEventListener("mousemove", updateCoordinates);
@@ -110,7 +110,7 @@ export const Draggable: React.FC<DraggableProps> = ({
   const endDragDelay = () => {
     document.removeEventListener("mouseup", endDragDelay);
     document.removeEventListener("mousemove", checkDragDelay);
-    startCoordinates.current = null;
+    startCoordinates.current = { x: 0, y: 0 };
   };
 
   const startDragDelay = (

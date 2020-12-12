@@ -1,21 +1,24 @@
 import { STAGE_ID } from "@utilities/index";
 import React from "react";
 
-type useDomRect = [DOMRect, () => DOMRect];
-
-export const useDOMRect = (id: string): useDomRect => {
+export const useDOMRect = (
+  id: string
+): [React.MutableRefObject<DOMRect | null>, () => void] => {
   /**
    * The persisted rectangle.
    */
-  const rect = React.useRef<DOMRect>();
+  const ref = React.useRef<DOMRect | null>(null);
 
   /**
    * Is used to imperatively trigger a recalculation of the rectangle.
    */
-  const recalculate = () =>
-    (rect.current = document
-      .getElementById(`${STAGE_ID}${id}`)
-      .getBoundingClientRect());
+  const recalculate = () => {
+    ref.current =
+      document?.getElementById(`${STAGE_ID}${id}`)?.getBoundingClientRect() ??
+      null;
+  };
 
-  return [rect.current, recalculate];
+  if (!ref) recalculate();
+
+  return [ref, recalculate];
 };
