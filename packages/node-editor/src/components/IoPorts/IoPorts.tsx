@@ -66,7 +66,6 @@ const IoPorts: React.FC<IoPortsProps> = ({
   outputs = [],
   connections,
   inputData,
-  updateNodeConnections,
   inputTypes,
   recalculate,
 }) => {

@@ -25,12 +25,13 @@ export const calculateCurve = (from: coordinates, to: coordinates): string => {
     [from.x + thirdLength * 2, to.y],
     [to.x, to.y],
   ]);
-  return curve;
+
+  return curve!;
 };
 
 export const deleteConnection = (id: string): void => {
   const line = document.querySelector(`[data-connection-id="${id}"]`);
-  if (line) line.parentElement.remove();
+  line?.parentElement?.remove();
 };
 
 export const deleteConnectionsByNodeId = (nodeId: string): void => {
@@ -38,7 +39,7 @@ export const deleteConnectionsByNodeId = (nodeId: string): void => {
     `[data-output-node-id="${nodeId}"], [data-input-node-id="${nodeId}"]`
   );
 
-  lines.forEach((line) => line.parentElement.remove());
+  lines.forEach((line) => line?.parentElement?.remove());
 };
 
 export const updateConnection = ({
@@ -91,7 +92,7 @@ export const createSVG = ({
   return svg;
 };
 
-export const getStageRef = (editorId: string): HTMLElement =>
+export const getStageRef = (editorId: string): HTMLElement | null =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
 export const createConnections = (

@@ -5,9 +5,9 @@
     "sourceMap": true,
     "target": "ES2018",
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noImplicitReturns": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node"

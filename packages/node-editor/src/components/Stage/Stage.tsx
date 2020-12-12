@@ -178,7 +178,7 @@ export const Stage: React.FC<StageProps> = ({
       return () => {
         stageWrapper?.removeEventListener("wheel", handleWheel);
       };
-    }
+    } else return;
   }, [handleWheel, disableZoom]);
 
   const menuOptions = React.useMemo(() => {

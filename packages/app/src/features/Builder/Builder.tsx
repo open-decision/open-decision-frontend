@@ -8,7 +8,16 @@ const Editor: React.FC<{
   initialData?: EditorState;
   onChange?: any;
   setComments?: any;
-}> = ({ initialData = { nodes: {}, comments: {} }, onChange }) => {
+}> = ({
+  initialData = {
+    nodes: {},
+    comments: {},
+    id: "1234",
+    position: { x: 0, y: 0 },
+    zoom: 1,
+  },
+  onChange,
+}) => {
   return <NodeEditor config={{}} state={initialData} onChange={onChange} />;
 };
 
@@ -44,9 +53,7 @@ export const Builder: React.FC = () => {
             </div>
             <Editor
               initialData={data}
-              onChange={(value: EditorState) =>
-                setData({ ...data, nodes: value })
-              }
+              onChange={(value: EditorState) => setData(value)}
             />
           </>
         ) : (
@@ -56,7 +63,7 @@ export const Builder: React.FC = () => {
               <p className="mt-6 text-xl">
                 Um den Builder auszuprobieren klicke auf{" "}
                 <Button
-                  onClick={() => setData({ nodes: {}, comments: {} })}
+                  onClick={() => setData({ nodes: {}, comments: {}, ...data })}
                   className="mx-2"
                 >
                   <ChevronRightOutline className="w-6" />
