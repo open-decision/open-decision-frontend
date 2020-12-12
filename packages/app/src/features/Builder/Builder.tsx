@@ -1,23 +1,23 @@
 import React from "react";
-import { NodeEditor, EditorState } from "@open-decision/node-editor";
+import { NodeEditor } from "./node-editor";
 import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
+import { EditorState } from "./node-editor/reducers";
+
+const initialEditorState = {
+  comments: {},
+  id: "1234",
+  nodes: {},
+  position: { x: 0, y: 0 },
+  zoom: 1,
+};
 
 const Editor: React.FC<{
   initialData?: EditorState;
   onChange?: any;
   setComments?: any;
-}> = ({
-  initialData = {
-    nodes: {},
-    comments: {},
-    id: "1234",
-    position: { x: 0, y: 0 },
-    zoom: 1,
-  },
-  onChange,
-}) => {
+}> = ({ initialData = initialEditorState, onChange }) => {
   return (
     <NodeEditor
       config={{ nodes: {}, ports: {} }}
@@ -68,7 +68,10 @@ export const Builder: React.FC = () => {
               <h1 className="text-5xl">Starte mit Testen!</h1>
               <p className="mt-6 text-xl">
                 Um den Builder auszuprobieren klicke auf{" "}
-                <Button onClick={() => setData(undefined)} className="mx-2">
+                <Button
+                  onClick={() => setData(initialEditorState)}
+                  className="mx-2"
+                >
                   <ChevronRightOutline className="w-6" />
                   Starten
                 </Button>
