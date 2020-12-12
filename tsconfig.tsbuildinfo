@@ -2528,14 +2528,6 @@
       }
     },
     "options": {
-      "module": 99,
-      "types": [],
-      "sourceMap": true,
-      "target": 5,
-      "strict": true,
-      "declaration": true,
-      "allowSyntheticDefaultImports": true,
-      "moduleResolution": 2,
       "composite": true,
       "jsx": 1,
       "baseUrl": "./src",
@@ -2553,13 +2545,21 @@
           "utils/*"
         ]
       },
+      "module": 99,
+      "types": [],
+      "sourceMap": true,
+      "target": 5,
+      "strict": true,
+      "declaration": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": 2,
       "noEmit": true,
       "plugins": [
         {
           "name": "typescript-plugin-css-modules"
         }
       ],
-      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision/packages/app",
+      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision",
       "watch": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -8725,14 +8725,6 @@
       "./src/utils/index.ts"
     ],
     "affectedFilesPendingEmit": [
-      [
-        "../../node_modules/@types/d3-path/index.d.ts",
-        1
-      ],
-      [
-        "../../node_modules/@types/d3-shape/index.d.ts",
-        1
-      ],
       [
         "./node_modules/@graphql-typed-document-node/core/index.d.ts",
         1

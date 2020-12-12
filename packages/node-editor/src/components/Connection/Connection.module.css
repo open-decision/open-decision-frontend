@@ -1,8 +1,0 @@
-.svg{
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  pointer-events: none;
-  z-index: 0;
-  overflow: visible !important;
-}

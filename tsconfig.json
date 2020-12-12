@@ -1,5 +1,4 @@
 {
-  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
     "composite": true,
     "jsx": "preserve",
@@ -10,6 +9,17 @@
       "@features/*": ["features/*"],
       "@utils/*": ["utils/*"]
     },
+    "module": "ESNext",
+    "types": [],
+    "sourceMap": true,
+    "target": "ES2018",
+    "strict": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noImplicitReturns": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "noEmit": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
