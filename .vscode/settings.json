@@ -63,12 +63,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/node_modules": false
+    "**/node_modules": true
   },
-  "conventionalCommits.scopes": ["App", "node-editor"],
-  "eslint.workingDirectories": [
-    { "directory": "packages/app", "changeProcessCWD": true },
-    { "directory": "packages/node-editor", "changeProcessCWD": true }
-  ],
   "explorerExclude.backup": null
 }
