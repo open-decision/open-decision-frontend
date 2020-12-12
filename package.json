@@ -1,22 +1,81 @@
 {
-  "name": "open-decision",
-  "private": true,
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.9.1",
-    "@typescript-eslint/parser": "^4.9.1",
-    "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "lerna": "^3.22.1",
-    "rimraf": "^3.0.2"
+  "name": "@open-decision/frontend",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Philipp Garbowsky <phil.garbowsky@philtech.dev>",
+  "publishConfig": {
+    "access": "public"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "volta": {
-    "node": "14.15.1",
-    "yarn": "1.22.10"
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "yarn codegen && snowpack build",
+    "codegen": "graphql-codegen --config .codegen.yml",
+    "lint": "eslint src --ext ts,js,tsx,jsx",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^3.0.0",
+    "@graphql-codegen/cli": "1.19.3",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.18.1",
+    "@graphql-codegen/typescript-operations": "1.17.12",
+    "@graphql-codegen/typescript-urql": "^2.0.3",
+    "@snowpack/plugin-dotenv": "^2.0.4",
+    "@snowpack/plugin-postcss": "^1.0.7",
+    "@snowpack/plugin-typescript": "^1.1.0",
+    "@snowpack/plugin-webpack": "^2.1.1",
+    "@types/node": "^14.14.10",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/snowpack-env": "^2.3.2",
+    "autoprefixer": "^10.0.3",
+    "postcss": "^8.1.10",
+    "postcss-cli": "^8.3.0",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "2.2.0",
+    "snowpack": "^2.17.1",
+    "ts-node": "^9.0.0",
+    "type-fest": "^0.20.2",
+    "typescript": "^4.1.2",
+    "typescript-plugin-css-modules": "^3.0.1"
+  },
+  "dependencies": {
+    "@graywolfai/react-heroicons": "^1.1.1",
+    "@types/d3-shape": "^2.0.0",
+    "@types/lodash": "^4.14.165",
+    "@types/react-portal": "^4.0.2",
+    "@urql/devtools": "^2.0.2",
+    "clsx": "^1.1.1",
+    "d3-shape": "^2.0.0",
+    "date-fns": "^2.16.1",
+    "fp-ts": "^2.9.0",
+    "framer-motion": "^2.9.4",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "immer": "^8.0.0",
+    "io-ts": "^2.2.13",
+    "io-ts-types": "^0.5.12",
+    "lodash": "^4.17.20",
+    "match-sorter": "^6.0.1",
+    "react": "^16",
+    "react-dom": "^16",
+    "react-portal": "^4.2.1",
+    "react-router-dom": "^5.2.0",
+    "remeda": "0.0.27",
+    "tailwindcss": "^2.0.1",
+    "urql": "^1.11.3"
+  },
+  "graphql": {
+    "schema": "https://builder.open-decision.org/graphql",
+    "documents": "src/**/*.graphql.ts",
+    "extensions": {
+      "endpoints": {
+        "default": {
+          "url": "https://builder.open-decision.org/graphql"
+        }
+      }
+    }
   }
 }
