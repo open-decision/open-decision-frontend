@@ -11,4 +11,5 @@ export const EditorContext = React.createContext<EditorState>({
   position: { x: 0, y: 0 },
   nodes: {},
   comments: {},
+  config: [{}, {}],
 });

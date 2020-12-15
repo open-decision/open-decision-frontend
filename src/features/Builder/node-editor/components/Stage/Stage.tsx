@@ -10,17 +10,15 @@ import {
 import { Draggable } from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
-import { coordinates, NodeTypes } from "../../types";
+import { coordinates } from "../../types";
 
 type StageProps = {
   outerStageChildren: React.ReactNode;
   numNodes: number;
   stageRect: React.MutableRefObject<DOMRect | null>;
   spaceToPan: boolean;
-  disableComments: boolean;
   disablePan: boolean;
   disableZoom: boolean;
-  nodeTypes: NodeTypes;
 };
 
 export const Stage: React.FC<StageProps> = ({
@@ -29,19 +27,26 @@ export const Stage: React.FC<StageProps> = ({
   numNodes,
   stageRect,
   spaceToPan,
-  disableComments,
   disablePan,
   disableZoom,
-  nodeTypes,
 }) => {
   const dispatch = React.useContext(EditorDispatchContext);
-  const { zoom, position, id } = React.useContext(EditorContext);
+  const {
+    zoom,
+    position,
+    id,
+    config: [nodeTypes],
+  } = React.useContext(EditorContext);
 
   const wrapper = React.useRef<HTMLDivElement>(null);
   const translateWrapper = React.useRef<HTMLDivElement>(null);
 
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
+  const [menuCoordinates, setMenuCoordinates] = React.useState<coordinates>({
+    x: 0,
+    y: 0,
+  });
+
   const dragData = React.useRef({ x: 0, y: 0 });
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
 
@@ -61,10 +66,9 @@ export const Stage: React.FC<StageProps> = ({
     (e: WheelEvent) => {
       e.preventDefault();
       if (numNodes > 0) {
-        const delta = e.deltaY;
         dispatch({
           type: "SET_SCALE",
-          zoom: clamp(zoom - clamp(delta, -10, 10) * 0.005, 0.1, 7),
+          zoom: clamp(zoom - clamp(e.deltaY, -10, 10) * 0.005, 0.1, 7),
         });
       }
     },
@@ -86,7 +90,7 @@ export const Stage: React.FC<StageProps> = ({
   const handleMouseDrag = (_coordinates: coordinates, e: MouseEvent) => {
     const xDistance = dragData.current.x - e.clientX;
     const yDistance = dragData.current.y - e.clientY;
-    translateWrapper.current
+    translateWrapper?.current
       ? (translateWrapper.current.style.transform = `translate(${-(
           position.x + xDistance
         )}px, ${-(position.y + yDistance)}px)`)
@@ -116,36 +120,34 @@ export const Stage: React.FC<StageProps> = ({
     return false;
   };
 
-  const closeContextMenu = () => {
-    setMenuOpen(false);
-  };
-
   const byScale = (value: number) => (1 / zoom) * value;
 
   const addNode = (option: menuOption) => {
-    const wrapperRect = wrapper.current!.getBoundingClientRect();
+    const wrapperRect = wrapper?.current?.getBoundingClientRect();
 
-    const x =
-      byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
-      byScale(position.x);
+    if (wrapperRect) {
+      const x =
+        byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
+        byScale(position.x);
 
-    const y =
-      byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
-      byScale(position.y);
+      const y =
+        byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
+        byScale(position.y);
 
-    if (option.internalType === "comment") {
-      dispatch({
-        type: "ADD_COMMENT",
-        x,
-        y,
-      });
-    } else {
-      dispatch({
-        type: "ADD_NODE",
-        x,
-        y,
-        nodeType: option.node!.type,
-      });
+      if (option.internalType === "comment") {
+        dispatch({
+          type: "ADD_COMMENT",
+          x,
+          y,
+        });
+      } else if (option.internalType === "node") {
+        dispatch({
+          type: "ADD_NODE",
+          x,
+          y,
+          nodeType: option.value,
+        });
+      }
     }
   };
 
@@ -183,29 +185,19 @@ export const Stage: React.FC<StageProps> = ({
 
   const menuOptions = React.useMemo(() => {
     const options = orderBy(
-      Object.values(nodeTypes)
-        .filter((node) => node.addable !== false)
-        .map(
-          (node): menuOption => ({
-            value: node.type,
-            label: node.label!,
-            description: node.description!,
-            sortIndex: node.sortIndex,
-            node,
-          })
-        ),
+      Object.values(nodeTypes).map(
+        (node): menuOption => ({
+          value: node.type,
+          label: node.label,
+          description: node.description,
+          sortPriority: node.sortPriority,
+        })
+      ),
       ["sortIndex", "label"]
     );
-    if (!disableComments) {
-      options.push({
-        value: "comment",
-        label: "Comment",
-        description: "A comment for documenting nodes",
-        internalType: "comment",
-      });
-    }
+
     return options;
-  }, [nodeTypes, disableComments]);
+  }, [nodeTypes]);
 
   return (
     <Draggable
@@ -229,7 +221,7 @@ export const Stage: React.FC<StageProps> = ({
             x={menuCoordinates.x}
             y={menuCoordinates.y}
             options={menuOptions}
-            onRequestClose={closeContextMenu}
+            onRequestClose={() => setMenuOpen(false)}
             onOptionSelected={addNode}
             label="Add Node"
           />

@@ -10,9 +10,8 @@ export type menuOption = {
   value: string;
   label: string;
   description: string;
-  sortIndex?: number;
-  node?: NodeConfig;
-  internalType?: "comment";
+  sortPriority?: number;
+  internalType?: "comment" | "node";
 };
 
 type ContextMenuProps = {
@@ -92,6 +91,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const filteredOptions = React.useMemo(() => {
     if (!filter) return options;
     const lowerFilter = filter.toLowerCase();
+
     return options.filter((opt) =>
       opt.label.toLowerCase().includes(lowerFilter)
     );

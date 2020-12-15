@@ -63,7 +63,11 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/.vscode": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#5d93ff"
+  }
 }

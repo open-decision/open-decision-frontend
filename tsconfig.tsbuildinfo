@@ -986,79 +986,9 @@
         "signature": "79b0191eb96a866ef31db2bc6803f4912da0c7a7482987f093a3770f50f505a9",
         "affectsGlobalScope": false
       },
-      "./node_modules/@types/lodash/common/common.d.ts": {
-        "version": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
-        "signature": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/array.d.ts": {
-        "version": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
-        "signature": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/collection.d.ts": {
-        "version": "0c75b204aed9cf6ff1c7b4bed87a3ece0d9d6fc857a6350c0c95ed0c38c814e8",
-        "signature": "0c75b204aed9cf6ff1c7b4bed87a3ece0d9d6fc857a6350c0c95ed0c38c814e8",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/date.d.ts": {
-        "version": "187119ff4f9553676a884e296089e131e8cc01691c546273b1d0089c3533ce42",
-        "signature": "187119ff4f9553676a884e296089e131e8cc01691c546273b1d0089c3533ce42",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/function.d.ts": {
-        "version": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
-        "signature": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/lang.d.ts": {
-        "version": "509235563ea2b939e1bbe92aae17e71e6a82ceab8f568b45fb4fce7d72523a32",
-        "signature": "509235563ea2b939e1bbe92aae17e71e6a82ceab8f568b45fb4fce7d72523a32",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/math.d.ts": {
-        "version": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
-        "signature": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/number.d.ts": {
-        "version": "00baffbe8a2f2e4875367479489b5d43b5fc1429ecb4a4cc98cfc3009095f52a",
-        "signature": "00baffbe8a2f2e4875367479489b5d43b5fc1429ecb4a4cc98cfc3009095f52a",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/object.d.ts": {
-        "version": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
-        "signature": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/seq.d.ts": {
-        "version": "3c92b6dfd43cc1c2485d9eba5ff0b74a19bb8725b692773ef1d66dac48cda4bd",
-        "signature": "3c92b6dfd43cc1c2485d9eba5ff0b74a19bb8725b692773ef1d66dac48cda4bd",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/string.d.ts": {
-        "version": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
-        "signature": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/common/util.d.ts": {
-        "version": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
-        "signature": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/lodash/index.d.ts": {
-        "version": "0714e2046df66c0e93c3330d30dbc0565b3e8cd3ee302cf99e4ede6220e5fec8",
-        "signature": "0714e2046df66c0e93c3330d30dbc0565b3e8cd3ee302cf99e4ede6220e5fec8",
-        "affectsGlobalScope": true
-      },
-      "./node_modules/nanoid/non-secure/index.d.ts": {
-        "version": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
-        "signature": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
-        "affectsGlobalScope": false
-      },
       "./src/features/Builder/node-editor/types/index.ts": {
-        "version": "f9479103ea71649ad24e51a0b14ad8924f5820d2b06aa4d3aab2e641688d4ff3",
-        "signature": "a077ed0c0daefe9c653784a0f9c709dd6025a53bf84225a792b9951144cf67c4",
+        "version": "8f3bb0df3b79f372a21336b52e84faa4f995a04775d672fd9af89adebb411a7a",
+        "signature": "59cb3b0fe6347b422f2b517d0dac9918812d4281b2b01555d5202eebf3fd6b8f",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/d3-path/index.d.ts": {
@@ -1077,12 +1007,12 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/utilities/connectionCalculator.ts": {
-        "version": "2fa5484c47b2df8854becac37be984ed207710297f00f4ebb42936b5288d8900",
-        "signature": "613112090b5011cc9874afc5563f82e0bb65520acad218e4832564d99c5bff2d",
+        "version": "cbf2c58d05ae998580b57a06e82210a43b4f66344e0f2a1f7fefe070a03d2a26",
+        "signature": "89976dfa729d11405e08b267fd821709f8b37deca878a70ea6f98189610d8bd5",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/utilities/context.ts": {
-        "version": "b23cd65702b0fdda1e5948c8a24ad95adcb20f405cc72e89a4a3a4924a8c7c21",
+        "version": "38f37a4461642e92fbab1bb899596041fceaa1c218e20f5858ce5554e8634643",
         "signature": "9760e2e608d4c162da63da8586b9ec2000460cfd3aa93c0f6d30fd49a4e9fa0d",
         "affectsGlobalScope": false
       },
@@ -1181,6 +1111,16 @@
         "signature": "3dbd423358f8d9248642c036ea6fd568ad04a71da40cec7839175c3b1fe43bbb",
         "affectsGlobalScope": false
       },
+      "./node_modules/nanoid/non-secure/index.d.ts": {
+        "version": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
+        "signature": "90ca6c073c0572c6376dc7fed2376fc155cf79ae4daa527dc12d559977825baf",
+        "affectsGlobalScope": false
+      },
+      "./src/features/Builder/node-editor/reducers/editorReducer.ts": {
+        "version": "3e8860666d855809299b8bd71b8d2c25dc8f8f8f3c589520c4f947279f481456",
+        "signature": "6c3f168d4ef22079105245fbc695ab4aabb894f6427fe3d3d235a078e9dd3bc1",
+        "affectsGlobalScope": false
+      },
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx": {
         "version": "12e204b93f23ecd43ecf88c5fa769643b3045704c31c7fe7c920da14bc0ee62a",
         "signature": "2008ad8c82aa2e016ecd0ad4022bc5418ce75cd48a8350d5f5a7696746f73d19",
@@ -1189,11 +1129,6 @@
       "./src/features/Builder/node-editor/reducers/toastsReducer.ts": {
         "version": "514b5d81a1ee21c4418d098523a20dda4262b61aabcd7dfc6d8e34bb6a57cd6e",
         "signature": "c7ae2934f532bc247b14290bd61019976b41bc4dbc0d14cabbf20336e24fdceb",
-        "affectsGlobalScope": false
-      },
-      "./src/features/Builder/node-editor/reducers/editorReducer.ts": {
-        "version": "8c14ffdbc8ca0419c26fe28da419d5e025551e4b4effce232b2cc7d9285a26c3",
-        "signature": "631963052616f52af343739b63bcab2b412c77d6918457600e7e58f07eb3a223",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/reducers/index.ts": {
@@ -1206,14 +1141,79 @@
         "signature": "36bc05f7f6493d04829407fff68a3343134e447917c80775262dc571e7ad0cc7",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/lodash/common/common.d.ts": {
+        "version": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
+        "signature": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/array.d.ts": {
+        "version": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
+        "signature": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/collection.d.ts": {
+        "version": "0c75b204aed9cf6ff1c7b4bed87a3ece0d9d6fc857a6350c0c95ed0c38c814e8",
+        "signature": "0c75b204aed9cf6ff1c7b4bed87a3ece0d9d6fc857a6350c0c95ed0c38c814e8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/date.d.ts": {
+        "version": "187119ff4f9553676a884e296089e131e8cc01691c546273b1d0089c3533ce42",
+        "signature": "187119ff4f9553676a884e296089e131e8cc01691c546273b1d0089c3533ce42",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/function.d.ts": {
+        "version": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
+        "signature": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/lang.d.ts": {
+        "version": "509235563ea2b939e1bbe92aae17e71e6a82ceab8f568b45fb4fce7d72523a32",
+        "signature": "509235563ea2b939e1bbe92aae17e71e6a82ceab8f568b45fb4fce7d72523a32",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/math.d.ts": {
+        "version": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
+        "signature": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/number.d.ts": {
+        "version": "00baffbe8a2f2e4875367479489b5d43b5fc1429ecb4a4cc98cfc3009095f52a",
+        "signature": "00baffbe8a2f2e4875367479489b5d43b5fc1429ecb4a4cc98cfc3009095f52a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/object.d.ts": {
+        "version": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
+        "signature": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/seq.d.ts": {
+        "version": "3c92b6dfd43cc1c2485d9eba5ff0b74a19bb8725b692773ef1d66dac48cda4bd",
+        "signature": "3c92b6dfd43cc1c2485d9eba5ff0b74a19bb8725b692773ef1d66dac48cda4bd",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/string.d.ts": {
+        "version": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
+        "signature": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/common/util.d.ts": {
+        "version": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
+        "signature": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lodash/index.d.ts": {
+        "version": "0714e2046df66c0e93c3330d30dbc0565b3e8cd3ee302cf99e4ede6220e5fec8",
+        "signature": "0714e2046df66c0e93c3330d30dbc0565b3e8cd3ee302cf99e4ede6220e5fec8",
+        "affectsGlobalScope": true
+      },
       "./node_modules/@types/lodash/clamp.d.ts": {
         "version": "0e4ae4222bb7bd59b44588c4fc5cbb72976e8196084f42778731db14a1d3e61e",
         "signature": "0e4ae4222bb7bd59b44588c4fc5cbb72976e8196084f42778731db14a1d3e61e",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx": {
-        "version": "01b8f35eae25d35d870a189ec45012bef8cffaac0b916b226c6cf60766792aaa",
-        "signature": "431f3a609a5f1090dd23ec1dc5e7c6bf9949d4c13a47735ff04fe55b00dad041",
+        "version": "e37c6da35f3521e205433a7e307b76092f6308a2142131d7456d657f2f37205a",
+        "signature": "35b224dcb217f935f2f94b8c9aa71b13c538a759dbb63ef3c566fef14be8dc63",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": {
@@ -1227,8 +1227,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Stage/Stage.tsx": {
-        "version": "1415d585311d2f9111386133a72d081e64c7ea14ae0db7bf5d3549901c0b2b2c",
-        "signature": "5d1b8b70b7795d2d60355e13c94b9171c82af999cc0254dcd846e97aa7fd82b3",
+        "version": "d67bd06be119a01ca3e4595c5fdf1929b169496c5a87dd0173a783224b819cff",
+        "signature": "a7c94cfa016e7fb97bc081cc5dd02d36383aea30b93a055fcfbe6ccd44ef3632",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Connection/Connection.tsx": {
@@ -1242,23 +1242,13 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx": {
-        "version": "dc674f6c751c81e57616e5e9dad177ede616b16d1a6bfa1bb3eb0d9ea85fe6b8",
-        "signature": "4abb96a031035ec063f09e77589f0ca503bed04ea3f7b70648bd93b4e7b57cca",
+        "version": "6b6be7ef59328e14af6613c6c5e3817f4cf694f30e0b9e741052ad88aa51ebc6",
+        "signature": "bd2e7a27e552005dd94f92d66c5679476dd6d4a1bec6848cdd60ade4ca67d3f1",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Node/Node.tsx": {
-        "version": "385128083b40539e94e331b78a275716fae32bef76d7f93ddae59403d88818ff",
-        "signature": "3cf362dc655ea73cc91d04157a01ddc6323b4619b5f530e3bc3aae6c05759ce8",
-        "affectsGlobalScope": false
-      },
-      "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx": {
-        "version": "fc9bbc1992c6ea23966df55411e92407be9d38a460d7edd9e4991fdc0e2d5114",
-        "signature": "372d2a69fe2ffd2a20c6e668cd828406deccf7783fb11bfe1485bb503ff91f81",
-        "affectsGlobalScope": false
-      },
-      "./src/features/Builder/node-editor/components/Comment/Comment.tsx": {
-        "version": "838e72bfeea1c68bcf3024eead970f1b1e6860ebd10334022d9bf5de396cd106",
-        "signature": "af2afcdc7514f46369cfc8296337b2ef8ca2999c293d0e6c9196643d1abd914b",
+        "version": "f5ff6d1fd720a494d9ae12951b0c5ab641fe23b3520a904575da33c1f11ebd0c",
+        "signature": "841d0639bc2469cb0bf235b31beb376a24515336f7639c720fd60ca20059a524",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Connections/Connections.tsx": {
@@ -1267,13 +1257,13 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts": {
-        "version": "8408db709139e34d5f1ca29cfa9e6ffba7102cd7fc25d4df524a402e4c802185",
+        "version": "5a1deb247d32cddb54625f0b06b72020903d1a24c241fdc968e1afe526d5b2d8",
         "signature": "b189b81de8dc244d7b1f247db03f37e2782815da04555cf8bd08a5aab18b6a4b",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/index.tsx": {
-        "version": "4dea0981186751136cd6cf8a2497fb6bffbef43d79e9982cd164b543d4664854",
-        "signature": "8e441782bec006422e855f09441c1a871407a0bb3f020b7a8dbe11477116a8e1",
+        "version": "8228af5ac218169f88b98b7f45b8336b4580eae43ef74f832796dec8dc5750a7",
+        "signature": "bdaf964dbf969eeb05932d7aa838f80f2af321c8a0d9b4f731d726f275cf7796",
         "affectsGlobalScope": false
       },
       "./node_modules/@graywolfai/react-heroicons/dist/index.d.ts": {
@@ -1291,8 +1281,13 @@
         "signature": "fd9db9743a00dc8ef9038082f0a61aa297240074bb1963da330a2691786c6e5a",
         "affectsGlobalScope": false
       },
+      "./src/features/Builder/node-editor/tests/nodes.ts": {
+        "version": "7c90b39112b70eefc51085e759842abc08ce6a16dc0e878104304e0175b3bf8b",
+        "signature": "7439a74fa18503db21727c237794402cc025d3788ce81014495bb977c61e21b9",
+        "affectsGlobalScope": false
+      },
       "./src/features/Builder/Builder.tsx": {
-        "version": "5931c7cdada99c5834962ea93a2b850b64272cf9191e4ea5e6b1a8cce80d61e3",
+        "version": "725cafdc09ff372c40ec1e7847cfb1bbd0ffdd76394fc3cfcad88f7c39c66f4e",
         "signature": "8afcf7f15772471b81796d8b06d9f2623e1e13cef17dd0443ce396e6cb423d57",
         "affectsGlobalScope": false
       },
@@ -2477,7 +2472,7 @@
         "affectsGlobalScope": false
       },
       "./src/App.tsx": {
-        "version": "3478afdc0c4c807f3d0bf22cd88f796405b343510ea7a41b17fe214124746ebd",
+        "version": "9fc163b367f5d357f5e7a9dc0d38d408d032e5d04674f981338d0345620db55a",
         "signature": "cb451bd5610987bba1ed83770c010d135dba4bb4160cedf457e3c3d31a2c5f57",
         "affectsGlobalScope": false
       },
@@ -2516,9 +2511,14 @@
         "signature": "c4972698c3f33091ce5648c3b1588f67103ce70946f0a605f01a87f227f5270b",
         "affectsGlobalScope": false
       },
-      "./src/features/Builder/node-editor/tests/nodes.ts": {
-        "version": "779b7bb8fbbc036d835bb682e99af3f4a46c66cfbd78a5194ab95b172ce61114",
-        "signature": "f438a3ddbadaad0cf54ff76ad2f1715773f209b969b592ced71b040168209860",
+      "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx": {
+        "version": "fc9bbc1992c6ea23966df55411e92407be9d38a460d7edd9e4991fdc0e2d5114",
+        "signature": "372d2a69fe2ffd2a20c6e668cd828406deccf7783fb11bfe1485bb503ff91f81",
+        "affectsGlobalScope": false
+      },
+      "./src/features/Builder/node-editor/components/Comment/Comment.tsx": {
+        "version": "3d80ecf34f2aaa56729d07488377a56d7790b36495350f2b43f524a581d76eb2",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/types/styles.d.ts": {
@@ -5211,6 +5211,7 @@
         "./src/components/index.ts",
         "./src/features/Builder/node-editor/index.tsx",
         "./src/features/Builder/node-editor/reducers/index.ts",
+        "./src/features/Builder/node-editor/tests/nodes.ts",
         "./src/utils/index.ts"
       ],
       "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx": [
@@ -5219,16 +5220,7 @@
         "./src/features/Builder/node-editor/types/styles.d.ts"
       ],
       "./src/features/Builder/node-editor/components/Comment/Comment.tsx": [
-        "./node_modules/@types/lodash/clamp.d.ts",
-        "./node_modules/@types/react-portal/index.d.ts",
-        "./node_modules/@types/react/index.d.ts",
-        "./node_modules/date-fns/typings.d.ts",
-        "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx",
-        "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-        "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-        "./src/features/Builder/node-editor/types/index.ts",
-        "./src/features/Builder/node-editor/types/styles.d.ts",
-        "./src/features/Builder/node-editor/utilities/index.ts"
+        "./node_modules/date-fns/typings.d.ts"
       ],
       "./src/features/Builder/node-editor/components/Connection/Connection.tsx": [
         "./node_modules/@types/react/index.d.ts",
@@ -5261,6 +5253,7 @@
         "./node_modules/@types/react-portal/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/nanoid/non-secure/index.d.ts",
         "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
         "./src/features/Builder/node-editor/hooks/usePrevious.ts",
         "./src/features/Builder/node-editor/types/index.ts",
@@ -5306,11 +5299,8 @@
         "./node_modules/date-fns/typings.d.ts"
       ],
       "./src/features/Builder/node-editor/index.tsx": [
-        "./node_modules/@types/lodash/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
-        "./node_modules/nanoid/non-secure/index.d.ts",
-        "./src/features/Builder/node-editor/components/Comment/Comment.tsx",
         "./src/features/Builder/node-editor/components/Connections/Connections.tsx",
         "./src/features/Builder/node-editor/components/Node/Node.tsx",
         "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
@@ -5318,7 +5308,6 @@
         "./src/features/Builder/node-editor/hooks/useDOMRect.ts",
         "./src/features/Builder/node-editor/hooks/usePrevious.ts",
         "./src/features/Builder/node-editor/reducers/index.ts",
-        "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts",
         "./src/features/Builder/node-editor/utilities/index.ts"
       ],
@@ -5326,7 +5315,6 @@
         "./node_modules/date-fns/typings.d.ts",
         "./node_modules/immer/dist/immer.d.ts",
         "./node_modules/nanoid/non-secure/index.d.ts",
-        "./src/features/Builder/node-editor/reducers/toastsReducer.ts",
         "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/utilities/index.ts"
       ],
@@ -8084,9 +8072,6 @@
       "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx": [
         "./node_modules/@types/react/index.d.ts"
       ],
-      "./src/features/Builder/node-editor/components/Comment/Comment.tsx": [
-        "./node_modules/@types/react/index.d.ts"
-      ],
       "./src/features/Builder/node-editor/components/Connection/Connection.tsx": [
         "./node_modules/@types/react/index.d.ts",
         "./src/features/Builder/node-editor/types/index.ts"
@@ -8095,8 +8080,7 @@
         "./node_modules/@types/react/index.d.ts"
       ],
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
+        "./node_modules/@types/react/index.d.ts"
       ],
       "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": [
         "./node_modules/@types/react/index.d.ts",
@@ -8111,8 +8095,7 @@
         "./src/features/Builder/node-editor/types/index.ts"
       ],
       "./src/features/Builder/node-editor/components/Stage/Stage.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
+        "./node_modules/@types/react/index.d.ts"
       ],
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx": [
         "./node_modules/@types/react/index.d.ts",
@@ -8123,8 +8106,7 @@
       ],
       "./src/features/Builder/node-editor/index.tsx": [
         "./node_modules/@types/react/index.d.ts",
-        "./src/features/Builder/node-editor/reducers/index.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
+        "./src/features/Builder/node-editor/reducers/index.ts"
       ],
       "./src/features/Builder/node-editor/reducers/editorReducer.ts": [
         "./src/features/Builder/node-editor/types/index.ts"
@@ -8695,8 +8677,111 @@
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx",
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts",
       "./src/features/Builder/node-editor/hooks/usePrevious.ts",
-      "./src/features/Builder/node-editor/index.tsx",
-      "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+      [
+        "./src/features/Builder/node-editor/index.tsx",
+        [
+          {
+            "file": "./src/features/Builder/node-editor/index.tsx",
+            "start": 4567,
+            "length": 9,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type 'MutableRefObject<DOMRect | null>' is not assignable to type 'MutableRefObject<DOMRect>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type 'DOMRect | null' is not assignable to type 'DOMRect'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Type 'null' is not assignable to type 'DOMRect'.",
+                      "category": 1,
+                      "code": 2322
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
+                "start": 498,
+                "length": 9,
+                "messageText": "The expected type comes from property 'stageRect' which is declared here on type 'IntrinsicAttributes & NodeProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      [
+        "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+        [
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 3352,
+            "length": 25,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type '{ id: string; coordinates: { x: number; y: number; }; type: string; width: number; connections: { inputs: {}; outputs: {}; }; root: boolean; }' is not assignable to type 'WritableDraft<Node>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Object literal may only specify known properties, and 'root' does not exist in type 'WritableDraft<Node>'.",
+                  "category": 1,
+                  "code": 2353
+                }
+              ]
+            }
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4212,
+            "length": 10,
+            "messageText": "'connection' refers to a value, but is being used as a type here. Did you mean 'typeof connection'?",
+            "category": 1,
+            "code": 2749
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4332,
+            "length": 10,
+            "messageText": "'connection' refers to a value, but is being used as a type here. Did you mean 'typeof connection'?",
+            "category": 1,
+            "code": 2749
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4407,
+            "length": 8,
+            "messageText": "Object is of type 'unknown'.",
+            "category": 1,
+            "code": 2571
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4424,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
+            "category": 1,
+            "code": 7006
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 7934,
+            "length": 5,
+            "code": 2339,
+            "category": 1,
+            "messageText": "Property 'isNew' does not exist on type 'WritableDraft<Comment>'."
+          }
+        ]
+      ],
       "./src/features/Builder/node-editor/reducers/index.ts",
       "./src/features/Builder/node-editor/reducers/toastsReducer.ts",
       "./src/features/Builder/node-editor/tests/nodes.ts",

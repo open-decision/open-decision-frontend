@@ -18,7 +18,5 @@ export const useDOMRect = (
       null;
   };
 
-  if (!ref) recalculate();
-
   return [ref, recalculate];
 };

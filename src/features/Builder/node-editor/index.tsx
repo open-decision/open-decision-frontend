@@ -1,15 +1,18 @@
 //External Libraries
 import React from "react";
-import { clamp } from "lodash";
-import { nanoid } from "nanoid/non-secure";
 
 //State Management
-import { toastsReducer, editorReducer, EditorState } from "./reducers";
+import {
+  toastsReducer,
+  editorReducer,
+  EditorState,
+  editorActions,
+} from "./reducers";
 
 //Components
 import { Stage } from "./components/Stage/Stage";
 import { Node } from "./components/Node/Node";
-import { Comment } from "./components/Comment/Comment";
+// import { Comment } from "./components/Comment/Comment";
 import { Toaster } from "./components/Toaster/Toaster";
 import { Connections } from "./components/Connections/Connections";
 
@@ -18,7 +21,6 @@ import usePrevious from "./hooks/usePrevious";
 
 // Types, Constants and Styles
 import styles from "./index.module.css";
-import { EditorConfig } from "./types";
 import {
   EditorDispatchContext,
   EditorContext,
@@ -33,20 +35,21 @@ type NodeEditorProps = {
    */
   state: EditorState;
   /**
-   * The preconfigured nodes and ports. This determines which nodes are avaliable when working with the Editor.
-   */
-  config: EditorConfig;
-  /**
-   * @description - This function is called every time the nodes update. This is helpful when managing the editor state externally.
+   * @description - This function is called every time the nodes update. This is helpful when managing the editors state externally.
    * @param state - The state of the Editor.
    */
   onChange: (state: EditorState) => void;
   /**
-   * Similar to Photoshop it is possible to pan the Editor when holding the space key.
+   * Similar to Photoshop it is possible to pan the Editor when holding the space key. False by default.
    */
   spaceToPan?: boolean;
-  disableComments?: boolean;
+  /**
+   * Zooming can be disabled. False by default.
+   */
   disableZoom?: boolean;
+  /**
+   * Panning can be disabled. False by default.
+   */
   disablePan?: boolean;
   /**
    * The Editor can make sure, that circular connections between nodes are not possible. By default circular connections are prevented.
@@ -58,42 +61,33 @@ type NodeEditorProps = {
    */
   zoom?: number;
   /**
-   * Comments can be hidden dynamically.
+   * Comments can be hidden dynamically. False by default.
    */
   hideComments?: boolean;
 };
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
-  config,
-  hideComments = false,
-  zoom = 1,
-  circularBehavior = "prevent",
   onChange,
+  hideComments = false,
+  circularBehavior = "prevent",
   spaceToPan = false,
-  disableComments = false,
   disableZoom = false,
   disablePan = false,
 }) => {
-  //These Refs allow us to preserve state across component renders without causing a rerender.
-  const editorId = nanoid(10);
-  const [stageRef, recalculateRect] = useDOMRect(editorId);
-
-  //----------------------------------------------------------------
-
   //The following is used for state management
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
-  const [editorState, dispatchEditorState] = React.useReducer(
-    editorReducer(config, circularBehavior, dispatchToasts),
-    {
-      id: editorId,
-      zoom: clamp(zoom, 0.1, 7),
-      position: { x: 0, y: 0 },
-      nodes: state.nodes,
-      comments: state.comments,
-    }
-  );
+  const [editorState, dispatchEditorState] = React.useReducer<
+    React.Reducer<EditorState, editorActions>
+  >(editorReducer(circularBehavior, dispatchToasts), {
+    ...state,
+  });
+
+  //----------------------------------------------------------------
+
+  //These Refs allow us to preserve state across component renders without causing a rerender.
+  const [stageRef, recalculateRect] = useDOMRect(editorState.id);
 
   //----------------------------------------------------------------
 
@@ -109,8 +103,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   };
 
   const recalculateConnections = React.useCallback(() => {
-    createConnections(editorState, editorId);
-  }, [editorId, editorState]);
+    createConnections(editorState, editorState.id);
+  }, [editorState]);
 
   React.useLayoutEffect(() => {
     if (shouldRecalculateConnections) {
@@ -132,11 +126,9 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     <EditorDispatchContext.Provider value={dispatchEditorState}>
       <EditorContext.Provider value={editorState}>
         <Stage
-          nodeTypes={config.nodes}
           spaceToPan={spaceToPan}
           disablePan={disablePan}
           disableZoom={disableZoom}
-          disableComments={disableComments || hideComments}
           stageRect={stageRef}
           numNodes={Object.keys(editorState.nodes).length}
           outerStageChildren={
@@ -145,7 +137,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
             </React.Fragment>
           }
         >
-          {!hideComments &&
+          {/* {!hideComments &&
             Object.values(editorState.comments).map((comment) => (
               <Comment
                 {...comment}
@@ -153,24 +145,24 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
                 onDragStart={recalculateRect}
                 key={comment.id}
               />
-            ))}
+            ))} */}
+
           {Object.values(editorState.nodes).map((node) => (
             <Node
-              {...node}
+              node={node}
               stageRect={stageRef}
-              onDragEnd={triggerRecalculation}
               onDragStart={recalculateRect}
               key={node.id}
               recalculate={triggerRecalculation}
-              nodeTypes={config.nodes}
-              portTypes={config.ports}
             />
           ))}
-          <Connections editorId={editorId} />
+
+          <Connections editorId={editorState.id} />
+
           <div
             className={styles.dragWrapper}
-            id={`${DRAG_CONNECTION_ID}${editorId}`}
-          ></div>
+            id={`${DRAG_CONNECTION_ID}${editorState.id}`}
+          />
         </Stage>
       </EditorContext.Provider>
     </EditorDispatchContext.Provider>

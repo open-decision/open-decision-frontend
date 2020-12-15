@@ -57,6 +57,7 @@ export type PortConfig = {
    * The human readable label of this PortType.
    */
   label: string;
+  name: string;
   /**
    * The color of this PortType.
    */
@@ -100,7 +101,7 @@ export type coordinates = { readonly x: number; readonly y: number };
 /**
  * A comment is a special type of node.
  */
-export type comment = nodeBase & {
+export type Comment = nodeBase & {
   /**
    * The text content of the comment.
    */
@@ -114,7 +115,7 @@ export type comment = nodeBase & {
 /**
  * The comments are an object indexed by unique strings.
  */
-export type comments = Record<string, comment>;
+export type Comments = Record<string, Comment>;
 
 /**
  * A Node is the main type of element in the node-editor. The properties of a node are  focused on information unique to each Node in the Editor even if the type of Node is used more than once. The shared configuration of a Node are part of the NodeConfig which is associated via the type property.

@@ -8,135 +8,119 @@ import {
 } from "../../utilities";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import IoPorts from "../IoPorts/IoPorts";
+import { IoPorts } from "../IoPorts/IoPorts";
 import { Draggable } from "../Draggable/Draggable";
-import {
-  connection,
-  connections,
-  coordinates,
-  NodeTypes,
-  PortTypes,
-} from "../../types";
+import { Connections, coordinates, Node as NodeType } from "../../types";
 
 type NodeProps = {
-  id: string;
-  width?: number;
-  height?: number;
-  x?: number;
-  y?: number;
-  delay?: number;
-  stageRect: React.MutableRefObject<DOMRect | null>;
-  connections: connections;
-  type: string;
-  inputData?: any;
+  node: NodeType;
+  stageRect: React.MutableRefObject<DOMRect>;
   onDragStart: (e: MouseEvent) => void;
-  onDragEnd: (coordinates: coordinates, e: MouseEvent) => void;
-  onDrag?: (coordinates: coordinates, e: MouseEvent) => void;
-  nodeTypes: NodeTypes;
-  portTypes: PortTypes;
   recalculate: () => void;
 };
 
 export const Node: React.FC<NodeProps> = ({
-  id,
-  width,
-  height,
-  x,
-  y,
-  delay = 6,
+  node,
   stageRect,
-  connections,
-  type,
-  inputData,
   onDragStart,
-  onDragEnd,
-  onDrag,
-  nodeTypes,
-  portTypes,
   recalculate,
   ...props
 }) => {
   const dispatch = React.useContext(EditorDispatchContext);
-  const { position, zoom } = React.useContext(EditorContext);
-  const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
+  const {
+    position,
+    zoom,
+    config: [nodeTypes, portTypes],
+  } = React.useContext(EditorContext);
 
-  const nodeWrapper = React.useRef<HTMLDivElement>(null);
+  // Get the shared information for a Node of this type from the NodeTypes.
+  const { label, deletable, inputPorts = [], outputPorts = [] } = nodeTypes[
+    node.type
+  ];
+
+  const wrapper = React.useRef<HTMLDivElement>(null);
+
+  // Track local menu state.
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
   const byScale = (value: number) => (1 / zoom) * value;
 
-  const updateConnectionsByTransput = (
-    transput: connection,
-    isOutput?: boolean
-  ) => {
-    Object.entries(transput).forEach(([portName, outputs]) => {
-      outputs.forEach((output) => {
-        const toRect = getPortRect(id, portName, isOutput ? "output" : "input");
+  const updateConnections = (connections: Connections, isOutput?: boolean) =>
+    Object.entries(connections).forEach(([portName, connections]) => {
+      connections.forEach((connection) => {
+        const toRect = getPortRect(
+          node.id,
+          portName,
+          isOutput ? "output" : "input"
+        );
 
         const fromRect = getPortRect(
-          output.nodeId,
-          output.portName,
+          connection.nodeId,
+          connection.portName,
           isOutput ? "input" : "output"
         );
 
-        const portHalf = fromRect!.width / 2;
+        if (fromRect && toRect) {
+          const portHalf = fromRect.width / 2;
 
-        let combined;
+          let combined: string;
 
-        if (isOutput) {
-          combined = id + portName + output.nodeId + output.portName;
-        } else {
-          combined = output.nodeId + output.portName + id + portName;
+          if (isOutput) {
+            combined =
+              node.id + portName + connection.nodeId + connection.portName;
+          } else {
+            combined =
+              connection.nodeId + connection.portName + node.id + portName;
+          }
+
+          const cnx = document.querySelector(
+            `[data-connection-id="${combined}"]`
+          );
+
+          const from = {
+            x:
+              byScale(
+                toRect.x -
+                  stageRect.current.x +
+                  portHalf -
+                  stageRect.current.width / 2
+              ) + byScale(position.x),
+            y:
+              byScale(
+                toRect.y -
+                  stageRect.current.y +
+                  portHalf -
+                  stageRect.current.height / 2
+              ) + byScale(position.y),
+          };
+
+          const to = {
+            x:
+              byScale(
+                fromRect.x -
+                  stageRect.current.x +
+                  portHalf -
+                  stageRect.current.width / 2
+              ) + byScale(position.x),
+            y:
+              byScale(
+                fromRect.y -
+                  stageRect.current.y +
+                  portHalf -
+                  stageRect.current.height / 2
+              ) + byScale(position.y),
+          };
+
+          cnx?.setAttribute("d", calculateCurve(from, to));
         }
-
-        const cnx = document.querySelector(
-          `[data-connection-id="${combined}"]`
-        );
-
-        const from = {
-          x:
-            byScale(
-              toRect!.x -
-                stageRect.current!.x +
-                portHalf -
-                stageRect.current!.width / 2
-            ) + byScale(position.x),
-          y:
-            byScale(
-              toRect!.y -
-                stageRect.current!.y +
-                portHalf -
-                stageRect.current!.height / 2
-            ) + byScale(position.y),
-        };
-
-        const to = {
-          x:
-            byScale(
-              fromRect!.x -
-                stageRect.current!.x +
-                portHalf -
-                stageRect.current!.width / 2
-            ) + byScale(position.x),
-          y:
-            byScale(
-              fromRect!.y -
-                stageRect.current!.y +
-                portHalf -
-                stageRect.current!.height / 2
-            ) + byScale(position.y),
-        };
-
-        cnx?.setAttribute("d", calculateCurve(from, to));
       });
     });
-  };
 
   const updateNodeConnections = () => {
-    if (connections) {
-      updateConnectionsByTransput(connections.inputs);
-      updateConnectionsByTransput(connections.outputs, true);
+    if (node.connections) {
+      updateConnections(node.connections.inputs);
+      updateConnections(node.connections.outputs, true);
     }
   };
 
@@ -144,19 +128,16 @@ export const Node: React.FC<NodeProps> = ({
     dispatch({
       type: "SET_NODE_COORDINATES",
       ...coordinates,
-      nodeId: id,
+      nodeId: node.id,
     });
   };
 
   const handleDrag = (coordinates: coordinates, _e: MouseEvent) => {
-    nodeWrapper.current
-      ? (nodeWrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`)
+    wrapper.current
+      ? (wrapper.current.style.transform = `translate(${coordinates.x}px,${coordinates.y}px)`)
       : null;
-    updateNodeConnections();
-  };
 
-  const startDrag = (e: MouseEvent) => {
-    onDragStart(e);
+    updateNodeConnections();
   };
 
   const handleContextMenu = (
@@ -169,16 +150,12 @@ export const Node: React.FC<NodeProps> = ({
     return false;
   };
 
-  const closeContextMenu = () => {
-    setMenuOpen(false);
-  };
-
   const handleMenuOption = ({ value }: menuOption) => {
     switch (value) {
       case "deleteNode":
         dispatch({
           type: "REMOVE_NODE",
-          nodeId: id,
+          nodeId: node.id,
         });
         break;
       default:
@@ -190,27 +167,24 @@ export const Node: React.FC<NodeProps> = ({
     <Draggable
       className={styles.wrapper}
       style={{
-        width,
-        transform: `translate(${x}px, ${y}px)`,
+        width: node.width,
+        transform: `translate(${node.coordinates.x}px, ${node.coordinates.y}px)`,
       }}
-      onDragStart={startDrag}
+      // onDragStart={onDragStart}
       onDrag={handleDrag}
       onDragEnd={stopDrag}
-      innerRef={nodeWrapper}
-      data-node-id={id}
+      innerRef={wrapper}
+      data-node-id={node.id}
       onContextMenu={handleContextMenu}
       stageRect={stageRect}
       {...props}
     >
       <h2 className={styles.label}>{label}</h2>
       <IoPorts
-        nodeId={id}
-        inputs={inputs}
-        outputs={outputs}
-        connections={connections}
-        updateNodeConnections={updateNodeConnections}
-        inputData={inputData}
-        inputTypes={portTypes}
+        nodeId={node.id}
+        inputs={inputPorts}
+        outputs={outputPorts}
+        connections={node.connections}
         recalculate={recalculate}
       />
       {menuOpen ? (
@@ -229,7 +203,7 @@ export const Node: React.FC<NodeProps> = ({
                   ]
                 : []),
             ]}
-            onRequestClose={closeContextMenu}
+            onRequestClose={() => setMenuOpen(false)}
             onOptionSelected={handleMenuOption}
             hideFilter
             label="Node Options"

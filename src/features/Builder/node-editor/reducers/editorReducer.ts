@@ -1,9 +1,7 @@
 import {
   Comments,
-  connection,
   Connection,
   coordinates,
-  EditorConfig,
   Nodes,
   NodeTypes,
   PortTypes,
@@ -15,7 +13,6 @@ import {
 } from "../utilities";
 import produce, { Draft, original } from "immer";
 import { nanoid } from "nanoid/non-secure";
-import { toastActions } from "./toastsReducer";
 
 const removeConnection = produce(
   (nodes: Draft<Nodes>, input: Connection, output: Connection) => {
@@ -24,17 +21,13 @@ const removeConnection = produce(
     const outputNode = nodes[output.nodeId];
 
     //remove the input from the inputNode
-    delete inputNode.connections.inputs[input.portName];
+    inputNode.connections.inputs[input.portName] = [];
 
-    const filteredOutputNodes = outputNode.connections.outputs[
-      output.portName
-    ].filter((cnx) => {
+    outputNode.connections.outputs[output.portName].filter((cnx) => {
       return cnx.nodeId === input.nodeId
         ? cnx.portName !== input.portName
         : true;
     });
-
-    outputNode.connections.outputs[output.portName] = filteredOutputNodes;
   }
 );
 
@@ -84,15 +77,33 @@ export type editorActions =
   | { type: "DELETE_COMMENT"; id: string };
 
 export type EditorState = {
+  /**
+   * The id of the Editor.
+   */
   readonly id: string;
+  /**
+   * The current zoom level.
+   */
   readonly zoom: number;
+  /**
+   * The current position of the Editor.
+   */
   readonly position: coordinates;
+  /**
+   * The currently shown Nodes.
+   */
   readonly nodes: Nodes;
+  /**
+   * The currently shown Comments.
+   */
   readonly comments: Comments;
+  /**
+   * The preconfigured avaliable NodeTypes and PortTypes that can be added when using the node-editor.
+   */
+  readonly config: [NodeTypes, PortTypes];
 };
 
 export const editorReducer = (
-  config: EditorConfig,
   circularBehavior: "warn" | "prevent" | "allow",
   dispatchToasts?: any
 ) =>
@@ -175,21 +186,19 @@ export const editorReducer = (
         const { input, output } = action;
 
         //This checks whether the receiving input is already connected. A new connection can only be added when the receiving port is not already connected.
-        const inputIsNotConnected = !draft.nodes[input.nodeId].connections
-          .inputs[input.portName];
+        const receivingInput =
+          draft.nodes[input.nodeId].connections.inputs[input.portName];
 
-        if (inputIsNotConnected) {
+        if (receivingInput.length === 0) {
           const allowCircular =
             circularBehavior === "warn" || circularBehavior === "allow";
 
-          const connections = draft.nodes[output.nodeId].connections;
-
-          connections.inputs[input.portName].push({
+          draft.nodes[input.nodeId].connections.inputs[input.portName].push({
             nodeId: output.nodeId,
             portName: output.portName,
           });
 
-          connections.outputs[output.portName].push({
+          draft.nodes[output.nodeId].connections.outputs[output.portName].push({
             nodeId: input.nodeId,
             portName: input.portName,
           });
@@ -223,7 +232,7 @@ export const editorReducer = (
         const id =
           output.nodeId + output.portName + input.nodeId + input.portName;
 
-        removeConnection(draft.nodes, input, output);
+        draft.nodes = removeConnection(draft.nodes, input, output);
         deleteConnection(id);
         break;
       }
@@ -255,13 +264,6 @@ export const editorReducer = (
         break;
       }
 
-      case "SET_PORT_DATA": {
-        const { nodeId, portName, controlName, data } = action;
-
-        draft.nodes[nodeId].inputData![portName][controlName] = data;
-        break;
-      }
-
       case "SET_NODE_COORDINATES": {
         const { x, y, nodeId } = action;
         draft.nodes[nodeId].coordinates = { x, y };
@@ -276,7 +278,6 @@ export const editorReducer = (
           width: 200,
           height: 30,
           color: "blue",
-          isNew: true,
         };
         break;
 

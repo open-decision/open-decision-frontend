@@ -4,27 +4,23 @@ import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import { EditorState } from "./node-editor/reducers";
+import { exampleNodes, nodeTypes, portTypes } from "./node-editor/tests/nodes";
 
-const initialEditorState = {
+const initialEditorState: EditorState = {
   comments: {},
   id: "1234",
-  nodes: {},
+  nodes: exampleNodes,
   position: { x: 0, y: 0 },
   zoom: 1,
+  config: [nodeTypes, portTypes],
 };
 
 const Editor: React.FC<{
-  initialData?: EditorState;
+  state: EditorState;
   onChange?: any;
   setComments?: any;
-}> = ({ initialData = initialEditorState, onChange }) => {
-  return (
-    <NodeEditor
-      config={{ nodes: {}, ports: {} }}
-      state={initialData}
-      onChange={onChange}
-    />
-  );
+}> = ({ state, onChange }) => {
+  return <NodeEditor state={state} onChange={onChange} />;
 };
 
 export const Builder: React.FC = () => {
@@ -58,7 +54,7 @@ export const Builder: React.FC = () => {
               </Button>
             </div>
             <Editor
-              initialData={data}
+              state={data}
               onChange={(value: EditorState) => setData(value)}
             />
           </>

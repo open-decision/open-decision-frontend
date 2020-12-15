@@ -1,4 +1,4 @@
-import { Nodes } from "../types";
+import { Nodes, NodeTypes, PortTypes } from "../types";
 
 export const exampleNodes: Nodes = {
   "5nCLb85WDw": {
@@ -8,12 +8,11 @@ export const exampleNodes: Nodes = {
     width: 150,
     connections: {
       inputs: {
-        num1: [],
+        num1: [{ nodeId: "vRPQ06k4nT", portName: "number" }],
         num2: [],
       },
       outputs: {},
     },
-    inputData: { num1: { number: 0 }, num2: { number: 0 } },
   },
   vRPQ06k4nT: {
     id: "vRPQ06k4nT",
@@ -22,9 +21,8 @@ export const exampleNodes: Nodes = {
     width: 150,
     connections: {
       inputs: {},
-      outputs: { number: [] },
+      outputs: { number: [{ nodeId: "5nCLb85WDw", portName: "num1" }] },
     },
-    inputData: { number: { number: 0 } },
   },
   BDhQ98lTfw: {
     id: "BDhQ98lTfw",
@@ -33,38 +31,38 @@ export const exampleNodes: Nodes = {
     width: 150,
     connections: {
       inputs: {},
-      outputs: { number: [] },
+      outputs: {},
     },
-    inputData: { number: { number: 0 } },
   },
 };
 
-export const portTypes = {
+export const portTypes: PortTypes = {
   number: {
+    type: "number",
     label: "Number",
     name: "number",
     acceptTypes: ["number"],
     color: "red",
-    controls: [
-      {
-        type: "number",
-        name: "number",
-        label: "Number",
-        defaultValue: 0,
-      },
-    ],
   },
 };
 
-export const nodeTypes = {
+export const nodeTypes: NodeTypes = {
   number: {
     type: "number",
     label: "Number",
-    initialWidth: 150,
-    inputs: [{ type: "number", name: "number" }],
-    outputs: [
+    addable: true,
+    deletable: true,
+    description: "",
+    root: false,
+    sortPriority: 1,
+    inputPorts: [
+      { type: "number", label: "test", color: "blue", name: "number" },
+    ],
+    outputPorts: [
       {
         type: "number",
+        label: "test",
+        color: "blue",
         name: "number",
       },
     ],
@@ -72,17 +70,27 @@ export const nodeTypes = {
   addNumbers: {
     type: "addNumbers",
     label: "Add Numbers",
-    initialWidth: 150,
-    inputs: [
+    addable: true,
+    deletable: true,
+    description: "",
+    root: false,
+    sortPriority: 1,
+    inputPorts: [
       {
         type: "number",
+        label: "test",
+        color: "blue",
         name: "num1",
       },
       {
         type: "number",
+        label: "test",
+        color: "blue",
         name: "num2",
       },
     ],
-    outputs: [{ type: "number", name: "result" }],
+    outputPorts: [
+      { type: "number", label: "test", color: "blue", name: "number" },
+    ],
   },
 };

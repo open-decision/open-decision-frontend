@@ -4,17 +4,17 @@ import { coordinates } from "../types";
 import { CONNECTIONS_ID } from "./constants";
 import { EditorState } from "../reducers";
 
-const getPort = (nodeId: string, portName: string, transputType = "input") =>
+const getPort = (nodeId: string, portName: string, portType = "input") =>
   document.querySelector(
-    `[data-node-id="${nodeId}"] [data-port-name="${portName}"][data-port-transput-type="${transputType}"]`
+    `[data-node-id="${nodeId}"] [data-port-name="${portName}"][data-port-transput-type="${portType}"]`
   );
 
 export const getPortRect = (
   nodeId: string,
   portName: string,
-  transputType = "input"
+  portType = "input"
 ): DOMRect | undefined =>
-  getPort(nodeId, portName, transputType)?.getBoundingClientRect() ?? undefined;
+  getPort(nodeId, portName, portType)?.getBoundingClientRect();
 
 export const calculateCurve = (from: coordinates, to: coordinates): string => {
   const length = to.x - from.x;
@@ -25,7 +25,6 @@ export const calculateCurve = (from: coordinates, to: coordinates): string => {
     [from.x + thirdLength * 2, to.y],
     [to.x, to.y],
   ]);
-
   return curve!;
 };
 
