@@ -14,7 +14,7 @@ import { Connections, coordinates, Node as NodeType } from "../../types";
 
 type NodeProps = {
   node: NodeType;
-  stageRect: React.MutableRefObject<DOMRect>;
+  stageRect: React.MutableRefObject<DOMRect | null>;
   onDragStart: (e: MouseEvent) => void;
   recalculate: () => void;
 };

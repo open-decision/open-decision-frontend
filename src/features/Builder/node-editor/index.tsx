@@ -16,9 +16,6 @@ import { Node } from "./components/Node/Node";
 import { Toaster } from "./components/Toaster/Toaster";
 import { Connections } from "./components/Connections/Connections";
 
-//Functions
-import usePrevious from "./hooks/usePrevious";
-
 // Types, Constants and Styles
 import styles from "./index.module.css";
 import {
@@ -27,18 +24,16 @@ import {
   createConnections,
   DRAG_CONNECTION_ID,
 } from "./utilities";
+
+//Hooks and Functions
 import { useDOMRect } from "./hooks/useDOMRect";
+import { useFunctionAfterLayout } from "./hooks/useFunctionAfterLayout";
 
 type NodeEditorProps = {
   /**
    * The state of the content in the Editor.
    */
   state: EditorState;
-  /**
-   * @description - This function is called every time the nodes update. This is helpful when managing the editors state externally.
-   * @param state - The state of the Editor.
-   */
-  onChange: (state: EditorState) => void;
   /**
    * Similar to Photoshop it is possible to pan the Editor when holding the space key. False by default.
    */
@@ -68,16 +63,17 @@ type NodeEditorProps = {
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
-  onChange,
-  hideComments = false,
+  // hideComments = false,
   circularBehavior = "prevent",
   spaceToPan = false,
   disableZoom = false,
   disablePan = false,
 }) => {
-  //The following is used for state management
+  //Toasts are used as Notifications to the User informing him of Errors and other Messages.
+  //TODO Toasts should be part of the main Application not just the node-editor
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
 
+  //The editorState contains all the information the editor needs to render.
   const [editorState, dispatchEditorState] = React.useReducer<
     React.Reducer<EditorState, editorActions>
   >(editorReducer(circularBehavior, dispatchToasts), {
@@ -86,39 +82,15 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 
   //----------------------------------------------------------------
 
-  //These Refs allow us to preserve state across component renders without causing a rerender.
+  //This DOMRect references the Stage of the node-editor. It is then used across the Editor to calculate positions and connections.
   const [stageRef, recalculateRect] = useDOMRect(editorState.id);
 
   //----------------------------------------------------------------
 
-  //These functions are used to update the stage imperatively across the codebase when necessary. They also track whether something should be recalculated.
-
-  const [
-    shouldRecalculateConnections,
-    setShouldRecalculateConnections,
-  ] = React.useState(true);
-
-  const triggerRecalculation = () => {
-    setShouldRecalculateConnections(true);
-  };
-
-  const recalculateConnections = React.useCallback(() => {
-    createConnections(editorState, editorState.id);
-  }, [editorState]);
-
-  React.useLayoutEffect(() => {
-    if (shouldRecalculateConnections) {
-      recalculateConnections();
-      setShouldRecalculateConnections(false);
-    }
-  }, [shouldRecalculateConnections, recalculateConnections]);
-
-  const previousNodes = usePrevious(editorState);
-  React.useEffect(() => {
-    if (previousNodes && onChange && editorState !== previousNodes) {
-      onChange(editorState);
-    }
-  }, [editorState, previousNodes, onChange]);
+  //The following hook returns a function that triggers the function supplied to the hook after this component has been rendered.
+  const triggerRecalculateConnections = useFunctionAfterLayout(() =>
+    createConnections(editorState)
+  );
 
   //----------------------------------------------------------------
 
@@ -153,7 +125,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
               stageRect={stageRef}
               onDragStart={recalculateRect}
               key={node.id}
-              recalculate={triggerRecalculation}
+              recalculate={triggerRecalculateConnections}
             />
           ))}
 

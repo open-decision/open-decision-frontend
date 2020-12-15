@@ -94,11 +94,8 @@ export const createSVG = ({
 export const getStageRef = (editorId: string): HTMLElement | null =>
   document.getElementById(`${CONNECTIONS_ID}${editorId}`);
 
-export const createConnections = (
-  { nodes, zoom }: EditorState,
-  editorId: string
-): void => {
-  const stageRef = getStageRef(editorId);
+export const createConnections = ({ nodes, zoom, id }: EditorState): void => {
+  const stageRef = getStageRef(id);
   if (stageRef) {
     const stage = stageRef.getBoundingClientRect();
     const stageHalfWidth = stage.width / 2;
