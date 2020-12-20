@@ -70,6 +70,8 @@
     "react-dom": "^16",
     "react-portal": "^4.2.1",
     "react-router-dom": "^5.2.0",
+    "react-use": "^15.3.4",
+    "react-use-gesture": "^9.0.0-beta.11",
     "remeda": "^0.0.27",
     "tailwindcss": "^2.0.1",
     "urql": "^1.11.3"

@@ -39,7 +39,7 @@ export const Draggable: React.FC<DraggableProps> = ({
   innerRef,
   ...props
 }) => {
-  const editorState = React.useContext(EditorContext);
+  const [editorState] = React.useContext(EditorContext);
   const startCoordinates = React.useRef({ x: 0, y: 0 });
   const offset = React.useRef({ x: 0, y: 0 });
   const wrapper = React.useRef<HTMLDivElement | null>(null);
@@ -85,9 +85,11 @@ export const Draggable: React.FC<DraggableProps> = ({
       onDragStart(e);
     }
     const nodeRect = wrapper?.current?.getBoundingClientRect();
+    if (!nodeRect) return;
+
     offset.current = {
-      x: startCoordinates.current.x - nodeRect!.left,
-      y: startCoordinates.current.y - nodeRect!.top,
+      x: startCoordinates.current.x - nodeRect.left,
+      y: startCoordinates.current.y - nodeRect.top,
     };
     window.addEventListener("mouseup", stopDrag);
     window.addEventListener("mousemove", updateCoordinates);

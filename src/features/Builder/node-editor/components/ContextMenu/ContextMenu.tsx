@@ -4,14 +4,13 @@ import React from "react";
 import styles from "./ContextMenu.module.css";
 import clamp from "lodash/clamp";
 import { nanoid } from "nanoid/non-secure";
-import { NodeConfig } from "../../types";
 
 export type menuOption = {
-  value: string;
+  type: string;
   label: string;
   description: string;
+  internalType: "comment" | "node";
   sortPriority?: number;
-  internalType?: "comment" | "node";
 };
 
 type ContextMenuProps = {
@@ -196,7 +195,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             onClick={() => handleOptionSelected(option)}
             onMouseEnter={() => setSelectedIndex(0)}
             index={i}
-            key={option.value + i}
+            key={option.type + i}
           >
             <label>{option.label}</label>
             {option.description ? <p>{option.description}</p> : null}

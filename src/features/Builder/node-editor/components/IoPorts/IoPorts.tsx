@@ -3,14 +3,12 @@ import React from "react";
 import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
 import { Connection } from "../Connection/Connection";
-import usePrevious from "../../hooks/usePrevious";
 import {
   calculateCurve,
   getPortRect,
   STAGE_ID,
   DRAG_CONNECTION_ID,
   EditorContext,
-  EditorDispatchContext,
 } from "../../utilities";
 import { connections, PortConfig, PortTypes } from "../../types";
 import { nanoid } from "nanoid/non-secure";
@@ -93,17 +91,16 @@ const Input: React.FC<InputProps> = ({
   recalculate,
   isConnected,
 }) => {
-  const {
-    config: [, portTypes],
-  } = React.useContext(EditorContext);
+  const [
+    {
+      config: [, portTypes],
+    },
+  ] = React.useContext(EditorContext);
   const { label: defaultLabel, color } = portTypes[type] || {};
-  const prevConnected = usePrevious(isConnected);
 
   React.useEffect(() => {
-    if (isConnected !== prevConnected) {
-      recalculate();
-    }
-  }, [isConnected, prevConnected, recalculate]);
+    recalculate();
+  }, [isConnected, recalculate]);
 
   return (
     <div
@@ -142,9 +139,11 @@ const Output: React.FC<OutputProps> = ({
   type,
   recalculate,
 }) => {
-  const {
-    config: [, portTypes],
-  } = React.useContext(EditorContext);
+  const [
+    {
+      config: [, portTypes],
+    },
+  ] = React.useContext(EditorContext);
   const { label: defaultLabel, color } = portTypes[type] || {};
 
   return (
@@ -188,8 +187,7 @@ const Port: React.FC<PortProps> = ({
   recalculate,
   portTypes,
 }) => {
-  const dispatch = React.useContext(EditorDispatchContext);
-  const { id, zoom, position } = React.useContext(EditorContext);
+  const [{ id, zoom, position }, dispatch] = React.useContext(EditorContext);
   const stageId = `${STAGE_ID}${id}`;
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragStartCoordinates, setDragStartCoordinates] = React.useState({

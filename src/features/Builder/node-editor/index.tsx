@@ -19,7 +19,6 @@ import { Connections } from "./components/Connections/Connections";
 // Types, Constants and Styles
 import styles from "./index.module.css";
 import {
-  EditorDispatchContext,
   EditorContext,
   createConnections,
   DRAG_CONNECTION_ID,
@@ -34,10 +33,6 @@ type NodeEditorProps = {
    * The state of the content in the Editor.
    */
   state: EditorState;
-  /**
-   * Similar to Photoshop it is possible to pan the Editor when holding the space key. False by default.
-   */
-  spaceToPan?: boolean;
   /**
    * Zooming can be disabled. False by default.
    */
@@ -65,7 +60,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
   // hideComments = false,
   circularBehavior = "prevent",
-  spaceToPan = false,
   disableZoom = false,
   disablePan = false,
 }) => {
@@ -95,21 +89,14 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //----------------------------------------------------------------
 
   return (
-    <EditorDispatchContext.Provider value={dispatchEditorState}>
-      <EditorContext.Provider value={editorState}>
-        <Stage
-          spaceToPan={spaceToPan}
-          disablePan={disablePan}
-          disableZoom={disableZoom}
-          stageRect={stageRef}
-          numNodes={Object.keys(editorState.nodes).length}
-          outerStageChildren={
-            <React.Fragment>
-              <Toaster toasts={toasts} dispatchToasts={dispatchToasts} />
-            </React.Fragment>
-          }
-        >
-          {/* {!hideComments &&
+    //The EditorState and dispatcher are shard across the node-editor.
+    <EditorContext.Provider value={[editorState, dispatchEditorState]}>
+      <Stage
+        disablePan={disablePan}
+        disableZoom={disableZoom}
+        stageRect={stageRef}
+      >
+        {/* {!hideComments &&
             Object.values(editorState.comments).map((comment) => (
               <Comment
                 {...comment}
@@ -119,24 +106,23 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
               />
             ))} */}
 
-          {Object.values(editorState.nodes).map((node) => (
-            <Node
-              node={node}
-              stageRect={stageRef}
-              onDragStart={recalculateRect}
-              key={node.id}
-              recalculate={triggerRecalculateConnections}
-            />
-          ))}
-
-          <Connections editorId={editorState.id} />
-
-          <div
-            className={styles.dragWrapper}
-            id={`${DRAG_CONNECTION_ID}${editorState.id}`}
+        {Object.values(editorState.nodes).map((node) => (
+          <Node
+            node={node}
+            stageRect={stageRef}
+            onDragStart={recalculateRect}
+            key={node.id}
+            recalculate={triggerRecalculateConnections}
           />
-        </Stage>
-      </EditorContext.Provider>
-    </EditorDispatchContext.Provider>
+        ))}
+
+        <Connections editorId={editorState.id} />
+
+        <div
+          className={styles.dragWrapper}
+          id={`${DRAG_CONNECTION_ID}${editorState.id}`}
+        />
+      </Stage>
+    </EditorContext.Provider>
   );
 };

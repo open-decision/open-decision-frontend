@@ -2,57 +2,95 @@ import React from "react";
 import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import {
-  EditorDispatchContext,
-  EditorContext,
-  STAGE_ID,
-} from "../../utilities";
-import { Draggable } from "../Draggable/Draggable";
+import { EditorContext, STAGE_ID } from "../../utilities";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { coordinates } from "../../types";
+import { useKeyPressEvent, useMouseWheel } from "react-use";
+import { useConditionalEffect } from "../../hooks/useConditionalEffect";
+import { useDrag } from "../../hooks/useDrag";
 
 type StageProps = {
-  outerStageChildren: React.ReactNode;
-  numNodes: number;
   stageRect: React.MutableRefObject<DOMRect | null>;
-  spaceToPan: boolean;
+  /**
+   * Setting this to false disables panning in the Editor.
+   */
   disablePan: boolean;
+  /**
+   * Setting this to false disables zooming in the Editor.
+   */
   disableZoom: boolean;
 };
 
+/**
+ * The Stage is the main parent component of the node-editor. It holds all the Nodes and Connections. It is pannable and zoomable.
+ */
 export const Stage: React.FC<StageProps> = ({
   children,
-  outerStageChildren,
-  numNodes,
   stageRect,
-  spaceToPan,
   disablePan,
   disableZoom,
 }) => {
-  const dispatch = React.useContext(EditorDispatchContext);
-  const {
-    zoom,
-    position,
-    id,
-    config: [nodeTypes],
-  } = React.useContext(EditorContext);
+  //We need information from the editorState to render the Stage. For the main functionality of the Stage, namely zooming and panning, we also need the dispatch function to update the zoom and position state variables.
+  const [
+    {
+      zoom,
+      position,
+      id,
+      config: [nodeTypes],
+    },
+    dispatch,
+  ] = React.useContext(EditorContext);
 
+  /**
+   * The wrapper is used as a ref for the main Box of the Stage. This allows the Stage to be imperatively modified without causing a rerender.
+   */
   const wrapper = React.useRef<HTMLDivElement>(null);
-  const translateWrapper = React.useRef<HTMLDivElement>(null);
 
+  /**
+   * This tracks the state of the ContextMenu.
+   */
   const [menuOpen, setMenuOpen] = React.useState(false);
+  /**
+   * This tracks the Coordinates of the ContextMenu.
+   */
   const [menuCoordinates, setMenuCoordinates] = React.useState<coordinates>({
     x: 0,
     y: 0,
   });
 
-  const dragData = React.useRef({ x: 0, y: 0 });
+  /**
+   * This tracks whether the space key is pressed. We need this, because the Stage should be pannable when pressing the space key.
+   */
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
+  useKeyPressEvent(
+    "space",
+    () => setSpaceIsPressed(true),
+    () => setSpaceIsPressed(false)
+  );
 
+  /**
+   * The mouseWheel is tracked.
+   */
+  const mouseWheel = useMouseWheel();
+
+  /**
+   * This hook runs a function when the condition is true. In this case we only want to set a zoom level when zoom is not disabled.
+   */
+  useConditionalEffect(
+    () =>
+      dispatch({
+        type: "SET_SCALE",
+        zoom: clamp(zoom - clamp(mouseWheel, -10, 10) * 0.005, 0.1, 7),
+      }),
+    !disableZoom
+  );
+
+  //------------------------------------------------------------------------
+  //TODO understand what this does
   const setStageRect = React.useCallback(() => {
     stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
-  }, [stageRect.current]);
+  }, [stageRect]);
 
   React.useEffect(() => {
     stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
@@ -60,69 +98,39 @@ export const Stage: React.FC<StageProps> = ({
     return () => {
       window.removeEventListener("resize", setStageRect);
     };
-  }, [stageRect.current, setStageRect]);
+  }, [setStageRect, stageRect]);
 
-  const handleWheel = React.useCallback(
-    (e: WheelEvent) => {
-      e.preventDefault();
-      if (numNodes > 0) {
-        dispatch({
-          type: "SET_SCALE",
-          zoom: clamp(zoom - clamp(e.deltaY, -10, 10) * 0.005, 0.1, 7),
-        });
-      }
-    },
-    [dispatch, numNodes, zoom]
-  );
+  //------------------------------------------------------------------------
+  //The following functions are event handlers to handle the Drag lifecycle.
+  const {
+    coordinates,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+  } = useDrag(position);
 
-  const handleDragDelayStart = () => {
-    wrapper?.current?.focus();
-  };
-
-  const handleDragStart = (e: MouseEvent) => {
-    e.preventDefault();
-    dragData.current = {
-      x: e.clientX,
-      y: e.clientY,
-    };
-  };
-
-  const handleMouseDrag = (_coordinates: coordinates, e: MouseEvent) => {
-    const xDistance = dragData.current.x - e.clientX;
-    const yDistance = dragData.current.y - e.clientY;
-    translateWrapper?.current
-      ? (translateWrapper.current.style.transform = `translate(${-(
-          position.x + xDistance
-        )}px, ${-(position.y + yDistance)}px)`)
-      : null;
-  };
-
-  const handleDragEnd = (_coordinates: coordinates, e: MouseEvent) => {
-    const xDistance = dragData.current.x - e.clientX;
-    const yDistance = dragData.current.y - e.clientY;
-    dragData.current.x = e.clientX;
-    dragData.current.y = e.clientY;
-    dispatch({
-      type: "SET_TRANSLATE",
-      position: {
-        x: position.x + xDistance,
-        y: position.y + yDistance,
-      },
-    });
-  };
-
+  /**
+   * Handles opening the ContextMenu.
+   */
   const handleContextMenu = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
+
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
     setMenuOpen(true);
     return false;
   };
 
+  /**
+   * Interpolates a value with the zoom level. This is used to make the positional values relative to the zoom level and just to the actual values reported by the a drag event.
+   */
   const byScale = (value: number) => (1 / zoom) * value;
 
-  const addNode = (option: menuOption) => {
+  /**
+   * Uses the ref of the outer box to calculate coordinates for elements.
+   */
+  const getCoordinates = () => {
     const wrapperRect = wrapper?.current?.getBoundingClientRect();
 
     if (wrapperRect) {
@@ -134,63 +142,70 @@ export const Stage: React.FC<StageProps> = ({
         byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
         byScale(position.y);
 
-      if (option.internalType === "comment") {
-        dispatch({
-          type: "ADD_COMMENT",
-          x,
-          y,
-        });
-      } else if (option.internalType === "node") {
-        dispatch({
+      return { x, y };
+    }
+  };
+
+  /**
+   * Can be called to add a new Node.
+   * @param type - The type of Node that should be added.
+   */
+  const addNode = (type: string) => {
+    const coordinates = getCoordinates();
+
+    coordinates
+      ? dispatch({
           type: "ADD_NODE",
-          x,
-          y,
-          nodeType: option.value,
-        });
-      }
+          nodeType: type,
+          ...coordinates,
+        })
+      : null;
+  };
+
+  /**
+   * Can be called to add a new Comment.
+   */
+  const addComment = () => {
+    const coordinates = getCoordinates();
+
+    coordinates
+      ? dispatch({
+          type: "ADD_COMMENT",
+          ...coordinates,
+        })
+      : null;
+  };
+
+  /**
+   * Handles the different kinds of elements that can be added to the Editor.
+   */
+  const addElement = (menuOption: menuOption) => {
+    switch (menuOption.internalType) {
+      case "comment":
+        addComment();
+        break;
+
+      case "node":
+        addNode(menuOption.type);
+        break;
+
+      default:
+        break;
     }
   };
 
-  const handleDocumentKeyUp = (e: KeyboardEvent) => {
-    if (e.which === 32) {
-      setSpaceIsPressed(false);
-      document.removeEventListener("keyup", handleDocumentKeyUp);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.which === 32 && document.activeElement === wrapper.current) {
-      e.preventDefault();
-      e.stopPropagation();
-      setSpaceIsPressed(true);
-      document.addEventListener("keyup", handleDocumentKeyUp);
-    }
-  };
-
-  const handleMouseEnter = () => {
-    if (!wrapper?.current?.contains(document.activeElement)) {
-      wrapper?.current?.focus();
-    }
-  };
-
-  React.useEffect(() => {
-    if (!disableZoom) {
-      const stageWrapper = wrapper.current;
-      stageWrapper?.addEventListener("wheel", handleWheel);
-      return () => {
-        stageWrapper?.removeEventListener("wheel", handleWheel);
-      };
-    } else return;
-  }, [handleWheel, disableZoom]);
-
+  /**
+   * The menuOptions are filling the ContextMenu with the nodes that are addable to the Editor. They are sorted based on sortIndex and label.
+   */
   const menuOptions = React.useMemo(() => {
     const options = orderBy(
       Object.values(nodeTypes).map(
         (node): menuOption => ({
-          value: node.type,
+          type: node.type,
           label: node.label,
           description: node.description,
           sortPriority: node.sortPriority,
+          internalType: "node",
         })
       ),
       ["sortIndex", "label"]
@@ -200,21 +215,20 @@ export const Stage: React.FC<StageProps> = ({
   }, [nodeTypes]);
 
   return (
-    <Draggable
+    // A Draggable component is providing the main Stage Container.
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div
       id={`${STAGE_ID}${id}`}
       className={styles.wrapper}
-      innerRef={wrapper}
       onContextMenu={handleContextMenu}
-      onMouseEnter={handleMouseEnter}
-      onDragDelayStart={handleDragDelayStart}
-      onDragStart={handleDragStart}
-      onDrag={handleMouseDrag}
-      onDragEnd={handleDragEnd}
-      onKeyDown={handleKeyDown}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseMove}
+      onMouseUp={handleMouseUp}
       tabIndex={-1}
-      style={{ cursor: spaceIsPressed && spaceToPan ? "grab" : "" }}
-      disabled={disablePan || (spaceToPan && !spaceIsPressed)}
+      style={{ cursor: spaceIsPressed ? "grab" : "" }}
     >
+      {/* Here we track whether the ContextMenu should be open or closed. When we open the menu the coordinates are set based on the position of the mouse click. */}
       {menuOpen ? (
         <Portal>
           <ContextMenu
@@ -222,16 +236,19 @@ export const Stage: React.FC<StageProps> = ({
             y={menuCoordinates.y}
             options={menuOptions}
             onRequestClose={() => setMenuOpen(false)}
-            onOptionSelected={addNode}
+            onOptionSelected={addElement}
             label="Add Node"
           />
         </Portal>
       ) : null}
+      {/* This inner wrapper is used to translate the position of the content on pan. */}
       <div
-        ref={translateWrapper}
         className={styles.transformWrapper}
-        style={{ transform: `translate(${-position.x}px, ${-position.y}px)` }}
+        style={{
+          transform: `translate(${-coordinates.x}px, ${-coordinates.y}px)`,
+        }}
       >
+        {/* This inner wrapper is used to zoom.  */}
         <div
           className={styles.scaleWrapper}
           style={{ transform: `scale(${zoom})` }}
@@ -239,7 +256,6 @@ export const Stage: React.FC<StageProps> = ({
           {children}
         </div>
       </div>
-      {outerStageChildren}
-    </Draggable>
+    </div>
   );
 };

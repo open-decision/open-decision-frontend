@@ -1,11 +1,6 @@
 import React from "react";
 import styles from "./Node.module.css";
-import {
-  getPortRect,
-  calculateCurve,
-  EditorContext,
-  EditorDispatchContext,
-} from "../../utilities";
+import { getPortRect, calculateCurve, EditorContext } from "../../utilities";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import { IoPorts } from "../IoPorts/IoPorts";
@@ -26,12 +21,14 @@ export const Node: React.FC<NodeProps> = ({
   recalculate,
   ...props
 }) => {
-  const dispatch = React.useContext(EditorDispatchContext);
-  const {
-    position,
-    zoom,
-    config: [nodeTypes, portTypes],
-  } = React.useContext(EditorContext);
+  const [
+    {
+      position,
+      zoom,
+      config: [nodeTypes],
+    },
+    dispatch,
+  ] = React.useContext(EditorContext);
 
   // Get the shared information for a Node of this type from the NodeTypes.
   const { label, deletable, inputPorts = [], outputPorts = [] } = nodeTypes[
@@ -150,7 +147,7 @@ export const Node: React.FC<NodeProps> = ({
     return false;
   };
 
-  const handleMenuOption = ({ value }: menuOption) => {
+  const handleMenuOption = ({ type: value }: menuOption) => {
     switch (value) {
       case "deleteNode":
         dispatch({
