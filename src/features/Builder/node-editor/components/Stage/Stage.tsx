@@ -5,10 +5,9 @@ import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import { EditorContext, STAGE_ID } from "../../utilities";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
-import { coordinates } from "../../types";
-import { useKeyPressEvent, useMouseWheel } from "react-use";
-import { useConditionalEffect } from "../../hooks/useConditionalEffect";
-import { useDrag } from "../../hooks/useDrag";
+import { useKeyPressEvent } from "react-use";
+import { useContextMenu } from "../../hooks/useContextMenu";
+import { useGesture } from "react-use-gesture";
 
 type StageProps = {
   stageRect: React.MutableRefObject<DOMRect | null>;
@@ -34,66 +33,77 @@ export const Stage: React.FC<StageProps> = ({
   //We need information from the editorState to render the Stage. For the main functionality of the Stage, namely zooming and panning, we also need the dispatch function to update the zoom and position state variables.
   const [
     {
-      zoom,
-      position,
+      zoom: initialZoom,
+      position: initialPosition,
       id,
       config: [nodeTypes],
     },
     dispatch,
   ] = React.useContext(EditorContext);
 
+  const {
+    menuOpen,
+    menuCoordinates,
+    setMenuOpen,
+    handleContextMenu,
+  } = useContextMenu();
+
   /**
    * The wrapper is used as a ref for the main Box of the Stage. This allows the Stage to be imperatively modified without causing a rerender.
    */
-  const wrapper = React.useRef<HTMLDivElement>(null);
-
-  /**
-   * This tracks the state of the ContextMenu.
-   */
-  const [menuOpen, setMenuOpen] = React.useState(false);
-  /**
-   * This tracks the Coordinates of the ContextMenu.
-   */
-  const [menuCoordinates, setMenuCoordinates] = React.useState<coordinates>({
-    x: 0,
-    y: 0,
-  });
+  const ref = React.useRef<HTMLDivElement>(null);
 
   /**
    * This tracks whether the space key is pressed. We need this, because the Stage should be pannable when pressing the space key.
    */
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
+  const [coordinates, setCoordinates] = React.useState(initialPosition);
+  const [zoom, setZoom] = React.useState(initialZoom);
   useKeyPressEvent(
-    "space",
+    (e) => e.code === "Space",
     () => setSpaceIsPressed(true),
-    () => setSpaceIsPressed(false)
+    () => {
+      dispatch({ type: "SET_TRANSLATE", position: coordinates });
+      setSpaceIsPressed(false);
+    }
   );
 
   /**
-   * The mouseWheel is tracked.
+   * These gestures represent the panning and zooming inside the Stage. They are enabled and disabled by the disableZoom and disablePan props.
    */
-  const mouseWheel = useMouseWheel();
+  const stageGestures = useGesture(
+    {
+      // We track the mousewheel and zoom in and out of the Stage. We only update the global state at the end of the wheel gesture.
+      onWheel: ({ delta: [, y] }) =>
+        setZoom(clamp(zoom - clamp(y, -10, 10) * 0.005, 0.5, 2)),
+      onWheelEnd: () => dispatch({ type: "SET_SCALE", zoom }),
 
-  /**
-   * This hook runs a function when the condition is true. In this case we only want to set a zoom level when zoom is not disabled.
-   */
-  useConditionalEffect(
-    () =>
-      dispatch({
-        type: "SET_SCALE",
-        zoom: clamp(zoom - clamp(mouseWheel, -10, 10) * 0.005, 0.1, 7),
-      }),
-    !disableZoom
+      // We track the drag and pan the Stage based on the previous coordinates and the delta (change) in the coordinates. We only update the global state at the end of the drag gesture.
+      onDrag: ({ delta: [x, y] }) =>
+        setCoordinates({ x: coordinates.x + x, y: coordinates.y + y }),
+      onDragEnd: () =>
+        dispatch({ type: "SET_TRANSLATE", position: coordinates }),
+
+      //This gesture enables panning of the Stage when the mouse is moved. We need this to make the Stage pannable when the Space key is pressed. Because we have to update the global state before we set disable the move we set it in the useKeypreeEvent Hook.
+      onMove: ({ delta: [x, y] }) => {
+        setCoordinates({ x: coordinates.x + x, y: coordinates.y + y });
+      },
+    },
+    {
+      move: { enabled: !disablePan && spaceIsPressed },
+      wheel: { enabled: !disableZoom },
+      drag: { enabled: !disablePan },
+    }
   );
 
   //------------------------------------------------------------------------
   //TODO understand what this does
   const setStageRect = React.useCallback(() => {
-    stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
+    stageRect.current = ref?.current?.getBoundingClientRect() ?? null;
   }, [stageRect]);
 
   React.useEffect(() => {
-    stageRect.current = wrapper?.current?.getBoundingClientRect() ?? null;
+    stageRect.current = ref?.current?.getBoundingClientRect() ?? null;
     window.addEventListener("resize", setStageRect);
     return () => {
       window.removeEventListener("resize", setStageRect);
@@ -101,27 +111,6 @@ export const Stage: React.FC<StageProps> = ({
   }, [setStageRect, stageRect]);
 
   //------------------------------------------------------------------------
-  //The following functions are event handlers to handle the Drag lifecycle.
-  const {
-    coordinates,
-    handleMouseDown,
-    handleMouseMove,
-    handleMouseUp,
-  } = useDrag(position);
-
-  /**
-   * Handles opening the ContextMenu.
-   */
-  const handleContextMenu = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-
-    setMenuCoordinates({ x: e.clientX, y: e.clientY });
-    setMenuOpen(true);
-    return false;
-  };
-
   /**
    * Interpolates a value with the zoom level. This is used to make the positional values relative to the zoom level and just to the actual values reported by the a drag event.
    */
@@ -221,12 +210,10 @@ export const Stage: React.FC<StageProps> = ({
       id={`${STAGE_ID}${id}`}
       className={styles.wrapper}
       onContextMenu={handleContextMenu}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseMove}
-      onMouseUp={handleMouseUp}
       tabIndex={-1}
       style={{ cursor: spaceIsPressed ? "grab" : "" }}
+      ref={ref}
+      {...stageGestures()}
     >
       {/* Here we track whether the ContextMenu should be open or closed. When we open the menu the coordinates are set based on the position of the mouse click. */}
       {menuOpen ? (
@@ -245,7 +232,7 @@ export const Stage: React.FC<StageProps> = ({
       <div
         className={styles.transformWrapper}
         style={{
-          transform: `translate(${-coordinates.x}px, ${-coordinates.y}px)`,
+          transform: `translate(${coordinates.x}px, ${coordinates.y}px)`,
         }}
       >
         {/* This inner wrapper is used to zoom.  */}
