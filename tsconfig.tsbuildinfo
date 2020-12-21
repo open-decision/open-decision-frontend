@@ -1806,18 +1806,78 @@
         "signature": "b8350eb66d6669389e8429d023e0948aa86272425e5e7b5e3d975af1bdba9258",
         "affectsGlobalScope": false
       },
-      "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts": {
-        "version": "bbf3ba42e9d78c9f9a6bc98fb43502a280554ce4afe45252f5428fb32235354a",
-        "signature": "9b1ba7ca6ebbbe5fad947a545299732bd248ba8f63f1f1ed0d44280a4f9bdf7c",
+      "./src/features/Builder/node-editor/hooks/useContextMenu.ts": {
+        "version": "d64f53ccad4b048cb602b0ca27b2cbf53d18f0733eace71c46b3de94313a1fb0",
+        "signature": "7577f31b76980b5e7f3219b9c78de177943775ce3b26242fcdabe90a3b952147",
         "affectsGlobalScope": false
       },
-      "./src/features/Builder/node-editor/hooks/useDrag.ts": {
-        "version": "876992f2dcf07837e371904e34fd479410d591a67532cbbb1325db681c5deddc",
-        "signature": "dc0c2c0e5793e4c2aa289b9bec6a32e130c78d97af91a0f04c72f34f5193cd28",
+      "./node_modules/react-use-gesture/dist/utils/math.d.ts": {
+        "version": "59e71f6318858dcceab52b7ed35f70ffc4a42e2bda99ec76326273ecbc319251",
+        "signature": "59e71f6318858dcceab52b7ed35f70ffc4a42e2bda99ec76326273ecbc319251",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts": {
+        "version": "82327ab1bd5c970ab0fbaf51c51906c9b3de3aeeae90615cf9c8af5c1d47a937",
+        "signature": "82327ab1bd5c970ab0fbaf51c51906c9b3de3aeeae90615cf9c8af5c1d47a937",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/Controller.d.ts": {
+        "version": "35b301eceb8eb8f5988f0ac348d476b1d39d500fd64a917ac04f79cdd929fddc",
+        "signature": "35b301eceb8eb8f5988f0ac348d476b1d39d500fd64a917ac04f79cdd929fddc",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts": {
+        "version": "55bc7b79bc5dbdc7b3cffde7ec73810a54c3d1c1cdbdd46428bc4fa02d364883",
+        "signature": "55bc7b79bc5dbdc7b3cffde7ec73810a54c3d1c1cdbdd46428bc4fa02d364883",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/types.d.ts": {
+        "version": "8112727033370e412e98958c0118033270e412afd9c4cf327c7cb3d745f090bc",
+        "signature": "8112727033370e412e98958c0118033270e412afd9c4cf327c7cb3d745f090bc",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts": {
+        "version": "2569d03f3d05eb5389646f24548589e8d4e320c85062ca7175993d3bbfc1e83b",
+        "signature": "2569d03f3d05eb5389646f24548589e8d4e320c85062ca7175993d3bbfc1e83b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts": {
+        "version": "94c3a0fdc9f35a05cb9f1c72dae936d9681bab3b63ea9ce636ce5f009a170d93",
+        "signature": "94c3a0fdc9f35a05cb9f1c72dae936d9681bab3b63ea9ce636ce5f009a170d93",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts": {
+        "version": "6c32d42eb7f69ba1b3f6e5619cf86d2f2d80e24af296c854690397e66a0dd2fe",
+        "signature": "6c32d42eb7f69ba1b3f6e5619cf86d2f2d80e24af296c854690397e66a0dd2fe",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts": {
+        "version": "cfd5481498c4b050c791b1fd5ae7976bc8f00a9c17f305b272ac54ad1fd17122",
+        "signature": "cfd5481498c4b050c791b1fd5ae7976bc8f00a9c17f305b272ac54ad1fd17122",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts": {
+        "version": "c645d6ba8c1c75e38600c5af994fa2ea2535e315e191c656300961e33321d546",
+        "signature": "c645d6ba8c1c75e38600c5af994fa2ea2535e315e191c656300961e33321d546",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts": {
+        "version": "13f369be1b53e787ed9b3dc235e94b28d9392733fe51a48e9797b8e24d1d9e8b",
+        "signature": "13f369be1b53e787ed9b3dc235e94b28d9392733fe51a48e9797b8e24d1d9e8b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts": {
+        "version": "92222a4e813ec900a72c5956fd65f850ab48dffc6f14d2965b372db56d804bc2",
+        "signature": "92222a4e813ec900a72c5956fd65f850ab48dffc6f14d2965b372db56d804bc2",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/react-use-gesture/dist/index.d.ts": {
+        "version": "3717d9f34a8a59c3a6fe157ce6255979210a21b91f81b1d11cba990ab6e566b1",
+        "signature": "3717d9f34a8a59c3a6fe157ce6255979210a21b91f81b1d11cba990ab6e566b1",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Stage/Stage.tsx": {
-        "version": "1897dee45f360dc1210edfa92a1ed268f35014baf9743ba31db93b7420dc7028",
+        "version": "bcab6c580407d7d3823615e4248c1ef8b857cd8af8ebd132aa3e4a4b4b02df98",
         "signature": "16dfd16a8a492dadd50a539727c660674a75149e9854fc586526c1979314646b",
         "affectsGlobalScope": false
       },
@@ -3116,6 +3176,16 @@
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
+      "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts": {
+        "version": "bbf3ba42e9d78c9f9a6bc98fb43502a280554ce4afe45252f5428fb32235354a",
+        "signature": "9b1ba7ca6ebbbe5fad947a545299732bd248ba8f63f1f1ed0d44280a4f9bdf7c",
+        "affectsGlobalScope": false
+      },
+      "./src/features/Builder/node-editor/hooks/useDrag.ts": {
+        "version": "78898cdd4cc96607f5374328111d03e4b8b954a401ab828dd406b1b412d3b2e6",
+        "signature": "a231c582740228e57531944e5992d510a39a2b57f30a66fecac9977d709254b4",
+        "affectsGlobalScope": false
+      },
       "./src/features/Builder/node-editor/hooks/usePrevious.ts": {
         "version": "ed87784c3b6a6bf24e77ff97cd82242b457392990f4c96e346d67d881130caa4",
         "signature": "3b475ab14e2b8cf081120ead86fe274d26d42f162537820ed061f252ab603b5d",
@@ -3159,7 +3229,7 @@
           "name": "typescript-plugin-css-modules"
         }
       ],
-      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision-frontend",
+      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision",
       "watch": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -5172,6 +5242,69 @@
       "./node_modules/popmotion/lib/utils/wrap.d.ts": [
         "./node_modules/date-fns/typings.d.ts"
       ],
+      "./node_modules/react-use-gesture/dist/Controller.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/index.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts",
+        "./node_modules/react-use-gesture/dist/utils/math.d.ts",
+        "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/Controller.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/types.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/Controller.d.ts",
+        "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/utils/math.d.ts": [
+        "./node_modules/date-fns/typings.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts": [
+        "./node_modules/date-fns/typings.d.ts"
+      ],
       "./node_modules/react-use/lib/createBreakpoint.d.ts": [
         "./node_modules/date-fns/typings.d.ts"
       ],
@@ -6397,11 +6530,10 @@
         "./node_modules/@types/react-portal/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/index.d.ts",
         "./node_modules/react-use/lib/index.d.ts",
         "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-        "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts",
-        "./src/features/Builder/node-editor/hooks/useDrag.ts",
-        "./src/features/Builder/node-editor/types/index.ts",
+        "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts",
         "./src/features/Builder/node-editor/utilities/index.ts"
       ],
@@ -6414,6 +6546,11 @@
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts": [
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts"
+      ],
+      "./src/features/Builder/node-editor/hooks/useContextMenu.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./src/features/Builder/node-editor/types/index.ts"
       ],
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts": [
         "./node_modules/@types/react/index.d.ts",
@@ -8618,6 +8755,69 @@
       "./node_modules/popmotion/lib/utils/wrap.d.ts": [
         "./node_modules/date-fns/typings.d.ts"
       ],
+      "./node_modules/react-use-gesture/dist/Controller.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/index.d.ts": [
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts",
+        "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts",
+        "./node_modules/react-use-gesture/dist/utils/math.d.ts",
+        "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/Controller.d.ts",
+        "./node_modules/react-use-gesture/dist/types.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/types.d.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/Controller.d.ts",
+        "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/utils/math.d.ts": [
+        "./node_modules/date-fns/typings.d.ts"
+      ],
+      "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts": [
+        "./node_modules/date-fns/typings.d.ts"
+      ],
       "./node_modules/react-use/lib/createBreakpoint.d.ts": [
         "./node_modules/date-fns/typings.d.ts"
       ],
@@ -9758,6 +9958,10 @@
         "./node_modules/@types/react/index.d.ts",
         "./src/features/Builder/node-editor/reducers/index.ts"
       ],
+      "./src/features/Builder/node-editor/hooks/useContextMenu.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./src/features/Builder/node-editor/types/index.ts"
+      ],
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts": [
         "./node_modules/@types/react/index.d.ts"
       ],
@@ -10183,6 +10387,19 @@
       "./node_modules/popmotion/lib/utils/velocity-per-frame.d.ts",
       "./node_modules/popmotion/lib/utils/velocity-per-second.d.ts",
       "./node_modules/popmotion/lib/utils/wrap.d.ts",
+      "./node_modules/react-use-gesture/dist/Controller.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts",
+      "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts",
+      "./node_modules/react-use-gesture/dist/index.d.ts",
+      "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts",
+      "./node_modules/react-use-gesture/dist/types.d.ts",
+      "./node_modules/react-use-gesture/dist/utils/math.d.ts",
+      "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts",
       "./node_modules/react-use/lib/createBreakpoint.d.ts",
       "./node_modules/react-use/lib/createGlobalState.d.ts",
       "./node_modules/react-use/lib/createMemo.d.ts",
@@ -10590,9 +10807,38 @@
           }
         ]
       ],
-      "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
+      [
+        "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
+        [
+          {
+            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
+            "start": 4202,
+            "length": 7,
+            "messageText": "Cannot find name 'wrapper'.",
+            "category": 1,
+            "code": 2304
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
+            "start": 4378,
+            "length": 8,
+            "messageText": "Cannot find name 'position'.",
+            "category": 1,
+            "code": 2304
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
+            "start": 4502,
+            "length": 8,
+            "messageText": "Cannot find name 'position'.",
+            "category": 1,
+            "code": 2304
+          }
+        ]
+      ],
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx",
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts",
+      "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts",
       "./src/features/Builder/node-editor/hooks/useDrag.ts",
       "./src/features/Builder/node-editor/hooks/useFunctionAfterLayout.ts",
@@ -11979,6 +12225,58 @@
         1
       ],
       [
+        "./node_modules/react-use-gesture/dist/Controller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useDrag.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useGesture.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useHover.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useMove.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/usePinch.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useScroll.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/hooks/useWheel.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/recognizers/Recognizer.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/types.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/utils/math.d.ts",
+        1
+      ],
+      [
+        "./node_modules/react-use-gesture/dist/utils/rubberband.d.ts",
+        1
+      ],
+      [
         "./node_modules/react-use/lib/createBreakpoint.d.ts",
         1
       ],
@@ -12960,6 +13258,10 @@
       ],
       [
         "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts",
+        1
+      ],
+      [
+        "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
         1
       ],
       [
