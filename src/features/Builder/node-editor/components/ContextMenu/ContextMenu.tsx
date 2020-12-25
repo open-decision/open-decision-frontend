@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./ContextMenu.module.css";
 import clamp from "lodash/clamp";
 import { nanoid } from "nanoid/non-secure";
+import { coordinates } from "../../types";
 
 export type menuOption = {
   type: string;
@@ -14,9 +15,8 @@ export type menuOption = {
 };
 
 type ContextMenuProps = {
-  x: number;
-  y: number;
-  options?: menuOption[];
+  coordinates: coordinates;
+  options: menuOption[] | [];
   onRequestClose: () => void;
   onOptionSelected: (option: menuOption) => void;
   label?: string;
@@ -26,8 +26,7 @@ type ContextMenuProps = {
 };
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
-  x,
-  y,
+  coordinates,
   options = [],
   onRequestClose,
   onOptionSelected,
@@ -158,8 +157,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       onMouseDown={(e) => e.stopPropagation()}
       onKeyDown={handleKeyDown}
       style={{
-        left: x,
-        top: y,
+        left: coordinates[0],
+        top: coordinates[1],
         width: filter ? menuWidth : "auto",
       }}
       ref={menuWrapper}
@@ -186,7 +185,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         className={styles.optionsWrapper}
         role="menu"
         ref={menuOptionsWrapper}
-        style={{ maxHeight: clamp(window.innerHeight - y - 70, 10, 300) }}
+        style={{
+          maxHeight: clamp(window.innerHeight - coordinates[1] - 70, 10, 300),
+        }}
       >
         {filteredOptions.map((option, i) => (
           <ContextOption

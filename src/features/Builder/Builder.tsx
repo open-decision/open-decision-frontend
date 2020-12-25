@@ -10,7 +10,7 @@ const initialEditorState: EditorState = {
   comments: {},
   id: "1234",
   nodes: exampleNodes,
-  position: { x: 0, y: 0 },
+  coordinates: [0, 0],
   zoom: 1,
   config: [nodeTypes, portTypes],
 };

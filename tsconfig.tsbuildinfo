@@ -987,8 +987,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/types/index.ts": {
-        "version": "8f3bb0df3b79f372a21336b52e84faa4f995a04775d672fd9af89adebb411a7a",
-        "signature": "59cb3b0fe6347b422f2b517d0dac9918812d4281b2b01555d5202eebf3fd6b8f",
+        "version": "c5eb6709f1bf697d594a71c891f15a0838ef297832a49d60252f0e60ae340ded",
+        "signature": "45dd68f16f3e582c04e6de03da7b2467264c6bf14f2f11b4b963b9ab8e8d9cac",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/d3-path/index.d.ts": {
@@ -1007,12 +1007,12 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/utilities/connectionCalculator.ts": {
-        "version": "6940136cea3d51f3f169c609d36cfd6d3c35b01e79722215d1eab1c6472bfc14",
+        "version": "d7197cb5f505ac838f5c75a3bc61affbef82de3677f3e2308cacbd3121d59336",
         "signature": "49f9c955d4f5486225625047d91c414fd58af2c99ecb7d19a66bd29d47a056fd",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/utilities/context.ts": {
-        "version": "292d73944e45693855adcc77bee2a306b54357ddce30112a29f93df23fab8ecd",
+        "version": "054d95237492a732632b5a5970c12284f68c102f1524d3adb526a85a4e15a9b1",
         "signature": "ae712e450d4857197afe401a80936199be8b284759d85ea7c2e75e8f2be5eb0a",
         "affectsGlobalScope": false
       },
@@ -1117,8 +1117,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/reducers/editorReducer.ts": {
-        "version": "3e8860666d855809299b8bd71b8d2c25dc8f8f8f3c589520c4f947279f481456",
-        "signature": "6c3f168d4ef22079105245fbc695ab4aabb894f6427fe3d3d235a078e9dd3bc1",
+        "version": "81e4062f87b7d65d70ad8e6d0879fd50b81cd451f2c716dbc552762ba69c0e1c",
+        "signature": "3db787230d001a0da6a745e61a2f37fa6578f9c0b686796b89d824d45324f0f1",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx": {
@@ -1212,8 +1212,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx": {
-        "version": "c76506e2c889b6824138fcf47577f76e6854ace31c3960a1aed34ab87435d155",
-        "signature": "9ad9c233d46c933d3449e0c5117c6fa7d01bc43b8c4ace835db43e824abe9c80",
+        "version": "922424b4a70935ae1eb7b63475715d616024c5f5844caa86b7678aad6665eea8",
+        "signature": "05e6d8f593ffb213d40a4c94926d5bc4427a9186ac880b986ba36e83a10b1dc7",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/orderBy.d.ts": {
@@ -1807,7 +1807,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/hooks/useContextMenu.ts": {
-        "version": "d64f53ccad4b048cb602b0ca27b2cbf53d18f0733eace71c46b3de94313a1fb0",
+        "version": "5c168c62b75a6ff601a6f2a9fe3d54d145b18142d0b7771c050a25286d065506",
         "signature": "7577f31b76980b5e7f3219b9c78de177943775ce3b26242fcdabe90a3b952147",
         "affectsGlobalScope": false
       },
@@ -1877,7 +1877,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Stage/Stage.tsx": {
-        "version": "bcab6c580407d7d3823615e4248c1ef8b857cd8af8ebd132aa3e4a4b4b02df98",
+        "version": "7b3e061f85d60301ef3e338c1d307edd6d507090df0d35df32e6b2032affc47f",
         "signature": "16dfd16a8a492dadd50a539727c660674a75149e9854fc586526c1979314646b",
         "affectsGlobalScope": false
       },
@@ -1891,14 +1891,9 @@
         "signature": "bd2e7a27e552005dd94f92d66c5679476dd6d4a1bec6848cdd60ade4ca67d3f1",
         "affectsGlobalScope": false
       },
-      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": {
-        "version": "6d5e095d5a661b9c41591b4f671babf0a8f1e69e6369d64e97a9dede79ea28d2",
-        "signature": "6450561f0703219828e572d91e984c8882bb099b8e5a07c7a105b48b43290ddd",
-        "affectsGlobalScope": false
-      },
       "./src/features/Builder/node-editor/components/Node/Node.tsx": {
-        "version": "e9a10549680ad540d793e9b17978f8bece3824b389c4fb466ddde9952a355ea9",
-        "signature": "0776863d4e2df1d8b408de6c2d4baa64362671be2ce4507eb27839c670ae0004",
+        "version": "8ea0b5c3e7e9e37fb4973f3d711d24636f4e28e86d1f0c2481b4627ade1d2623",
+        "signature": "95fc48c4e920f5b52dbe3351b710bc1c020ff60d2bc3dae4974d1f92f24f360f",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Connections/Connections.tsx": {
@@ -1917,7 +1912,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/index.tsx": {
-        "version": "56fd115ae868f5b92fc060de725ddfea963c0e5aa4b3e658c07f14782fd64bbf",
+        "version": "c0f0fe05b8e0140c512e8687768f3bf715810a935f5e94f450f09ce07e685971",
         "signature": "14953316d6ce5429fcb0a10f3084d1ba01858b4de0825b8bc02492a017cbfb72",
         "affectsGlobalScope": false
       },
@@ -1937,12 +1932,12 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/tests/nodes.ts": {
-        "version": "7c90b39112b70eefc51085e759842abc08ce6a16dc0e878104304e0175b3bf8b",
+        "version": "57200b2b8c8040da8029647ba2b91086fe3988f5db92297adf2e52310bed6693",
         "signature": "7439a74fa18503db21727c237794402cc025d3788ce81014495bb977c61e21b9",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/Builder.tsx": {
-        "version": "725cafdc09ff372c40ec1e7847cfb1bbd0ffdd76394fc3cfcad88f7c39c66f4e",
+        "version": "a33ac3f2f2235203126c345923084c3bb458b7004d4e66449764a471561490fe",
         "signature": "8afcf7f15772471b81796d8b06d9f2623e1e13cef17dd0443ce396e6cb423d57",
         "affectsGlobalScope": false
       },
@@ -3176,14 +3171,14 @@
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
+      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": {
+        "version": "6d5e095d5a661b9c41591b4f671babf0a8f1e69e6369d64e97a9dede79ea28d2",
+        "signature": "6450561f0703219828e572d91e984c8882bb099b8e5a07c7a105b48b43290ddd",
+        "affectsGlobalScope": false
+      },
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts": {
         "version": "bbf3ba42e9d78c9f9a6bc98fb43502a280554ce4afe45252f5428fb32235354a",
         "signature": "9b1ba7ca6ebbbe5fad947a545299732bd248ba8f63f1f1ed0d44280a4f9bdf7c",
-        "affectsGlobalScope": false
-      },
-      "./src/features/Builder/node-editor/hooks/useDrag.ts": {
-        "version": "78898cdd4cc96607f5374328111d03e4b8b954a401ab828dd406b1b412d3b2e6",
-        "signature": "a231c582740228e57531944e5992d510a39a2b57f30a66fecac9977d709254b4",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/hooks/usePrevious.ts": {
@@ -3229,7 +3224,7 @@
           "name": "typescript-plugin-css-modules"
         }
       ],
-      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision",
+      "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision-frontend",
       "watch": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -6495,6 +6490,7 @@
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
         "./node_modules/nanoid/non-secure/index.d.ts",
+        "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts"
       ],
       "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": [
@@ -6517,8 +6513,8 @@
         "./node_modules/@types/react-portal/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
+        "./node_modules/react-use-gesture/dist/index.d.ts",
         "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-        "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
         "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
         "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts",
@@ -6534,6 +6530,7 @@
         "./node_modules/react-use/lib/index.d.ts",
         "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
         "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
+        "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts",
         "./src/features/Builder/node-editor/utilities/index.ts"
       ],
@@ -6556,11 +6553,6 @@
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/date-fns/typings.d.ts",
         "./src/features/Builder/node-editor/utilities/index.ts"
-      ],
-      "./src/features/Builder/node-editor/hooks/useDrag.ts": [
-        "./node_modules/@types/react/index.d.ts",
-        "./node_modules/date-fns/typings.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
       ],
       "./src/features/Builder/node-editor/hooks/useFunctionAfterLayout.ts": [
         "./node_modules/@types/react/index.d.ts",
@@ -9937,7 +9929,8 @@
         "./node_modules/@types/react/index.d.ts"
       ],
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx": [
-        "./node_modules/@types/react/index.d.ts"
+        "./node_modules/@types/react/index.d.ts",
+        "./src/features/Builder/node-editor/types/index.ts"
       ],
       "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": [
         "./node_modules/@types/react/index.d.ts",
@@ -9964,10 +9957,6 @@
       ],
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts": [
         "./node_modules/@types/react/index.d.ts"
-      ],
-      "./src/features/Builder/node-editor/hooks/useDrag.ts": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
       ],
       "./src/features/Builder/node-editor/index.tsx": [
         "./node_modules/@types/react/index.d.ts",
@@ -10676,7 +10665,7 @@
         [
           {
             "file": "./src/features/Builder/Builder.tsx",
-            "start": 713,
+            "start": 708,
             "length": 8,
             "code": 2322,
             "category": 1,
@@ -10700,95 +10689,145 @@
       "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
       "./src/features/Builder/node-editor/components/Connections/Connections.tsx",
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-      "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+      [
+        "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
+        [
+          {
+            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
+            "start": 1722,
+            "length": 8,
+            "code": 2339,
+            "category": 1,
+            "messageText": "Property 'position' does not exist on type 'EditorState'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
+            "start": 1934,
+            "length": 8,
+            "code": 2339,
+            "category": 1,
+            "messageText": "Property 'position' does not exist on type 'EditorState'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
+            "start": 2103,
+            "length": 11,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
+            "start": 2258,
+            "length": 11,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
+          }
+        ]
+      ],
+      [
+        "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+        [
+          {
+            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+            "start": 3892,
+            "length": 8,
+            "messageText": "Property 'position' does not exist on type 'EditorState'.",
+            "category": 1,
+            "code": 2339
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+            "start": 5053,
+            "length": 33,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+            "start": 5398,
+            "length": 33,
+            "code": 2345,
+            "category": 1,
+            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+            "start": 12228,
+            "length": 4,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type '{ x: number; y: number; }' is not assignable to type 'coordinates'.",
+            "relatedInformation": [
+              {
+                "file": "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
+                "start": 194,
+                "length": 4,
+                "messageText": "The expected type comes from property 'from' which is declared here on type 'IntrinsicAttributes & ConnectionProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+            "start": 12268,
+            "length": 2,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type '{ x: number; y: number; }' is not assignable to type 'coordinates'.",
+            "relatedInformation": [
+              {
+                "file": "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
+                "start": 215,
+                "length": 2,
+                "messageText": "The expected type comes from property 'to' which is declared here on type 'IntrinsicAttributes & ConnectionProps & { children?: ReactNode; }'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
       [
         "./src/features/Builder/node-editor/components/Node/Node.tsx",
         [
           {
             "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2345,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2414,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2564,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2633,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2823,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 2892,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 3044,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 3113,
-            "length": 17,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 5330,
-            "length": 19,
+            "start": 5059,
+            "length": 7,
             "code": 2322,
             "category": 1,
             "messageText": {
-              "messageText": "Type '{ label: string; value: string; description: string; }[]' is not assignable to type 'menuOption[]'.",
+              "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }[]' is not assignable to type 'menuOption[] | []'.",
               "category": 1,
               "code": 2322,
               "next": [
                 {
-                  "messageText": "Type '{ label: string; value: string; description: string; }' is not assignable to type 'menuOption'.",
+                  "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }[]' is not assignable to type 'menuOption[]'.",
                   "category": 1,
                   "code": 2322,
                   "next": [
                     {
-                      "messageText": "Object literal may only specify known properties, and 'value' does not exist in type 'menuOption'.",
+                      "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }' is not assignable to type 'menuOption'.",
                       "category": 1,
-                      "code": 2353
+                      "code": 2322,
+                      "next": [
+                        {
+                          "messageText": "Types of property 'internalType' are incompatible.",
+                          "category": 1,
+                          "code": 2326,
+                          "next": [
+                            {
+                              "messageText": "Type 'string' is not assignable to type '\"node\" | \"comment\"'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -10797,7 +10836,7 @@
             "relatedInformation": [
               {
                 "file": "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-                "start": 471,
+                "start": 516,
                 "length": 7,
                 "messageText": "The expected type comes from property 'options' which is declared here on type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'",
                 "category": 3,
@@ -10812,27 +10851,22 @@
         [
           {
             "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
-            "start": 4202,
-            "length": 7,
-            "messageText": "Cannot find name 'wrapper'.",
+            "start": 7123,
+            "length": 1,
+            "code": 2322,
             "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
-            "start": 4378,
-            "length": 8,
-            "messageText": "Cannot find name 'position'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
-            "start": 4502,
-            "length": 8,
-            "messageText": "Cannot find name 'position'.",
-            "category": 1,
-            "code": 2304
+            "messageText": {
+              "messageText": "Type '{ x: number; y: number; options: menuOption[]; onRequestClose: () => void; onOptionSelected: (menuOption: menuOption) => void; label: string; }' is not assignable to type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Property 'x' does not exist on type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'.",
+                  "category": 1,
+                  "code": 2339
+                }
+              ]
+            }
           }
         ]
       ],
@@ -10840,7 +10874,6 @@
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts",
       "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
       "./src/features/Builder/node-editor/hooks/useDOMRect.ts",
-      "./src/features/Builder/node-editor/hooks/useDrag.ts",
       "./src/features/Builder/node-editor/hooks/useFunctionAfterLayout.ts",
       "./src/features/Builder/node-editor/hooks/usePrevious.ts",
       "./src/features/Builder/node-editor/index.tsx",
@@ -10849,62 +10882,27 @@
         [
           {
             "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 3352,
-            "length": 25,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type '{ id: string; coordinates: { x: number; y: number; }; type: string; width: number; connections: { inputs: {}; outputs: {}; }; root: boolean; }' is not assignable to type 'WritableDraft<Node>'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Object literal may only specify known properties, and 'root' does not exist in type 'WritableDraft<Node>'.",
-                  "category": 1,
-                  "code": 2353
-                }
-              ]
-            }
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4212,
-            "length": 10,
-            "messageText": "'connection' refers to a value, but is being used as a type here. Did you mean 'typeof connection'?",
-            "category": 1,
-            "code": 2749
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4332,
-            "length": 10,
-            "messageText": "'connection' refers to a value, but is being used as a type here. Did you mean 'typeof connection'?",
-            "category": 1,
-            "code": 2749
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4407,
+            "start": 2876,
             "length": 8,
-            "messageText": "Object is of type 'unknown'.",
-            "category": 1,
-            "code": 2571
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4424,
-            "length": 1,
-            "messageText": "Parameter 't' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 7934,
-            "length": 5,
             "code": 2339,
             "category": 1,
-            "messageText": "Property 'isNew' does not exist on type 'WritableDraft<Comment>'."
+            "messageText": "Property 'position' does not exist on type 'WritableDraft<EditorState>'."
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 3627,
+            "length": 21,
+            "messageText": "Cannot find name 'removeConnectionsById'.",
+            "category": 1,
+            "code": 2304
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 3708,
+            "length": 21,
+            "messageText": "Cannot find name 'removeConnectionsById'.",
+            "category": 1,
+            "code": 2304
           }
         ]
       ],

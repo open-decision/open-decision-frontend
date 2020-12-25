@@ -110,7 +110,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
           <Node
             node={node}
             stageRect={stageRef}
-            onDragStart={recalculateRect}
             key={node.id}
             recalculate={triggerRecalculateConnections}
           />

@@ -20,10 +20,7 @@ export const useContextMenu = (
    * This tracks the Coordinates of the ContextMenu.
    */
   const [menuCoordinates, setMenuCoordinates] = React.useState<coordinates>(
-    coordinates || {
-      x: 0,
-      y: 0,
-    }
+    coordinates || [0, 0]
   );
 
   /**
@@ -34,7 +31,7 @@ export const useContextMenu = (
   ) => {
     e.preventDefault();
 
-    setMenuCoordinates({ x: e.clientX, y: e.clientY });
+    setMenuCoordinates([e.clientX, e.clientY]);
     setMenuOpen(true);
   };
 

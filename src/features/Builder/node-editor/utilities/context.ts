@@ -8,7 +8,7 @@ export const EditorContext = React.createContext<
   {
     id: "",
     zoom: 1,
-    position: { x: 0, y: 0 },
+    coordinates: [0, 0],
     nodes: {},
     comments: {},
     config: [{}, {}],
