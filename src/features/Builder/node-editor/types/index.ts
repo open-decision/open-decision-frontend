@@ -96,7 +96,7 @@ type nodeBase = {
 /**
  * The position of nodes is tracked as x and y coordinates.
  */
-export type coordinates = { readonly x: number; readonly y: number };
+export type coordinates = [number, number];
 
 /**
  * A comment is a special type of node.

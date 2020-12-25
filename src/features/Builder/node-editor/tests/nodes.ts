@@ -3,7 +3,7 @@ import { Nodes, NodeTypes, PortTypes } from "../types";
 export const exampleNodes: Nodes = {
   "5nCLb85WDw": {
     id: "5nCLb85WDw",
-    coordinates: { x: 134.5, y: -90 },
+    coordinates: [134.5, -90],
     type: "addNumbers",
     width: 150,
     connections: {
@@ -16,7 +16,7 @@ export const exampleNodes: Nodes = {
   },
   vRPQ06k4nT: {
     id: "vRPQ06k4nT",
-    coordinates: { x: -182.5, y: -176 },
+    coordinates: [-182.5, -176],
     type: "number",
     width: 150,
     connections: {
@@ -26,7 +26,7 @@ export const exampleNodes: Nodes = {
   },
   BDhQ98lTfw: {
     id: "BDhQ98lTfw",
-    coordinates: { x: -181.5, y: -42 },
+    coordinates: [-181.5, -42],
     type: "number",
     width: 150,
     connections: {

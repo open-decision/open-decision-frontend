@@ -8,6 +8,7 @@ import clamp from "lodash/clamp";
 import { useKeyPressEvent } from "react-use";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { useGesture } from "react-use-gesture";
+import { coordinates } from "../../types";
 
 type StageProps = {
   stageRect: React.MutableRefObject<DOMRect | null>;
@@ -34,7 +35,7 @@ export const Stage: React.FC<StageProps> = ({
   const [
     {
       zoom: initialZoom,
-      position: initialPosition,
+      coordinates: initialCoordinates,
       id,
       config: [nodeTypes],
     },
@@ -57,13 +58,13 @@ export const Stage: React.FC<StageProps> = ({
    * This tracks whether the space key is pressed. We need this, because the Stage should be pannable when pressing the space key.
    */
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
-  const [coordinates, setCoordinates] = React.useState(initialPosition);
+  const [coordinates, setCoordinates] = React.useState(initialCoordinates);
   const [zoom, setZoom] = React.useState(initialZoom);
   useKeyPressEvent(
     (e) => e.code === "Space",
     () => setSpaceIsPressed(true),
     () => {
-      dispatch({ type: "SET_TRANSLATE", position: coordinates });
+      dispatch({ type: "SET_TRANSLATE", coordinates: coordinates });
       setSpaceIsPressed(false);
     }
   );
@@ -79,20 +80,16 @@ export const Stage: React.FC<StageProps> = ({
       onWheelEnd: () => dispatch({ type: "SET_SCALE", zoom }),
 
       // We track the drag and pan the Stage based on the previous coordinates and the delta (change) in the coordinates. We only update the global state at the end of the drag gesture.
-      onDrag: ({ delta: [x, y] }) =>
-        setCoordinates({ x: coordinates.x + x, y: coordinates.y + y }),
-      onDragEnd: () =>
-        dispatch({ type: "SET_TRANSLATE", position: coordinates }),
+      onDrag: ({ movement }) => setCoordinates(movement),
+      onDragEnd: () => dispatch({ type: "SET_TRANSLATE", coordinates }),
 
       //This gesture enables panning of the Stage when the mouse is moved. We need this to make the Stage pannable when the Space key is pressed. Because we have to update the global state before we set disable the move we set it in the useKeypreeEvent Hook.
-      onMove: ({ delta: [x, y] }) => {
-        setCoordinates({ x: coordinates.x + x, y: coordinates.y + y });
-      },
+      onMove: ({ movement }) => setCoordinates(movement),
     },
     {
-      move: { enabled: !disablePan && spaceIsPressed },
-      wheel: { enabled: !disableZoom },
-      drag: { enabled: !disablePan },
+      move: { enabled: !disablePan && spaceIsPressed, initial: coordinates },
+      wheel: { enabled: !disableZoom, axis: "y" },
+      drag: { enabled: !disablePan, initial: coordinates },
     }
   );
 
@@ -119,20 +116,22 @@ export const Stage: React.FC<StageProps> = ({
   /**
    * Uses the ref of the outer box to calculate coordinates for elements.
    */
-  const getCoordinates = () => {
-    const wrapperRect = wrapper?.current?.getBoundingClientRect();
+  const getCoordinates = (): coordinates => {
+    const wrapperRect = ref?.current?.getBoundingClientRect();
 
     if (wrapperRect) {
       const x =
-        byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) +
-        byScale(position.x);
+        byScale(menuCoordinates[0] - wrapperRect.x - wrapperRect.width / 2) +
+        byScale(coordinates[0]);
 
       const y =
-        byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) +
-        byScale(position.y);
+        byScale(menuCoordinates[1] - wrapperRect.y - wrapperRect.height / 2) +
+        byScale(coordinates[1]);
 
-      return { x, y };
+      return [x, y];
     }
+
+    return [0, 0];
   };
 
   /**
@@ -146,7 +145,7 @@ export const Stage: React.FC<StageProps> = ({
       ? dispatch({
           type: "ADD_NODE",
           nodeType: type,
-          ...coordinates,
+          coordinates,
         })
       : null;
   };
@@ -160,7 +159,7 @@ export const Stage: React.FC<StageProps> = ({
     coordinates
       ? dispatch({
           type: "ADD_COMMENT",
-          ...coordinates,
+          coordinates,
         })
       : null;
   };
@@ -219,8 +218,8 @@ export const Stage: React.FC<StageProps> = ({
       {menuOpen ? (
         <Portal>
           <ContextMenu
-            x={menuCoordinates.x}
-            y={menuCoordinates.y}
+            x={menuCoordinates[0]}
+            y={menuCoordinates[1]}
             options={menuOptions}
             onRequestClose={() => setMenuOpen(false)}
             onOptionSelected={addElement}
@@ -232,7 +231,7 @@ export const Stage: React.FC<StageProps> = ({
       <div
         className={styles.transformWrapper}
         style={{
-          transform: `translate(${coordinates.x}px, ${coordinates.y}px)`,
+          transform: `translate(${coordinates[0]}px, ${coordinates[1]}px)`,
         }}
       >
         {/* This inner wrapper is used to zoom.  */}

@@ -11,7 +11,7 @@ import {
   deleteConnection,
   deleteConnectionsByNodeId,
 } from "../utilities";
-import produce, { Draft, original } from "immer";
+import produce, { Draft } from "immer";
 import { nanoid } from "nanoid/non-secure";
 
 const removeConnection = produce(
@@ -33,7 +33,7 @@ const removeConnection = produce(
 
 export type editorActions =
   | { type: "SET_SCALE"; zoom: number }
-  | { type: "SET_TRANSLATE"; position: coordinates }
+  | { type: "SET_TRANSLATE"; coordinates: coordinates }
   | {
       type: "ADD_CONNECTION";
       input: Connection;
@@ -43,8 +43,7 @@ export type editorActions =
   | { type: "DESTROY_TRANSPUT"; transput: Connection; transputType: string }
   | {
       type: "ADD_NODE";
-      x: number;
-      y: number;
+      coordinates: coordinates;
       nodeType: string;
       id?: string;
       width?: number;
@@ -58,14 +57,12 @@ export type editorActions =
       controlName: string;
       data: any;
     }
-  | { type: "SET_NODE_COORDINATES"; nodeId: string; x: number; y: number }
+  | { type: "SET_NODE_COORDINATES"; nodeId: string; coordinates: coordinates }
   | {
       type: "ADD_COMMENT";
-      x: number;
-      y: number;
+      coordinates: coordinates;
     }
-  | { type: "REMOVE_COMMENT_NEW"; id: string }
-  | { type: "SET_COMMENT_COORDINATES"; id: string; x: number; y: number }
+  | { type: "SET_COMMENT_COORDINATES"; id: string; coordinates: coordinates }
   | {
       type: "SET_COMMENT_DIMENSIONS";
       id: string;
@@ -88,7 +85,7 @@ export type EditorState = {
   /**
    * The current position of the Editor.
    */
-  readonly position: coordinates;
+  readonly coordinates: coordinates;
   /**
    * The currently shown Nodes.
    */
@@ -114,24 +111,23 @@ export const editorReducer = (
         break;
 
       case "SET_TRANSLATE":
-        draft.position = action.position;
+        draft.position = action.coordinates;
         break;
 
       case "ADD_NODE": {
-        const { x, y, nodeType, id, width, root } = action;
+        const { coordinates, nodeType, id, width } = action;
 
         const newNodeId = id || nanoid(10);
 
         draft.nodes[newNodeId] = {
           id: newNodeId,
-          coordinates: { x, y },
+          coordinates,
           type: nodeType,
           width: width ? width : 200,
           connections: {
             inputs: {},
             outputs: {},
           },
-          root: root ? root : false,
         };
         break;
       }
@@ -159,22 +155,22 @@ export const editorReducer = (
         );
 
         /**Connections are referencing other nodes by their unique id. When nodes are removed all connections need to be removed aswell. */
-        const removeConnectionsById = (
-          connection: Draft<connection>,
-          nodeId: string
-        ) =>
-          Object.entries(connection).reduce(
-            (obj: Draft<connection>, [portName, transput]) => {
-              const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
+        // const removeConnectionsById = (
+        //   connection: Draft<Connections>,
+        //   nodeId: string
+        // ) =>
+        //   Object.entries(connection).reduce(
+        //     (obj: Draft<Connection>, [portName, transput]) => {
+        //       const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
 
-              if (newTransputs.length) {
-                obj[portName] = newTransputs;
-              }
+        //       if (newTransputs.length) {
+        //         obj[portName] = newTransputs;
+        //       }
 
-              return obj;
-            },
-            {}
-          );
+        //       return obj;
+        //     },
+        //     {}
+        //   );
 
         //This is a side effect that actually removes the connections from the DOM
         deleteConnectionsByNodeId(nodeId);
@@ -265,8 +261,8 @@ export const editorReducer = (
       }
 
       case "SET_NODE_COORDINATES": {
-        const { x, y, nodeId } = action;
-        draft.nodes[nodeId].coordinates = { x, y };
+        const { coordinates, nodeId } = action;
+        draft.nodes[nodeId].coordinates = coordinates;
         break;
       }
 
@@ -274,19 +270,15 @@ export const editorReducer = (
         draft.comments[nanoid(10)] = {
           id: nanoid(10),
           text: "",
-          coordinates: { x: action.x, y: action.y },
+          coordinates: action.coordinates,
           width: 200,
           height: 30,
           color: "blue",
         };
         break;
 
-      case "REMOVE_COMMENT_NEW":
-        delete draft.comments[action.id].isNew;
-        break;
-
       case "SET_COMMENT_COORDINATES":
-        draft.comments[action.id].coordinates = { x: action.x, y: action.y };
+        draft.comments[action.id].coordinates = action.coordinates;
         break;
 
       case "SET_COMMENT_DIMENSIONS":

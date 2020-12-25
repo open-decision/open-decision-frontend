@@ -17,13 +17,13 @@ export const getPortRect = (
   getPort(nodeId, portName, portType)?.getBoundingClientRect();
 
 export const calculateCurve = (from: coordinates, to: coordinates): string => {
-  const length = to.x - from.x;
+  const length = to[0] - from[0];
   const thirdLength = length / 3;
   const curve = line().curve(curveBasis)([
-    [from.x, from.y],
-    [from.x + thirdLength, from.y],
-    [from.x + thirdLength * 2, to.y],
-    [to.x, to.y],
+    [from[0], from[1]],
+    [from[0] + thirdLength, from[1]],
+    [from[0] + thirdLength * 2, to[1]],
+    [to[0], to[1]],
   ]);
   return curve!;
 };
@@ -124,22 +124,16 @@ export const createConnections = ({ nodes, zoom, id }: EditorState): void => {
                 if (existingLine) {
                   updateConnection({
                     line: existingLine,
-                    from: {
-                      x: byScale(
-                        fromPort.x - stage.x + portHalf - stageHalfWidth
-                      ),
-                      y: byScale(
+                    from: [
+                      byScale(fromPort.x - stage.x + portHalf - stageHalfWidth),
+                      byScale(
                         fromPort.y - stage.y + portHalf - stageHalfHeight
                       ),
-                    },
-                    to: {
-                      x: byScale(
-                        toPort.x - stage.x + portHalf - stageHalfWidth
-                      ),
-                      y: byScale(
-                        toPort.y - stage.y + portHalf - stageHalfHeight
-                      ),
-                    },
+                    ],
+                    to: [
+                      byScale(toPort.x - stage.x + portHalf - stageHalfWidth),
+                      byScale(toPort.y - stage.y + portHalf - stageHalfHeight),
+                    ],
                   });
                 } else {
                   createSVG({
@@ -148,22 +142,16 @@ export const createConnections = ({ nodes, zoom, id }: EditorState): void => {
                     outputPortName: output.portName,
                     inputNodeId: node.id,
                     inputPortName: inputName,
-                    from: {
-                      x: byScale(
-                        fromPort.x - stage.x + portHalf - stageHalfWidth
-                      ),
-                      y: byScale(
+                    from: [
+                      byScale(fromPort.x - stage.x + portHalf - stageHalfWidth),
+                      byScale(
                         fromPort.y - stage.y + portHalf - stageHalfHeight
                       ),
-                    },
-                    to: {
-                      x: byScale(
-                        toPort.x - stage.x + portHalf - stageHalfWidth
-                      ),
-                      y: byScale(
-                        toPort.y - stage.y + portHalf - stageHalfHeight
-                      ),
-                    },
+                    ],
+                    to: [
+                      byScale(toPort.x - stage.x + portHalf - stageHalfWidth),
+                      byScale(toPort.y - stage.y + portHalf - stageHalfHeight),
+                    ],
                     stage: stageRef,
                   });
                 }
