@@ -1117,7 +1117,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/reducers/editorReducer.ts": {
-        "version": "81e4062f87b7d65d70ad8e6d0879fd50b81cd451f2c716dbc552762ba69c0e1c",
+        "version": "6d850ce19e32777aec2ac7ca28b5662eb0459ee593959c6a4c512f34d8fcc25a",
         "signature": "3db787230d001a0da6a745e61a2f37fa6578f9c0b686796b89d824d45324f0f1",
         "affectsGlobalScope": false
       },
@@ -1877,7 +1877,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Stage/Stage.tsx": {
-        "version": "7b3e061f85d60301ef3e338c1d307edd6d507090df0d35df32e6b2032affc47f",
+        "version": "809c58791acf6db587235274374b8b3edd7a6a63e332b6afbe40bf61a44a8274",
         "signature": "16dfd16a8a492dadd50a539727c660674a75149e9854fc586526c1979314646b",
         "affectsGlobalScope": false
       },
@@ -1887,12 +1887,12 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx": {
-        "version": "4061a9b6e92c447b3218df969eedcd4f7cf97c081cf7453c93227b47b6a986f2",
+        "version": "642a6e4a91dfde7bf31760a9f1cd6b82f1b9d8b62606d57b5d9ba676d4439164",
         "signature": "bd2e7a27e552005dd94f92d66c5679476dd6d4a1bec6848cdd60ade4ca67d3f1",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Node/Node.tsx": {
-        "version": "8ea0b5c3e7e9e37fb4973f3d711d24636f4e28e86d1f0c2481b4627ade1d2623",
+        "version": "f13d755248bf91857e5d8e3393e76be6ea604ff855d2727919916b6669d6dd1d",
         "signature": "95fc48c4e920f5b52dbe3351b710bc1c020ff60d2bc3dae4974d1f92f24f360f",
         "affectsGlobalScope": false
       },
@@ -1912,8 +1912,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/index.tsx": {
-        "version": "c0f0fe05b8e0140c512e8687768f3bf715810a935f5e94f450f09ce07e685971",
-        "signature": "14953316d6ce5429fcb0a10f3084d1ba01858b4de0825b8bc02492a017cbfb72",
+        "version": "7c1908f74bb55901f0e2f3e5d7d510859e036e4b374759faa7405ee097859605",
+        "signature": "5df5a9711514b924b9d53da14ffc6d595fa7dd04d55d4f14e8f4289381c411a4",
         "affectsGlobalScope": false
       },
       "./node_modules/@graywolfai/react-heroicons/dist/index.d.ts": {
@@ -1937,7 +1937,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/Builder.tsx": {
-        "version": "a33ac3f2f2235203126c345923084c3bb458b7004d4e66449764a471561490fe",
+        "version": "89b85dc1c0f40bae33b83b885fc8b5e9d84c0d76bf2aa189e9f7ebf974587ca7",
         "signature": "8afcf7f15772471b81796d8b06d9f2623e1e13cef17dd0443ce396e6cb423d57",
         "affectsGlobalScope": false
       },
@@ -3169,11 +3169,6 @@
       "./src/features/Builder/node-editor/components/Comment/Comment.tsx": {
         "version": "3d80ecf34f2aaa56729d07488377a56d7790b36495350f2b43f524a581d76eb2",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
-      },
-      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": {
-        "version": "6d5e095d5a661b9c41591b4f671babf0a8f1e69e6369d64e97a9dede79ea28d2",
-        "signature": "6450561f0703219828e572d91e984c8882bb099b8e5a07c7a105b48b43290ddd",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts": {
@@ -6492,12 +6487,6 @@
         "./node_modules/nanoid/non-secure/index.d.ts",
         "./src/features/Builder/node-editor/types/index.ts",
         "./src/features/Builder/node-editor/types/styles.d.ts"
-      ],
-      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./node_modules/date-fns/typings.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts",
-        "./src/features/Builder/node-editor/utilities/index.ts"
       ],
       "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx": [
         "./node_modules/@types/react-portal/index.d.ts",
@@ -9932,10 +9921,6 @@
         "./node_modules/@types/react/index.d.ts",
         "./src/features/Builder/node-editor/types/index.ts"
       ],
-      "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/features/Builder/node-editor/types/index.ts"
-      ],
       "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx": [
         "./node_modules/@types/react/index.d.ts",
         "./src/features/Builder/node-editor/types/index.ts"
@@ -10660,216 +10645,15 @@
       "./src/features/Auth/LoginButton.tsx",
       "./src/features/Auth/LogoutButton.tsx",
       "./src/features/Auth/SignupButton.tsx",
-      [
-        "./src/features/Builder/Builder.tsx",
-        [
-          {
-            "file": "./src/features/Builder/Builder.tsx",
-            "start": 708,
-            "length": 8,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type '{ state: EditorState; onChange: any; }' is not assignable to type 'IntrinsicAttributes & NodeEditorProps & { children?: ReactNode; }'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Property 'onChange' does not exist on type 'IntrinsicAttributes & NodeEditorProps & { children?: ReactNode; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          }
-        ]
-      ],
+      "./src/features/Builder/Builder.tsx",
       "./src/features/Builder/node-editor/components/ColorPicker/ColorPicker.tsx",
       "./src/features/Builder/node-editor/components/Comment/Comment.tsx",
       "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
       "./src/features/Builder/node-editor/components/Connections/Connections.tsx",
       "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-      [
-        "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-        [
-          {
-            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-            "start": 1722,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": "Property 'position' does not exist on type 'EditorState'."
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-            "start": 1934,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": "Property 'position' does not exist on type 'EditorState'."
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-            "start": 2103,
-            "length": 11,
-            "code": 2345,
-            "category": 1,
-            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/Draggable/Draggable.tsx",
-            "start": 2258,
-            "length": 11,
-            "code": 2345,
-            "category": 1,
-            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
-          }
-        ]
-      ],
-      [
-        "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-        [
-          {
-            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-            "start": 3892,
-            "length": 8,
-            "messageText": "Property 'position' does not exist on type 'EditorState'.",
-            "category": 1,
-            "code": 2339
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-            "start": 5053,
-            "length": 33,
-            "code": 2345,
-            "category": 1,
-            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-            "start": 5398,
-            "length": 33,
-            "code": 2345,
-            "category": 1,
-            "messageText": "Argument of type '{ x: number; y: number; }' is not assignable to parameter of type 'coordinates'."
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-            "start": 12228,
-            "length": 4,
-            "code": 2322,
-            "category": 1,
-            "messageText": "Type '{ x: number; y: number; }' is not assignable to type 'coordinates'.",
-            "relatedInformation": [
-              {
-                "file": "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
-                "start": 194,
-                "length": 4,
-                "messageText": "The expected type comes from property 'from' which is declared here on type 'IntrinsicAttributes & ConnectionProps & { children?: ReactNode; }'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
-          },
-          {
-            "file": "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
-            "start": 12268,
-            "length": 2,
-            "code": 2322,
-            "category": 1,
-            "messageText": "Type '{ x: number; y: number; }' is not assignable to type 'coordinates'.",
-            "relatedInformation": [
-              {
-                "file": "./src/features/Builder/node-editor/components/Connection/Connection.tsx",
-                "start": 215,
-                "length": 2,
-                "messageText": "The expected type comes from property 'to' which is declared here on type 'IntrinsicAttributes & ConnectionProps & { children?: ReactNode; }'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
-          }
-        ]
-      ],
-      [
-        "./src/features/Builder/node-editor/components/Node/Node.tsx",
-        [
-          {
-            "file": "./src/features/Builder/node-editor/components/Node/Node.tsx",
-            "start": 5059,
-            "length": 7,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }[]' is not assignable to type 'menuOption[] | []'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }[]' is not assignable to type 'menuOption[]'.",
-                  "category": 1,
-                  "code": 2322,
-                  "next": [
-                    {
-                      "messageText": "Type '{ label: string; type: string; description: string; internalType: string; }' is not assignable to type 'menuOption'.",
-                      "category": 1,
-                      "code": 2322,
-                      "next": [
-                        {
-                          "messageText": "Types of property 'internalType' are incompatible.",
-                          "category": 1,
-                          "code": 2326,
-                          "next": [
-                            {
-                              "messageText": "Type 'string' is not assignable to type '\"node\" | \"comment\"'.",
-                              "category": 1,
-                              "code": 2322
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            "relatedInformation": [
-              {
-                "file": "./src/features/Builder/node-editor/components/ContextMenu/ContextMenu.tsx",
-                "start": 516,
-                "length": 7,
-                "messageText": "The expected type comes from property 'options' which is declared here on type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
-          }
-        ]
-      ],
-      [
-        "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
-        [
-          {
-            "file": "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
-            "start": 7123,
-            "length": 1,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type '{ x: number; y: number; options: menuOption[]; onRequestClose: () => void; onOptionSelected: (menuOption: menuOption) => void; label: string; }' is not assignable to type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Property 'x' does not exist on type 'IntrinsicAttributes & ContextMenuProps & { children?: ReactNode; }'.",
-                  "category": 1,
-                  "code": 2339
-                }
-              ]
-            }
-          }
-        ]
-      ],
+      "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx",
+      "./src/features/Builder/node-editor/components/Node/Node.tsx",
+      "./src/features/Builder/node-editor/components/Stage/Stage.tsx",
       "./src/features/Builder/node-editor/components/Toaster/Toaster.tsx",
       "./src/features/Builder/node-editor/hooks/useConditionalEffect.ts",
       "./src/features/Builder/node-editor/hooks/useContextMenu.ts",
@@ -10882,27 +10666,153 @@
         [
           {
             "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 2876,
+            "start": 3622,
+            "length": 6,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Record<string, readonly Connection[]>>'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Index signature is missing in type '[string, unknown]'.",
+                  "category": 1,
+                  "code": 2329
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/features/Builder/node-editor/types/index.ts",
+                "start": 4445,
+                "length": 6,
+                "messageText": "The expected type comes from property 'inputs' which is declared here on type 'WritableDraft<connections>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 3702,
+            "length": 7,
+            "code": 2322,
+            "category": 1,
+            "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Record<string, readonly Connection[]>>'.",
+            "relatedInformation": [
+              {
+                "file": "./src/features/Builder/node-editor/types/index.ts",
+                "start": 4518,
+                "length": 7,
+                "messageText": "The expected type comes from property 'outputs' which is declared here on type 'WritableDraft<connections>'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4125,
+            "length": 11,
+            "messageText": "Cannot find name 'Connections'.",
+            "category": 1,
+            "code": 2304
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4187,
+            "length": 351,
+            "code": 2769,
+            "category": 1,
+            "messageText": {
+              "messageText": "No overload matches this call.",
+              "category": 1,
+              "code": 2769,
+              "next": [
+                {
+                  "messageText": "Overload 1 of 3, '(callbackfn: (previousValue: [string, unknown], currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => [string, unknown], initialValue: [string, unknown]): [string, unknown]', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type '(obj: WritableDraft<Connection>, [portName, transput]: [string, unknown]) => WritableDraft<Connection>' is not assignable to parameter of type '(previousValue: [string, unknown], currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => [string, unknown]'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Types of parameters 'obj' and 'previousValue' are incompatible.",
+                          "category": 1,
+                          "code": 2328,
+                          "next": [
+                            {
+                              "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Connection>'.",
+                              "category": 1,
+                              "code": 2322
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "messageText": "Overload 2 of 3, '(callbackfn: (previousValue: WritableDraft<Connection>, currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => WritableDraft<Connection>, initialValue: WritableDraft<...>): WritableDraft<...>', gave the following error.",
+                  "category": 1,
+                  "code": 2772,
+                  "next": [
+                    {
+                      "messageText": "Argument of type '{}' is not assignable to parameter of type 'WritableDraft<Connection>'.",
+                      "category": 1,
+                      "code": 2345,
+                      "next": [
+                        {
+                          "messageText": "Type '{}' is missing the following properties from type 'WritableDraft<Connection>': nodeId, portName",
+                          "category": 1,
+                          "code": 2739
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": []
+          },
+          {
+            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
+            "start": 4321,
             "length": 8,
-            "code": 2339,
+            "messageText": "Object is of type 'unknown'.",
             "category": 1,
-            "messageText": "Property 'position' does not exist on type 'WritableDraft<EditorState>'."
+            "code": 2571
           },
           {
             "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 3627,
-            "length": 21,
-            "messageText": "Cannot find name 'removeConnectionsById'.",
+            "start": 4338,
+            "length": 1,
+            "messageText": "Parameter 't' implicitly has an 'any' type.",
             "category": 1,
-            "code": 2304
+            "code": 7006
           },
           {
             "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 3708,
-            "length": 21,
-            "messageText": "Cannot find name 'removeConnectionsById'.",
+            "start": 4424,
+            "length": 13,
+            "code": 7053,
             "category": 1,
-            "code": 2304
+            "messageText": {
+              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'WritableDraft<Connection>'.",
+              "category": 1,
+              "code": 7053,
+              "next": [
+                {
+                  "messageText": "No index signature with a parameter of type 'string' was found on type 'WritableDraft<Connection>'.",
+                  "category": 1,
+                  "code": 7054
+                }
+              ]
+            }
           }
         ]
       ],

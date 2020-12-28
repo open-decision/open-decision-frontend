@@ -111,7 +111,7 @@ export const editorReducer = (
         break;
 
       case "SET_TRANSLATE":
-        draft.position = action.coordinates;
+        draft.coordinates = action.coordinates;
         break;
 
       case "ADD_NODE": {
@@ -155,22 +155,22 @@ export const editorReducer = (
         );
 
         /**Connections are referencing other nodes by their unique id. When nodes are removed all connections need to be removed aswell. */
-        // const removeConnectionsById = (
-        //   connection: Draft<Connections>,
-        //   nodeId: string
-        // ) =>
-        //   Object.entries(connection).reduce(
-        //     (obj: Draft<Connection>, [portName, transput]) => {
-        //       const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
+        const removeConnectionsById = (
+          connection: Draft<Connections>,
+          nodeId: string
+        ) =>
+          Object.entries(connection).reduce(
+            (obj: Draft<Connection>, [portName, transput]) => {
+              const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
 
-        //       if (newTransputs.length) {
-        //         obj[portName] = newTransputs;
-        //       }
+              if (newTransputs.length) {
+                obj[portName] = newTransputs;
+              }
 
-        //       return obj;
-        //     },
-        //     {}
-        //   );
+              return obj;
+            },
+            {}
+          );
 
         //This is a side effect that actually removes the connections from the DOM
         deleteConnectionsByNodeId(nodeId);

@@ -218,8 +218,7 @@ export const Stage: React.FC<StageProps> = ({
       {menuOpen ? (
         <Portal>
           <ContextMenu
-            x={menuCoordinates[0]}
-            y={menuCoordinates[1]}
+            coordinates={menuCoordinates}
             options={menuOptions}
             onRequestClose={() => setMenuOpen(false)}
             onOptionSelected={addElement}

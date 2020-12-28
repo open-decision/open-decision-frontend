@@ -33,6 +33,7 @@ type NodeEditorProps = {
    * The state of the content in the Editor.
    */
   state: EditorState;
+  setState?: (value: EditorState) => void;
   /**
    * Zooming can be disabled. False by default.
    */
@@ -58,6 +59,7 @@ type NodeEditorProps = {
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
+  setState,
   // hideComments = false,
   circularBehavior = "prevent",
   disableZoom = false,

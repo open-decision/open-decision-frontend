@@ -17,10 +17,10 @@ const initialEditorState: EditorState = {
 
 const Editor: React.FC<{
   state: EditorState;
-  onChange?: any;
+  setState?: (value: EditorState) => void;
   setComments?: any;
-}> = ({ state, onChange }) => {
-  return <NodeEditor state={state} onChange={onChange} />;
+}> = ({ state, setState }) => {
+  return <NodeEditor state={state} setState={setState} />;
 };
 
 export const Builder: React.FC = () => {
@@ -53,10 +53,7 @@ export const Builder: React.FC = () => {
                 Reset
               </Button>
             </div>
-            <Editor
-              state={data}
-              onChange={(value: EditorState) => setData(value)}
-            />
+            <Editor state={data} setState={(value) => setData(value)} />
           </>
         ) : (
           <div className="text-white h-full w-full flex justify-center items-center flex-col">

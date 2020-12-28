@@ -10,7 +10,7 @@ import {
   DRAG_CONNECTION_ID,
   EditorContext,
 } from "../../utilities";
-import { connections, PortConfig, PortTypes } from "../../types";
+import { connections, coordinates, PortConfig, PortTypes } from "../../types";
 import { nanoid } from "nanoid/non-secure";
 
 type IoPortsProps = {
@@ -178,6 +178,34 @@ type PortProps = {
   portTypes: PortTypes;
 };
 
+/**
+ * This function takes a number and returns the number based on the zoom level.
+ * @param zoom - The current zoom level of the editor.
+ * @param value - Number to be based on the zoom level of the Editor.
+ */
+const byZoom = (zoom: number, value: number) => (1 / zoom) * value;
+
+type element = { x: number; width: number };
+
+const calculateNewCoordinateByZoom = (
+  zoom: number,
+  element: element,
+  stage: DOMRect,
+  coordinate: number
+) =>
+  byZoom(zoom, element.x - stage.x + element.width / 2 - stage.width / 2) +
+  byZoom(zoom, coordinate);
+
+const calculateNewCoordinatesByZoom = (
+  zoom: number,
+  element: element,
+  stage: DOMRect,
+  coordinates: coordinates
+): coordinates => [
+  calculateNewCoordinateByZoom(zoom, element, stage, coordinates[0]),
+  calculateNewCoordinateByZoom(zoom, element, stage, coordinates[1]),
+];
+
 const Port: React.FC<PortProps> = ({
   color = "grey",
   name = "",
@@ -187,45 +215,41 @@ const Port: React.FC<PortProps> = ({
   recalculate,
   portTypes,
 }) => {
-  const [{ id, zoom, position }, dispatch] = React.useContext(EditorContext);
+  const [{ id, zoom, coordinates }, dispatch] = React.useContext(EditorContext);
   const stageId = `${STAGE_ID}${id}`;
   const [isDragging, setIsDragging] = React.useState(false);
-  const [dragStartCoordinates, setDragStartCoordinates] = React.useState({
-    x: 0,
-    y: 0,
-  });
+  const [
+    dragStartCoordinates,
+    setDragStartCoordinates,
+  ] = React.useState<coordinates>([0, 0]);
 
   const dragStartCoordinatesCache = React.useRef(dragStartCoordinates);
   const port = React.useRef<HTMLDivElement>(null);
   const line = React.useRef<SVGPathElement>(null);
   const existingConnection = React.useRef<SVGElement | null>(null);
 
-  /**
-   * This function takes a number and returns the number based on the zoom level.
-   * @param value - Number to be based on the zoom level of the Editor.
-   */
-  const byScale = (value: number) => (1 / zoom) * value;
-
-  const handleDrag = (e: MouseEvent) => {
+  const handleDrag = (event: MouseEvent) => {
     const stage = document?.getElementById(stageId)?.getBoundingClientRect();
 
     if (isInput && stage) {
-      const to = {
-        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
-        y:
-          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
-      };
+      const to: coordinates = calculateNewCoordinatesByZoom(
+        zoom,
+        { width: stage.width, x: event.clientX },
+        stage,
+        coordinates
+      );
 
       existingConnection?.current?.setAttribute(
         "d",
         calculateCurve(dragStartCoordinatesCache.current, to)
       );
     } else if (stage) {
-      const to = {
-        x: byScale(e.clientX - stage.x - stage.width / 2) + byScale(position.x),
-        y:
-          byScale(e.clientY - stage.y - stage.height / 2) + byScale(position.y),
-      };
+      const to: coordinates = calculateNewCoordinatesByZoom(
+        zoom,
+        { width: stage.width, x: event.clientX },
+        stage,
+        coordinates
+      );
 
       line?.current?.setAttribute(
         "d",
@@ -363,39 +387,31 @@ const Port: React.FC<PortProps> = ({
       //Return if it does not exist.
       if (!outputPort) return;
 
-      const coordinates = {
-        x:
-          byScale(
-            outputPort.x - stage.x + outputPort.width / 2 - stage.width / 2
-          ) + byScale(position.x),
-        y:
-          byScale(
-            outputPort.y - stage.y + outputPort.width / 2 - stage.height / 2
-          ) + byScale(position.y),
-      };
+      const newCoordinates = calculateNewCoordinatesByZoom(
+        zoom,
+        outputPort,
+        stage,
+        coordinates
+      );
 
-      setDragStartCoordinates(coordinates);
+      setDragStartCoordinates(newCoordinates);
 
-      dragStartCoordinatesCache.current = coordinates;
+      dragStartCoordinatesCache.current = newCoordinates;
 
       setIsDragging(true);
 
       document.addEventListener("mouseup", handleDragEnd);
       document.addEventListener("mousemove", handleDrag);
     } else {
-      const coordinates = {
-        x:
-          byScale(
-            startPort.x - stage.x + startPort.width / 2 - stage.width / 2
-          ) + byScale(position.x),
-        y:
-          byScale(
-            startPort.y - stage.y + startPort.width / 2 - stage.height / 2
-          ) + byScale(position.y),
-      };
+      const newCoordinates = calculateNewCoordinatesByZoom(
+        zoom,
+        startPort,
+        stage,
+        coordinates
+      );
 
-      setDragStartCoordinates(coordinates);
-      dragStartCoordinatesCache.current = coordinates;
+      setDragStartCoordinates(newCoordinates);
+      dragStartCoordinatesCache.current = newCoordinates;
       setIsDragging(true);
 
       document.addEventListener("mouseup", handleDragEnd);
