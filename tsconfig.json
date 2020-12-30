@@ -21,7 +21,8 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "noEmit": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
