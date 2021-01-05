@@ -128,7 +128,7 @@ export type Node = nodeBase & {
   /**
    * Contains the information to which other Nodes and specifically which port a Node is connected to.
    */
-  readonly connections: connections;
+  readonly connections: Transputs;
 };
 
 /**
@@ -152,7 +152,7 @@ export type Connections = Record<string, readonly Connection[]>;
 /**
  * Groups the input and output Connections for use as part of each Nodes state.
  */
-export type connections = {
+export type Transputs = {
   /**
    * All input Connections.
    */

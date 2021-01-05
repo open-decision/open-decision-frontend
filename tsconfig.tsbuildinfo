@@ -987,8 +987,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/types/index.ts": {
-        "version": "c5eb6709f1bf697d594a71c891f15a0838ef297832a49d60252f0e60ae340ded",
-        "signature": "45dd68f16f3e582c04e6de03da7b2467264c6bf14f2f11b4b963b9ab8e8d9cac",
+        "version": "1b21b775a7faee2257a9791ff781c39837662a48792f7d5f3974aed3f1286e22",
+        "signature": "7a1ad9c5cd793b4914812e52638e2a4ff8f8b25de40b6d644d6369c8cd631446",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/d3-path/index.d.ts": {
@@ -1117,7 +1117,7 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/reducers/editorReducer.ts": {
-        "version": "6d850ce19e32777aec2ac7ca28b5662eb0459ee593959c6a4c512f34d8fcc25a",
+        "version": "0f135af6b8de95309ec2054251671611e0716b40c72f120ff0ea9785a2cc24a4",
         "signature": "3db787230d001a0da6a745e61a2f37fa6578f9c0b686796b89d824d45324f0f1",
         "affectsGlobalScope": false
       },
@@ -1887,8 +1887,8 @@
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/IoPorts/IoPorts.tsx": {
-        "version": "642a6e4a91dfde7bf31760a9f1cd6b82f1b9d8b62606d57b5d9ba676d4439164",
-        "signature": "bd2e7a27e552005dd94f92d66c5679476dd6d4a1bec6848cdd60ade4ca67d3f1",
+        "version": "f0c29794c19bd3af1044ccec063195c8e32985e776e85581255f6d5c19a514a1",
+        "signature": "c28f22f7679341803a6119d1b18e5b3e6cb17e78e052348c729bbdb5e543fe35",
         "affectsGlobalScope": false
       },
       "./src/features/Builder/node-editor/components/Node/Node.tsx": {
@@ -3219,6 +3219,7 @@
           "name": "typescript-plugin-css-modules"
         }
       ],
+      "skipLibCheck": true,
       "pathsBasePath": "/home/philipp/Projects/open-decision/code_open-decision-frontend",
       "watch": true,
       "configFilePath": "./tsconfig.json"
@@ -10406,19 +10407,7 @@
       "./node_modules/react-use/lib/useFavicon.d.ts",
       "./node_modules/react-use/lib/useFirstMountState.d.ts",
       "./node_modules/react-use/lib/useFullscreen.d.ts",
-      [
-        "./node_modules/react-use/lib/useGeolocation.d.ts",
-        [
-          {
-            "file": "./node_modules/react-use/lib/useGeolocation.d.ts",
-            "start": 322,
-            "length": 13,
-            "messageText": "Cannot find name 'PositionError'.",
-            "category": 1,
-            "code": 2304
-          }
-        ]
-      ],
+      "./node_modules/react-use/lib/useGeolocation.d.ts",
       "./node_modules/react-use/lib/useGetSet.d.ts",
       "./node_modules/react-use/lib/useGetSetState.d.ts",
       "./node_modules/react-use/lib/useHarmonicIntervalFn.d.ts",
@@ -10661,161 +10650,7 @@
       "./src/features/Builder/node-editor/hooks/useFunctionAfterLayout.ts",
       "./src/features/Builder/node-editor/hooks/usePrevious.ts",
       "./src/features/Builder/node-editor/index.tsx",
-      [
-        "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-        [
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 3622,
-            "length": 6,
-            "code": 2322,
-            "category": 1,
-            "messageText": {
-              "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Record<string, readonly Connection[]>>'.",
-              "category": 1,
-              "code": 2322,
-              "next": [
-                {
-                  "messageText": "Index signature is missing in type '[string, unknown]'.",
-                  "category": 1,
-                  "code": 2329
-                }
-              ]
-            },
-            "relatedInformation": [
-              {
-                "file": "./src/features/Builder/node-editor/types/index.ts",
-                "start": 4445,
-                "length": 6,
-                "messageText": "The expected type comes from property 'inputs' which is declared here on type 'WritableDraft<connections>'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 3702,
-            "length": 7,
-            "code": 2322,
-            "category": 1,
-            "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Record<string, readonly Connection[]>>'.",
-            "relatedInformation": [
-              {
-                "file": "./src/features/Builder/node-editor/types/index.ts",
-                "start": 4518,
-                "length": 7,
-                "messageText": "The expected type comes from property 'outputs' which is declared here on type 'WritableDraft<connections>'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4125,
-            "length": 11,
-            "messageText": "Cannot find name 'Connections'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4187,
-            "length": 351,
-            "code": 2769,
-            "category": 1,
-            "messageText": {
-              "messageText": "No overload matches this call.",
-              "category": 1,
-              "code": 2769,
-              "next": [
-                {
-                  "messageText": "Overload 1 of 3, '(callbackfn: (previousValue: [string, unknown], currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => [string, unknown], initialValue: [string, unknown]): [string, unknown]', gave the following error.",
-                  "category": 1,
-                  "code": 2772,
-                  "next": [
-                    {
-                      "messageText": "Argument of type '(obj: WritableDraft<Connection>, [portName, transput]: [string, unknown]) => WritableDraft<Connection>' is not assignable to parameter of type '(previousValue: [string, unknown], currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => [string, unknown]'.",
-                      "category": 1,
-                      "code": 2345,
-                      "next": [
-                        {
-                          "messageText": "Types of parameters 'obj' and 'previousValue' are incompatible.",
-                          "category": 1,
-                          "code": 2328,
-                          "next": [
-                            {
-                              "messageText": "Type '[string, unknown]' is not assignable to type 'WritableDraft<Connection>'.",
-                              "category": 1,
-                              "code": 2322
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "messageText": "Overload 2 of 3, '(callbackfn: (previousValue: WritableDraft<Connection>, currentValue: [string, unknown], currentIndex: number, array: [string, unknown][]) => WritableDraft<Connection>, initialValue: WritableDraft<...>): WritableDraft<...>', gave the following error.",
-                  "category": 1,
-                  "code": 2772,
-                  "next": [
-                    {
-                      "messageText": "Argument of type '{}' is not assignable to parameter of type 'WritableDraft<Connection>'.",
-                      "category": 1,
-                      "code": 2345,
-                      "next": [
-                        {
-                          "messageText": "Type '{}' is missing the following properties from type 'WritableDraft<Connection>': nodeId, portName",
-                          "category": 1,
-                          "code": 2739
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            "relatedInformation": []
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4321,
-            "length": 8,
-            "messageText": "Object is of type 'unknown'.",
-            "category": 1,
-            "code": 2571
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4338,
-            "length": 1,
-            "messageText": "Parameter 't' implicitly has an 'any' type.",
-            "category": 1,
-            "code": 7006
-          },
-          {
-            "file": "./src/features/Builder/node-editor/reducers/editorReducer.ts",
-            "start": 4424,
-            "length": 13,
-            "code": 7053,
-            "category": 1,
-            "messageText": {
-              "messageText": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'WritableDraft<Connection>'.",
-              "category": 1,
-              "code": 7053,
-              "next": [
-                {
-                  "messageText": "No index signature with a parameter of type 'string' was found on type 'WritableDraft<Connection>'.",
-                  "category": 1,
-                  "code": 7054
-                }
-              ]
-            }
-          }
-        ]
-      ],
+      "./src/features/Builder/node-editor/reducers/editorReducer.ts",
       "./src/features/Builder/node-editor/reducers/index.ts",
       "./src/features/Builder/node-editor/reducers/toastsReducer.ts",
       "./src/features/Builder/node-editor/tests/nodes.ts",

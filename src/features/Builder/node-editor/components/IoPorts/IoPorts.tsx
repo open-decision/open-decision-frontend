@@ -10,7 +10,7 @@ import {
   DRAG_CONNECTION_ID,
   EditorContext,
 } from "../../utilities";
-import { connections, coordinates, PortConfig, PortTypes } from "../../types";
+import { Transputs, coordinates, PortConfig, PortTypes } from "../../types";
 import { nanoid } from "nanoid/non-secure";
 
 type IoPortsProps = {
@@ -29,7 +29,7 @@ type IoPortsProps = {
   /**
    * The connections of the Node. This informs the individual Port whether it is connected or not.
    */
-  connections: connections;
+  connections: Transputs;
   recalculate: () => void;
 };
 

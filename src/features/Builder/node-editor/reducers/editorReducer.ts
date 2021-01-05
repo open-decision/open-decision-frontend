@@ -5,6 +5,7 @@ import {
   Nodes,
   NodeTypes,
   PortTypes,
+  Connections,
 } from "../types";
 import {
   checkForCircularNodes,
@@ -28,6 +29,15 @@ const removeConnection = produce(
         ? cnx.portName !== input.portName
         : true;
     });
+  }
+);
+
+/**Connections are referencing other nodes by their unique id. When nodes are removed all connections need to be removed aswell. */
+const removeConnectionsById = produce(
+  (connections: Draft<Connections>, nodeId: string) => {
+    Object.values(connections).map((connection) =>
+      connection.filter((connection) => connection.nodeId !== nodeId)
+    );
   }
 );
 
@@ -136,41 +146,17 @@ export const editorReducer = (
         const { nodeId } = action;
         delete draft.nodes[nodeId];
 
-        draft.nodes = Object.values(draft.nodes).reduce(
-          (obj: Draft<Nodes>, node) => {
-            obj[node.id] = {
-              ...node,
-              connections: {
-                inputs: removeConnectionsById(node.connections.inputs, nodeId),
-                outputs: removeConnectionsById(
-                  node.connections.outputs,
-                  nodeId
-                ),
-              },
-            };
-
-            return obj;
-          },
-          {}
-        );
-
-        /**Connections are referencing other nodes by their unique id. When nodes are removed all connections need to be removed aswell. */
-        const removeConnectionsById = (
-          connection: Draft<Connections>,
-          nodeId: string
-        ) =>
-          Object.entries(connection).reduce(
-            (obj: Draft<Connection>, [portName, transput]) => {
-              const newTransputs = transput.filter((t) => t.nodeId !== nodeId);
-
-              if (newTransputs.length) {
-                obj[portName] = newTransputs;
-              }
-
-              return obj;
-            },
-            {}
+        Object.values(draft.nodes).map((node) => {
+          node.connections.inputs = removeConnectionsById(
+            node.connections.inputs,
+            nodeId
           );
+
+          node.connections.outputs = removeConnectionsById(
+            node.connections.outputs,
+            nodeId
+          );
+        });
 
         //This is a side effect that actually removes the connections from the DOM
         deleteConnectionsByNodeId(nodeId);
