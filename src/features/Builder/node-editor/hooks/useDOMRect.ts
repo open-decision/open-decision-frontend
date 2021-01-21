@@ -12,11 +12,14 @@ export const useDOMRect = (
   /**
    * Is used to imperatively trigger a recalculation of the rectangle.
    */
-  const recalculate = () => {
+
+  const recalculate = React.useCallback(() => {
     ref.current =
       document?.getElementById(`${STAGE_ID}${id}`)?.getBoundingClientRect() ??
       null;
-  };
+  }, [id]);
+
+  React.useLayoutEffect(() => recalculate(), [recalculate]);
 
   return [ref, recalculate];
 };
