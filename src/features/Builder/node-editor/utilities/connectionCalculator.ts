@@ -1,165 +1,82 @@
-import styles from "../components/Connection/Connection.module.css";
-import { line, curveBasis } from "d3-shape";
-import { coordinates } from "../types";
-import { CONNECTIONS_ID } from "./constants";
-import { EditorState } from "../reducers";
+import { coordinates, Nodes } from "../types";
+import {
+  getExistingConnection,
+  updateConnection,
+} from "./connections/existingConnections";
+import { createSVGConnection } from "./connections/newConnections";
+import {
+  getConnectionCoordinates,
+  getConnectionPorts,
+} from "./connections/shared";
 
-const getPort = (nodeId: string, portName: string, portType = "input") =>
-  document.querySelector(
-    `[data-node-id="${nodeId}"] [data-port-name="${portName}"][data-port-transput-type="${portType}"]`
-  );
+type createConnections = (
+  nodes: Nodes,
+  zoom: number,
+  id: string,
+  stageRect: React.MutableRefObject<DOMRect | null>,
+  stageCoordinates: coordinates
+) => void;
 
-export const getPortRect = (
-  nodeId: string,
-  portName: string,
-  portType = "input"
-): DOMRect | undefined =>
-  getPort(nodeId, portName, portType)?.getBoundingClientRect();
-
-export const calculateCurve = (from: coordinates, to: coordinates): string => {
-  const length = to[0] - from[0];
-  const thirdLength = length / 3;
-  const curve = line().curve(curveBasis)([
-    [from[0], from[1]],
-    [from[0] + thirdLength, from[1]],
-    [from[0] + thirdLength * 2, to[1]],
-    [to[0], to[1]],
-  ]);
-  return curve!;
-};
-
-export const deleteConnection = (id: string): void => {
-  const line = document.querySelector(`[data-connection-id="${id}"]`);
-  line?.parentElement?.remove();
-};
-
-export const deleteConnectionsByNodeId = (nodeId: string): void => {
-  const lines = document.querySelectorAll(
-    `[data-output-node-id="${nodeId}"], [data-input-node-id="${nodeId}"]`
-  );
-
-  lines.forEach((line) => line?.parentElement?.remove());
-};
-
-export const updateConnection = ({
-  line,
-  from,
-  to,
-}: {
-  line: Element;
-  from: coordinates;
-  to: coordinates;
-}): void => {
-  line.setAttribute("d", calculateCurve(from, to));
-};
-
-export const createSVG = ({
-  from,
-  to,
-  stage,
+export const createConnections: createConnections = (
+  nodes,
+  zoom,
   id,
-  outputNodeId,
-  outputPortName,
-  inputNodeId,
-  inputPortName,
-}: {
-  from: coordinates;
-  to: coordinates;
-  stage: HTMLElement;
-  id: string;
-  outputNodeId: string;
-  outputPortName: string;
-  inputNodeId: string;
-  inputPortName: string;
-}): SVGSVGElement => {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("class", styles.svg);
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  const curve = calculateCurve(from, to);
-  path.setAttribute("d", curve);
-  path.setAttribute("stroke", "rgb(185, 186, 189)");
-  path.setAttribute("stroke-width", "3");
-  path.setAttribute("stroke-linecap", "round");
-  path.setAttribute("fill", "none");
-  path.setAttribute("data-connection-id", id);
-  path.setAttribute("data-output-node-id", outputNodeId);
-  path.setAttribute("data-output-port-name", outputPortName);
-  path.setAttribute("data-input-node-id", inputNodeId);
-  path.setAttribute("data-input-port-name", inputPortName);
-  svg.appendChild(path);
-  stage.appendChild(svg);
-  return svg;
-};
+  stageRect,
+  stageCoordinates
+) => {
+  Object.values(nodes).forEach((node) => {
+    if (node.connections && node.connections.inputs) {
+      Object.entries(node.connections.inputs).forEach(
+        ([inputName, outputs]) => {
+          outputs.forEach((output) => {
+            const existingConnection = getExistingConnection(
+              node.id,
+              output.portName,
+              output,
+              true
+            );
 
-export const getStageRef = (editorId: string): HTMLElement | null =>
-  document.getElementById(`${CONNECTIONS_ID}${editorId}`);
+            const connectionPorts = getConnectionPorts(
+              output,
+              true,
+              node.id,
+              output.portName
+            );
 
-export const createConnections = ({ nodes, zoom, id }: EditorState): void => {
-  const stageRef = getStageRef(id);
-  if (stageRef) {
-    const stage = stageRef.getBoundingClientRect();
-    const stageHalfWidth = stage.width / 2;
-    const stageHalfHeight = stage.height / 2;
+            const portHalf = connectionPorts ? connectionPorts[0].width / 2 : 0;
 
-    const byScale = (value: number) => (1 / zoom) * value;
-
-    Object.values(nodes).forEach((node) => {
-      if (node.connections && node.connections.inputs) {
-        Object.entries(node.connections.inputs).forEach(
-          ([inputName, outputs]) => {
-            outputs.forEach((output) => {
-              const fromPort = getPortRect(
-                output.nodeId,
-                output.portName,
-                "output"
-              );
-              const toPort = getPortRect(node.id, inputName, "input");
-              const portHalf = fromPort ? fromPort.width / 2 : 0;
-              if (fromPort && toPort) {
-                const id =
-                  output.nodeId + output.portName + node.id + inputName;
-                const existingLine = document.querySelector(
-                  `[data-connection-id="${id}"]`
+            if (connectionPorts) {
+              if (existingConnection)
+                return updateConnection(
+                  existingConnection,
+                  getConnectionCoordinates(
+                    zoom,
+                    connectionPorts,
+                    stageRect,
+                    portHalf,
+                    stageCoordinates
+                  )
                 );
-                if (existingLine) {
-                  updateConnection({
-                    line: existingLine,
-                    from: [
-                      byScale(fromPort.x - stage.x + portHalf - stageHalfWidth),
-                      byScale(
-                        fromPort.y - stage.y + portHalf - stageHalfHeight
-                      ),
-                    ],
-                    to: [
-                      byScale(toPort.x - stage.x + portHalf - stageHalfWidth),
-                      byScale(toPort.y - stage.y + portHalf - stageHalfHeight),
-                    ],
-                  });
-                } else {
-                  createSVG({
-                    id,
-                    outputNodeId: output.nodeId,
-                    outputPortName: output.portName,
-                    inputNodeId: node.id,
-                    inputPortName: inputName,
-                    from: [
-                      byScale(fromPort.x - stage.x + portHalf - stageHalfWidth),
-                      byScale(
-                        fromPort.y - stage.y + portHalf - stageHalfHeight
-                      ),
-                    ],
-                    to: [
-                      byScale(toPort.x - stage.x + portHalf - stageHalfWidth),
-                      byScale(toPort.y - stage.y + portHalf - stageHalfHeight),
-                    ],
-                    stage: stageRef,
-                  });
-                }
-              }
-            });
-          }
-        );
-      }
-    });
-  }
+
+              return createSVGConnection({
+                id,
+                outputNodeId: output.nodeId,
+                outputPortName: output.portName,
+                inputNodeId: node.id,
+                inputPortName: inputName,
+                connectionCoordinates: getConnectionCoordinates(
+                  zoom,
+                  connectionPorts,
+                  stageRect,
+                  portHalf,
+                  stageCoordinates
+                ),
+                stage: stageRect,
+              });
+            }
+          });
+        }
+      );
+    }
+  });
 };
