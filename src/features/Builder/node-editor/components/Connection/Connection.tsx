@@ -1,13 +1,11 @@
 import React from "react";
-import { calculateCurve } from "../../utilities";
 import styles from "./Connection.module.css";
-import { coordinates } from "../../types";
+import { calculateCurve } from "../../utilities/connections/shared";
+import { connectionCoordinates } from "../../utilities/connections/types";
 
 type ConnectionProps = {
-  from: coordinates;
-  to: coordinates;
+  connectionCoordinates: connectionCoordinates;
   id?: string;
-  lineRef: React.LegacyRef<SVGPathElement>;
   outputNodeId?: string;
   outputPortName?: string;
   inputNodeId?: string;
@@ -15,16 +13,17 @@ type ConnectionProps = {
 };
 
 export const Connection: React.FC<ConnectionProps> = ({
-  from,
-  to,
+  connectionCoordinates,
   id,
-  lineRef,
   outputNodeId,
   outputPortName,
   inputNodeId,
   inputPortName,
 }) => {
-  const curve = calculateCurve(from, to);
+  const curve = calculateCurve(connectionCoordinates);
+
+  console.log("rendered Connection", id);
+
   return (
     <svg className={styles.svg}>
       <path
@@ -37,8 +36,7 @@ export const Connection: React.FC<ConnectionProps> = ({
         fill="none"
         strokeWidth={3}
         strokeLinecap="round"
-        d={curve}
-        ref={lineRef}
+        d={curve!}
       />
     </svg>
   );

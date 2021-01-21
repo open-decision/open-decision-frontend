@@ -1,4 +1,5 @@
 import { Nodes, NodeTypes, PortTypes } from "../types";
+import { connectionCoordinates } from "../utilities/connections/types";
 
 export const exampleNodes: Nodes = {
   "5nCLb85WDw": {
@@ -6,34 +7,33 @@ export const exampleNodes: Nodes = {
     coordinates: [134.5, -90],
     type: "addNumbers",
     width: 150,
-    connections: {
-      inputs: {
-        num1: [{ nodeId: "vRPQ06k4nT", portName: "number" }],
-        num2: [],
-      },
-      outputs: {},
-    },
   },
   vRPQ06k4nT: {
     id: "vRPQ06k4nT",
     coordinates: [-182.5, -176],
     type: "number",
     width: 150,
-    connections: {
-      inputs: {},
-      outputs: { number: [{ nodeId: "5nCLb85WDw", portName: "num1" }] },
-    },
   },
   BDhQ98lTfw: {
     id: "BDhQ98lTfw",
     coordinates: [-181.5, -42],
     type: "number",
     width: 150,
-    connections: {
-      inputs: {},
-      outputs: {},
-    },
   },
+};
+
+export type edge = {
+  nodeId: string;
+  portName: string;
+  connectionCoordinates?: connectionCoordinates;
+};
+export type edges = Record<string, edge[]>;
+
+export const exampleEdges: edges = {
+  "5nCLb85WDw": [
+    { nodeId: "vRPQ06k4nT", portName: "number" },
+    { nodeId: "BDhQ98lTfw", portName: "number" },
+  ],
 };
 
 export const portTypes: PortTypes = {

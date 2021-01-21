@@ -84,13 +84,13 @@ type nodeBase = {
   /**
    * The unique id of each Node.
    */
-  readonly id: string;
+  id: string;
   /**
    * The positional coordinates of this Node.
    */
-  readonly coordinates: coordinates;
-  readonly width?: number;
-  readonly height?: number;
+  coordinates: coordinates;
+  width?: number;
+  height?: number;
 };
 
 /**
@@ -105,11 +105,11 @@ export type Comment = nodeBase & {
   /**
    * The text content of the comment.
    */
-  readonly text: string;
+  text: string;
   /**
    * The color of the comment.
    */
-  readonly color?: string;
+  color?: string;
 };
 
 /**
@@ -124,11 +124,12 @@ export type Node = nodeBase & {
   /**
    * The type is analogous to the type of a preconfigured node. Information is looked up based on this type so it must be a type that is part of the config object.
    */
-  readonly type: string;
+  type: string;
+  runtimeData?: DOMRect;
   /**
    * Contains the information to which other Nodes and specifically which port a Node is connected to.
    */
-  readonly connections: Transputs;
+  //  connections: Transputs;
 };
 
 /**
@@ -140,14 +141,14 @@ export type Nodes = Record<string, Node>;
  * The information used to uniquely track a Connection between two ports of distinct Nodes.
  */
 export type Connection = {
-  readonly nodeId: string;
-  readonly portName: string;
+  nodeId: string;
+  portName: string;
 };
 
 /**
  * The Connections are an object indexed by a unique string. Each key has an Array of Connections assosciated.
  */
-export type Connections = Record<string, readonly Connection[]>;
+export type Connections = Record<string, Connection[]>;
 
 /**
  * Groups the input and output Connections for use as part of each Nodes state.
@@ -156,11 +157,11 @@ export type Transputs = {
   /**
    * All input Connections.
    */
-  readonly inputs: Connections;
+  inputs: Connections;
   /**
    * All output Connections.
    */
-  readonly outputs: Connections;
+  outputs: Connections;
 };
 
 //------------------------------------------------------------------------------

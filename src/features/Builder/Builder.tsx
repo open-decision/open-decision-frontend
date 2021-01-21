@@ -4,12 +4,18 @@ import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import { EditorState } from "./node-editor/reducers";
-import { exampleNodes, nodeTypes, portTypes } from "./node-editor/tests/nodes";
+import {
+  exampleNodes,
+  nodeTypes,
+  portTypes,
+  exampleEdges,
+} from "./node-editor/tests/nodes";
 
 const initialEditorState: EditorState = {
   comments: {},
   id: "1234",
   nodes: exampleNodes,
+  edges: exampleEdges,
   coordinates: [0, 0],
   zoom: 1,
   config: [nodeTypes, portTypes],

@@ -12,6 +12,7 @@ export const EditorContext = React.createContext<
     nodes: {},
     comments: {},
     config: [{}, {}],
+    edges: {},
   },
   () => null,
 ]);

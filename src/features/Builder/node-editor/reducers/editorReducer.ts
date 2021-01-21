@@ -7,13 +7,59 @@ import {
   PortTypes,
   Connections,
 } from "../types";
-import {
-  checkForCircularNodes,
-  deleteConnection,
-  deleteConnectionsByNodeId,
-} from "../utilities";
+import { checkForCircularNodes } from "../utilities";
 import produce, { Draft } from "immer";
 import { nanoid } from "nanoid/non-secure";
+import {
+  deleteConnection,
+  deleteConnectionsByNodeId,
+} from "../utilities/connections/existingConnections";
+import { edges } from "../tests/nodes";
+import {
+  connectionCoordinates,
+  connectionPorts,
+} from "../utilities/connections/types";
+
+export const getConnectionCoordinates = (
+  zoom: number,
+  connectionPorts: connectionPorts,
+  stageRect: React.MutableRefObject<DOMRect>,
+  portHalf: number,
+  stageCoordinates: coordinates
+): connectionCoordinates => {
+  const byScale = (value: number) => (1 / zoom) * value;
+  const [originPort, destinationPort] = connectionPorts;
+
+  const destination: coordinates = [
+    byScale(
+      destinationPort.x -
+        stageRect.current.x +
+        (portHalf - stageRect.current.width / 2)
+    ) - byScale(stageCoordinates[0]),
+    byScale(
+      destinationPort.y -
+        stageRect.current.y +
+        (portHalf - stageRect.current.height / 2)
+    ) - byScale(stageCoordinates[1]),
+  ];
+
+  const origin: coordinates = [
+    byScale(
+      originPort.x -
+        stageRect.current.x +
+        portHalf -
+        stageRect.current.width / 2
+    ) - byScale(stageCoordinates[0]),
+    byScale(
+      originPort.y -
+        stageRect.current.y +
+        portHalf -
+        stageRect.current.height / 2
+    ) - byScale(stageCoordinates[1]),
+  ];
+
+  return [origin, destination];
+};
 
 const removeConnection = produce(
   (nodes: Draft<Nodes>, input: Connection, output: Connection) => {
@@ -49,6 +95,7 @@ export type editorActions =
       input: Connection;
       output: Connection;
     }
+  | { type: "INITIALIZE" }
   | { type: "REMOVE_CONNECTION"; input: Connection; output: Connection }
   | { type: "DESTROY_TRANSPUT"; transput: Connection; transputType: string }
   | {
@@ -67,7 +114,21 @@ export type editorActions =
       controlName: string;
       data: any;
     }
-  | { type: "SET_NODE_COORDINATES"; nodeId: string; coordinates: coordinates }
+  | {
+      type: "SET_NODE_COORDINATES";
+      nodeId: string;
+      coordinates: coordinates;
+      nodeRuntimeData: DOMRect;
+    }
+  | {
+      type: "ADD_NODE_RUNTIME_DATA";
+      nodeRuntimeData: DOMRect;
+      id: string;
+    }
+  | {
+      type: "ADD_EDGES_RUNTIME_DATA";
+      stageRect: React.MutableRefObject<DOMRect | null>;
+    }
   | {
       type: "ADD_COMMENT";
       coordinates: coordinates;
@@ -87,34 +148,38 @@ export type EditorState = {
   /**
    * The id of the Editor.
    */
-  readonly id: string;
+  id: string;
   /**
    * The current zoom level.
    */
-  readonly zoom: number;
+  zoom: number;
   /**
    * The current position of the Editor.
    */
-  readonly coordinates: coordinates;
+  coordinates: coordinates;
   /**
    * The currently shown Nodes.
    */
-  readonly nodes: Nodes;
+  nodes: Nodes;
+  /**
+   * The currently shown Nodes.
+   */
+  edges: edges;
   /**
    * The currently shown Comments.
    */
-  readonly comments: Comments;
+  comments: Comments;
   /**
    * The preconfigured avaliable NodeTypes and PortTypes that can be added when using the node-editor.
    */
-  readonly config: [NodeTypes, PortTypes];
+  config: [NodeTypes, PortTypes];
 };
 
 export const editorReducer = (
   circularBehavior: "warn" | "prevent" | "allow",
   dispatchToasts?: any
 ) =>
-  produce((draft: Draft<EditorState>, action: editorActions) => {
+  produce((draft: EditorState, action: editorActions) => {
     switch (action.type) {
       case "SET_SCALE":
         draft.zoom = action.zoom;
@@ -134,18 +199,41 @@ export const editorReducer = (
           coordinates,
           type: nodeType,
           width: width ? width : 200,
-          connections: {
-            inputs: {},
-            outputs: {},
-          },
         };
+        break;
+      }
+
+      case "ADD_NODE_RUNTIME_DATA": {
+        draft.nodes[action.id].runtimeData = action.nodeRuntimeData;
+        break;
+      }
+
+      case "ADD_EDGES_RUNTIME_DATA": {
+        const edges = draft.edges;
+
+        for (const node in edges) {
+          const originNode = draft.nodes[node]?.runtimeData;
+
+          edges[node].forEach((edge) => {
+            const destinationNode = draft.nodes[edge.nodeId]?.runtimeData;
+
+            if (originNode && destinationNode) {
+              edge.connectionCoordinates = getConnectionCoordinates(
+                draft.zoom,
+                [originNode, destinationNode],
+                action.stageRect,
+                6,
+                draft.coordinates
+              );
+            }
+          });
+        }
         break;
       }
 
       case "REMOVE_NODE": {
         const { nodeId } = action;
         delete draft.nodes[nodeId];
-
         Object.values(draft.nodes).map((node) => {
           node.connections.inputs = removeConnectionsById(
             node.connections.inputs,
@@ -247,8 +335,10 @@ export const editorReducer = (
       }
 
       case "SET_NODE_COORDINATES": {
-        const { coordinates, nodeId } = action;
+        const { coordinates, nodeId, nodeRuntimeData } = action;
+
         draft.nodes[nodeId].coordinates = coordinates;
+        draft.nodes[nodeId].runtimeData = nodeRuntimeData;
         break;
       }
 

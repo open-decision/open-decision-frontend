@@ -27,6 +27,7 @@ import {
 //Hooks and Functions
 import { useDOMRect } from "./hooks/useDOMRect";
 import { useFunctionAfterLayout } from "./hooks/useFunctionAfterLayout";
+import { Connection } from "./components/Connection/Connection";
 
 type NodeEditorProps = {
   /**
@@ -79,14 +80,24 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //----------------------------------------------------------------
 
   //This DOMRect references the Stage of the node-editor. It is then used across the Editor to calculate positions and connections.
-  const [stageRef, recalculateRect] = useDOMRect(editorState.id);
+  const [stageRect, recalculateRect] = useDOMRect(editorState.id);
 
   //----------------------------------------------------------------
 
   //The following hook returns a function that triggers the function supplied to the hook after this component has been rendered.
-  const triggerRecalculateConnections = useFunctionAfterLayout(() =>
-    createConnections(editorState)
-  );
+  // const triggerRecalculateConnections = useFunctionAfterLayout(() =>
+  //   createConnections(
+  //     editorState.nodes,
+  //     editorState.zoom,
+  //     editorState.id,
+  //     stageRect,
+  //     editorState.coordinates
+  //   )
+  // );
+
+  React.useLayoutEffect(() => {
+    dispatchEditorState({ type: "ADD_EDGES_RUNTIME_DATA", stageRect });
+  }, [editorState.nodes, stageRect]);
 
   //----------------------------------------------------------------
 
@@ -96,7 +107,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
       <Stage
         disablePan={disablePan}
         disableZoom={disableZoom}
-        stageRect={stageRef}
+        stageRect={stageRect}
       >
         {/* {!hideComments &&
             Object.values(editorState.comments).map((comment) => (
@@ -109,15 +120,23 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
             ))} */}
 
         {Object.values(editorState.nodes).map((node) => (
-          <Node
-            node={node}
-            stageRect={stageRef}
-            key={node.id}
-            recalculate={triggerRecalculateConnections}
-          />
+          <Node node={node} key={node.id} />
         ))}
 
-        <Connections editorId={editorState.id} />
+        {/* <Connections editorId={editorState.id} /> */}
+
+        {Object.entries(editorState.edges).map(([originNodeId, node]) =>
+          node.map(
+            (edge) =>
+              edge.connectionCoordinates && (
+                <Connection
+                  id={`${originNodeId}-${edge.nodeId}`}
+                  key={`${originNodeId}-${edge.nodeId}`}
+                  connectionCoordinates={edge.connectionCoordinates}
+                />
+              )
+          )
+        )}
 
         <div
           className={styles.dragWrapper}
