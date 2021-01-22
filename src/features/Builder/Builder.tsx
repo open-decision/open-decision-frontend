@@ -1,9 +1,8 @@
 import React from "react";
-import { NodeEditor } from "./node-editor";
+import { EditorState, NodeEditor } from "./node-editor";
 import { Button, FileInput, Header, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
-import { EditorState } from "./node-editor/reducers";
 import {
   exampleNodes,
   nodeTypes,

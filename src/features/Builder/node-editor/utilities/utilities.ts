@@ -1,7 +1,7 @@
-import { Nodes } from "../types";
+import { nodes } from "../types";
 
 export const checkForCircularNodes = (
-  nodes: Nodes,
+  nodes: nodes,
   startNodeId: string
 ): boolean => {
   let isCircular = false;

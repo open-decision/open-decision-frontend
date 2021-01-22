@@ -1,20 +1,11 @@
 import React from "react";
 import styles from "./Node.module.css";
-import { EditorContext } from "../../utilities";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import { IoPorts } from "../IoPorts/IoPorts";
-import {
-  Connection,
-  Connections,
-  coordinates,
-  Node as NodeType,
-} from "../../types";
+import { coordinates } from "../../types";
 import { useGesture } from "react-use-gesture";
-import {
-  calculateCurve,
-  getPortRect,
-} from "../../utilities/connections/shared";
+import { useEditorStore, useNodesStore } from "../../globalState/stores";
+import shallow from "zustand/shallow";
 
 const deleteNodeMenuoption: menuOption = {
   label: "Delete Node",
@@ -24,17 +15,17 @@ const deleteNodeMenuoption: menuOption = {
 };
 
 type NodeProps = {
-  node: NodeType;
+  id: string;
 };
 
-export const Node: React.FC<NodeProps> = React.memo(({ node, ...props }) => {
-  const [
-    {
-      coordinates,
-      config: [nodeTypes],
-    },
-    dispatch,
-  ] = React.useContext(EditorContext);
+export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
+  const [coordinates, nodeTypes] = useEditorStore(
+    (state) => [state.editorConfig.coordinates, state.editorConfig.config[0]],
+    shallow
+  );
+
+  const setNodeData = useNodesStore((state) => state.setNodeData);
+  const node = useNodesStore((state) => state.nodes[id]);
 
   // Get the shared information for a Node of this type from the NodeTypes.
   const { label, deletable } = nodeTypes[node.type];
@@ -51,24 +42,17 @@ export const Node: React.FC<NodeProps> = React.memo(({ node, ...props }) => {
   const nodeGestures = useGesture(
     {
       onDrag: ({ movement, event }) => {
-        //To avoid panning the Stage when dragging the Node we stop the propagation of the event.
         event.stopPropagation();
-        // setCoordinates(movement);
-        // updateNodeConnections();
-        const nodeRuntimeData = ref.current?.getBoundingClientRect();
+        const runtimeData = ref.current?.getBoundingClientRect();
 
-        nodeRuntimeData &&
-          dispatch({
-            type: "SET_NODE_COORDINATES",
-            coordinates: movement,
-            nodeId: node.id,
-            nodeRuntimeData,
-          });
+        runtimeData &&
+          setNodeData({ ...node, coordinates: movement, runtimeData });
       },
     },
     { drag: { initial: node.coordinates } }
   );
 
+  //TODO Refactor Nodes Menu
   const handleContextMenu = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -92,18 +76,10 @@ export const Node: React.FC<NodeProps> = React.memo(({ node, ...props }) => {
     }
   };
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const nodeRuntimeData = ref.current?.getBoundingClientRect();
-
-    nodeRuntimeData &&
-      dispatch({
-        type: "ADD_NODE_RUNTIME_DATA",
-        id: node.id,
-        nodeRuntimeData,
-      });
-  }, [dispatch, node.id, coordinates]);
-
-  console.log("rendered Node", node.id);
+    nodeRuntimeData && setNodeData({ ...node, runtimeData: nodeRuntimeData });
+  }, []);
 
   return (
     <div
@@ -118,14 +94,7 @@ export const Node: React.FC<NodeProps> = React.memo(({ node, ...props }) => {
       {...nodeGestures()}
       {...props}
     >
-      <h2 className={styles.label}>{label}</h2>
-      {/* <IoPorts
-        nodeId={node.id}
-        inputs={inputPorts}
-        outputs={outputPorts}
-        connections={node.connections}
-        recalculate={recalculate}
-      /> */}
+      <h2 className={styles.label}>{node.id}</h2>
       {menuOpen ? (
         <Portal>
           <ContextMenu

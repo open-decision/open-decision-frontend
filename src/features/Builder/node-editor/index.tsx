@@ -2,32 +2,60 @@
 import React from "react";
 
 //State Management
-import {
-  toastsReducer,
-  editorReducer,
-  EditorState,
-  editorActions,
-} from "./reducers";
+import { toastsReducer } from "./globalState";
 
 //Components
 import { Stage } from "./components/Stage/Stage";
-import { Node } from "./components/Node/Node";
 // import { Comment } from "./components/Comment/Comment";
-import { Toaster } from "./components/Toaster/Toaster";
-import { Connections } from "./components/Connections/Connections";
-
-// Types, Constants and Styles
-import styles from "./index.module.css";
-import {
-  EditorContext,
-  createConnections,
-  DRAG_CONNECTION_ID,
-} from "./utilities";
+// import { Toaster } from "./components/Toaster/Toaster";
 
 //Hooks and Functions
-import { useDOMRect } from "./hooks/useDOMRect";
-import { useFunctionAfterLayout } from "./hooks/useFunctionAfterLayout";
-import { Connection } from "./components/Connection/Connection";
+import {
+  useEdgesStore,
+  useEditorStore,
+  useNodesStore,
+} from "./globalState/stores";
+import { Nodes } from "./components/Node/Nodes";
+import { ConnectionsWrapper } from "./components/Connections/ConnectionsWrapper";
+import {
+  comments,
+  coordinates,
+  edges,
+  nodes,
+  nodeTypes,
+  portTypes,
+} from "./types";
+
+export type EditorState = {
+  /**
+   * The id of the Editor.
+   */
+  id: string;
+  /**
+   * The current zoom level.
+   */
+  zoom: number;
+  /**
+   * The current position of the Editor.
+   */
+  coordinates: coordinates;
+  /**
+   * The currently shown Nodes.
+   */
+  nodes: nodes;
+  /**
+   * The currently shown Nodes.
+   */
+  edges: edges;
+  /**
+   * The currently shown Comments.
+   */
+  comments: comments;
+  /**
+   * The preconfigured avaliable NodeTypes and PortTypes that can be added when using the node-editor.
+   */
+  config: [nodeTypes, portTypes];
+};
 
 type NodeEditorProps = {
   /**
@@ -60,89 +88,44 @@ type NodeEditorProps = {
 
 export const NodeEditor: React.FC<NodeEditorProps> = ({
   state,
-  setState,
-  // hideComments = false,
-  circularBehavior = "prevent",
   disableZoom = false,
   disablePan = false,
 }) => {
+  //#region
   //Toasts are used as Notifications to the User informing him of Errors and other Messages.
   //TODO Toasts should be part of the main Application not just the node-editor
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
+  //#endregion
 
-  //The editorState contains all the information the editor needs to render.
-  const [editorState, dispatchEditorState] = React.useReducer<
-    React.Reducer<EditorState, editorActions>
-  >(editorReducer(circularBehavior, dispatchToasts), {
-    ...state,
-  });
+  const setEditorConfig = useEditorStore((state) => state.setEditorConfig);
+  const setNodes = useNodesStore((state) => state.setNodes);
+  const setEdges = useEdgesStore((state) => state.setEdges);
 
-  //----------------------------------------------------------------
-
-  //This DOMRect references the Stage of the node-editor. It is then used across the Editor to calculate positions and connections.
-  const [stageRect, recalculateRect] = useDOMRect(editorState.id);
-
-  //----------------------------------------------------------------
-
-  //The following hook returns a function that triggers the function supplied to the hook after this component has been rendered.
-  // const triggerRecalculateConnections = useFunctionAfterLayout(() =>
-  //   createConnections(
-  //     editorState.nodes,
-  //     editorState.zoom,
-  //     editorState.id,
-  //     stageRect,
-  //     editorState.coordinates
-  //   )
-  // );
-
-  React.useLayoutEffect(() => {
-    dispatchEditorState({ type: "ADD_EDGES_RUNTIME_DATA", stageRect });
-  }, [editorState.nodes, stageRect]);
+  React.useEffect(() => {
+    setEditorConfig({
+      zoom: state.zoom,
+      coordinates: state.coordinates,
+      config: state.config,
+    });
+    setNodes(state.nodes);
+    setEdges(state.edges);
+  }, [
+    setEdges,
+    setEditorConfig,
+    setNodes,
+    state.config,
+    state.coordinates,
+    state.edges,
+    state.nodes,
+    state.zoom,
+  ]);
 
   //----------------------------------------------------------------
 
   return (
-    //The EditorState and dispatcher are shard across the node-editor.
-    <EditorContext.Provider value={[editorState, dispatchEditorState]}>
-      <Stage
-        disablePan={disablePan}
-        disableZoom={disableZoom}
-        stageRect={stageRect}
-      >
-        {/* {!hideComments &&
-            Object.values(editorState.comments).map((comment) => (
-              <Comment
-                {...comment}
-                stageRect={stageRef}
-                onDragStart={recalculateRect}
-                key={comment.id}
-              />
-            ))} */}
-
-        {Object.values(editorState.nodes).map((node) => (
-          <Node node={node} key={node.id} />
-        ))}
-
-        {/* <Connections editorId={editorState.id} /> */}
-
-        {Object.entries(editorState.edges).map(([originNodeId, node]) =>
-          node.map(
-            (edge) =>
-              edge.connectionCoordinates && (
-                <Connection
-                  id={`${originNodeId}-${edge.nodeId}`}
-                  key={`${originNodeId}-${edge.nodeId}`}
-                  connectionCoordinates={edge.connectionCoordinates}
-                />
-              )
-          )
-        )}
-
-        <div
-          className={styles.dragWrapper}
-          id={`${DRAG_CONNECTION_ID}${editorState.id}`}
-        />
-      </Stage>
-    </EditorContext.Provider>
+    <Stage disablePan={disablePan} disableZoom={disableZoom}>
+      <Nodes />
+      <ConnectionsWrapper />
+    </Stage>
   );
 };

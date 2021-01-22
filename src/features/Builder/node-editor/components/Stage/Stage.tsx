@@ -2,16 +2,16 @@ import React from "react";
 import styles from "./Stage.module.css";
 import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
-import { EditorContext, STAGE_ID } from "../../utilities";
+import { STAGE_ID } from "../../utilities";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
 import { useKeyPressEvent } from "react-use";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { useGesture } from "react-use-gesture";
 import { coordinates } from "../../types";
+import { useEditorStore } from "../../globalState/stores";
 
 type StageProps = {
-  stageRect: React.MutableRefObject<DOMRect | null>;
   /**
    * Setting this to false disables panning in the Editor.
    */
@@ -27,20 +27,25 @@ type StageProps = {
  */
 export const Stage: React.FC<StageProps> = ({
   children,
-  stageRect,
   disablePan,
   disableZoom,
 }) => {
-  //We need information from the editorState to render the Stage. For the main functionality of the Stage, namely zooming and panning, we also need the dispatch function to update the zoom and position state variables.
   const [
-    {
-      zoom: initialZoom,
-      coordinates: initialCoordinates,
-      id,
-      config: [nodeTypes],
-    },
-    dispatch,
-  ] = React.useContext(EditorContext);
+    initialZoom,
+    initialCoordinates,
+    id,
+    nodeTypes,
+    setEditorConfig,
+  ] = useEditorStore((state) => [
+    state.editorConfig.zoom,
+    state.editorConfig.coordinates,
+    state.editorConfig.id,
+    state.editorConfig.config[0],
+    state.setEditorConfig,
+  ]);
+
+  const [zoom, setZoom] = React.useState(initialZoom);
+  const [coordinates, setCoordinates] = React.useState(initialCoordinates);
 
   const {
     menuOpen,
@@ -58,33 +63,32 @@ export const Stage: React.FC<StageProps> = ({
    * This tracks whether the space key is pressed. We need this, because the Stage should be pannable when pressing the space key.
    */
   const [spaceIsPressed, setSpaceIsPressed] = React.useState(false);
-  const [coordinates, setCoordinates] = React.useState(initialCoordinates);
-  const [zoom, setZoom] = React.useState(initialZoom);
   useKeyPressEvent(
     (e) => e.code === "Space",
     () => setSpaceIsPressed(true),
     () => {
-      dispatch({ type: "SET_TRANSLATE", coordinates: coordinates });
+      setEditorConfig({ coordinates });
       setSpaceIsPressed(false);
     }
   );
 
   /**
-   * These gestures represent the panning and zooming inside the Stage. They are enabled and disabled by the disableZoom and disablePan props.
+   * These gestures represent the panning and zooming inside the Stage. They are enabled and disabled by the `disableZoom` and `disablePan` props.
    */
   const stageGestures = useGesture(
     {
       // We track the mousewheel and zoom in and out of the Stage. We only update the global state at the end of the wheel gesture.
       onWheel: ({ delta: [, y] }) =>
         setZoom(clamp(zoom - clamp(y, -10, 10) * 0.005, 0.5, 2)),
-      onWheelEnd: () => dispatch({ type: "SET_SCALE", zoom }),
+      onWheelEnd: () => setEditorConfig({ zoom }),
 
       // We track the drag and pan the Stage based on the previous coordinates and the delta (change) in the coordinates. We only update the global state at the end of the drag gesture.
       onDrag: ({ movement }) => setCoordinates(movement),
-      onDragEnd: () => dispatch({ type: "SET_TRANSLATE", coordinates }),
+      onDragEnd: () => setEditorConfig({ coordinates }),
 
       //This gesture enables panning of the Stage when the mouse is moved. We need this to make the Stage pannable when the Space key is pressed. Because we have to update the global state before we set disable the move we set it in the useKeypreeEvent Hook.
       onMove: ({ movement }) => setCoordinates(movement),
+      onMoveEnd: () => setEditorConfig({ coordinates }),
     },
     {
       move: { enabled: !disablePan && spaceIsPressed, initial: coordinates },
@@ -94,20 +98,18 @@ export const Stage: React.FC<StageProps> = ({
   );
 
   //------------------------------------------------------------------------
-  //TODO understand what this does
-  const setStageRect = React.useCallback(() => {
-    stageRect.current = ref?.current?.getBoundingClientRect() ?? null;
-  }, [stageRect]);
+
+  const setRuntimeData = useEditorStore((state) => state.setRuntimeData);
 
   React.useEffect(() => {
-    stageRect.current = ref?.current?.getBoundingClientRect() ?? null;
-    window.addEventListener("resize", setStageRect);
-    return () => {
-      window.removeEventListener("resize", setStageRect);
-    };
-  }, [setStageRect, stageRect]);
+    const runtimeData = ref.current?.getBoundingClientRect();
+
+    runtimeData && setRuntimeData(runtimeData);
+  }, [setRuntimeData]);
 
   //------------------------------------------------------------------------
+
+  //TODO Refactor Stage Context Menu
   /**
    * Interpolates a value with the zoom level. This is used to make the positional values relative to the zoom level and just to the actual values reported by the a drag event.
    */

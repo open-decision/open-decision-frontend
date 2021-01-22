@@ -1,6 +1,10 @@
 import { curveBasis, line } from "d3-shape";
-import { Connection, coordinates } from "../../types";
-import { connectionCoordinates, connectionPorts } from "./types";
+import {
+  connection,
+  connectionCoordinates,
+  connectionPorts,
+  edge,
+} from "../../types";
 
 export const calculateCurve = (
   connectionCoordinates: connectionCoordinates
@@ -30,7 +34,7 @@ export const getPortRect = (
   getPort(nodeId, portName, portType)?.getBoundingClientRect();
 
 export const getConnectionPorts = (
-  connection: Connection,
+  connection: edge,
   isOutput: boolean,
   nodeId: string,
   portName: string
@@ -49,45 +53,4 @@ export const getConnectionPorts = (
 
   if (!originPort || !destinationPort) return;
   return [originPort, destinationPort];
-};
-
-export const getConnectionCoordinates = (
-  zoom: number,
-  connectionPorts: connectionPorts,
-  stageRect: React.MutableRefObject<DOMRect>,
-  portHalf: number,
-  stageCoordinates: coordinates
-): connectionCoordinates => {
-  const byScale = (value: number) => (1 / zoom) * value;
-  const [originPort, destinationPort] = connectionPorts;
-
-  const destination: coordinates = [
-    byScale(
-      destinationPort.x -
-        stageRect.current.x +
-        (portHalf - stageRect.current.width / 2)
-    ) - byScale(stageCoordinates[0]),
-    byScale(
-      destinationPort.y -
-        stageRect.current.y +
-        (portHalf - stageRect.current.height / 2)
-    ) - byScale(stageCoordinates[1]),
-  ];
-
-  const origin: coordinates = [
-    byScale(
-      originPort.x -
-        stageRect.current.x +
-        portHalf -
-        stageRect.current.width / 2
-    ) - byScale(stageCoordinates[0]),
-    byScale(
-      originPort.y -
-        stageRect.current.y +
-        portHalf -
-        stageRect.current.height / 2
-    ) - byScale(stageCoordinates[1]),
-  ];
-
-  return [origin, destination];
 };
