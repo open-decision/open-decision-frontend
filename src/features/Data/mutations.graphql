@@ -31,3 +31,14 @@ mutation REGISTER_USER(
     token
   }
 }
+
+mutation CREATE_TREE($input: CreateDecisionTreeMutationInput!) {
+  createTree(input: $input) {
+    tree {
+      id
+      name
+      extraData
+      tags
+    }
+  }
+}

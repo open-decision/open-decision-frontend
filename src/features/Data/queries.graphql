@@ -1,0 +1,12 @@
+query ALL_TREES {
+  allDecisionTrees {
+    edges {
+      node {
+        id
+        name
+        tags
+        createdAt
+      }
+    }
+  }
+}

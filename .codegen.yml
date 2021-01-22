@@ -1,6 +1,8 @@
 overwrite: true
 schema: "https://builder.open-decision.org/graphql"
-documents: "src/**/*.gql"
+documents:
+  - src/features/Data/queries.graphql
+  - src/features/Data/mutations.graphql
 generates:
   src/types/generated/graphql.tsx:
     plugins:
