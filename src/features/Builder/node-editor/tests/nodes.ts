@@ -1,42 +1,57 @@
-import { Nodes, NodeTypes, PortTypes } from "../types";
-import { connectionCoordinates } from "../utilities/connections/types";
+import { edges, nodes, nodeTypes, portTypes } from "../types";
 
-export const exampleNodes: Nodes = {
-  "5nCLb85WDw": {
-    id: "5nCLb85WDw",
+export const exampleNodes: nodes = {
+  node1: {
+    id: "node1",
     coordinates: [134.5, -90],
     type: "addNumbers",
     width: 150,
+    height: 20,
   },
-  vRPQ06k4nT: {
-    id: "vRPQ06k4nT",
+  node2: {
+    id: "node2",
     coordinates: [-182.5, -176],
     type: "number",
     width: 150,
+    height: 20,
   },
-  BDhQ98lTfw: {
-    id: "BDhQ98lTfw",
+  node3: {
+    id: "node3",
     coordinates: [-181.5, -42],
     type: "number",
     width: 150,
+    height: 20,
+  },
+  node4: {
+    id: "node4",
+    coordinates: [-170.5, -80],
+    type: "number",
+    width: 150,
+    height: 20,
+  },
+  node5: {
+    id: "node5",
+    coordinates: [-1120, -20],
+    type: "number",
+    width: 150,
+    height: 20,
+  },
+  node6: {
+    id: "node6",
+    coordinates: [50, 40],
+    type: "number",
+    width: 150,
+    height: 20,
   },
 };
 
-export type edge = {
-  nodeId: string;
-  portName: string;
-  connectionCoordinates?: connectionCoordinates;
-};
-export type edges = Record<string, edge[]>;
-
 export const exampleEdges: edges = {
-  "5nCLb85WDw": [
-    { nodeId: "vRPQ06k4nT", portName: "number" },
-    { nodeId: "BDhQ98lTfw", portName: "number" },
-  ],
+  node1: [{ nodeId: "node2", portName: "number" }],
+  node3: [{ nodeId: "node2", portName: "number" }],
+  node5: [{ nodeId: "node6", portName: "number" }],
 };
 
-export const portTypes: PortTypes = {
+export const portTypes: portTypes = {
   number: {
     type: "number",
     label: "Number",
@@ -46,7 +61,7 @@ export const portTypes: PortTypes = {
   },
 };
 
-export const nodeTypes: NodeTypes = {
+export const nodeTypes: nodeTypes = {
   number: {
     type: "number",
     label: "Number",
