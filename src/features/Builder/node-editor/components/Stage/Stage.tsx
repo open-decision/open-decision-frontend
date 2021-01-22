@@ -4,7 +4,7 @@ import { Portal } from "react-portal";
 import ContextMenu, { menuOption } from "../ContextMenu/ContextMenu";
 import { STAGE_ID } from "../../utilities";
 import orderBy from "lodash/orderBy";
-import clamp from "lodash/clamp";
+import { clamp } from "lodash";
 import { useKeyPressEvent } from "react-use";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { useGesture } from "react-use-gesture";
@@ -109,100 +109,100 @@ export const Stage: React.FC<StageProps> = ({
 
   //------------------------------------------------------------------------
 
-  //TODO Refactor Stage Context Menu
-  /**
-   * Interpolates a value with the zoom level. This is used to make the positional values relative to the zoom level and just to the actual values reported by the a drag event.
-   */
-  const byScale = (value: number) => (1 / zoom) * value;
+  // //TODO Refactor Stage Context Menu
+  // /**
+  //  * Interpolates a value with the zoom level. This is used to make the positional values relative to the zoom level and just to the actual values reported by the a drag event.
+  //  */
+  // const byScale = (value: number) => (1 / zoom) * value;
 
-  /**
-   * Uses the ref of the outer box to calculate coordinates for elements.
-   */
-  const getCoordinates = (): coordinates => {
-    const wrapperRect = ref?.current?.getBoundingClientRect();
+  // /**
+  //  * Uses the ref of the outer box to calculate coordinates for elements.
+  //  */
+  // const getCoordinates = (): coordinates => {
+  //   const wrapperRect = ref?.current?.getBoundingClientRect();
 
-    if (wrapperRect) {
-      const x =
-        byScale(menuCoordinates[0] - wrapperRect.x - wrapperRect.width / 2) +
-        byScale(coordinates[0]);
+  //   if (wrapperRect) {
+  //     const x =
+  //       byScale(menuCoordinates[0] - wrapperRect.x - wrapperRect.width / 2) +
+  //       byScale(coordinates[0]);
 
-      const y =
-        byScale(menuCoordinates[1] - wrapperRect.y - wrapperRect.height / 2) +
-        byScale(coordinates[1]);
+  //     const y =
+  //       byScale(menuCoordinates[1] - wrapperRect.y - wrapperRect.height / 2) +
+  //       byScale(coordinates[1]);
 
-      return [x, y];
-    }
+  //     return [x, y];
+  //   }
 
-    return [0, 0];
-  };
+  //   return [0, 0];
+  // };
 
-  /**
-   * Can be called to add a new Node.
-   * @param type - The type of Node that should be added.
-   */
-  const addNode = (type: string) => {
-    const coordinates = getCoordinates();
+  // /**
+  //  * Can be called to add a new Node.
+  //  * @param type - The type of Node that should be added.
+  //  */
+  // const addNode = (type: string) => {
+  //   const coordinates = getCoordinates();
 
-    coordinates
-      ? dispatch({
-          type: "ADD_NODE",
-          nodeType: type,
-          coordinates,
-        })
-      : null;
-  };
+  //   coordinates
+  //     ? dispatch({
+  //         type: "ADD_NODE",
+  //         nodeType: type,
+  //         coordinates,
+  //       })
+  //     : null;
+  // };
 
-  /**
-   * Can be called to add a new Comment.
-   */
-  const addComment = () => {
-    const coordinates = getCoordinates();
+  // /**
+  //  * Can be called to add a new Comment.
+  //  */
+  // const addComment = () => {
+  //   const coordinates = getCoordinates();
 
-    coordinates
-      ? dispatch({
-          type: "ADD_COMMENT",
-          coordinates,
-        })
-      : null;
-  };
+  //   coordinates
+  //     ? dispatch({
+  //         type: "ADD_COMMENT",
+  //         coordinates,
+  //       })
+  //     : null;
+  // };
 
-  /**
-   * Handles the different kinds of elements that can be added to the Editor.
-   */
-  const addElement = (menuOption: menuOption) => {
-    switch (menuOption.internalType) {
-      case "comment":
-        addComment();
-        break;
+  // /**
+  //  * Handles the different kinds of elements that can be added to the Editor.
+  //  */
+  // const addElement = (menuOption: menuOption) => {
+  //   switch (menuOption.internalType) {
+  //     case "comment":
+  //       addComment();
+  //       break;
 
-      case "node":
-        addNode(menuOption.type);
-        break;
+  //     case "node":
+  //       addNode(menuOption.type);
+  //       break;
 
-      default:
-        break;
-    }
-  };
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  /**
-   * The menuOptions are filling the ContextMenu with the nodes that are addable to the Editor. They are sorted based on sortIndex and label.
-   */
-  const menuOptions = React.useMemo(() => {
-    const options = orderBy(
-      Object.values(nodeTypes).map(
-        (node): menuOption => ({
-          type: node.type,
-          label: node.label,
-          description: node.description,
-          sortPriority: node.sortPriority,
-          internalType: "node",
-        })
-      ),
-      ["sortIndex", "label"]
-    );
+  // /**
+  //  * The menuOptions are filling the ContextMenu with the nodes that are addable to the Editor. They are sorted based on sortIndex and label.
+  //  */
+  // const menuOptions = React.useMemo(() => {
+  //   const options = orderBy(
+  //     Object.values(nodeTypes).map(
+  //       (node): menuOption => ({
+  //         type: node.type,
+  //         label: node.label,
+  //         description: node.description,
+  //         sortPriority: node.sortPriority,
+  //         internalType: "node",
+  //       })
+  //     ),
+  //     ["sortIndex", "label"]
+  //   );
 
-    return options;
-  }, [nodeTypes]);
+  //   return options;
+  // }, [nodeTypes]);
 
   return (
     // A Draggable component is providing the main Stage Container.
@@ -217,7 +217,7 @@ export const Stage: React.FC<StageProps> = ({
       {...stageGestures()}
     >
       {/* Here we track whether the ContextMenu should be open or closed. When we open the menu the coordinates are set based on the position of the mouse click. */}
-      {menuOpen ? (
+      {/* {menuOpen ? (
         <Portal>
           <ContextMenu
             coordinates={menuCoordinates}
@@ -227,7 +227,7 @@ export const Stage: React.FC<StageProps> = ({
             label="Add Node"
           />
         </Portal>
-      ) : null}
+      ) : null} */}
       {/* This inner wrapper is used to translate the position of the content on pan. */}
       <div
         className={styles.transformWrapper}

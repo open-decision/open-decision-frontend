@@ -53,28 +53,28 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
   );
 
   //TODO Refactor Nodes Menu
-  const handleContextMenu = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setMenuCoordinates([e.clientX, e.clientY]);
-    setMenuOpen(true);
-    return false;
-  };
+  // const handleContextMenu = (
+  //   e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  // ) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   setMenuCoordinates([e.clientX, e.clientY]);
+  //   setMenuOpen(true);
+  //   return false;
+  // };
 
-  const handleMenuOption = ({ type: value }: menuOption) => {
-    switch (value) {
-      case "deleteNode":
-        dispatch({
-          type: "REMOVE_NODE",
-          nodeId: node.id,
-        });
-        break;
-      default:
-        return;
-    }
-  };
+  // const handleMenuOption = ({ type: value }: menuOption) => {
+  //   switch (value) {
+  //     case "deleteNode":
+  //       dispatch({
+  //         type: "REMOVE_NODE",
+  //         nodeId: node.id,
+  //       });
+  //       break;
+  //     default:
+  //       return;
+  //   }
+  // };
 
   React.useEffect(() => {
     const nodeRuntimeData = ref.current?.getBoundingClientRect();
@@ -89,25 +89,25 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
         transform: `translate(${node.coordinates[0]}px, ${node.coordinates[1]}px)`,
       }}
       id={node.id}
-      onContextMenu={handleContextMenu}
+      // onContextMenu={handleContextMenu}
       ref={ref}
       {...nodeGestures()}
       {...props}
     >
       <h2 className={styles.label}>{node.id}</h2>
-      {menuOpen ? (
+      {/* {menuOpen ? (
         <Portal>
           <ContextMenu
             coordinates={menuCoordinates}
             options={nodeOptions}
             onRequestClose={() => setMenuOpen(false)}
-            onOptionSelected={handleMenuOption}
+            // onOptionSelected={handleMenuOption}
             hideFilter
             label="Node Options"
             emptyText="This node has no options."
           />
         </Portal>
-      ) : null}
+      ) : null} */}
     </div>
   );
 });

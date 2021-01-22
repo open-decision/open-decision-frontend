@@ -51,7 +51,7 @@ export const exampleEdges: edges = {
   node5: [{ nodeId: "node6", portName: "number" }],
 };
 
-export const portTypes: portTypes = {
+export const examplePortTypes: portTypes = {
   number: {
     type: "number",
     label: "Number",
@@ -61,7 +61,7 @@ export const portTypes: portTypes = {
   },
 };
 
-export const nodeTypes: nodeTypes = {
+export const exampleNodeTypes: nodeTypes = {
   number: {
     type: "number",
     label: "Number",

@@ -5,8 +5,8 @@ import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import {
   exampleNodes,
-  nodeTypes,
-  portTypes,
+  exampleNodeTypes,
+  examplePortTypes,
   exampleEdges,
 } from "./node-editor/tests/nodes";
 
@@ -17,7 +17,7 @@ const initialEditorState: EditorState = {
   edges: exampleEdges,
   coordinates: [0, 0],
   zoom: 1,
-  config: [nodeTypes, portTypes],
+  config: [exampleNodeTypes, examplePortTypes],
 };
 
 const Editor: React.FC<{

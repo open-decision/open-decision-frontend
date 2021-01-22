@@ -1,10 +1,5 @@
 import { curveBasis, line } from "d3-shape";
-import {
-  connection,
-  connectionCoordinates,
-  connectionPorts,
-  edge,
-} from "../../types";
+import { connectionCoordinates, connectionPorts, edge } from "../../types";
 
 export const calculateCurve = (
   connectionCoordinates: connectionCoordinates

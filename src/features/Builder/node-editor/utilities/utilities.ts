@@ -1,35 +1,35 @@
-import { nodes } from "../types";
+// import { nodes } from "../types";
 
-export const checkForCircularNodes = (
-  nodes: nodes,
-  startNodeId: string
-): boolean => {
-  let isCircular = false;
+// export const checkForCircularNodes = (
+//   nodes: nodes,
+//   startNodeId: string
+// ): boolean => {
+//   let isCircular = false;
 
-  const walk = (nodeId: string) => {
-    const outputs = Object.values(nodes[nodeId].connections.outputs);
+//   const walk = (nodeId: string) => {
+//     const outputs = Object.values(nodes[nodeId].connections.outputs);
 
-    for (let i = 0; i < outputs.length; i++) {
-      if (isCircular) {
-        break;
-      }
+//     for (let i = 0; i < outputs.length; i++) {
+//       if (isCircular) {
+//         break;
+//       }
 
-      const outputConnections = outputs[i];
+//       const outputConnections = outputs[i];
 
-      for (let k = 0; k < outputConnections.length; k++) {
-        const connectedTo = outputConnections[k];
+//       for (let k = 0; k < outputConnections.length; k++) {
+//         const connectedTo = outputConnections[k];
 
-        if (connectedTo.nodeId === startNodeId) {
-          isCircular = true;
-          break;
-        } else {
-          walk(connectedTo.nodeId);
-        }
-      }
-    }
-  };
+//         if (connectedTo.nodeId === startNodeId) {
+//           isCircular = true;
+//           break;
+//         } else {
+//           walk(connectedTo.nodeId);
+//         }
+//       }
+//     }
+//   };
 
-  walk(startNodeId);
+//   walk(startNodeId);
 
-  return isCircular;
-};
+//   return isCircular;
+// };
