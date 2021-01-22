@@ -3,7 +3,7 @@
 /**
  * The NodeConfig describes a certain type of preconfigured node. This is used to share the configuration of a node type across many uses in the state.
  */
-export type NodeConfig = {
+export type nodeConfig = {
   /**
    * The type of this NodeType. Basically the name of the NodeType.
    */
@@ -15,11 +15,11 @@ export type NodeConfig = {
   /**
    * The precconfigured inputPorts of a NodeType.
    */
-  inputPorts?: PortConfig[];
+  inputPorts?: portConfig[];
   /**
    * The precconfigured outputPorts of a NodeType.
    */
-  outputPorts?: PortConfig[];
+  outputPorts?: portConfig[];
   /**
    * A root Node is an entry point into the tree.
    */
@@ -43,12 +43,12 @@ export type NodeConfig = {
 /**
  * The NodeTypes is an object indexed by the name of the node types. Each key has a NodeConfig assosciated.
  */
-export type NodeTypes = Record<string, NodeConfig>;
+export type nodeTypes = Record<string, nodeConfig>;
 
 /**
  * Similar to a NodeConfig is a PortConfig used to preconfigure a certain type of port. This way a port type can be shared across many uses by its name.
  */
-export type PortConfig = {
+export type portConfig = {
   /**
    * The type of this PortType. Basically the name of this PortType.
    */
@@ -71,7 +71,7 @@ export type PortConfig = {
 /**
  * The PortTypes is an object indexed by the name of the port types. Each key has a PortConfig associated with it.
  */
-export type PortTypes = Record<string, PortConfig>;
+export type portTypes = Record<string, portConfig>;
 
 //------------------------------------------------------------------------------
 
@@ -101,7 +101,7 @@ export type coordinates = [number, number];
 /**
  * A comment is a special type of node.
  */
-export type Comment = nodeBase & {
+export type comment = nodeBase & {
   /**
    * The text content of the comment.
    */
@@ -115,12 +115,12 @@ export type Comment = nodeBase & {
 /**
  * The comments are an object indexed by unique strings.
  */
-export type Comments = Record<string, Comment>;
+export type comments = Record<string, comment>;
 
 /**
  * A Node is the main type of element in the node-editor. The properties of a node are  focused on information unique to each Node in the Editor even if the type of Node is used more than once. The shared configuration of a Node are part of the NodeConfig which is associated via the type property.
  */
-export type Node = nodeBase & {
+export type node = nodeBase & {
   /**
    * The type is analogous to the type of a preconfigured node. Information is looked up based on this type so it must be a type that is part of the config object.
    */
@@ -135,33 +135,23 @@ export type Node = nodeBase & {
 /**
  * The Nodes are an object indexed by a unique string. Each key has a Node assosciated.
  */
-export type Nodes = Record<string, Node>;
-
-/**
- * The information used to uniquely track a Connection between two ports of distinct Nodes.
- */
-export type Connection = {
-  nodeId: string;
-  portName: string;
-};
-
-/**
- * The Connections are an object indexed by a unique string. Each key has an Array of Connections assosciated.
- */
-export type Connections = Record<string, Connection[]>;
-
-/**
- * Groups the input and output Connections for use as part of each Nodes state.
- */
-export type Transputs = {
-  /**
-   * All input Connections.
-   */
-  inputs: Connections;
-  /**
-   * All output Connections.
-   */
-  outputs: Connections;
-};
+export type nodes = Record<string, node>;
 
 //------------------------------------------------------------------------------
+
+export type connectionCoordinates = [coordinates, coordinates];
+export type connectionPorts = [DOMRect, DOMRect];
+
+export type edge = {
+  nodeId: string;
+  portName: string;
+  connectionCoordinates?: connectionCoordinates;
+};
+export type edges = Record<string, edge[]>;
+
+export type nodeInformation = {
+  id: string;
+  coordinates: coordinates;
+  width: number;
+  height: number;
+};

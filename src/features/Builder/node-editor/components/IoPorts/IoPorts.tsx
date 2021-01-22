@@ -2,9 +2,9 @@
 import React from "react";
 import styles from "./IoPorts.module.css";
 import { Portal } from "react-portal";
-import { Connection } from "../Connection/Connection";
+import { Connection } from "../Connections/Connection";
 import { STAGE_ID, DRAG_CONNECTION_ID, EditorContext } from "../../utilities";
-import { Transputs, coordinates, PortConfig, PortTypes } from "../../types";
+import { Transputs, coordinates, portConfig, portTypes } from "../../types";
 import { nanoid } from "nanoid/non-secure";
 import { useGesture } from "react-use-gesture";
 import { calculateCurve } from "../../utilities/connections/shared";
@@ -17,11 +17,11 @@ type IoPortsProps = {
   /**
    * The inputs of the Node.
    */
-  inputs: PortConfig[];
+  inputs: portConfig[];
   /**
    * The outputs of the Node.
    */
-  outputs: PortConfig[];
+  outputs: portConfig[];
   /**
    * The connections of the Node. This informs the individual Port whether it is connected or not.
    */
@@ -171,7 +171,7 @@ type PortProps = {
   isInput?: boolean;
   nodeId: string;
   recalculate: () => void;
-  portTypes: PortTypes;
+  portTypes: portTypes;
 };
 
 /**

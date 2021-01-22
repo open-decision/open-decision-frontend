@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Toaster.module.css";
-import { toastActions } from "../../reducers";
+import { toastActions } from "../../globalState";
 
 type ToasterProps = {
   toasts: readonly toast[];
