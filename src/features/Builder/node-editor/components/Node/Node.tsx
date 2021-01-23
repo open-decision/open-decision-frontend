@@ -19,17 +19,16 @@ type NodeProps = {
 };
 
 export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
-  const [coordinates, nodeTypes] = useEditorStore(
-    (state) => [state.editorConfig.coordinates, state.editorConfig.config[0]],
+  const [nodeTypes] = useEditorStore(
+    (state) => [state.editorConfig.config[0]],
     shallow
   );
 
-  const setNodeData = useNodesStore((state) => state.setNodeData);
+  const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
 
   // Get the shared information for a Node of this type from the NodeTypes.
   const { label, deletable } = nodeTypes[node.type];
-  const ref = React.useRef<HTMLDivElement | null>(null);
   const nodeOptions = deletable ? [deleteNodeMenuoption] : [];
 
   // Track local menu state.
@@ -43,10 +42,10 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
     {
       onDrag: ({ movement, event }) => {
         event.stopPropagation();
-        const runtimeData = ref.current?.getBoundingClientRect();
-
-        runtimeData &&
-          setNodeData({ ...node, coordinates: movement, runtimeData });
+        setNode({ ...node, coordinates: movement, dragging: true });
+      },
+      onDragEnd: () => {
+        setNode({ ...node, dragging: false });
       },
     },
     { drag: { initial: node.coordinates } }
@@ -76,11 +75,6 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
   //   }
   // };
 
-  React.useEffect(() => {
-    const nodeRuntimeData = ref.current?.getBoundingClientRect();
-    nodeRuntimeData && setNodeData({ ...node, runtimeData: nodeRuntimeData });
-  }, []);
-
   return (
     <div
       className={styles.wrapper}
@@ -90,7 +84,6 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
       }}
       id={node.id}
       // onContextMenu={handleContextMenu}
-      ref={ref}
       {...nodeGestures()}
       {...props}
     >

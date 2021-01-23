@@ -1,15 +1,14 @@
 import create from "zustand";
 import {
   coordinates,
+  edge,
   edges,
   node,
-  nodeInformation,
   nodes,
   nodeTypes,
   portTypes,
 } from "../types";
 import produce from "immer";
-import { getConnectionCoordinates } from "./getConnectionCoordinates";
 import { merge } from "remeda";
 import { devtools } from "zustand/middleware";
 
@@ -68,14 +67,20 @@ export type NodesState = {
   setNodes: (nodes: nodes) => void;
   addNode: (node: node) => void;
   removeNode: (nodeId: string) => void;
-  setNodeData: (node: node) => void;
+  setNode: (node: node) => void;
 };
 
 export const useNodesStore = create<NodesState>(
   devtools(
     (set) => ({
       nodes: {},
-      setNodes: (nodes) => set({ nodes }),
+      setNodes: (nodes) =>
+        set({
+          nodes: Object.entries(nodes).reduce((acc: nodes, node) => {
+            acc[node[0]] = { ...node[1], dragging: false };
+            return acc;
+          }, {}),
+        }),
       addNode: (node) => set((state) => ({ ...state, node })),
       removeNode: (nodeId) =>
         set(
@@ -83,7 +88,7 @@ export const useNodesStore = create<NodesState>(
             delete state.nodes[nodeId];
           })
         ),
-      setNodeData: (node) =>
+      setNode: (node) =>
         set(
           produce((state: NodesState) => {
             state.nodes[node.id] = node;
@@ -97,9 +102,10 @@ export const useNodesStore = create<NodesState>(
 export type EdgesState = {
   edges: edges;
   setEdges: (edges: edges) => void;
-  setRuntimeData: (
-    originNode: nodeInformation,
-    destinationNode: nodeInformation
+  setEdgeData: (
+    data: Partial<edge>,
+    originNodeId: string,
+    destinationNodeId: string
   ) => void;
 };
 
@@ -108,18 +114,18 @@ export const useEdgesStore = create<EdgesState>(
     (set) => ({
       edges: {},
       setEdges: (edges) => set({ edges }),
-      setRuntimeData: (originNode, destinationNode) =>
+      setEdgeData: (data, originNodeId, destinationNodeId) =>
         set(
           produce((state: EdgesState) => {
-            const edge = state.edges[originNode.id].find(
-              (edge) => edge.nodeId === destinationNode.id
+            const edge = state.edges[originNodeId].find(
+              (edge) => edge.nodeId === destinationNodeId
+            );
+            const edgeIndex = state.edges[originNodeId].findIndex(
+              (edge) => edge.nodeId === destinationNodeId
             );
 
-            if (edge)
-              edge.connectionCoordinates = getConnectionCoordinates(
-                originNode,
-                destinationNode
-              );
+            if (edgeIndex && edge)
+              state.edges[originNodeId][edgeIndex] = { ...edge, ...data };
           })
         ),
     }),

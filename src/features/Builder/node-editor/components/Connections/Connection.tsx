@@ -9,6 +9,7 @@ import {
 } from "../../globalState/stores";
 import { edge, nodeInformation } from "../../types";
 import shallow from "zustand/shallow";
+import { getConnectionCoordinates } from "../../globalState/getConnectionCoordinates";
 
 type ConnectionProps = {
   edge: edge;
@@ -28,12 +29,12 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
     coordinates: node.coordinates,
     height: node?.height ?? 20,
     width: node?.width ?? 150,
+    dragging: node?.dragging ?? false,
   };
 };
 
 export const Connection: React.FC<ConnectionProps> = React.memo(
   ({
-    edge,
     connectedNodes,
     id,
     outputNodeId,
@@ -41,8 +42,7 @@ export const Connection: React.FC<ConnectionProps> = React.memo(
     inputNodeId,
     inputPortName,
   }) => {
-    const editorConfig = useEditorStore((state) => state.editorConfig);
-    const setRuntimeData = useEdgesStore((state) => state.setRuntimeData);
+    // const setEdgeData = useEdgesStore((state) => state.setEdgeData);
     const [originNodeId, destinationNodeId] = connectedNodes;
 
     const originNode: nodeInformation = useNodesStore(
@@ -55,13 +55,23 @@ export const Connection: React.FC<ConnectionProps> = React.memo(
       shallow
     );
 
+    const [connectionCoordinates, setConnectionCoordinates] = React.useState(
+      getConnectionCoordinates(originNode, destinationNode)
+    );
+
+    console.log("rendered Connection", id);
+
     React.useEffect(() => {
-      if (editorConfig.initialized && originNode && destinationNode)
-        setRuntimeData(originNode, destinationNode);
-    }, [destinationNode, editorConfig, originNode, setRuntimeData]);
+      const newCoordinates = getConnectionCoordinates(
+        originNode,
+        destinationNode
+      );
+
+      setConnectionCoordinates(newCoordinates);
+    }, [destinationNode, originNode]);
 
     const curve =
-      edge.connectionCoordinates && calculateCurve(edge.connectionCoordinates);
+      connectionCoordinates && calculateCurve(connectionCoordinates);
 
     return (
       <svg className={styles.svg}>

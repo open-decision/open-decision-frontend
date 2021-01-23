@@ -125,7 +125,7 @@ export type node = nodeBase & {
    * The type is analogous to the type of a preconfigured node. Information is looked up based on this type so it must be a type that is part of the config object.
    */
   type: string;
-  runtimeData?: DOMRect;
+  dragging?: boolean;
   /**
    * Contains the information to which other Nodes and specifically which port a Node is connected to.
    */
@@ -154,4 +154,5 @@ export type nodeInformation = {
   coordinates: coordinates;
   width: number;
   height: number;
+  dragging: boolean;
 };
