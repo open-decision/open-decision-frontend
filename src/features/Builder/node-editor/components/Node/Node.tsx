@@ -18,7 +18,7 @@ type NodeProps = {
   id: string;
 };
 
-export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
+export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
   const [nodeTypes] = useEditorStore(
     (state) => [state.editorConfig.config[0]],
     shallow
@@ -103,4 +103,4 @@ export const Node: React.FC<NodeProps> = React.memo(({ id, ...props }) => {
       ) : null} */}
     </div>
   );
-});
+};

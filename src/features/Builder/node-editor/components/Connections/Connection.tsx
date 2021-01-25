@@ -33,65 +33,60 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
   };
 };
 
-export const Connection: React.FC<ConnectionProps> = React.memo(
-  ({
-    connectedNodes,
-    id,
-    outputNodeId,
-    outputPortName,
-    inputNodeId,
-    inputPortName,
-  }) => {
-    // const setEdgeData = useEdgesStore((state) => state.setEdgeData);
-    const [originNodeId, destinationNodeId] = connectedNodes;
+export const Connection: React.FC<ConnectionProps> = ({
+  connectedNodes,
+  id,
+  outputNodeId,
+  outputPortName,
+  inputNodeId,
+  inputPortName,
+}) => {
+  // const setEdgeData = useEdgesStore((state) => state.setEdgeData);
+  const [originNodeId, destinationNodeId] = connectedNodes;
 
-    const originNode: nodeInformation = useNodesStore(
-      (state) => createNodeInformation(state, originNodeId),
-      shallow
+  const originNode: nodeInformation = useNodesStore(
+    (state) => createNodeInformation(state, originNodeId),
+    shallow
+  );
+
+  const destinationNode = useNodesStore(
+    (state) => createNodeInformation(state, destinationNodeId),
+    shallow
+  );
+
+  const [connectionCoordinates, setConnectionCoordinates] = React.useState(
+    getConnectionCoordinates(originNode, destinationNode)
+  );
+
+  React.useEffect(() => {
+    const newCoordinates = getConnectionCoordinates(
+      originNode,
+      destinationNode
     );
 
-    const destinationNode = useNodesStore(
-      (state) => createNodeInformation(state, destinationNodeId),
-      shallow
-    );
+    setConnectionCoordinates(newCoordinates);
+  }, [destinationNode, originNode]);
 
-    const [connectionCoordinates, setConnectionCoordinates] = React.useState(
-      getConnectionCoordinates(originNode, destinationNode)
-    );
+  const curve = connectionCoordinates && calculateCurve(connectionCoordinates);
 
-    console.log("rendered Connection", id);
-
-    React.useEffect(() => {
-      const newCoordinates = getConnectionCoordinates(
-        originNode,
-        destinationNode
-      );
-
-      setConnectionCoordinates(newCoordinates);
-    }, [destinationNode, originNode]);
-
-    const curve =
-      connectionCoordinates && calculateCurve(connectionCoordinates);
-
-    return (
-      <svg className={styles.svg}>
-        {curve && (
-          <path
-            data-connection-id={id}
-            data-output-node-id={outputNodeId}
-            data-output-port-name={outputPortName}
-            data-input-node-id={inputNodeId}
-            data-input-port-name={inputPortName}
-            stroke="rgb(185, 186, 189)"
-            fill="none"
-            strokeWidth={3}
-            strokeLinecap="round"
-            d={curve}
-          />
-        )}
-      </svg>
-    );
-  }
-);
+  return (
+    <svg className={styles.svg}>
+      {curve && (
+        <path
+          data-connection-id={id}
+          data-output-node-id={outputNodeId}
+          data-output-port-name={outputPortName}
+          data-input-node-id={inputNodeId}
+          data-input-port-name={inputPortName}
+          stroke="rgb(185, 186, 189)"
+          fill="none"
+          strokeWidth={3}
+          strokeLinecap="round"
+          d={curve}
+        />
+      )}
+    </svg>
+  );
+};
 
 Connection.displayName = "Connection";
