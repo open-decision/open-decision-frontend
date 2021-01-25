@@ -7,13 +7,13 @@ export const Logo: React.FunctionComponent<{ className?: string }> = ({
 }) => {
   return (
     <InternalLink to="/">
-      <h1
-        className={clsx(
-          "text-gray-800 font-bold text-xl md:text-3xl",
-          className
-        )}
-      >
-        open <span className="text-red-500">decision</span>
+      <h1 className={clsx("text-gray-800 font-bold w-44", className)}>
+        <img
+          src="/assets/icons/open_decision_logo.svg"
+          alt=""
+          className="logo"
+        />
+        {/* open <span className="text-red-500">decision</span> */}
       </h1>
     </InternalLink>
   );
