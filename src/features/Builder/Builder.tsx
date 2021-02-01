@@ -17,7 +17,8 @@ const initialEditorState: EditorState = {
   edges: exampleEdges,
   coordinates: [0, 0],
   zoom: 1,
-  config: [exampleNodeTypes, examplePortTypes],
+  nodeTypes: exampleNodeTypes,
+  portTypes: examplePortTypes,
 };
 
 const Editor: React.FC<{

@@ -1,12 +1,7 @@
 import React from "react";
 import styles from "./Connection.module.css";
 import { calculateCurve } from "../../utilities/connections/shared";
-import {
-  NodesState,
-  useEdgesStore,
-  useEditorStore,
-  useNodesStore,
-} from "../../globalState/stores";
+import { NodesState, useNodesStore } from "../../globalState/stores";
 import { edge, nodeInformation } from "../../types";
 import shallow from "zustand/shallow";
 import { getConnectionCoordinates } from "../../globalState/getConnectionCoordinates";

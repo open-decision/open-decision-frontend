@@ -54,7 +54,8 @@ export type EditorState = {
   /**
    * The preconfigured avaliable NodeTypes and PortTypes that can be added when using the node-editor.
    */
-  config: [nodeTypes, portTypes];
+  nodeTypes: nodeTypes;
+  portTypes: portTypes;
 };
 
 type NodeEditorProps = {
@@ -94,7 +95,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //#region
   //Toasts are used as Notifications to the User informing him of Errors and other Messages.
   //TODO Toasts should be part of the main Application not just the node-editor
-  const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
+  // const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
   //#endregion
 
   const setEditorConfig = useEditorStore((state) => state.setEditorConfig);
@@ -105,18 +106,18 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     setEditorConfig({
       zoom: state.zoom,
       coordinates: state.coordinates,
-      config: state.config,
     });
-    setNodes(state.nodes);
+    setNodes(state.nodes, state.nodeTypes, state.portTypes);
     setEdges(state.edges);
   }, [
     setEdges,
     setEditorConfig,
     setNodes,
-    state.config,
     state.coordinates,
     state.edges,
+    state.nodeTypes,
     state.nodes,
+    state.portTypes,
     state.zoom,
   ]);
 

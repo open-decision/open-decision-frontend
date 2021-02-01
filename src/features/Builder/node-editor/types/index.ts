@@ -82,10 +82,6 @@ export type portTypes = Record<string, portConfig>;
  */
 type nodeBase = {
   /**
-   * The unique id of each Node.
-   */
-  id: string;
-  /**
    * The positional coordinates of this Node.
    */
   coordinates: coordinates;

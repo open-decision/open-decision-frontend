@@ -1,4 +1,5 @@
 import create from "zustand";
+import produce from "immer";
 import {
   coordinates,
   edge,
@@ -8,14 +9,13 @@ import {
   nodeTypes,
   portTypes,
 } from "../types";
-import produce from "immer";
 import { merge } from "remeda";
 import { devtools } from "zustand/middleware";
+import { nanoid } from "nanoid/non-secure";
 
 type EditorConfigBase = {
   zoom: number;
   coordinates: coordinates;
-  config: [nodeTypes, portTypes];
   id: number;
 };
 
@@ -41,7 +41,6 @@ export const useEditorStore = create<EditorState>(
         zoom: 1,
         coordinates: [0, 0],
         initialized: false,
-        config: [{}, {}],
         id: 1234,
       },
       setEditorConfig: (editorConfig) =>
@@ -64,34 +63,51 @@ export const useEditorStore = create<EditorState>(
 
 export type NodesState = {
   nodes: nodes;
-  setNodes: (nodes: nodes) => void;
-  addNode: (node: node) => void;
+  nodeTypes: nodeTypes;
+  portTypes: portTypes;
+  setNodes: (nodes: nodes, nodeTypes: nodeTypes, portTypes: portTypes) => void;
+  addNode: (nodeType: string, coordinates: coordinates) => void;
   removeNode: (nodeId: string) => void;
-  setNode: (node: node) => void;
+  setNode: (id: string, node: node) => void;
 };
 
 export const useNodesStore = create<NodesState>(
   devtools(
     (set) => ({
       nodes: {},
-      setNodes: (nodes) =>
+      nodeTypes: {},
+      portTypes: {},
+      setNodes: (nodes, nodeTypes, portTypes) =>
         set({
           nodes: Object.entries(nodes).reduce((acc: nodes, node) => {
             acc[node[0]] = { ...node[1], dragging: false };
             return acc;
           }, {}),
+          nodeTypes,
+          portTypes,
         }),
-      addNode: (node) => set((state) => ({ ...state, node })),
+      addNode: (nodeType, coordinates) =>
+        set(
+          produce((state: NodesState) => {
+            state.nodes[nanoid(5)] = {
+              coordinates,
+              type: nodeType,
+              dragging: false,
+              width: 150,
+              height: 20,
+            };
+          })
+        ),
       removeNode: (nodeId) =>
         set(
           produce((state: NodesState) => {
             delete state.nodes[nodeId];
           })
         ),
-      setNode: (node) =>
+      setNode: (id, node) =>
         set(
           produce((state: NodesState) => {
-            state.nodes[node.id] = node;
+            state.nodes[id] = node;
           })
         ),
     }),
