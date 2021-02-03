@@ -20,7 +20,6 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
   const node = state.nodes[nodeId];
 
   return {
-    id: node.id,
     coordinates: node.coordinates,
     height: node?.height ?? 20,
     width: node?.width ?? 150,
