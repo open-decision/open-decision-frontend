@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Stage.module.css";
 import { STAGE_ID } from "../../utilities";
 import { clamp } from "lodash";
 import { useKeyPressEvent } from "react-use";
@@ -97,6 +96,7 @@ export const Stage: React.FC<StageProps> = ({
   }, [setRuntimeData]);
 
   //------------------------------------------------------------------------
+  //#region
   // /**
   //  * Can be called to add a new Comment.
   //  */
@@ -147,41 +147,28 @@ export const Stage: React.FC<StageProps> = ({
   //   return options;
   // }, [nodeTypes]);
 
+  //#endregion
+
   return (
     // A Draggable component is providing the main Stage Container.
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       id={`${STAGE_ID}${id}`}
-      className={styles.wrapper}
-      // onContextMenu={handleContextMenu}
+      className="bg-gray-800 overflow-hidden relative w-full h-full pattern-background outline-none"
       tabIndex={-1}
-      // style={{ cursor: spaceIsPressed ? "grab" : "" }}
+      style={{ cursor: spaceIsPressed ? "grab" : "" }}
       ref={ref}
       {...stageGestures()}
     >
-      {/* Here we track whether the ContextMenu should be open or closed. When we
-      open the menu the coordinates are set based on the position of the mouse
-      click.
-      {menuOpen && (
-        <ContextMenu
-          coordinates={menuCoordinates}
-          options={menuOptions}
-          onOptionSelected={addElement}
-          label="Add Node"
-        />
-      )} */}
       {/* This inner wrapper is used to translate the position of the content on pan. */}
       <div
-        className={styles.transformWrapper}
+        className="origin-center absolute left-1/2 top-1/2"
         style={{
           transform: `translate(${coordinates[0]}px, ${coordinates[1]}px)`,
         }}
       >
         {/* This inner wrapper is used to zoom.  */}
-        <div
-          className={styles.scaleWrapper}
-          style={{ transform: `scale(${zoom})` }}
-        >
+        <div className="absolute" style={{ transform: `scale(${zoom})` }}>
           {children}
         </div>
       </div>
