@@ -6,6 +6,7 @@ module.exports = {
     "@snowpack/plugin-postcss",
     "@snowpack/plugin-typescript",
     "@snowpack/plugin-webpack",
+    "@snowpack/plugin-react-refresh",
   ],
   devOptions: { open: "none", port: 3000 },
   alias: {
