@@ -5,13 +5,11 @@ export const calculateCurve = (
   connectionCoordinates: connectionCoordinates
 ): string | null => {
   const [origin, destination] = connectionCoordinates;
-  const length = destination[0] - origin[0];
-  const thirdLength = length / 3;
 
   return line().curve(curveBasis)([
     [origin[0], origin[1]],
-    [origin[0] + thirdLength, origin[1]],
-    [origin[0] + thirdLength * 2, destination[1]],
+    [origin[0] - 50, origin[1]],
+    [destination[0] + 50, destination[1]],
     [destination[0], destination[1]],
   ]);
 };

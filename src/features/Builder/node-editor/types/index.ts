@@ -38,6 +38,7 @@ export type nodeConfig = {
    * Ranks a NodeType to make them sortable based on their importance.
    */
   sortPriority: number;
+  color?: string;
 };
 
 /**
@@ -146,7 +147,6 @@ export type edge = {
 export type edges = Record<string, edge[]>;
 
 export type nodeInformation = {
-  id: string;
   coordinates: coordinates;
   width: number;
   height: number;
