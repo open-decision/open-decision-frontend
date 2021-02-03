@@ -3,7 +3,6 @@ import { useGesture } from "react-use-gesture";
 import { useEditorStore, useNodesStore } from "../../globalState/stores";
 import shallow from "zustand/shallow";
 import { ChatOutline } from "@graywolfai/react-heroicons";
-import { desaturate, lighten, readableColor } from "polished";
 import { Port } from "./Port";
 
 type NodeProps = {
