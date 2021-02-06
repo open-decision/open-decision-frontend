@@ -2,7 +2,9 @@ import clsx from "clsx";
 import React from "react";
 import { Port } from "./Port";
 
-export const ConnectedPort = ({ className, nodeId }) => {
+type ConnectedPort = React.FC<{ className?: string; nodeId: string }>;
+
+export const ConnectedPort: ConnectedPort = ({ className, nodeId }) => {
   return (
     <Port
       nodeId={nodeId}

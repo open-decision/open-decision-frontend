@@ -64,15 +64,13 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
   const curve = connectionCoordinates && calculateCurve(connectionCoordinates);
 
   return (
-    curve && (
-      <Connection
-        curve={curve}
-        data-connection-id={id}
-        data-output-node-id={outputNodeId}
-        data-output-port-name={outputPortName}
-        data-input-node-id={inputNodeId}
-        data-input-port-name={inputPortName}
-      />
-    )
+    <Connection
+      curve={curve ?? ""}
+      data-connection-id={id}
+      data-output-node-id={outputNodeId}
+      data-output-port-name={outputPortName}
+      data-input-node-id={inputNodeId}
+      data-input-port-name={inputPortName}
+    />
   );
 };
