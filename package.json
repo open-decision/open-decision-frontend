@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "snowpack dev",
-    "build": "yarn codegen && snowpack build",
+    "build": "npm run codegen && snowpack build",
     "codegen": "graphql-codegen --config .codegen.yml",
     "lint": "eslint src --ext ts,js,tsx,jsx",
     "clean": "rimraf dist *.tsbuildinfo"
