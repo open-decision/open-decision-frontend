@@ -19,12 +19,6 @@ export const exampleNodes: nodes = {
     width: 250,
     height: 100,
   },
-  node5: {
-    coordinates: [-1120, -20],
-    type: "number",
-    width: 250,
-    height: 100,
-  },
   node6: {
     coordinates: [50, 40],
     type: "number",
@@ -34,9 +28,8 @@ export const exampleNodes: nodes = {
 };
 
 export const exampleEdges: edges = {
-  node1: [{ nodeId: "node2", portName: "number" }],
-  node3: [{ nodeId: "node2", portName: "number" }],
-  node5: [{ nodeId: "node6", portName: "number" }],
+  node1: [{ nodeId: "node2" }],
+  node3: [{ nodeId: "node2" }, { nodeId: "node6" }],
 };
 
 export const examplePortTypes: portTypes = {
@@ -59,6 +52,8 @@ export const exampleNodeTypes: nodeTypes = {
     description: "",
     root: false,
     sortPriority: 1,
+    width: 250,
+    height: 100,
     inputPorts: [
       { type: "number", label: "test", color: "blue", name: "number" },
     ],
@@ -80,6 +75,8 @@ export const exampleNodeTypes: nodeTypes = {
     description: "",
     root: false,
     sortPriority: 1,
+    width: 250,
+    height: 100,
     inputPorts: [
       {
         type: "number",

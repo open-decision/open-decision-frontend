@@ -39,6 +39,8 @@ export type nodeConfig = {
    */
   sortPriority: number;
   color?: string;
+  width: number;
+  height: number;
 };
 
 /**
@@ -141,8 +143,6 @@ export type connectionPorts = [DOMRect, DOMRect];
 
 export type edge = {
   nodeId: string;
-  portName: string;
-  connectionCoordinates?: connectionCoordinates;
 };
 export type edges = Record<string, edge[]>;
 
