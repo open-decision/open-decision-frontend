@@ -35,34 +35,11 @@ export const Builder: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="relative" style={{ backgroundColor: "#1a1c1d" }}>
+      <div className="relative">
         {data?.nodes ? (
-          <>
-            <div className="absolute p-5 z-20 space-x-6 flex">
-              <Link
-                variant="button"
-                download="decision_tree.json"
-                href={`data:application/json,${JSON.stringify(
-                  data,
-                  null,
-                  "\t"
-                )}`}
-              >
-                Export
-              </Link>
-
-              <Button
-                onClick={() => {
-                  setData(undefined);
-                }}
-              >
-                Reset
-              </Button>
-            </div>
-            <Editor state={data} setState={(value) => setData(value)} />
-          </>
+          <Editor state={data} setState={(value) => setData(value)} />
         ) : (
-          <div className="text-white h-full w-full flex justify-center items-center flex-col">
+          <div className="h-full w-full flex justify-center items-center flex-col">
             <div>
               <h1 className="text-5xl">Starte mit Testen!</h1>
               <p className="mt-6 text-xl">

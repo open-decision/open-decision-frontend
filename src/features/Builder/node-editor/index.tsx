@@ -25,6 +25,7 @@ import {
   nodeTypes,
   portTypes,
 } from "./types";
+import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
 
 export type EditorState = {
   /**
@@ -92,12 +93,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   disableZoom = false,
   disablePan = false,
 }) => {
-  //#region
-  //Toasts are used as Notifications to the User informing him of Errors and other Messages.
-  //TODO Toasts should be part of the main Application not just the node-editor
-  // const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
-  //#endregion
-
   const setEditorConfig = useEditorStore((state) => state.setEditorConfig);
   const setNodes = useNodesStore((state) => state.setNodes);
   const setEdges = useEdgesStore((state) => state.setEdges);
@@ -124,9 +119,22 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   //----------------------------------------------------------------
 
   return (
-    <Stage disablePan={disablePan} disableZoom={disableZoom}>
-      <Nodes />
-      <ConnectionsWrapper />
-    </Stage>
+    <div
+      className="w-full h-full grid"
+      style={{
+        gridTemplateAreas: "'nodeToolbar stage stage'",
+        gridTemplateColumns: "max-content 1fr",
+      }}
+    >
+      <NewNodeToolbar style={{ gridArea: "nodeToolbar" }} className="z-10" />
+      <Stage
+        disablePan={disablePan}
+        disableZoom={disableZoom}
+        style={{ gridArea: "stage" }}
+      >
+        <Nodes />
+        <ConnectionsWrapper />
+      </Stage>
+    </div>
   );
 };
