@@ -11,27 +11,16 @@ import {
 } from "../types";
 import { merge } from "remeda";
 import { devtools } from "zustand/middleware";
-import { nanoid } from "nanoid/non-secure";
 
-type EditorConfigBase = {
+type EditorConfig = {
   zoom: number;
   coordinates: coordinates;
   id: number;
 };
 
-export type EditorConfigUninitialized = EditorConfigBase & {
-  initialized: false;
-  runtimeData?: DOMRect;
-};
-export type EditorConfigInitialized = EditorConfigBase & {
-  initialized: true;
-  runtimeData: DOMRect;
-};
-
 export type EditorState = {
-  editorConfig: EditorConfigUninitialized | EditorConfigInitialized;
-  setEditorConfig: (editorConfig: Partial<EditorConfigBase>) => void;
-  setRuntimeData: (runtimeData: DOMRect) => void;
+  editorConfig: EditorConfig;
+  setEditorConfig: (editorConfig: Partial<EditorConfig>) => void;
 };
 
 export const useEditorStore = create<EditorState>(
@@ -49,13 +38,6 @@ export const useEditorStore = create<EditorState>(
             state.editorConfig = merge(state.editorConfig, editorConfig);
           })
         ),
-      setRuntimeData: (runtimeData) =>
-        set(
-          produce((state: EditorState) => {
-            state.editorConfig.runtimeData = runtimeData;
-            state.editorConfig.initialized = true;
-          })
-        ),
     }),
     "Editor"
   )
@@ -66,7 +48,7 @@ export type NodesState = {
   nodeTypes: nodeTypes;
   portTypes: portTypes;
   setNodes: (nodes: nodes, nodeTypes: nodeTypes, portTypes: portTypes) => void;
-  addNode: (nodeType: string, coordinates: coordinates) => void;
+  addNode: (nodeType: string, coordinates: coordinates, id: string) => void;
   removeNode: (nodeId: string) => void;
   setNode: (id: string, node: node) => void;
 };
@@ -86,15 +68,15 @@ export const useNodesStore = create<NodesState>(
           nodeTypes,
           portTypes,
         }),
-      addNode: (nodeType, coordinates) =>
+      addNode: (nodeType, coordinates, id) =>
         set(
           produce((state: NodesState) => {
-            state.nodes[nanoid(5)] = {
+            state.nodes[id] = {
               coordinates,
               type: nodeType,
               dragging: false,
-              width: 150,
-              height: 20,
+              width: 250,
+              height: 100,
             };
           })
         ),
@@ -123,6 +105,7 @@ export type EdgesState = {
     originNodeId: string,
     destinationNodeId: string
   ) => void;
+  addEdge: (originNodeId: string, destinationNodeId: string) => void;
 };
 
 export const useEdgesStore = create<EdgesState>(
@@ -142,6 +125,16 @@ export const useEdgesStore = create<EdgesState>(
 
             if (edgeIndex && edge)
               state.edges[originNodeId][edgeIndex] = { ...edge, ...data };
+          })
+        ),
+      addEdge: (originNodeId, destinationNodeId) =>
+        set(
+          produce((state: EdgesState) => {
+            if (!state.edges[originNodeId]) state.edges[originNodeId] = [];
+
+            state.edges[originNodeId].push({
+              nodeId: destinationNodeId,
+            });
           })
         ),
     }),

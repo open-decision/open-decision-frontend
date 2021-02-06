@@ -1,9 +1,15 @@
 import React from "react";
 import { useGesture } from "react-use-gesture";
-import { useEditorStore, useNodesStore } from "../../globalState/stores";
+import {
+  useEdgesStore,
+  useEditorStore,
+  useNodesStore,
+} from "../../globalState/stores";
 import shallow from "zustand/shallow";
 import { ChatOutline } from "@graywolfai/react-heroicons";
-import { Port } from "./Port";
+import { ConnectedPort } from "./ConnectedPort";
+import { UnconnectedPort } from "./UnconnectedPort";
+import { getOutputConnections } from "./utilities";
 
 type NodeProps = {
   id: string;
@@ -11,6 +17,7 @@ type NodeProps = {
 
 export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
   const nodeTypes = useNodesStore((state) => state.nodeTypes, shallow);
+  const outputConnections = useEdgesStore(getOutputConnections(id));
 
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
@@ -47,11 +54,13 @@ export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
       className="z-10 absolute left-0 top-0 grid"
     >
       <div
-        className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full"
+        className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
         style={{
           borderLeftColor: color ?? "gray",
         }}
         id={id}
+        onDrop={(event) => console.log(event)}
+        onDragOver={(event) => event.preventDefault()}
         {...nodeGestures()}
         {...props}
       >
@@ -63,8 +72,21 @@ export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
           <h2 className="font-semibold">{id}</h2>
         </div>
       </div>
-      <Port className="col-start-1 col-end-3 row-span-full self-center justify-self-center" />
-      <Port className="col-start-4 col-end-6 row-span-full self-center justify-self-center" />
+      <ConnectedPort
+        nodeId={id}
+        className="col-start-1 col-end-3 row-span-full self-center justify-self-center z-10"
+      />
+      {outputConnections.length < 1 ? (
+        <UnconnectedPort
+          className="col-start-4 col-end-6 row-span-full self-center justify-self-center z-10"
+          nodeId={id}
+        />
+      ) : (
+        <ConnectedPort
+          nodeId={id}
+          className="col-start-4 col-end-6 row-span-full self-center justify-self-center z-10"
+        />
+      )}
     </div>
   );
 };

@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
   const { token } = useAuth();
 
   return (
-    <div className="bg-gray-200 px-4 md:px-8 py-4">
+    <div className="bg-gray-100 px-4 md:px-8 py-4">
       <div className="flex justify-between items-center">
         <Logo />
         <Dropdown

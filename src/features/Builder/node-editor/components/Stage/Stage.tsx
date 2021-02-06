@@ -4,6 +4,7 @@ import { clamp } from "lodash";
 import { useKeyPressEvent } from "react-use";
 import { useGesture } from "react-use-gesture";
 import { useEditorStore } from "../../globalState/stores";
+import clsx from "clsx";
 
 type StageProps = {
   /**
@@ -14,15 +15,20 @@ type StageProps = {
    * Setting this to false disables zooming in the Editor.
    */
   disableZoom: boolean;
+  // className?: string;
 };
+
+type Stage = React.FC<React.HTMLAttributes<HTMLDivElement> & StageProps>;
 
 /**
  * The Stage is the main parent component of the node-editor. It holds all the Nodes and Connections. It is pannable and zoomable.
  */
-export const Stage: React.FC<StageProps> = ({
+export const Stage: Stage = ({
   children,
   disablePan,
   disableZoom,
+  className,
+  ...props
 }) => {
   const [
     initialZoom,
@@ -35,18 +41,8 @@ export const Stage: React.FC<StageProps> = ({
     state.editorConfig.id,
     state.setEditorConfig,
   ]);
-
-  // const nodeTypes = useNodesStore((state) => state.nodeTypes);
-  // const addNode = useNodesStore((state) => state.addNode);
-
   const [zoom, setZoom] = React.useState(initialZoom);
   const [coordinates, setCoordinates] = React.useState(initialCoordinates);
-
-  /**
-   * The wrapper is used as a ref for the main Box of the Stage. This allows the Stage to be imperatively modified without causing a rerender.
-   */
-  const ref = React.useRef<HTMLDivElement>(null);
-  // const mousePosition = React.useRef<coordinates>([0, 0]);
 
   /**
    * This tracks whether the space key is pressed. We need this, because the Stage should be pannable when pressing the space key.
@@ -87,78 +83,17 @@ export const Stage: React.FC<StageProps> = ({
 
   //------------------------------------------------------------------------
 
-  const setRuntimeData = useEditorStore((state) => state.setRuntimeData);
-
-  React.useEffect(() => {
-    const runtimeData = ref.current?.getBoundingClientRect();
-
-    runtimeData && setRuntimeData(runtimeData);
-  }, [setRuntimeData]);
-
-  //------------------------------------------------------------------------
-  //#region
-  // /**
-  //  * Can be called to add a new Comment.
-  //  */
-  // const addComment = () => {
-  //   coordinates
-  //     ? dispatch({
-  //         type: "ADD_COMMENT",
-  //         coordinates,
-  //       })
-  //     : null;
-  // };
-
-  // /**
-  //  * Handles the different kinds of elements that can be added to the Editor.
-  //  */
-  // const addElement = (menuOption: menuOption) => {
-  //   switch (menuOption.internalType) {
-  //     case "comment":
-  //       // addComment();
-  //       break;
-
-  //     case "node":
-  //       addNode(menuOption.type);
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  // /**
-  //  * The menuOptions are filling the ContextMenu with the nodes that are addable to the Editor. They are sorted based on sortIndex and label.
-  //  */
-  // const menuOptions = React.useMemo(() => {
-  //   const options = orderBy(
-  //     Object.values(nodeTypes).map(
-  //       (nodeType): menuOption => ({
-  //         type: nodeType.type,
-  //         label: nodeType.label,
-  //         description: nodeType.description,
-  //         sortPriority: nodeType.sortPriority,
-  //         internalType: "node",
-  //       })
-  //     ),
-  //     ["sortIndex", "label"]
-  //   );
-
-  //   return options;
-  // }, [nodeTypes]);
-
-  //#endregion
-
   return (
-    // A Draggable component is providing the main Stage Container.
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       id={`${STAGE_ID}${id}`}
-      className="bg-gray-800 overflow-hidden relative w-full h-full pattern-background outline-none"
+      className={clsx(
+        "overflow-hidden relative pattern-background outline-none",
+        className
+      )}
       tabIndex={-1}
       style={{ cursor: spaceIsPressed ? "grab" : "" }}
-      ref={ref}
       {...stageGestures()}
+      {...props}
     >
       {/* This inner wrapper is used to translate the position of the content on pan. */}
       <div

@@ -1,6 +1,6 @@
 import React from "react";
 import { useEdgesStore } from "../../globalState/stores";
-import { Connection } from "./Connection";
+import { ExistingConnection } from "./ExisitingConnection";
 
 type NodeConnectionsProps = { originNodeId: string };
 
@@ -12,7 +12,7 @@ export const NodeConnections: React.FC<NodeConnectionsProps> = React.memo(
       <div {...props}>
         {connections.map((edge) => {
           return (
-            <Connection
+            <ExistingConnection
               edge={edge}
               id={`${originNodeId}-${edge.nodeId}`}
               key={`${originNodeId}-${edge.nodeId}`}
