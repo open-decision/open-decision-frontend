@@ -1,21 +1,25 @@
 import React from "react";
-import { useGesture } from "react-use-gesture";
+import { useDrag } from "react-use-gesture";
 import {
   useEdgesStore,
   useEditorStore,
   useNodesStore,
 } from "../../globalState/stores";
 import shallow from "zustand/shallow";
-import { ChatOutline } from "@graywolfai/react-heroicons";
-import { ConnectedPort } from "./ConnectedPort";
-import { UnconnectedPort } from "./UnconnectedPort";
+import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
+import { Port } from "./Port";
+import { useModalState } from "./useModal";
 
 type NodeProps = {
+  /**
+   * The Node only gets the id of the node it is supposed to render. It takes care of getting the data it needs about the node itself.
+   */
   id: string;
 };
 
-export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
+export const Node: React.FC<NodeProps> = ({ id }) => {
+  // Here we get all the data and functions, that we need, from state.
   const nodeTypes = useNodesStore((state) => state.nodeTypes, shallow);
   const outputConnections = useEdgesStore(getOutputConnections(id));
 
@@ -23,25 +27,21 @@ export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
   const node = useNodesStore((state) => state.nodes[id]);
   const zoom = useEditorStore((state) => state.editorConfig.zoom);
 
-  // Get the shared information for a Node of this type from the NodeTypes.
-  const { label, deletable, color } = nodeTypes[node.type];
+  const setMenuOpen = useModalState((state) => state.openModal);
 
-  const nodeGestures = useGesture(
-    {
-      onDrag: ({ movement, event }) => {
-        event.stopPropagation();
-        setNode(id, { ...node, coordinates: movement, dragging: true });
-      },
-      onDragEnd: () => {
-        setNode(id, { ...node, dragging: false });
-      },
+  // Get the shared information for a Node of this type from the NodeTypes.
+  const { color } = nodeTypes[node.type];
+
+  const ref = React.useRef(null);
+
+  //-----------------------------------------------------------------------
+  //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
+  const nodeGestures = useDrag(
+    ({ movement, event }) => {
+      event.stopPropagation();
+      setNode(id, { ...node, coordinates: movement });
     },
-    {
-      drag: {
-        initial: node.coordinates,
-        transform: ([x, y]) => [x / zoom, y / zoom],
-      },
-    }
+    { initial: node.coordinates, transform: ([x, y]) => [x / zoom, y / zoom] }
   );
 
   return (
@@ -51,18 +51,14 @@ export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
         gridTemplateColumns: `10px 10px ${node.width}px 10px 10px`,
         gridTemplateRows: node.height,
       }}
-      className="z-10 absolute left-0 top-0 grid"
+      className="absolute left-0 top-0 grid"
     >
+      {/* This is the body of the Node. */}
       <div
         className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
-        style={{
-          borderLeftColor: color ?? "gray",
-        }}
+        style={{ borderLeftColor: color ?? "gray" }}
         id={id}
-        onDrop={(event) => console.log(event)}
-        onDragOver={(event) => event.preventDefault()}
         {...nodeGestures()}
-        {...props}
       >
         <div className="p-1 flex items-center text-lg">
           <ChatOutline
@@ -72,19 +68,35 @@ export const Node: React.FC<NodeProps> = ({ id, ...props }) => {
           <h2 className="font-semibold">{id}</h2>
         </div>
       </div>
-      <ConnectedPort
+      {/* These are the Ports of the Nodes. There is only one Port on each side. The Output Port can also be an unconnected port. This port looks different and has a menu to create a new Node. Above we get the outputConnections and here we use them to decide which port to render. */}
+      <Port
         nodeId={id}
-        className="col-start-1 col-end-3 row-span-full self-center justify-self-center z-10"
+        className="col-start-1 col-end-3 row-span-full self-center justify-self-center"
+        variant="connected"
       />
       {outputConnections.length < 1 ? (
-        <UnconnectedPort
-          className="col-start-4 col-end-6 row-span-full self-center justify-self-center z-10"
+        <Port
+          className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           nodeId={id}
-        />
+          variant="unconnected"
+        >
+          <button
+            onClick={(event) => {
+              console.log(event.pageX, event.pageY);
+              setMenuOpen([event.pageX, event.pageY], id);
+            }}
+            data-node-id={id}
+            className="w-full h-full p-1"
+            ref={ref}
+          >
+            <PlusOutline className="text-white" />
+          </button>
+        </Port>
       ) : (
-        <ConnectedPort
+        <Port
           nodeId={id}
-          className="col-start-4 col-end-6 row-span-full self-center justify-self-center z-10"
+          className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
+          variant="connected"
         />
       )}
     </div>

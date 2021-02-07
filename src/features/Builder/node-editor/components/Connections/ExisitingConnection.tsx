@@ -1,9 +1,8 @@
 import React from "react";
-import { calculateCurve } from "../../utilities/connections/shared";
+import { calculateCurve, getConnectionCoordinates } from "../../utilities";
 import { NodesState, useNodesStore } from "../../globalState/stores";
 import { edge, nodeInformation } from "../../types";
 import shallow from "zustand/shallow";
-import { getConnectionCoordinates } from "../../globalState/getConnectionCoordinates";
 import { Connection } from "./Connection";
 
 type ConnectionProps = {
@@ -23,7 +22,6 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
     coordinates: node.coordinates,
     height: node?.height ?? 20,
     width: node?.width ?? 150,
-    dragging: node?.dragging ?? false,
   };
 };
 

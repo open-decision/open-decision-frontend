@@ -26,6 +26,9 @@ import {
   portTypes,
 } from "./types";
 import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
+import { useModal } from "./components/Node/useModal";
+import { NewNodeMenu } from "./components/Node/NewNodeMenu";
+import { Portal } from "react-portal";
 
 export type EditorState = {
   /**
@@ -97,6 +100,9 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   const setNodes = useNodesStore((state) => state.setNodes);
   const setEdges = useEdgesStore((state) => state.setEdges);
 
+  const ref = React.useRef<HTMLDivElement>(null);
+  const { open, coordinates, nodeId, closeModal } = useModal(ref);
+
   React.useEffect(() => {
     setEditorConfig({
       zoom: state.zoom,
@@ -118,6 +124,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 
   //----------------------------------------------------------------
 
+  const menu = document.getElementById("breakout");
+
   return (
     <div
       className="w-full h-full grid"
@@ -135,6 +143,16 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
         <Nodes />
         <ConnectionsWrapper />
       </Stage>
+      {open && (
+        <Portal node={menu}>
+          <NewNodeMenu
+            ref={ref}
+            menuCoordinates={coordinates}
+            close={closeModal}
+            nodeId={nodeId}
+          />
+        </Portal>
+      )}
     </div>
   );
 };

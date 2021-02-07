@@ -11,7 +11,7 @@ export const getOutputConnections = (id: string) => (
   Object.values(state.edges).reduce((acc: edge[], edgesArray) => {
     const connection = edgesArray.find((edge) => edge.nodeId === id);
 
-    if (connection) acc.push(connection);
+    connection && acc.push(connection);
 
     return acc;
   }, []);

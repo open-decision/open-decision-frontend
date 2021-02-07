@@ -64,7 +64,6 @@
     "immer": "^8.0.1",
     "io-ts": "^2.2.13",
     "io-ts-types": "^0.5.13",
-    "lodash": "^4.17.20",
     "match-sorter": "^6.2.0",
     "react": "^17",
     "react-dom": "^17",
