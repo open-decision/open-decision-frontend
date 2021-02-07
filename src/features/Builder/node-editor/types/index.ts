@@ -124,7 +124,6 @@ export type node = nodeBase & {
    * The type is analogous to the type of a preconfigured node. Information is looked up based on this type so it must be a type that is part of the config object.
    */
   type: string;
-  dragging?: boolean;
   /**
    * Contains the information to which other Nodes and specifically which port a Node is connected to.
    */
@@ -136,19 +135,30 @@ export type node = nodeBase & {
  */
 export type nodes = Record<string, node>;
 
-//------------------------------------------------------------------------------
-
+/**
+ * A Tuple of coordinates to describe start and end points of something.
+ */
 export type connectionCoordinates = [coordinates, coordinates];
-export type connectionPorts = [DOMRect, DOMRect];
 
+/**
+ * The information associated with an individual edge.
+ */
 export type edge = {
   nodeId: string;
 };
+
+/**
+ * The Object holding all the edges. Each property is the nodeId of the originating node. Each associated value is an array of all the edges connected to this node.
+ */
 export type edges = Record<string, edge[]>;
 
+/**
+ * Describes the data used to communicate necessary information about a node to connection caluclations.
+ */
 export type nodeInformation = {
   coordinates: coordinates;
   width: number;
   height: number;
-  dragging: boolean;
 };
+
+//------------------------------------------------------------------------------

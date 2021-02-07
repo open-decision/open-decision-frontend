@@ -2,25 +2,25 @@ import { edges, nodes, nodeTypes, portTypes } from "../types";
 
 export const exampleNodes: nodes = {
   node1: {
-    coordinates: [134.5, -90],
+    coordinates: [200, -200],
     type: "addNumbers",
     width: 250,
     height: 100,
   },
   node2: {
-    coordinates: [-182.5, -176],
+    coordinates: [-200, -176],
     type: "number",
     width: 250,
     height: 100,
   },
   node3: {
-    coordinates: [-181.5, -42],
+    coordinates: [181.5, -42],
     type: "number",
     width: 250,
     height: 100,
   },
   node6: {
-    coordinates: [50, 40],
+    coordinates: [-200, 40],
     type: "number",
     width: 250,
     height: 100,
