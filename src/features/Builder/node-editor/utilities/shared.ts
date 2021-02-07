@@ -1,5 +1,5 @@
 import { curveBasis, line } from "d3-shape";
-import { connectionCoordinates } from "../../types";
+import { connectionCoordinates } from "../types";
 
 export const calculateCurve = (
   connectionCoordinates: connectionCoordinates
@@ -9,8 +9,8 @@ export const calculateCurve = (
 
   return line().curve(curveBasis)([
     [origin[0], origin[1]],
-    [origin[0] - length / 3, origin[1]],
-    [destination[0] + length / 3, destination[1]],
+    [origin[0] - Math.max(length / 3, 15), origin[1]],
+    [destination[0] + Math.max(length / 3, 15), destination[1]],
     [destination[0], destination[1]],
   ]);
 };

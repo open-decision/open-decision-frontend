@@ -62,7 +62,7 @@ export const useNodesStore = create<NodesState>(
       setNodes: (nodes, nodeTypes, portTypes) =>
         set({
           nodes: Object.entries(nodes).reduce((acc: nodes, node) => {
-            acc[node[0]] = { ...node[1], dragging: false };
+            acc[node[0]] = { ...node[1] };
             return acc;
           }, {}),
           nodeTypes,
@@ -74,7 +74,6 @@ export const useNodesStore = create<NodesState>(
             state.nodes[id] = {
               coordinates,
               type: nodeType,
-              dragging: false,
               width: 250,
               height: 100,
             };
