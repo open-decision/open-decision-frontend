@@ -4,7 +4,7 @@ import {
   useEdgesStore,
   useEditorStore,
   useNodesStore,
-} from "../../globalState/stores";
+} from "../../globalState";
 import shallow from "zustand/shallow";
 import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";

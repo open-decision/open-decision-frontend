@@ -1,6 +1,6 @@
 import React from "react";
 import shallow from "zustand/shallow";
-import { useNodesStore } from "../../globalState/stores";
+import { useNodesStore } from "../../globalState";
 import { Node } from "./Node";
 
 /**

@@ -5,7 +5,7 @@ import {
   BriefcaseOutline,
   FolderOutline,
 } from "@graywolfai/react-heroicons";
-import { useEditorStore, useNodesStore } from "../../globalState/stores";
+import { useEditorStore, useNodesStore } from "../../globalState";
 import { pick } from "remeda";
 import { ToolbarNode } from "./ToolbarNode";
 import { nanoid } from "nanoid/non-secure";

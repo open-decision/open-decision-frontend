@@ -1,4 +1,4 @@
-import { EdgesState } from "../../globalState/stores";
+import { EdgesState } from "../../globalState";
 import { edge } from "../../types";
 
 export const getInputConnections = (id: string) => (

@@ -1,6 +1,6 @@
 import React from "react";
 import { calculateCurve, getConnectionCoordinates } from "../../utilities";
-import { NodesState, useNodesStore } from "../../globalState/stores";
+import { NodesState, useNodesStore } from "../../globalState";
 import { edge, nodePositionalData } from "../../types";
 import shallow from "zustand/shallow";
 import { Connection } from "./Connection";

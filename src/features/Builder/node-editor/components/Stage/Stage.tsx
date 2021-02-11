@@ -1,7 +1,7 @@
 import React from "react";
 import { useKeyPressEvent } from "react-use";
 import { useGesture } from "react-use-gesture";
-import { useEditorStore } from "../../globalState/stores";
+import { useEditorStore } from "../../globalState";
 import clsx from "clsx";
 import { clamp } from "remeda";
 

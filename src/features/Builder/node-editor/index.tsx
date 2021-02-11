@@ -1,20 +1,13 @@
 //External Libraries
 import React from "react";
 
-//State Management
-import { toastsReducer } from "./globalState";
-
 //Components
 import { Stage } from "./components/Stage/Stage";
 // import { Comment } from "./components/Comment/Comment";
 // import { Toaster } from "./components/Toaster/Toaster";
 
 //Hooks and Functions
-import {
-  useEdgesStore,
-  useEditorStore,
-  useNodesStore,
-} from "./globalState/stores";
+import { useEdgesStore, useEditorStore, useNodesStore } from "./globalState";
 import { Nodes } from "./components/Node/Nodes";
 import { ConnectionsWrapper } from "./components/Connections/ConnectionsWrapper";
 import {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEdgesStore } from "../../globalState/stores";
+import { useEdgesStore } from "../../globalState";
 import { ExistingConnection } from "./ExisitingConnection";
 
 type NodeConnectionsProps = { originNodeId: string };

@@ -1,6 +1,6 @@
 import React from "react";
 import shallow from "zustand/shallow";
-import { useEdgesStore } from "../../globalState/stores";
+import { useEdgesStore } from "../../globalState";
 import styles from "./Connections.module.css";
 import { NodeConnections } from "./NodeConnections";
 
