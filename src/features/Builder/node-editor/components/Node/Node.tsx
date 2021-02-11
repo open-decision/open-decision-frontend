@@ -48,7 +48,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
     <div
       style={{
         transform: `translate(${node.coordinates[0]}px, ${node.coordinates[1]}px)`,
-        gridTemplateColumns: `10px 10px ${node.width}px 10px 10px`,
+        gridTemplateColumns: `10px 10px ${node.width - 40}px 10px 10px`,
         gridTemplateRows: node.height,
       }}
       className="absolute left-0 top-0 grid"

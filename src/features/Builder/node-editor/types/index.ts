@@ -88,7 +88,7 @@ type nodeBase = {
    * The positional coordinates of this Node.
    */
   coordinates: coordinates;
-  width?: number;
+  width: number;
   height?: number;
 };
 
@@ -153,9 +153,9 @@ export type edge = {
 export type edges = Record<string, edge[]>;
 
 /**
- * Describes the data used to communicate necessary information about a node to connection caluclations.
+ * Describes the data used to communicate necessary information about a node to connection calculations.
  */
-export type nodeInformation = {
+export type nodePositionalData = {
   coordinates: coordinates;
   width: number;
   height: number;

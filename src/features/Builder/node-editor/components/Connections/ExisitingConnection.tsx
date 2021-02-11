@@ -1,7 +1,7 @@
 import React from "react";
 import { calculateCurve, getConnectionCoordinates } from "../../utilities";
 import { NodesState, useNodesStore } from "../../globalState/stores";
-import { edge, nodeInformation } from "../../types";
+import { edge, nodePositionalData } from "../../types";
 import shallow from "zustand/shallow";
 import { Connection } from "./Connection";
 
@@ -36,7 +36,7 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
   // const setEdgeData = useEdgesStore((state) => state.setEdgeData);
   const [originNodeId, destinationNodeId] = connectedNodes;
 
-  const originNode: nodeInformation = useNodesStore(
+  const originNode: nodePositionalData = useNodesStore(
     (state) => createNodeInformation(state, originNodeId),
     shallow
   );
