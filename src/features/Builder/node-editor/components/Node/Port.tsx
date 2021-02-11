@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import { Portal } from "react-portal";
 import { pipe, prop } from "remeda";
-import { useEdgesStore } from "../../globalState/stores";
+import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";
 import { calculateCurve } from "../../utilities";
 import { Connection } from "../Connections/Connection";
@@ -46,6 +46,7 @@ export const Port: Port = ({ children, className, nodeId, variant }) => {
     if (!(event.target instanceof HTMLElement)) return;
 
     const receivingNodeId = event.target?.dataset.nodeId;
+    if (nodeId === receivingNodeId) return;
     receivingNodeId && addEdge(receivingNodeId, nodeId);
 
     document.removeEventListener("pointerup", handleDragEnd);
