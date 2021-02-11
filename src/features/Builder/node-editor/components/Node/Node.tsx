@@ -58,6 +58,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
         style={{ borderLeftColor: color ?? "gray" }}
         id={id}
+        data-node-id={id}
         {...nodeGestures()}
       >
         <div className="p-1 flex items-center text-lg">
