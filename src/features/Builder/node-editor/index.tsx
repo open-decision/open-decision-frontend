@@ -140,8 +140,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
         disableZoom={disableZoom}
         style={{ gridArea: "stage" }}
       >
-        <Nodes />
         <ConnectionsWrapper />
+        <Nodes />
       </Stage>
       {open && (
         <Portal node={menu}>
