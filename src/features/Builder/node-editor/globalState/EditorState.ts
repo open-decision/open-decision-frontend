@@ -1,33 +1,40 @@
 import produce from "immer";
-import { merge } from "remeda";
+import { clamp } from "remeda";
 import { devtools } from "zustand/middleware";
 import create from "zustand";
 import { coordinates } from "../types";
 
-type EditorConfig = {
-  zoom: number;
-  coordinates: coordinates;
-  id: number;
-};
+export const editorZoomMinimum = 0.5;
+export const editorZoomMaximum = 3;
 
 export type EditorState = {
-  editorConfig: EditorConfig;
-  setEditorConfig: (editorConfig: Partial<EditorConfig>) => void;
+  zoom: number;
+  coordinates: coordinates;
+  setCoordinates: (coordinates: coordinates) => void;
+  setEditorZoom: (zoom: number) => void;
 };
 
 export const useEditorStore = create<EditorState>(
   devtools(
     (set) => ({
-      editorConfig: {
-        zoom: 1,
-        coordinates: [0, 0],
-        initialized: false,
-        id: 1234,
-      },
-      setEditorConfig: (editorConfig) =>
+      zoom: 0,
+      coordinates: [0, 0],
+      setCoordinates: (coordinates) =>
         set(
           produce((state: EditorState) => {
-            state.editorConfig = merge(state.editorConfig, editorConfig);
+            state.coordinates = coordinates;
+          })
+        ),
+      setEditorZoom: (zoom) =>
+        set(
+          produce((state: EditorState) => {
+            state.zoom = clamp(
+              state.zoom - clamp(zoom, { min: -10, max: 10 }) * 0.005,
+              {
+                min: editorZoomMinimum,
+                max: editorZoomMaximum,
+              }
+            );
           })
         ),
     }),

@@ -89,7 +89,10 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   disableZoom = false,
   disablePan = false,
 }) => {
-  const setEditorConfig = useEditorStore((state) => state.setEditorConfig);
+  const [setCoordinates, setZoom] = useEditorStore((state) => [
+    state.setCoordinates,
+    state.setEditorZoom,
+  ]);
   const setNodes = useNodesStore((state) => state.setNodes);
   const setEdges = useEdgesStore((state) => state.setEdges);
 
@@ -97,16 +100,16 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   const { open, coordinates, nodeId, closeModal } = useModal(ref);
 
   React.useEffect(() => {
-    setEditorConfig({
-      zoom: state.zoom,
-      coordinates: state.coordinates,
-    });
+    setZoom(state.zoom);
+    setCoordinates(state.coordinates);
+
     setNodes(state.nodes, state.nodeTypes, state.portTypes);
     setEdges(state.edges);
   }, [
+    setCoordinates,
     setEdges,
-    setEditorConfig,
     setNodes,
+    setZoom,
     state.coordinates,
     state.edges,
     state.nodeTypes,

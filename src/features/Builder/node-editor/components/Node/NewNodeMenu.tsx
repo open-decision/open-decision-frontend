@@ -83,8 +83,6 @@ const MenuEntry: MenuEntry = ({
   const addNode = useNodesStore((state) => state.addNode);
   const addEdge = useEdgesStore((state) => state.addEdge);
 
-  console.log(coordinates);
-
   const newNodeCoordinates: coordinates = [
     coordinates[0] + width + 150,
     coordinates[1],

@@ -1,7 +1,11 @@
 import React from "react";
 import { useKeyPressEvent } from "react-use";
 import { useGesture } from "react-use-gesture";
-import { useEditorStore } from "../../globalState";
+import {
+  editorZoomMaximum,
+  editorZoomMinimum,
+  useEditorStore,
+} from "../../globalState";
 import clsx from "clsx";
 import { clamp } from "remeda";
 
@@ -29,10 +33,16 @@ export const Stage: Stage = ({
   disableZoom,
   ...props
 }) => {
-  const [zoom, coordinates, setEditorConfig] = useEditorStore((state) => [
-    state.editorConfig.zoom,
-    state.editorConfig.coordinates,
-    state.setEditorConfig,
+  const [
+    zoom,
+    coordinates,
+    setCoordinates,
+    setZoom,
+  ] = useEditorStore((state) => [
+    state.zoom,
+    state.coordinates,
+    state.setCoordinates,
+    state.setEditorZoom,
   ]);
 
   /**
@@ -51,18 +61,12 @@ export const Stage: Stage = ({
   const stageGestures = useGesture(
     {
       // We track the mousewheel and zoom in and out of the Stage.
-      onWheel: ({ delta: [, y] }) =>
-        setEditorConfig({
-          zoom: clamp(zoom - clamp(y, { min: -10, max: 10 }) * 0.005, {
-            min: 0.5,
-            max: 2,
-          }),
-        }),
+      onWheel: ({ delta: [, y] }) => setZoom(y),
 
       // We track the drag and pan the Stage based on the previous coordinates and the delta (change) in the coordinates.
-      onDrag: ({ movement }) => setEditorConfig({ coordinates: movement }),
+      onDrag: ({ movement }) => setCoordinates(movement),
       //This gesture enables panning of the Stage when the mouse is moved. We need this to make the Stage pannable when the Space key is pressed.
-      onMove: ({ movement }) => setEditorConfig({ coordinates: movement }),
+      onMove: ({ movement }) => setCoordinates(movement),
     },
     {
       move: { enabled: !disablePan && spaceIsPressed, initial: coordinates },

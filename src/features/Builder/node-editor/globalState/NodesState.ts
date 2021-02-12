@@ -19,32 +19,49 @@ export const useNodesStore = create<NodesState>(
       nodes: {},
       nodeTypes: {},
       portTypes: {},
+      /**
+       * Sets the state initially based on the passed in arguments.
+       */
       setNodes: (nodes, nodeTypes, portTypes) =>
         set({
-          nodes: Object.entries(nodes).reduce((acc: nodes, node) => {
-            acc[node[0]] = { ...node[1] };
-            return acc;
-          }, {}),
+          nodes,
           nodeTypes,
           portTypes,
         }),
+      /**
+       * Adds a Node of a specific type.
+       * @param nodeType - One of the available nodeTypes.
+       * @param coordinates - The coordinates where the new Node should be created.
+       * @param id - The id of the new Node.
+       */
       addNode: (nodeType, coordinates, id) =>
         set(
           produce((state: NodesState) => {
+            const { width, height } = state.nodeTypes[nodeType];
+
             state.nodes[id] = {
               coordinates,
               type: nodeType,
-              width: 250,
-              height: 100,
+              width: width,
+              height: height,
             };
           })
         ),
-      removeNode: (nodeId) =>
+      /**
+       * Deletes an existing Node.
+       * @param id - The id of the Node that should be deleted.
+       */
+      removeNode: (id) =>
         set(
           produce((state: NodesState) => {
-            delete state.nodes[nodeId];
+            delete state.nodes[id];
           })
         ),
+      /**
+       * Updates an existing Node with a new Node object.
+       * @param id - Id of the Node that should be edited.
+       * @param node The new Node data.
+       */
       setNode: (id, node) =>
         set(
           produce((state: NodesState) => {
