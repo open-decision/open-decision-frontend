@@ -1,11 +1,7 @@
 import React from "react";
 import { useKeyPressEvent } from "react-use";
 import { useGesture } from "react-use-gesture";
-import {
-  editorZoomMaximum,
-  editorZoomMinimum,
-  useEditorStore,
-} from "../../globalState";
+import { useEditorStore } from "../../globalState";
 import clsx from "clsx";
 
 type StageProps = {

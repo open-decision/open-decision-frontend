@@ -22,6 +22,7 @@ import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
 import { useModal } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
 import { Portal } from "react-portal";
+import shallow from "zustand/shallow";
 
 export type EditorState = {
   /**
@@ -89,16 +90,15 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   disableZoom = false,
   disablePan = false,
 }) => {
-  const [setCoordinates, setZoom] = useEditorStore((state) => [
-    state.setCoordinates,
-    state.setZoom,
-  ]);
+  const [setCoordinates, setZoom] = useEditorStore(
+    (state) => [state.setCoordinates, state.setZoom],
+    shallow
+  );
 
-  const setNodes = useNodesStore((state) => state.setNodes);
-  const setEdges = useEdgesStore((state) => state.setEdges);
+  const setNodes = useNodesStore((state) => state.setNodes, shallow);
+  const setEdges = useEdgesStore((state) => state.setEdges, shallow);
 
-  const ref = React.useRef<HTMLDivElement>(null);
-  const { open, coordinates, nodeId, closeModal } = useModal(ref);
+  const { open } = useModal();
 
   React.useEffect(() => {
     setZoom(state.zoom);
@@ -142,12 +142,7 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
       </Stage>
       {open && (
         <Portal node={menu}>
-          <NewNodeMenu
-            ref={ref}
-            menuCoordinates={coordinates}
-            close={closeModal}
-            nodeId={nodeId}
-          />
+          <NewNodeMenu />
         </Portal>
       )}
     </div>

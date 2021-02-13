@@ -9,7 +9,7 @@ import shallow from "zustand/shallow";
 import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
-import { useModalState } from "./useModal";
+import { useModal } from "./useModal";
 
 type NodeProps = {
   /**
@@ -27,12 +27,10 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   const node = useNodesStore((state) => state.nodes[id]);
   const zoom = useEditorStore((state) => state.zoom);
 
-  const setMenuOpen = useModalState((state) => state.openModal);
+  const { openModal } = useModal();
 
   // Get the shared information for a Node of this type from the NodeTypes.
   const { color } = nodeTypes[node.type];
-
-  const ref = React.useRef(null);
 
   //-----------------------------------------------------------------------
   //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
@@ -82,13 +80,9 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           variant="unconnected"
         >
           <button
-            onClick={(event) => {
-              console.log(event.pageX, event.pageY);
-              setMenuOpen([event.pageX, event.pageY], id);
-            }}
+            onClick={(event) => openModal([event.pageX, event.pageY], id)}
             data-node-id={id}
             className="w-full h-full p-1"
-            ref={ref}
           >
             <PlusOutline className="text-white" />
           </button>

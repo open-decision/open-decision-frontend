@@ -1,10 +1,11 @@
 import { useClickAway, useKeyPressEvent } from "react-use";
 import create from "zustand";
 import { coordinates } from "../../types";
+import React from "react";
 
-type useModal = (ref: React.RefObject<HTMLDivElement>) => ModalState;
+type useModal = () => ModalState & { ref: React.MutableRefObject<null> };
 
-export const useModal: useModal = (ref) => {
+export const useModal: useModal = () => {
   const [
     open,
     coordinates,
@@ -19,10 +20,12 @@ export const useModal: useModal = (ref) => {
     state.closeModal,
   ]);
 
+  const ref = React.useRef(null);
+
   useClickAway(ref, () => closeModal());
   useKeyPressEvent("Escape", () => closeModal());
 
-  return { open, coordinates, nodeId, openModal, closeModal };
+  return { open, coordinates, nodeId, openModal, closeModal, ref };
 };
 
 type ModalState = {

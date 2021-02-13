@@ -5,58 +5,54 @@ import { NewspaperOutline } from "@graywolfai/react-heroicons";
 import clsx from "clsx";
 import { coordinates } from "../../types";
 import { nanoid } from "nanoid/non-secure";
+import { useModal } from "./useModal";
 
 type NewNodeMenuProps = {
   className?: string;
-  menuCoordinates: coordinates;
-  close: () => void;
-  nodeId: string;
 };
 
-export const NewNodeMenu = React.forwardRef<HTMLDivElement, NewNodeMenuProps>(
-  ({ className, menuCoordinates, close, nodeId }, ref) => {
-    const nodeTypes = useNodesStore((state) => state.nodeTypes);
-    const options = Object.values(nodeTypes).map((nodeType) =>
-      pick(nodeType, ["label", "color", "type", "width"])
-    );
+export const NewNodeMenu: React.FC<NewNodeMenuProps> = ({ className }) => {
+  const { coordinates, closeModal, nodeId, ref } = useModal();
 
-    const nodeCoordinates = useNodesStore(
-      (state) => state.nodes[nodeId].coordinates
-    );
+  const nodeTypes = useNodesStore((state) => state.nodeTypes);
+  const options = Object.values(nodeTypes).map((nodeType) =>
+    pick(nodeType, ["label", "color", "type", "width"])
+  );
 
-    return (
-      <div
-        className={clsx(
-          "bg-gray-100 rounded shadow-2xl border-gray-300 border-2 min-w-max absolute z-50",
-          className
-        )}
-        style={{ left: menuCoordinates[0], top: menuCoordinates[1] }}
-        ref={ref}
-      >
-        <h2 className="text-lg border-b-2 border-gray-30 p-2">
-          Neuen Knoten hinzufügen
-        </h2>
-        <div className="pt-3 p-2 space-y-2">
-          {options.map((option) => (
-            <MenuEntry
-              key={option.label}
-              color={option.color}
-              nodeType={option.type}
-              coordinates={nodeCoordinates}
-              width={option.width}
-              close={close}
-              nodeId={nodeId}
-            >
-              {option.label}
-            </MenuEntry>
-          ))}
-        </div>
+  const nodeCoordinates = useNodesStore(
+    (state) => state.nodes[nodeId].coordinates
+  );
+
+  return (
+    <div
+      className={clsx(
+        "bg-gray-100 rounded shadow-2xl border-gray-300 border-2 min-w-max absolute z-50",
+        className
+      )}
+      style={{ left: coordinates[0], top: coordinates[1] }}
+      ref={ref}
+    >
+      <h2 className="text-lg border-b-2 border-gray-30 p-2">
+        Neuen Knoten hinzufügen
+      </h2>
+      <div className="pt-3 p-2 space-y-2">
+        {options.map((option) => (
+          <MenuEntry
+            key={option.label}
+            color={option.color}
+            nodeType={option.type}
+            coordinates={nodeCoordinates}
+            width={option.width}
+            close={closeModal}
+            nodeId={nodeId}
+          >
+            {option.label}
+          </MenuEntry>
+        ))}
       </div>
-    );
-  }
-);
-
-NewNodeMenu.displayName = "NewNodeMenu";
+    </div>
+  );
+};
 
 type MenuEntry = React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
