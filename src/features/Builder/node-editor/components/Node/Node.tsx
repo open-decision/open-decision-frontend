@@ -25,7 +25,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
 
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
-  const zoom = useEditorStore((state) => state.editorConfig.zoom);
+  const zoom = useEditorStore((state) => state.zoom);
 
   const setMenuOpen = useModalState((state) => state.openModal);
 

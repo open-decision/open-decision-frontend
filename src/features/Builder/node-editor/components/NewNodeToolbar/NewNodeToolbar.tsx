@@ -32,8 +32,8 @@ export const NewNodeToolbar: NewNodeToolbar = ({ className, ...props }) => {
 
   const addNode = useNodesStore((state) => state.addNode);
   const [stageCoordinates, zoom] = useEditorStore((state) => [
-    state.editorConfig.coordinates,
-    state.editorConfig.zoom,
+    state.coordinates,
+    state.zoom,
   ]);
   const centerOfStage = getCenterOfStage(stageCoordinates, zoom);
 

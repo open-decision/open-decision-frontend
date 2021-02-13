@@ -4,22 +4,42 @@ import { edge, edges } from "../types";
 import { devtools } from "zustand/middleware";
 
 export type EdgesState = {
+  /**
+   * The data about all the edges between nodes in the editor.
+   */
   edges: edges;
+  /**
+   * The initializer function. Provide the edges data to fill the store.
+   */
   setEdges: (edges: edges) => void;
-  setEdgeData: (
+  /**
+   * Updates the data of an individual edge.
+   * @param data - The properties of an edge object to update. Will be merged with the existing data.
+   * @param inputNodeId - The id of the node with the **input** port of the connection.
+   * @param outputNodeId - The id of the node with the **ouput** port of the connection.
+   */
+  updateEdge: (
     data: Partial<edge>,
-    originNodeId: string,
-    destinationNodeId: string
+    inputNodeId: string,
+    outputNodeId: string
   ) => void;
-  addEdge: (originNodeId: string, destinationNodeId: string) => void;
+  /**
+   * Adds a new edge to the store.
+   * @param inputNodeId - The id of the node with the **input** port of the connection.
+   * @param outputNodeId - The id of the node with the **ouput** port of the connection.
+   */
+  addEdge: (inputNodeId: string, outputNodeId: string) => void;
 };
 
+/**
+ * The global store for the edges. It needs to be provided with edges and has no default data.
+ */
 export const useEdgesStore = create<EdgesState>(
   devtools(
     (set) => ({
       edges: {},
       setEdges: (edges) => set({ edges }),
-      setEdgeData: (data, originNodeId, destinationNodeId) =>
+      updateEdge: (data, originNodeId, destinationNodeId) =>
         set(
           produce((state: EdgesState) => {
             const edge = state.edges[originNodeId].find(

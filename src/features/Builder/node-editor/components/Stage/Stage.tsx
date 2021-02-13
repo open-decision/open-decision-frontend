@@ -7,7 +7,6 @@ import {
   useEditorStore,
 } from "../../globalState";
 import clsx from "clsx";
-import { clamp } from "remeda";
 
 type StageProps = {
   /**
@@ -42,7 +41,7 @@ export const Stage: Stage = ({
     state.zoom,
     state.coordinates,
     state.setCoordinates,
-    state.setEditorZoom,
+    state.setZoom,
   ]);
 
   /**

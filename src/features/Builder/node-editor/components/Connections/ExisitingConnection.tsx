@@ -33,7 +33,6 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
   inputNodeId,
   inputPortName,
 }) => {
-  // const setEdgeData = useEdgesStore((state) => state.setEdgeData);
   const [originNodeId, destinationNodeId] = connectedNodes;
 
   const originNode: nodePositionalData = useNodesStore(

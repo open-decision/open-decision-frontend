@@ -91,8 +91,9 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 }) => {
   const [setCoordinates, setZoom] = useEditorStore((state) => [
     state.setCoordinates,
-    state.setEditorZoom,
+    state.setZoom,
   ]);
+
   const setNodes = useNodesStore((state) => state.setNodes);
   const setEdges = useEdgesStore((state) => state.setEdges);
 
