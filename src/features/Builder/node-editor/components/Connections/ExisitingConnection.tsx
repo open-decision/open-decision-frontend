@@ -1,9 +1,10 @@
 import React from "react";
 import { calculateCurve, getConnectionCoordinates } from "../../utilities";
-import { NodesState, useNodesStore } from "../../globalState";
+import { NodesState, useEdgesStore, useNodesStore } from "../../globalState";
 import { edge, nodePositionalData } from "../../types";
 import shallow from "zustand/shallow";
 import { Connection } from "./Connection";
+import { useGesture } from "react-use-gesture";
 
 type ConnectionProps = {
   edge: edge;
@@ -58,16 +59,29 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
     setConnectionCoordinates(newCoordinates);
   }, [destinationNode, originNode]);
 
+  const [hovered, setHovered] = React.useState(false);
+  const removeEdge = useEdgesStore((state) => state.removeEdge);
+
   const curve = connectionCoordinates && calculateCurve(connectionCoordinates);
+
+  const gestures = useGesture({
+    onPointerEnter: () => setHovered(true),
+    onPointerLeave: () => setHovered(false),
+    onPointerDown: ({ event }) => event.stopPropagation(),
+    onClick: () => removeEdge(originNodeId, destinationNodeId),
+  });
 
   return (
     <Connection
+      {...gestures()}
+      enableEvents={true}
       curve={curve ?? ""}
       data-connection-id={id}
       data-output-node-id={outputNodeId}
       data-output-port-name={outputPortName}
       data-input-node-id={inputNodeId}
       data-input-port-name={inputPortName}
+      hovered={hovered}
     />
   );
 };

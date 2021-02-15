@@ -43,14 +43,20 @@ export const Port: Port = ({ children, className, nodeId, variant }) => {
 
   const handleDragEnd = (event: PointerEvent) => {
     setDragging(false);
-    if (!(event.target instanceof HTMLElement)) return;
-
-    const receivingNodeId = event.target?.dataset.nodeId;
-    if (nodeId === receivingNodeId) return;
-    receivingNodeId && addEdge(receivingNodeId, nodeId);
-
     document.removeEventListener("pointerup", handleDragEnd);
     document.removeEventListener("pointermove", handleDrag([0, 0]));
+
+    let receivingNodeId: string | undefined = "";
+    if (!(event.target instanceof Element)) return;
+
+    if (event.target instanceof SVGElement) {
+      receivingNodeId = event.target.parentElement?.id;
+    } else {
+      receivingNodeId = event.target?.id;
+    }
+
+    if (nodeId === receivingNodeId) return;
+    receivingNodeId && addEdge(receivingNodeId, nodeId);
   };
 
   return (

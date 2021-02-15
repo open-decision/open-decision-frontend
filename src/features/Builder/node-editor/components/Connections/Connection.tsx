@@ -1,19 +1,36 @@
+import clsx from "clsx";
 import React from "react";
 
-type Connection = React.SVGAttributes<SVGPathElement> & { curve?: string };
+type Connection = React.SVGAttributes<SVGElement> & {
+  curve?: string;
+  hovered?: boolean;
+  enableEvents?: boolean;
+};
 
 export const Connection = React.forwardRef<SVGPathElement, Connection>(
-  ({ curve, ...props }, ref) => {
+  ({ curve, hovered = false, enableEvents = false, ...props }, ref) => {
     return (
-      <svg className="absolute left-0 top-0 pointer-events-none overflow-visible">
+      <svg
+        className={clsx(
+          "absolute left-0 top-0 overflow-visible",
+          !enableEvents && "pointer-events-none"
+        )}
+        style={{ height: "1px", width: "1px" }}
+        fill="none"
+        {...props}
+      >
         <path
-          stroke="rgb(185, 186, 189)"
-          fill="none"
+          d={curve}
+          strokeWidth={50}
+          visibility="visible"
+          stroke="transparent"
+        />
+        <path
+          stroke={hovered ? "red" : "rgb(185, 186, 189)"}
           strokeWidth={3}
           strokeLinecap="round"
           d={curve}
           ref={ref}
-          {...props}
         />
       </svg>
     );

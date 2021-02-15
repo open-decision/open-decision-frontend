@@ -29,6 +29,7 @@ export type EdgesState = {
    * @param outputNodeId - The id of the node with the **ouput** port of the connection.
    */
   addEdge: (inputNodeId: string, outputNodeId: string) => void;
+  removeEdge: (inputNodeId: string, outputNodeId: string) => void;
 };
 
 /**
@@ -57,10 +58,27 @@ export const useEdgesStore = create<EdgesState>(
         set(
           produce((state: EdgesState) => {
             if (!state.edges[originNodeId]) state.edges[originNodeId] = [];
+            const existingConnection = state.edges[originNodeId].find(
+              (edge) => edge.nodeId === destinationNodeId
+            );
 
-            state.edges[originNodeId].push({
-              nodeId: destinationNodeId,
-            });
+            !existingConnection
+              ? state.edges[originNodeId].push({
+                  nodeId: destinationNodeId,
+                })
+              : null;
+          })
+        ),
+      removeEdge: (originNodeId, destinationNodeId) =>
+        set(
+          produce((state: EdgesState) => {
+            const connections = state.edges[originNodeId];
+
+            const edgeToDelete = connections.findIndex(
+              (value) => value.nodeId === destinationNodeId
+            );
+
+            connections.splice(edgeToDelete, 1);
           })
         ),
     }),
