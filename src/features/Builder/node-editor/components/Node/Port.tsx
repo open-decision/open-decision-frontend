@@ -19,7 +19,13 @@ type Port = React.FC<
   }
 >;
 
-export const Port: Port = ({ children, className, nodeId, variant }) => {
+export const Port: Port = ({
+  children,
+  className,
+  nodeId,
+  variant,
+  ...props
+}) => {
   const addEdge = useEdgesStore((state) => state.addEdge);
   const connectionRef = React.useRef<SVGPathElement>(null);
   const [dragging, setDragging] = React.useState(false);
@@ -67,7 +73,7 @@ export const Port: Port = ({ children, className, nodeId, variant }) => {
         "rounded-full border-2 border-gray-200 shadow-md relative",
         pipe(portVariants, prop(variant))
       )}
-      data-node-id={nodeId}
+      {...props}
     >
       {children}
       {dragging && (

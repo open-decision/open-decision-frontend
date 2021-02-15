@@ -76,11 +76,6 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
       {...gestures()}
       enableEvents={true}
       curve={curve ?? ""}
-      data-connection-id={id}
-      data-output-node-id={outputNodeId}
-      data-output-port-name={outputPortName}
-      data-input-node-id={inputNodeId}
-      data-input-port-name={inputPortName}
       hovered={hovered}
     />
   );

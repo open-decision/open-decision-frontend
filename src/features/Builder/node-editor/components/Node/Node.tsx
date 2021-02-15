@@ -74,11 +74,13 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         nodeId={id}
         className="col-start-1 col-end-3 row-span-full self-center justify-self-center"
         variant="connected"
+        id={id}
       />
       {outputConnections.length < 1 ? (
         <Port
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           nodeId={id}
+          id={id}
           variant="unconnected"
         >
           <button
@@ -94,6 +96,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           nodeId={id}
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           variant="connected"
+          id={id}
         />
       )}
     </div>
