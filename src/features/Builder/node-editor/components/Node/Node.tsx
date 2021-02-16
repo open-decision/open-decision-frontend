@@ -68,18 +68,14 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
       <div
         className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
         style={{ borderLeftColor: color ?? "gray" }}
-        id={id}
         {...nodeGestures()}
       >
-        <div className="p-1 flex items-center text-lg" id={id}>
+        <div className="p-1 flex items-center text-lg">
           <ChatOutline
             style={{ width: "2.5em", color: color ?? "black" }}
             className="mr-2 rounded py-4 px-2"
-            id={id}
           />
-          <h2 className="font-semibold" id={id}>
-            {id}
-          </h2>
+          <h2 className="font-semibold">{id}</h2>
         </div>
       </div>
       {/* These are the Ports of the Nodes. There is only one Port on each side. The Output Port can also be an unconnected port. This port looks different and has a menu to create a new Node. Above we get the outputConnections and here we use them to decide which port to render. */}
@@ -87,18 +83,15 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         nodeId={id}
         className="col-start-1 col-end-3 row-span-full self-center justify-self-center"
         variant="connected"
-        id={id}
       />
       {outputConnections.length < 1 ? (
         <Port
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           nodeId={id}
-          id={id}
           variant="unconnected"
         >
           <button
             onClick={(event) => openModal([event.pageX, event.pageY], id)}
-            id={id}
             className="w-full h-full p-1"
           >
             <PlusOutline className="text-white" />
@@ -109,7 +102,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           nodeId={id}
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           variant="connected"
-          id={id}
         />
       )}
     </div>

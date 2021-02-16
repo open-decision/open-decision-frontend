@@ -1,12 +1,10 @@
 import clsx from "clsx";
 import React from "react";
-import { Portal } from "react-portal";
 import { pipe, prop } from "remeda";
 import shallow from "zustand/shallow";
 import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";
 import { calculateCurve } from "../../utilities";
-import { Connection } from "../Connections/Connection";
 import { NewConnection } from "../Connections/NewConnection";
 
 const portVariants = {
@@ -53,22 +51,11 @@ export const Port: Port = ({
     newCurve && connectionRef.current?.setAttribute("d", newCurve);
   };
 
-  const handleDragEnd = (event: PointerEvent) => {
+  const handleDragEnd = () => {
     endEdgeCreation();
     document.removeEventListener("pointerup", handleDragEnd);
     document.removeEventListener("pointermove", handleDrag([0, 0]));
-
-    let receivingNodeId: string | undefined = "";
-    if (!(event.target instanceof Element)) return;
-
-    if (event.target instanceof SVGElement) {
-      receivingNodeId = event.target.parentElement?.id;
-    } else {
-      receivingNodeId = event.target?.id;
-    }
-
-    if (nodeId === receivingNodeId) return;
-    receivingNodeId && addEdge(receivingNodeId, nodeId);
+    addEdge(nodeId);
   };
 
   return (
