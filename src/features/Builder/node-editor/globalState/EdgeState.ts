@@ -8,6 +8,7 @@ export type EdgesState = {
    * The data about all the edges between nodes in the editor.
    */
   edges: edges;
+  newEdge: { target?: string; active: boolean };
   /**
    * The initializer function. Provide the edges data to fill the store.
    */
@@ -30,6 +31,10 @@ export type EdgesState = {
    */
   addEdge: (inputNodeId: string, outputNodeId: string) => void;
   removeEdge: (inputNodeId: string, outputNodeId: string) => void;
+  startEdgeCreation: () => void;
+  updateEdgeTarget: (id: string) => void;
+  removeEdgeTarget: () => void;
+  endEdgeCreation: () => void;
 };
 
 /**
@@ -39,6 +44,7 @@ export const useEdgesStore = create<EdgesState>(
   devtools(
     (set) => ({
       edges: {},
+      newEdge: { target: undefined, active: false },
       setEdges: (edges) => set({ edges }),
       updateEdge: (data, originNodeId, destinationNodeId) =>
         set(
@@ -57,13 +63,16 @@ export const useEdgesStore = create<EdgesState>(
       addEdge: (originNodeId, destinationNodeId) =>
         set(
           produce((state: EdgesState) => {
-            if (!state.edges[originNodeId]) state.edges[originNodeId] = [];
-            const existingConnection = state.edges[originNodeId].find(
+            console.log(state.newEdge.target);
+
+            if (!state.edges[state.newEdge.target])
+              state.edges[state.newEdge.target] = [];
+            const existingConnection = state.edges[state.newEdge.target].find(
               (edge) => edge.nodeId === destinationNodeId
             );
 
             !existingConnection
-              ? state.edges[originNodeId].push({
+              ? state.edges[state.newEdge.target].push({
                   nodeId: destinationNodeId,
                 })
               : null;
@@ -79,6 +88,25 @@ export const useEdgesStore = create<EdgesState>(
             );
 
             connections.splice(edgeToDelete, 1);
+          })
+        ),
+      startEdgeCreation: () => set({ newEdge: { active: true } }),
+      updateEdgeTarget: (id) =>
+        set(
+          produce((state: EdgesState) => {
+            if (state.newEdge.active) state.newEdge.target = id;
+          })
+        ),
+      removeEdgeTarget: () =>
+        set(
+          produce((state: EdgesState) => {
+            if (state.newEdge.active) state.newEdge.target = undefined;
+          })
+        ),
+      endEdgeCreation: () =>
+        set(
+          produce((state: EdgesState) => {
+            state.newEdge.active = false;
           })
         ),
     }),

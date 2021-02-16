@@ -1,5 +1,5 @@
 import React from "react";
-import { useDrag } from "react-use-gesture";
+import { useDrag, useGesture } from "react-use-gesture";
 import {
   useEdgesStore,
   useEditorStore,
@@ -21,7 +21,11 @@ type NodeProps = {
 export const Node: React.FC<NodeProps> = ({ id }) => {
   // Here we get all the data and functions, that we need, from state.
   const nodeTypes = useNodesStore((state) => state.nodeTypes, shallow);
-  const outputConnections = useEdgesStore(getOutputConnections(id));
+  const outputConnections = useEdgesStore(getOutputConnections(id), shallow);
+  const [updateEdgeTarget, removeEdgeTarget] = useEdgesStore(
+    (state) => [state.updateEdgeTarget, state.removeEdgeTarget],
+    shallow
+  );
 
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
@@ -34,12 +38,21 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
 
   //-----------------------------------------------------------------------
   //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
-  const nodeGestures = useDrag(
-    ({ movement, event }) => {
-      event.stopPropagation();
-      setNode(id, { ...node, coordinates: movement });
+  const nodeGestures = useGesture(
+    {
+      onDrag: ({ movement, event }) => {
+        event.stopPropagation();
+        setNode(id, { ...node, coordinates: movement });
+      },
+      onPointerEnter: () => updateEdgeTarget(id),
+      onPointerLeave: () => removeEdgeTarget(),
     },
-    { initial: node.coordinates, transform: ([x, y]) => [x / zoom, y / zoom] }
+    {
+      drag: {
+        initial: node.coordinates,
+        transform: ([x, y]) => [x / zoom, y / zoom],
+      },
+    }
   );
 
   return (

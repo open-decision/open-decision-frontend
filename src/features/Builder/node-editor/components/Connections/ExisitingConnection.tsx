@@ -9,11 +9,6 @@ import { useGesture } from "react-use-gesture";
 type ConnectionProps = {
   edge: edge;
   connectedNodes: [string, string];
-  id?: string;
-  outputNodeId?: string;
-  outputPortName?: string;
-  inputNodeId?: string;
-  inputPortName?: string;
 };
 
 const createNodeInformation = (state: NodesState, nodeId: string) => {
@@ -28,11 +23,6 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
 
 export const ExistingConnection: React.FC<ConnectionProps> = ({
   connectedNodes,
-  id,
-  outputNodeId,
-  outputPortName,
-  inputNodeId,
-  inputPortName,
 }) => {
   const [originNodeId, destinationNodeId] = connectedNodes;
 

@@ -2,10 +2,12 @@ import clsx from "clsx";
 import React from "react";
 import { Portal } from "react-portal";
 import { pipe, prop } from "remeda";
+import shallow from "zustand/shallow";
 import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";
 import { calculateCurve } from "../../utilities";
 import { Connection } from "../Connections/Connection";
+import { NewConnection } from "../Connections/NewConnection";
 
 const portVariants = {
   connected: "h-4 w-4 bg-blue-500",
@@ -26,14 +28,18 @@ export const Port: Port = ({
   variant,
   ...props
 }) => {
-  const addEdge = useEdgesStore((state) => state.addEdge);
   const connectionRef = React.useRef<SVGPathElement>(null);
-  const [dragging, setDragging] = React.useState(false);
+
+  const addEdge = useEdgesStore((state) => state.addEdge);
+  const [startEdgeCreation, endEdgeCreation] = useEdgesStore(
+    (state) => [state.startEdgeCreation, state.endEdgeCreation],
+    shallow
+  );
 
   const handleDragStart = (event: React.PointerEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    setDragging(true);
+    startEdgeCreation();
 
     document.addEventListener("pointerup", handleDragEnd);
     document.addEventListener(
@@ -48,7 +54,7 @@ export const Port: Port = ({
   };
 
   const handleDragEnd = (event: PointerEvent) => {
-    setDragging(false);
+    endEdgeCreation();
     document.removeEventListener("pointerup", handleDragEnd);
     document.removeEventListener("pointermove", handleDrag([0, 0]));
 
@@ -76,11 +82,7 @@ export const Port: Port = ({
       {...props}
     >
       {children}
-      {dragging && (
-        <Portal>
-          <Connection ref={connectionRef} />
-        </Portal>
-      )}
+      <NewConnection ref={connectionRef} />
     </div>
   );
 };
