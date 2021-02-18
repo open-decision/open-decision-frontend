@@ -76,13 +76,13 @@ export const useEdgesStore = create<EdgesState>(
               });
           })
         ),
-      removeEdge: (originNodeId, destinationNodeId) =>
+      removeEdge: (inputNodeId, outputNodeId) =>
         set(
           produce((state: EdgesState) => {
-            const connections = state.edges[originNodeId];
+            const connections = state.edges[outputNodeId];
 
             const edgeToDelete = connections.findIndex(
-              (value) => value.nodeId === destinationNodeId
+              (value) => value.nodeId === inputNodeId
             );
 
             connections.splice(edgeToDelete, 1);
