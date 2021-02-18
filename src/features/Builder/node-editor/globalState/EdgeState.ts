@@ -1,5 +1,5 @@
 import create from "zustand";
-import produce from "immer";
+import produce, { current } from "immer";
 import { edge, edges } from "../types";
 import { devtools } from "zustand/middleware";
 
@@ -8,7 +8,7 @@ export type EdgesState = {
    * The data about all the edges between nodes in the editor.
    */
   edges: edges;
-  newEdge: { target?: string; active: boolean };
+  newEdge: { target?: string };
   /**
    * The initializer function. Provide the edges data to fill the store.
    */
@@ -29,12 +29,10 @@ export type EdgesState = {
    * @param inputNodeId - The id of the node with the **input** port of the connection.
    * @param outputNodeId - The id of the node with the **ouput** port of the connection.
    */
-  addEdge: (origin: string) => void;
+  addEdge: (origin: string, destination?: string) => void;
   removeEdge: (inputNodeId: string, outputNodeId: string) => void;
-  startEdgeCreation: () => void;
   updateEdgeTarget: (id: string) => void;
   removeEdgeTarget: () => void;
-  endEdgeCreation: () => void;
 };
 
 /**
@@ -44,7 +42,7 @@ export const useEdgesStore = create<EdgesState>(
   devtools(
     (set) => ({
       edges: {},
-      newEdge: { target: undefined, active: false },
+      newEdge: { target: undefined },
       setEdges: (edges) => set({ edges }),
       updateEdge: (data, originNodeId, destinationNodeId) =>
         set(
@@ -60,22 +58,22 @@ export const useEdgesStore = create<EdgesState>(
               state.edges[originNodeId][edgeIndex] = { ...edge, ...data };
           })
         ),
-      addEdge: (origin) =>
+      addEdge: (origin, destination) =>
         set(
           produce((state: EdgesState) => {
-            if (!state.newEdge.target) return;
+            const targetNodeId = destination ?? state.newEdge.target;
+            if (!targetNodeId) return;
 
-            if (!state.edges[state.newEdge.target])
-              state.edges[state.newEdge.target] = [];
-            const existingConnection = state.edges[state.newEdge.target].find(
+            if (!state.edges[targetNodeId]) state.edges[targetNodeId] = [];
+
+            const existingConnection = state.edges[targetNodeId].find(
               (edge) => edge.nodeId === origin
             );
 
-            !existingConnection
-              ? state.edges[state.newEdge.target].push({
-                  nodeId: origin,
-                })
-              : null;
+            if (!existingConnection)
+              state.edges[targetNodeId].push({
+                nodeId: origin,
+              });
           })
         ),
       removeEdge: (originNodeId, destinationNodeId) =>
@@ -90,23 +88,16 @@ export const useEdgesStore = create<EdgesState>(
             connections.splice(edgeToDelete, 1);
           })
         ),
-      startEdgeCreation: () => set({ newEdge: { active: true } }),
       updateEdgeTarget: (id) =>
         set(
           produce((state: EdgesState) => {
-            if (state.newEdge.active) state.newEdge.target = id;
+            state.newEdge.target = id;
           })
         ),
       removeEdgeTarget: () =>
         set(
           produce((state: EdgesState) => {
-            if (state.newEdge.active) state.newEdge.target = undefined;
-          })
-        ),
-      endEdgeCreation: () =>
-        set(
-          produce((state: EdgesState) => {
-            state.newEdge.active = false;
+            state.newEdge.target = undefined;
           })
         ),
     }),

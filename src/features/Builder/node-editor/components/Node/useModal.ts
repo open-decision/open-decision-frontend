@@ -36,7 +36,7 @@ type ModalState = {
   closeModal: () => void;
 };
 
-export const useModalState = create<ModalState>((set) => ({
+const useModalState = create<ModalState>((set) => ({
   open: false,
   coordinates: [0, 0],
   nodeId: "",

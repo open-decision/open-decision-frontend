@@ -1,5 +1,5 @@
 import React from "react";
-import { useDrag, useGesture } from "react-use-gesture";
+import { useGesture } from "react-use-gesture";
 import {
   useEdgesStore,
   useEditorStore,
@@ -10,6 +10,7 @@ import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
 import { useModal } from "./useModal";
+import { useSidebar, useSidebarState } from "./useSidebar";
 
 type NodeProps = {
   /**
@@ -19,8 +20,6 @@ type NodeProps = {
 };
 
 export const Node: React.FC<NodeProps> = ({ id }) => {
-  // Here we get all the data and functions, that we need, from state.
-  const nodeTypes = useNodesStore((state) => state.nodeTypes, shallow);
   const outputConnections = useEdgesStore(getOutputConnections(id), shallow);
   const [updateEdgeTarget, removeEdgeTarget] = useEdgesStore(
     (state) => [state.updateEdgeTarget, state.removeEdgeTarget],
@@ -30,11 +29,14 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
   const zoom = useEditorStore((state) => state.zoom);
+  // Here we get all the data and functions, that we need, from state.
+  const color = useNodesStore(
+    (state) => state.nodeTypes[node.type].color,
+    shallow
+  );
 
   const { openModal } = useModal();
-
-  // Get the shared information for a Node of this type from the NodeTypes.
-  const { color } = nodeTypes[node.type];
+  const openSidebar = useSidebarState((state) => state.openSidebar);
 
   //-----------------------------------------------------------------------
   //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
@@ -68,6 +70,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
       <div
         className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
         style={{ borderLeftColor: color ?? "gray" }}
+        onClick={() => openSidebar(id, node.type)}
         {...nodeGestures()}
       >
         <div className="p-1 flex items-center text-lg">
@@ -91,7 +94,10 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           variant="unconnected"
         >
           <button
-            onClick={(event) => openModal([event.pageX, event.pageY], id)}
+            onClick={(event) => {
+              event.stopPropagation();
+              openModal([event.pageX, event.pageY], id);
+            }}
             className="w-full h-full p-1"
           >
             <PlusOutline className="text-white" />

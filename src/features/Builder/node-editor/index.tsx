@@ -23,6 +23,8 @@ import { useModal } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
 import { Portal } from "react-portal";
 import shallow from "zustand/shallow";
+import { useSidebar, useSidebarState } from "./components/Node/useSidebar";
+import { NodeEditingSidebar } from "./components/Node/NodeEditingSidebar";
 
 export type EditorState = {
   /**
@@ -98,7 +100,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   const setNodes = useNodesStore((state) => state.setNodes, shallow);
   const setEdges = useEdgesStore((state) => state.setEdges, shallow);
 
-  const { open } = useModal();
+  const { open: openMenu } = useModal();
+  const openSidebar = useSidebarState((state) => state.open);
 
   React.useEffect(() => {
     setZoom(state.zoom);
@@ -127,20 +130,26 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     <div
       className="w-full h-full grid"
       style={{
-        gridTemplateAreas: "'nodeToolbar stage stage'",
-        gridTemplateColumns: "max-content 1fr",
+        gridTemplateColumns: "max-content 1fr max-content",
+        gridAutoRows: "none",
       }}
     >
-      <NewNodeToolbar style={{ gridArea: "nodeToolbar" }} className="z-10" />
+      <NewNodeToolbar style={{ gridColumn: "1", gridRow: "1" }} />
+      {openSidebar && (
+        <NodeEditingSidebar
+          className="bg-gray-300"
+          style={{ gridColumn: "3", gridRow: "1", zIndex: "1" }}
+        />
+      )}
       <Stage
         disablePan={disablePan}
         disableZoom={disableZoom}
-        style={{ gridArea: "stage" }}
+        style={{ gridColumn: "2 / 4", gridRow: "1" }}
       >
         <ConnectionsWrapper />
         <Nodes />
       </Stage>
-      {open && (
+      {openMenu && (
         <Portal node={menu}>
           <NewNodeMenu />
         </Portal>

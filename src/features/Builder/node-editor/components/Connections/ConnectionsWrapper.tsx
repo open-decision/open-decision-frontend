@@ -15,7 +15,6 @@ export const ConnectionsWrapper: React.FC = () => {
         edges.map((edge) => (
           <ExistingConnection
             edge={edge}
-            id={`${originNodeId}-${edge.nodeId}`}
             key={`${originNodeId}-${edge.nodeId}`}
             connectedNodes={[originNodeId, edge.nodeId]}
           />
