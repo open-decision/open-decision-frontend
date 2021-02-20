@@ -2,7 +2,10 @@ import React from "react";
 import { useClickAway, useKeyPressEvent } from "react-use";
 import create from "zustand";
 
-export const useSidebar = () => {
+/**
+ *
+ */
+export const useSidebar = (): SidebarState & React.MutableRefObject<null> => {
   const [open, nodeId, openSidebar, closeSidebar] = useSidebarState((state) => [
     state.open,
     state.nodeId,
@@ -21,7 +24,7 @@ export const useSidebar = () => {
   return { open, nodeId, openSidebar, closeSidebar, ref };
 };
 
-type ModalState = {
+type SidebarState = {
   open: boolean;
   nodeId: string;
   nodeType: string;
@@ -29,7 +32,7 @@ type ModalState = {
   closeSidebar: () => void;
 };
 
-export const useSidebarState = create<ModalState>((set) => ({
+export const useSidebarState = create<SidebarState>((set) => ({
   open: false,
   nodeId: "",
   nodeType: "",

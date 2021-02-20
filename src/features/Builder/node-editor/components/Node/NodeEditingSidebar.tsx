@@ -3,22 +3,76 @@ import React from "react";
 import { useKeyPressEvent } from "react-use";
 import { useNodesStore } from "../../globalState";
 import { useSidebarState } from "./useSidebar";
+import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 
-export const NodeEditingSidebar = ({ className, ...props }) => {
-  const [closeSidebar, nodeType] = useSidebarState((state) => [
+export const NodeEditingSidebar = ({ className, style, ...props }) => {
+  const [nodeId, closeSidebar, nodeType] = useSidebarState((state) => [
+    state.nodeId,
     state.closeSidebar,
     state.nodeType,
   ]);
+
   const config = useNodesStore((state) => state.nodeTypes[nodeType]);
+  console.log(config);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(ref, () => closeSidebar());
   useKeyPressEvent("Escape", () => closeSidebar());
 
   return (
-    <div className={clsx("w-96", className)} ref={ref} {...props}>
-      Test
+    <div
+      className={clsx(
+        "w-full p-6 shadow-md space-y-8 overflow-y-scroll",
+        className
+      )}
+      style={style}
+      ref={ref}
+      {...props}
+    >
+      <header className="flex justify-between items-start">
+        <h2
+          className="text-3xl font-semibold border-b-4 pb-1"
+          style={{ borderColor: config.color }}
+        >
+          {nodeId}
+        </h2>
+        <button
+          className="w-9 bg-gray-300 text-gray-600 clickable p-2"
+          onClick={() => closeSidebar()}
+        >
+          <ChevronRightOutline />
+        </button>
+      </header>
+      <section className="space-y-2">
+        <h3 className="text-lg font-semibold">Unused Inputs</h3>
+        <div className="w-full h-52 bg-gray-300 flex items-center justify-center text-xl">
+          Filler
+        </div>
+      </section>
+      <section className="space-y-2">
+        <h3 className="text-lg font-semibold">Conditions</h3>
+        <div className="w-full h-52 bg-gray-300 flex items-center justify-center text-xl">
+          Filler
+        </div>
+      </section>
+      <section className="space-y-2">
+        <h3 className="text-lg font-semibold">Variables</h3>
+        <div className="w-full h-52 bg-gray-300 flex items-center justify-center text-xl">
+          Filler
+        </div>
+      </section>
+      <section className="space-y-2">
+        <h3 className="text-lg font-semibold">Question</h3>
+        <div className="w-full h-52 bg-gray-300 flex items-center justify-center text-xl">
+          Filler
+        </div>
+      </section>
+      <section className="space-y-2">
+        <h3 className="text-lg font-semibold">Answers</h3>
+        <div className="w-full h-52 bg-gray-300 flex items-center justify-center text-xl">
+          Filler
+        </div>
+      </section>
     </div>
   );
 };

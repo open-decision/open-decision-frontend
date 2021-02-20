@@ -56,6 +56,7 @@ export type EditorState = {
    */
   nodeTypes: nodeTypes;
   portTypes: portTypes;
+  treeName: string;
 };
 
 type NodeEditorProps = {
@@ -130,17 +131,11 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
     <div
       className="w-full h-full grid"
       style={{
-        gridTemplateColumns: "max-content 1fr max-content",
-        gridAutoRows: "none",
+        gridTemplateColumns: "max-content 4fr 1fr",
+        gridTemplateRows: "1fr",
       }}
     >
       <NewNodeToolbar style={{ gridColumn: "1", gridRow: "1" }} />
-      {openSidebar && (
-        <NodeEditingSidebar
-          className="bg-gray-300"
-          style={{ gridColumn: "3", gridRow: "1", zIndex: "1" }}
-        />
-      )}
       <Stage
         disablePan={disablePan}
         disableZoom={disableZoom}
@@ -149,6 +144,12 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
         <ConnectionsWrapper />
         <Nodes />
       </Stage>
+      {openSidebar && (
+        <NodeEditingSidebar
+          className="bg-gray-100 z-10"
+          style={{ gridColumn: "3 / 4", gridRow: "1" }}
+        />
+      )}
       {openMenu && (
         <Portal node={menu}>
           <NewNodeMenu />
