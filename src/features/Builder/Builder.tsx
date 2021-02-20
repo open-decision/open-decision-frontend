@@ -1,6 +1,6 @@
 import React from "react";
 import { EditorState, NodeEditor } from "./node-editor";
-import { Button, FileInput, Header, Link } from "@components/index";
+import { Button, FileInput, Header, Input, Link } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import {
@@ -19,6 +19,7 @@ const initialEditorState: EditorState = {
   zoom: 1,
   nodeTypes: exampleNodeTypes,
   portTypes: examplePortTypes,
+  treeName: "Test",
 };
 
 const Editor: React.FC<{
@@ -34,8 +35,27 @@ export const Builder: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <div className="relative">
+      <Header>
+        <div className="flex space-x-4 flex-1 justify-between">
+          {data ? (
+            <>
+              <input
+                className="shadow-none border-none max-w-2xl text-xl px-4 bg-gray-50"
+                value={data.treeName}
+                onChange={(event) =>
+                  setData({ ...data, treeName: event.target.value })
+                }
+              />
+              <div className="space-x-4 self-center py-2">
+                <Button>Preview</Button>
+                <Button>Export</Button>
+                <Button>Speichern</Button>
+              </div>
+            </>
+          ) : null}
+        </div>
+      </Header>
+      <div className="relative min-h-0">
         {data?.nodes ? (
           <Editor state={data} setState={(value) => setData(value)} />
         ) : (

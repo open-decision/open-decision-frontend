@@ -39,13 +39,10 @@ export const NewNodeToolbar: NewNodeToolbar = ({ className, ...props }) => {
 
   return (
     <div
-      className={clsx(
-        "w-80 border-r-4 border-gray-300 flex shadow-xl",
-        className
-      )}
+      className={clsx("w-80 bg-gray-100 flex shadow-xl z-10", className)}
       {...props}
     >
-      <div className="bg-gray-200 border-r-4 border-gray-300 shadow-xl px-2 py-5 flex flex-col items-center space-y-4">
+      <div className="bg-gray-300 shadow-xl px-2 py-5 flex flex-col items-center space-y-4">
         <button className="flex flex-col items-center">
           <BriefcaseOutline style={{ width: "2em" }} />
           Package

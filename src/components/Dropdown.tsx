@@ -1,20 +1,23 @@
 import React from "react";
 import { useKeyboardEvent } from "@utils/index";
 import { Button } from "./Button";
+import clsx from "clsx";
 
 type Dropdown = {
   icon: React.ReactNode;
+  className?: string;
 };
 
 export const Dropdown: React.FunctionComponent<Dropdown> = ({
   children,
   icon,
+  className,
 }) => {
   const [open, setOpen] = React.useState(false);
   useKeyboardEvent("Escape", () => setOpen(false));
 
   return (
-    <div className="relative h-10">
+    <div className={clsx("relative h-10", className)}>
       <Button
         className="relative z-20"
         size="filled"
