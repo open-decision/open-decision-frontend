@@ -5,7 +5,15 @@ import { useNodesStore } from "../../globalState";
 import { useSidebarState } from "./useSidebar";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 
-export const NodeEditingSidebar = ({ className, style, ...props }) => {
+type NodeEditingSidebar = React.FC<React.HTMLAttributes<HTMLDivElement>> & {
+  className?: string;
+};
+
+export const NodeEditingSidebar: NodeEditingSidebar = ({
+  className,
+  style,
+  ...props
+}) => {
   const [nodeId, closeSidebar, nodeType] = useSidebarState((state) => [
     state.nodeId,
     state.closeSidebar,
