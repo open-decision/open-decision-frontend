@@ -42,17 +42,19 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
   const nodeGestures = useGesture(
     {
-      onDrag: ({ movement, event }) => {
+      onDrag: ({ movement, event, tap }) => {
         event.stopPropagation();
-        setNode(id, { ...node, coordinates: movement });
+        if (!tap) setNode(id, { ...node, coordinates: movement });
       },
       onPointerEnter: () => updateEdgeTarget(id),
       onPointerLeave: () => removeEdgeTarget(),
+      onPointerDown: ({ event }) => event.stopPropagation(),
     },
     {
       drag: {
         initial: node.coordinates,
         transform: ([x, y]) => [x / zoom, y / zoom],
+        filterTaps: true,
       },
     }
   );
@@ -67,7 +69,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
       className="absolute left-0 top-0 grid"
     >
       {/* This is the body of the Node. */}
-      <div
+      <button
         className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
         style={{ borderLeftColor: color ?? "gray" }}
         onClick={() => openSidebar(id, node.type)}
@@ -80,7 +82,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           />
           <h2 className="font-semibold">{id}</h2>
         </div>
-      </div>
+      </button>
       {/* These are the Ports of the Nodes. There is only one Port on each side. The Output Port can also be an unconnected port. This port looks different and has a menu to create a new Node. Above we get the outputConnections and here we use them to decide which port to render. */}
       <Port
         nodeId={id}
