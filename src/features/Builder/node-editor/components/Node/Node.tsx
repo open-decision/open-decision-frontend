@@ -26,8 +26,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
     shallow
   );
 
-  console.log(id, outputConnections);
-
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
   const zoom = useEditorStore((state) => state.zoom);
