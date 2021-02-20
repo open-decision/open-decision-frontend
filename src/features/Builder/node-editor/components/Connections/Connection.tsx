@@ -15,7 +15,6 @@ export const Connection = React.forwardRef<SVGPathElement, Connection>(
           "absolute left-0 top-0 overflow-visible",
           !enableEvents && "pointer-events-none"
         )}
-        style={{ height: "1px", width: "1px" }}
         fill="none"
         {...props}
       >
