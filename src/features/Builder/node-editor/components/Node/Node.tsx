@@ -10,7 +10,7 @@ import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
 import { useModal } from "./useModal";
-import { useSidebar, useSidebarState } from "./useSidebar";
+import { useSidebarState } from "./useSidebar";
 
 type NodeProps = {
   /**
@@ -25,6 +25,8 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
     (state) => [state.updateEdgeTarget, state.removeEdgeTarget],
     shallow
   );
+
+  console.log(id, outputConnections);
 
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
@@ -89,7 +91,13 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         className="col-start-1 col-end-3 row-span-full self-center justify-self-center"
         variant="connected"
       />
-      {outputConnections.length < 1 ? (
+      {outputConnections ? (
+        <Port
+          nodeId={id}
+          className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
+          variant="connected"
+        />
+      ) : (
         <Port
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           nodeId={id}
@@ -105,12 +113,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
             <PlusOutline className="text-white" />
           </button>
         </Port>
-      ) : (
-        <Port
-          nodeId={id}
-          className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
-          variant="connected"
-        />
       )}
     </div>
   );

@@ -2,13 +2,10 @@ import clsx from "clsx";
 import React from "react";
 import { Portal } from "react-portal";
 import { pipe, prop } from "remeda";
-import shallow from "zustand/shallow";
 import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";
 import { calculateCurve } from "../../utilities";
 import { Connection } from "../Connections/Connection";
-import { NewConnection } from "../Connections/NewConnection";
-
 const portVariants = {
   connected: "h-4 w-4 bg-blue-500",
   unconnected: "h-7 w-7 bg-red-500 clickable",
@@ -46,7 +43,7 @@ export const Port: Port = ({
   };
 
   const handleDrag = (origin: coordinates) => (event: PointerEvent) => {
-    const newCurve = calculateCurve([[event.clientX, event.clientY], origin]);
+    const newCurve = calculateCurve([origin, [event.clientX, event.clientY]]);
     newCurve && connectionRef.current?.setAttribute("d", newCurve);
   };
 

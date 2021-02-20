@@ -125,8 +125,6 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
 
   //----------------------------------------------------------------
 
-  const menu = document.getElementById("breakout");
-
   return (
     <div
       className="w-full h-full grid"
@@ -143,17 +141,17 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
       >
         <ConnectionsWrapper />
         <Nodes />
+        {openMenu && (
+          <Portal>
+            <NewNodeMenu />
+          </Portal>
+        )}
       </Stage>
       {openSidebar && (
         <NodeEditingSidebar
           className="bg-gray-100 z-10"
           style={{ gridColumn: "3 / 4", gridRow: "1" }}
         />
-      )}
-      {openMenu && (
-        <Portal node={menu}>
-          <NewNodeMenu />
-        </Portal>
       )}
     </div>
   );

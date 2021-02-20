@@ -11,12 +11,12 @@ export const ConnectionsWrapper: React.FC = () => {
 
   return (
     <div className="absolute left-0 h-0">
-      {connections.map(([inputNodeId, edges]) =>
+      {connections.map(([outputNodeId, edges]) =>
         edges.map((edge) => (
           <ExistingConnection
             edge={edge}
-            key={`${inputNodeId}-${edge.nodeId}`}
-            connectedNodes={[edge.nodeId, inputNodeId]}
+            key={`${outputNodeId}-${edge.nodeId}`}
+            connectedNodes={[outputNodeId, edge.nodeId]}
           />
         ))
       )}

@@ -29,7 +29,7 @@ export type EdgesState = {
    * @param inputNodeId - The id of the node with the **input** port of the connection.
    * @param outputNodeId - The id of the node with the **ouput** port of the connection.
    */
-  addEdge: (origin: string, destination?: string) => void;
+  addEdge: (output: string, input?: string) => void;
   removeEdge: (inputNodeId: string, outputNodeId: string) => void;
   updateEdgeTarget: (id: string) => void;
   removeEdgeTarget: () => void;
@@ -58,31 +58,32 @@ export const useEdgesStore = create<EdgesState>(
               state.edges[originNodeId][edgeIndex] = { ...edge, ...data };
           })
         ),
-      addEdge: (origin, destination) =>
+      addEdge: (outputNodeId, inputNodeId) =>
         set(
           produce((state: EdgesState) => {
-            const targetNodeId = destination ?? state.newEdge.target;
+            const targetNodeId = inputNodeId ?? state.newEdge.target;
+
             if (!targetNodeId) return;
 
-            if (!state.edges[targetNodeId]) state.edges[targetNodeId] = [];
+            if (!state.edges[outputNodeId]) state.edges[outputNodeId] = [];
 
-            const existingConnection = state.edges[targetNodeId].find(
-              (edge) => edge.nodeId === origin
+            const existingConnection = state.edges[outputNodeId].find(
+              (edge) => edge.nodeId === targetNodeId
             );
 
             if (!existingConnection)
-              state.edges[targetNodeId].push({
-                nodeId: origin,
+              state.edges[outputNodeId].push({
+                nodeId: targetNodeId,
               });
           })
         ),
       removeEdge: (inputNodeId, outputNodeId) =>
         set(
           produce((state: EdgesState) => {
-            const connections = state.edges[outputNodeId];
+            const connections = state.edges[inputNodeId];
 
             const edgeToDelete = connections.findIndex(
-              (value) => value.nodeId === inputNodeId
+              (value) => value.nodeId === outputNodeId
             );
 
             connections.splice(edgeToDelete, 1);

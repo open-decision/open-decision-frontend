@@ -92,7 +92,7 @@ const MenuEntry: MenuEntry = ({
         close();
         const newNodeId = nanoid(5);
         addNode(nodeType, newNodeCoordinates, newNodeId);
-        addEdge(nodeId, newNodeId);
+        addEdge(newNodeId, nodeId);
       }}
     >
       <NewspaperOutline className="h-4 w-4 mr-2" style={{ color: color }} />

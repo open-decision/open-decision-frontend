@@ -8,7 +8,7 @@ import {
  * Gets the **input** port coordinate of a Node.
  * @param node - The data of the Node.
  */
-const calculateOutputCoordinate = (node: nodePositionalData): coordinates => [
+const calculateInputCoordinate = (node: nodePositionalData): coordinates => [
   node.coordinates[0] + 2,
   node.coordinates[1] + node.height / 2,
 ];
@@ -17,7 +17,7 @@ const calculateOutputCoordinate = (node: nodePositionalData): coordinates => [
  * Gets the **output** port coordinate of a Node.
  * @param node - The data of the Node.
  */
-const calculateInputCoordinate = (node: nodePositionalData): coordinates => [
+const calculateOutputCoordinate = (node: nodePositionalData): coordinates => [
   node.coordinates[0] + node.width,
   node.coordinates[1] + node.height / 2,
 ];
