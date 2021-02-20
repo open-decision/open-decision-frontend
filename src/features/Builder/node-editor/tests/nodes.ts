@@ -28,8 +28,8 @@ export const exampleNodes: nodes = {
 };
 
 export const exampleEdges: edges = {
-  node1: [{ nodeId: "node2" }],
-  node3: [{ nodeId: "node2" }, { nodeId: "node6" }],
+  node2: [{ nodeId: "node1" }, { nodeId: "node3" }],
+  node6: [{ nodeId: "node3" }],
 };
 
 export const examplePortTypes: portTypes = {

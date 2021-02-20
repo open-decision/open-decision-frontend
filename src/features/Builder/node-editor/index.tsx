@@ -23,7 +23,7 @@ import { useModal } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
 import { Portal } from "react-portal";
 import shallow from "zustand/shallow";
-import { useSidebar, useSidebarState } from "./components/Node/useSidebar";
+import { useSidebarState } from "./components/Node/useSidebar";
 import { NodeEditingSidebar } from "./components/Node/NodeEditingSidebar";
 
 export type EditorState = {

@@ -10,21 +10,18 @@ const minimumDistanceFromPort = 15;
 export const calculateCurve = (
   connectionCoordinates: connectionCoordinates
 ): string | null => {
-  const [origin, destination] = connectionCoordinates;
+  const [output, input] = connectionCoordinates;
   /**
    * The distance between the Nodes on the x axis.
    */
-  const length = origin[0] - destination[0];
+  const length = output[0] - input[0];
 
   //The passed in array defines the coordinates of the curve.
   return line().curve(curveBasis)([
-    origin,
+    output,
     //The next two coordinates make sure that a minimun distance from the port is maintained. This makes the curve look better.
-    [origin[0] - Math.max(length / 3, minimumDistanceFromPort), origin[1]],
-    [
-      destination[0] + Math.max(length / 3, minimumDistanceFromPort),
-      destination[1],
-    ],
-    destination,
+    [output[0] - Math.max(length / 3, minimumDistanceFromPort), output[1]],
+    [input[0] + Math.max(length / 3, minimumDistanceFromPort), input[1]],
+    input,
   ]);
 };

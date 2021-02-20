@@ -24,30 +24,27 @@ const createNodeInformation = (state: NodesState, nodeId: string) => {
 export const ExistingConnection: React.FC<ConnectionProps> = ({
   connectedNodes,
 }) => {
-  const [originNodeId, destinationNodeId] = connectedNodes;
+  const [outputNodeId, inputNodeId] = connectedNodes;
 
-  const originNode: nodePositionalData = useNodesStore(
-    (state) => createNodeInformation(state, originNodeId),
+  const outputNode: nodePositionalData = useNodesStore(
+    (state) => createNodeInformation(state, outputNodeId),
     shallow
   );
 
-  const destinationNode = useNodesStore(
-    (state) => createNodeInformation(state, destinationNodeId),
+  const inputNode = useNodesStore(
+    (state) => createNodeInformation(state, inputNodeId),
     shallow
   );
 
   const [connectionCoordinates, setConnectionCoordinates] = React.useState(
-    getConnectionCoordinates(originNode, destinationNode)
+    getConnectionCoordinates(outputNode, inputNode)
   );
 
   React.useEffect(() => {
-    const newCoordinates = getConnectionCoordinates(
-      originNode,
-      destinationNode
-    );
+    const newCoordinates = getConnectionCoordinates(outputNode, inputNode);
 
     setConnectionCoordinates(newCoordinates);
-  }, [destinationNode, originNode]);
+  }, [outputNode, inputNode]);
 
   const [hovered, setHovered] = React.useState(false);
   const removeEdge = useEdgesStore((state) => state.removeEdge);
@@ -58,7 +55,7 @@ export const ExistingConnection: React.FC<ConnectionProps> = ({
     onPointerEnter: () => setHovered(true),
     onPointerLeave: () => setHovered(false),
     onPointerDown: ({ event }) => event.stopPropagation(),
-    onClick: () => removeEdge(originNodeId, destinationNodeId),
+    onClick: () => removeEdge(outputNodeId, inputNodeId),
   });
 
   return (
