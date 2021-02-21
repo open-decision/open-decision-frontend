@@ -2,6 +2,7 @@ import produce from "immer";
 import { devtools } from "zustand/middleware";
 import create from "zustand";
 import { coordinates, node, nodes, nodeTypes, portTypes } from "../types";
+import { merge } from "remeda";
 
 export type NodesState = {
   nodes: nodes;
@@ -10,7 +11,7 @@ export type NodesState = {
   setNodes: (nodes: nodes, nodeTypes: nodeTypes, portTypes: portTypes) => void;
   addNode: (nodeType: string, coordinates: coordinates, id: string) => void;
   removeNode: (nodeId: string) => void;
-  setNode: (id: string, node: node) => void;
+  setNode: (id: string, node: Partial<node>) => void;
 };
 
 export const useNodesStore = create<NodesState>(
@@ -59,13 +60,13 @@ export const useNodesStore = create<NodesState>(
         ),
       /**
        * Updates an existing Node with a new Node object.
-       * @param id - Id of the Node that should be edited.
+       * @param id Id of the Node that should be edited.
        * @param node The new Node data.
        */
       setNode: (id, node) =>
         set(
           produce((state: NodesState) => {
-            state.nodes[id] = node;
+            state.nodes[id] = merge(state.nodes[id], node);
           })
         ),
     }),
