@@ -46,8 +46,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         event.stopPropagation();
         if (!tap) setNode(id, { ...node, coordinates: movement });
       },
-      onPointerEnter: () => updateEdgeTarget(id),
-      onPointerLeave: () => removeEdgeTarget(),
       onPointerDown: ({ event }) => event.stopPropagation(),
     },
     {
@@ -59,6 +57,11 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
     }
   );
 
+  const boxGestures = useGesture({
+    onPointerEnter: () => updateEdgeTarget(id),
+    onPointerLeave: () => removeEdgeTarget(),
+  });
+
   return (
     <div
       style={{
@@ -67,6 +70,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         gridTemplateRows: node.height,
       }}
       className="absolute left-0 top-0 grid"
+      {...boxGestures()}
     >
       {/* This is the body of the Node. */}
       <button
@@ -75,12 +79,12 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         onClick={() => openSidebar(id, node.type)}
         {...nodeGestures()}
       >
-        <div className="p-1 flex items-center text-lg">
+        <div className="p-1 flex items-center">
           <ChatOutline
             style={{ width: "2.5em", color: color ?? "black" }}
             className="mr-2 rounded py-4 px-2"
           />
-          <h2 className="font-semibold">{id}</h2>
+          <h2 className="font-semibold flex-1 text-left">{node.name}</h2>
         </div>
       </button>
       {/* These are the Ports of the Nodes. There is only one Port on each side. The Output Port can also be an unconnected port. This port looks different and has a menu to create a new Node. Above we get the outputConnections and here we use them to decide which port to render. */}
