@@ -20,7 +20,7 @@ export const Connection = React.forwardRef<SVGPathElement, Connection>(
       >
         <path
           d={curve}
-          strokeWidth={50}
+          strokeWidth={20}
           visibility="visible"
           stroke="transparent"
         />
