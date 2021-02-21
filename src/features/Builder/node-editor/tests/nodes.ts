@@ -6,24 +6,28 @@ export const exampleNodes: nodes = {
     type: "addNumbers",
     width: 250,
     height: 100,
+    name: "Addiere zwei Zahlen",
   },
   node2: {
     coordinates: [-200, -176],
     type: "number",
     width: 250,
     height: 100,
+    name: "Irgendwas mit Nummer",
   },
   node3: {
     coordinates: [181.5, -42],
     type: "number",
     width: 250,
     height: 100,
+    name: "Whatever",
   },
   node6: {
     coordinates: [-200, 40],
     type: "number",
     width: 250,
     height: 100,
+    name: "Test",
   },
 };
 
