@@ -10,13 +10,19 @@ import {
   exampleEdges,
 } from "./node-editor/tests/nodes";
 import { nanoid } from "nanoid/non-secure";
-import { nodes } from "./node-editor/types";
+import { edges, nodes } from "./node-editor/types";
 
-const exampleNodes = (numberOfElements: number) => {
+const randomProperty = (obj: any) => {
+  const keys = Object.keys(obj);
+  return keys[(keys.length * Math.random()) << 0];
+};
+
+const exampleNodes = (numberOfElements: number): [nodes, edges] => {
   const elements: nodes = {};
+  const edges: edges = {};
 
   for (let index = 0; index < numberOfElements; index++) {
-    elements[nanoid(5)] = {
+    elements[index] = {
       coordinates: [
         Math.floor(Math.random() * 1000),
         Math.floor(Math.random() * 1000),
@@ -26,23 +32,28 @@ const exampleNodes = (numberOfElements: number) => {
       height: 100,
       name: "Addiere zwei Zahlen",
     };
-  }
-  console.log(elements);
 
-  return elements;
+    edges[index] = [{ nodeId: randomProperty(elements) }];
+  }
+
+  return [elements, edges];
 };
 
-const initialEditorState = (numberOfElements: number): EditorState => ({
-  comments: {},
-  id: "1234",
-  nodes: exampleNodes(numberOfElements),
-  edges: {},
-  coordinates: [0, 0],
-  zoom: 1,
-  nodeTypes: exampleNodeTypes,
-  portTypes: examplePortTypes,
-  treeName: "Test",
-});
+const initialEditorState = (numberOfElements: number): EditorState => {
+  const [nodes, edges] = exampleNodes(numberOfElements);
+
+  return {
+    comments: {},
+    id: "1234",
+    nodes: nodes,
+    edges: edges,
+    coordinates: [0, 0],
+    zoom: 1,
+    nodeTypes: exampleNodeTypes,
+    portTypes: examplePortTypes,
+    treeName: "Test",
+  };
+};
 
 const Editor: React.FC<{
   state: EditorState;
