@@ -1,5 +1,5 @@
 import create from "zustand";
-import produce, { current } from "immer";
+import produce from "immer";
 import { edge, edges } from "../types";
 import { devtools } from "zustand/middleware";
 
@@ -8,7 +8,7 @@ export type EdgesState = {
    * The data about all the edges between nodes in the editor.
    */
   edges: edges;
-  newEdge: { target?: string };
+  connectionTarget?: string;
   /**
    * The initializer function. Provide the edges data to fill the store.
    */
@@ -42,7 +42,7 @@ export const useEdgesStore = create<EdgesState>(
   devtools(
     (set) => ({
       edges: {},
-      newEdge: { target: undefined },
+      connectionTarget: undefined,
       setEdges: (edges) => set({ edges }),
       updateEdge: (data, originNodeId, destinationNodeId) =>
         set(
@@ -61,7 +61,7 @@ export const useEdgesStore = create<EdgesState>(
       addEdge: (outputNodeId, inputNodeId) =>
         set(
           produce((state: EdgesState) => {
-            const targetNodeId = inputNodeId ?? state.newEdge.target;
+            const targetNodeId = inputNodeId ?? state.connectionTarget;
 
             if (!targetNodeId) return;
 
@@ -89,18 +89,8 @@ export const useEdgesStore = create<EdgesState>(
             connections.splice(edgeToDelete, 1);
           })
         ),
-      updateEdgeTarget: (id) =>
-        set(
-          produce((state: EdgesState) => {
-            state.newEdge.target = id;
-          })
-        ),
-      removeEdgeTarget: () =>
-        set(
-          produce((state: EdgesState) => {
-            state.newEdge.target = undefined;
-          })
-        ),
+      updateEdgeTarget: (id) => set({ connectionTarget: id }),
+      removeEdgeTarget: () => set({ connectionTarget: undefined }),
     }),
     "Edges"
   )

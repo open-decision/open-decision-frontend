@@ -33,24 +33,17 @@ export const useEditorStore = create<EditorState>(
     (set) => ({
       zoom: 1,
       coordinates: [0, 0],
-      setCoordinates: (coordinates) =>
-        set(
-          produce((state: EditorState) => {
-            state.coordinates = coordinates;
-          })
-        ),
+      setCoordinates: (coordinates) => set({ coordinates }),
       setZoom: (zoomIntention) =>
-        set(
-          produce((state: EditorState) => {
-            state.zoom = clamp(
-              state.zoom - clamp(zoomIntention, { min: -10, max: 10 }) * 0.005,
-              {
-                min: editorZoomMinimum,
-                max: editorZoomMaximum,
-              }
-            );
-          })
-        ),
+        set((state) => ({
+          zoom: clamp(
+            state.zoom - clamp(zoomIntention, { min: -10, max: 10 }) * 0.005,
+            {
+              min: editorZoomMinimum,
+              max: editorZoomMaximum,
+            }
+          ),
+        })),
     }),
     "Editor"
   )
