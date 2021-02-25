@@ -29,7 +29,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   const setNode = useNodesStore((state) => state.setNode);
   const node = useNodesStore((state) => state.nodes[id]);
   const zoom = useEditorStore((state) => state.zoom);
-  // Here we get all the data and functions, that we need, from state.
   const color = useNodesStore(
     (state) => state.nodeTypes[node.type].color,
     shallow
@@ -110,6 +109,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
               event.stopPropagation();
               openModal([event.pageX, event.pageY], id);
             }}
+            onPointerDown={(event) => event.stopPropagation()}
             className="w-full h-full p-1"
           >
             <PlusOutline className="text-white" />

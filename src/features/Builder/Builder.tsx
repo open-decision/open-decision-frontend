@@ -1,26 +1,48 @@
 import React from "react";
 import { EditorState, NodeEditor } from "./node-editor";
-import { Button, FileInput, Header, Input, Link } from "@components/index";
+import { Button, FileInput, Header } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import {
-  exampleNodes,
+  // exampleNodes,
   exampleNodeTypes,
   examplePortTypes,
   exampleEdges,
 } from "./node-editor/tests/nodes";
+import { nanoid } from "nanoid/non-secure";
+import { nodes } from "./node-editor/types";
 
-const initialEditorState: EditorState = {
+const exampleNodes = (numberOfElements: number) => {
+  const elements: nodes = {};
+
+  for (let index = 0; index < numberOfElements; index++) {
+    elements[nanoid(5)] = {
+      coordinates: [
+        Math.floor(Math.random() * 1000),
+        Math.floor(Math.random() * 1000),
+      ],
+      type: "addNumbers",
+      width: 250,
+      height: 100,
+      name: "Addiere zwei Zahlen",
+    };
+  }
+  console.log(elements);
+
+  return elements;
+};
+
+const initialEditorState = (numberOfElements: number): EditorState => ({
   comments: {},
   id: "1234",
-  nodes: exampleNodes,
-  edges: exampleEdges,
+  nodes: exampleNodes(numberOfElements),
+  edges: {},
   coordinates: [0, 0],
   zoom: 1,
   nodeTypes: exampleNodeTypes,
   portTypes: examplePortTypes,
   treeName: "Test",
-};
+});
 
 const Editor: React.FC<{
   state: EditorState;
@@ -32,6 +54,7 @@ const Editor: React.FC<{
 
 export const Builder: React.FC = () => {
   const [data, setData, setFile] = useFileReader<EditorState>();
+  const [number, setNumber] = React.useState(10);
 
   return (
     <>
@@ -64,8 +87,13 @@ export const Builder: React.FC = () => {
               <h1 className="text-5xl">Starte mit Testen!</h1>
               <p className="mt-6 text-xl">
                 Um den Builder auszuprobieren klicke auf{" "}
+                <input
+                  type="number"
+                  value={number}
+                  onChange={(event) => setNumber(Number(event.target.value))}
+                />
                 <Button
-                  onClick={() => setData(initialEditorState)}
+                  onClick={() => setData(initialEditorState(number))}
                   className="mx-2"
                 >
                   <ChevronRightOutline className="w-6" />
