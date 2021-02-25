@@ -45,6 +45,7 @@ export const useNodesStore = create<NodesState>(
               type: nodeType,
               width: width,
               height: height,
+              name: "",
             };
           })
         ),
