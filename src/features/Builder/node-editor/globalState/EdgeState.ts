@@ -63,14 +63,20 @@ export const useEdgesStore = create<EdgesState>(
           produce((state: EdgesState) => {
             const targetNodeId = inputNodeId ?? state.connectionTarget;
 
+            //Stop Nodes from being connected to itself.
+            if (targetNodeId === outputNodeId) return;
+            //Delete Connections when they have no target.
             if (!targetNodeId) return;
 
+            //Create an empty array for the output nodes connections if their is not already data.
             if (!state.edges[outputNodeId]) state.edges[outputNodeId] = [];
 
+            //Find a possible existing connection between the two Nodes.
             const existingConnection = state.edges[outputNodeId].find(
               (edge) => edge.nodeId === targetNodeId
             );
 
+            //Only add the new connection when their is not an existing connection between them.
             if (!existingConnection)
               state.edges[outputNodeId].push({
                 nodeId: targetNodeId,
