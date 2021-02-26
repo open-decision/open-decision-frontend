@@ -8,6 +8,7 @@ export type EdgesState = {
    * The data about all the edges between nodes in the editor.
    */
   edges: edges;
+  newConnectionInCreation: boolean;
   connectionTarget?: string;
   /**
    * The initializer function. Provide the edges data to fill the store.
@@ -31,8 +32,10 @@ export type EdgesState = {
    */
   addEdge: (output: string, input?: string) => void;
   removeEdge: (inputNodeId: string, outputNodeId: string) => void;
+  startNewEdgeCreation: () => void;
   updateEdgeTarget: (id: string) => void;
   removeEdgeTarget: () => void;
+  endNewEdgeCreation: () => void;
 };
 
 /**
@@ -42,6 +45,7 @@ export const useEdgesStore = create<EdgesState>(
   devtools(
     (set) => ({
       edges: {},
+      newConnectionInCreation: false,
       connectionTarget: undefined,
       setEdges: (edges) => set({ edges }),
       updateEdge: (data, originNodeId, destinationNodeId) =>
@@ -95,8 +99,13 @@ export const useEdgesStore = create<EdgesState>(
             connections.splice(edgeToDelete, 1);
           })
         ),
-      updateEdgeTarget: (id) => set({ connectionTarget: id }),
+      startNewEdgeCreation: () => set({ newConnectionInCreation: true }),
+      updateEdgeTarget: (id) =>
+        set((state) => ({
+          connectionTarget: state.newConnectionInCreation ? id : undefined,
+        })),
       removeEdgeTarget: () => set({ connectionTarget: undefined }),
+      endNewEdgeCreation: () => set({ newConnectionInCreation: false }),
     }),
     "Edges"
   )

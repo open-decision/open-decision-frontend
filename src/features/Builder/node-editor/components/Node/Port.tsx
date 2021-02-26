@@ -6,15 +6,18 @@ import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";
 import { calculateCurve } from "../../utilities";
 import { Connection } from "../Connections/Connection";
+
 const portVariants = {
   connected: "h-4 w-4 bg-blue-500",
   unconnected: "h-7 w-7 bg-red-500 clickable",
+  target: "h-4 w-4 bg-green-500",
 };
 
 type Port = React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     nodeId: string;
     variant: keyof typeof portVariants;
+    type: "input" | "output";
   }
 >;
 
@@ -23,17 +26,31 @@ export const Port: Port = ({
   className,
   nodeId,
   variant,
+  type,
   ...props
 }) => {
   const connectionRef = React.useRef<SVGPathElement>(null);
 
-  const addEdge = useEdgesStore((state) => state.addEdge);
+  const [
+    addEdge,
+    connectionTarget,
+    newConnectionInCreation,
+    startNewEdgeCreation,
+    endNewEdgeCreation,
+  ] = useEdgesStore((state) => [
+    state.addEdge,
+    state.connectionTarget,
+    state.newConnectionInCreation,
+    state.startNewEdgeCreation,
+    state.endNewEdgeCreation,
+  ]);
   const [dragging, setDragging] = React.useState(false);
 
   const handleDragStart = (event: React.PointerEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
     setDragging(true);
+    startNewEdgeCreation();
 
     document.addEventListener("pointerup", handleDragEnd);
     document.addEventListener(
@@ -49,6 +66,7 @@ export const Port: Port = ({
 
   const handleDragEnd = () => {
     setDragging(false);
+    endNewEdgeCreation();
     document.removeEventListener("pointerup", handleDragEnd);
     document.removeEventListener("pointermove", handleDrag([0, 0]));
     addEdge(nodeId);
@@ -60,12 +78,16 @@ export const Port: Port = ({
       className={clsx(
         className,
         "rounded-full border-2 border-gray-200 shadow-md relative",
-        pipe(portVariants, prop(variant))
+        connectionTarget === nodeId &&
+          type === "input" &&
+          newConnectionInCreation
+          ? portVariants.target
+          : pipe(portVariants, prop(variant))
       )}
       {...props}
     >
       {children}
-      {dragging && (
+      {type === "output" && dragging && (
         <Portal>
           <Connection ref={connectionRef} />
         </Portal>

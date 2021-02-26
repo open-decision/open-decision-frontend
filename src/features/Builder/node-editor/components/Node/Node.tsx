@@ -98,18 +98,21 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         nodeId={id}
         className="col-start-1 col-end-3 row-span-full self-center justify-self-center"
         variant="connected"
+        type="input"
       />
       {outputConnections ? (
         <Port
           nodeId={id}
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           variant="connected"
+          type="output"
         />
       ) : (
         <Port
           className="col-start-4 col-end-6 row-span-full self-center justify-self-center"
           nodeId={id}
           variant="unconnected"
+          type="output"
         >
           <button
             onClick={(event) => {
