@@ -109,7 +109,6 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
               event.stopPropagation();
               openModal([event.pageX, event.pageY], id);
             }}
-            onPointerDown={(event) => event.stopPropagation()}
             className="w-full h-full p-1"
           >
             <PlusOutline className="text-white" />
