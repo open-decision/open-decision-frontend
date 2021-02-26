@@ -33,7 +33,9 @@ const exampleNodes = (numberOfElements: number): [nodes, edges] => {
       name: "Addiere zwei Zahlen",
     };
 
-    edges[index] = [{ nodeId: randomProperty(elements) }];
+    const randomIndex = randomProperty(elements);
+
+    if (index !== Number(randomIndex)) edges[index] = [{ nodeId: randomIndex }];
   }
 
   return [elements, edges];
