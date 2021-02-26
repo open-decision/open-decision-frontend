@@ -11,6 +11,7 @@ import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
 import { useModal } from "./useModal";
 import { useSidebarState } from "./useSidebar";
+import clsx from "clsx";
 
 type NodeProps = {
   /**
@@ -33,6 +34,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
     (state) => state.nodeTypes[node.type].color,
     shallow
   );
+  const [dragging, setDragging] = React.useState(false);
 
   const { openModal } = useModal();
   const openSidebar = useSidebarState((state) => state.openSidebar);
@@ -41,10 +43,12 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   //This is the drag gesture of the node. It updates the Node state when the Node is dragged. The initial start position of the Node come from the coordinates in the nodes state. We transform the data produced by the drag operation by dividing it with the editor zoom. This makes sure that we keep the Node under the mouse when dragging.
   const nodeGestures = useGesture(
     {
+      onDragStart: () => setDragging(true),
       onDrag: ({ movement, event, tap }) => {
         event.stopPropagation();
         if (!tap) setNode(id, { ...node, coordinates: movement });
       },
+      onDragEnd: () => setDragging(false),
       onPointerDown: ({ event }) => event.stopPropagation(),
     },
     {
@@ -68,12 +72,15 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
         gridTemplateColumns: `10px 10px ${node.width - 40}px 10px 10px`,
         gridTemplateRows: node.height,
       }}
-      className="absolute left-0 top-0 grid"
+      className={clsx("absolute left-0 top-0 grid", dragging && "z-50")}
       {...boxGestures()}
     >
       {/* This is the body of the Node. */}
       <button
-        className="bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full opacity-80"
+        className={clsx(
+          "bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full",
+          dragging ? "opacity-100" : "opacity-80"
+        )}
         style={{ borderLeftColor: color ?? "gray" }}
         onClick={() => openSidebar(id, node.type)}
         {...nodeGestures()}
