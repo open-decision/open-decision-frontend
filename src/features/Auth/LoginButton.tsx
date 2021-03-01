@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { FunctionComponent } from "react";
-import { LocationState } from "@internalTypes/types";
+import type { LocationState } from "@internalTypes/types";
 import { Button } from "@components/index";
 import { useAuthMethods } from "./AuthContext";
 
@@ -12,7 +11,7 @@ type Props = {
   password?: string;
 };
 
-export const LoginButton: FunctionComponent<Props> = ({
+export const LoginButton: React.FC<Props> = ({
   //for development purposes are email and password provided with a default value
   className,
   email = "test@outlook.com",

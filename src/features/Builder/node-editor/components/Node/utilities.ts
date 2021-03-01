@@ -1,5 +1,5 @@
-import { EdgesState } from "../../globalState";
-import { edge } from "../../types";
+import type { EdgesState } from "../../globalState";
+import type { edge } from "@internalTypes/types";
 
 export const getOutputConnections = (id: string) => (
   state: EdgesState

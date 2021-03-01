@@ -1,7 +1,7 @@
 import * as E from "fp-ts/lib/Either";
 import * as A from "fp-ts/lib/Array";
 import { flow, identity, pipe } from "fp-ts/lib/function";
-import { All_TreesQuery } from "@internalTypes/generated/graphql";
+import type { All_TreesQuery } from "@internalTypes/generated/graphql";
 import { Tags, TreeNode, ValidTreeNode } from "./types";
 
 const parseTags = (tags: string) =>

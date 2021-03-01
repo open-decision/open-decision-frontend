@@ -1,6 +1,6 @@
 import { useClickAway, useKeyPressEvent } from "react-use";
 import create from "zustand";
-import { coordinates } from "../../types";
+import type { coordinates } from "@internalTypes/types";
 import React from "react";
 
 type useModal = () => ModalState & { ref: React.MutableRefObject<null> };

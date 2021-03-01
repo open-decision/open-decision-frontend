@@ -10,14 +10,14 @@ import { Stage } from "./components/Stage/Stage";
 import { useEdgesStore, useEditorStore, useNodesStore } from "./globalState";
 import { Nodes } from "./components/Node/Nodes";
 import { ConnectionsWrapper } from "./components/Connections/ConnectionsWrapper";
-import {
+import type {
   comments,
   coordinates,
   edges,
   nodes,
   nodeTypes,
   portTypes,
-} from "./types";
+} from "@internalTypes/types";
 import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
 import { useModal } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";

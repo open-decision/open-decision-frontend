@@ -9,7 +9,7 @@ import { useEditorStore, useNodesStore } from "../../globalState";
 import { pick } from "remeda";
 import { ToolbarNode } from "./ToolbarNode";
 import { nanoid } from "nanoid/non-secure";
-import { coordinates } from "../../types";
+import type { coordinates } from "@internalTypes/types";
 
 const turnNumberIntoOpposite = (number: number) =>
   number > 0 ? -number : Math.abs(number);

@@ -1,7 +1,7 @@
 import React from "react";
 import { calculateCurve, getConnectionCoordinates } from "../../utilities";
 import { NodesState, useEdgesStore, useNodesStore } from "../../globalState";
-import { edge, nodePositionalData } from "../../types";
+import type { edge, nodePositionalData } from "@internalTypes/types";
 import shallow from "zustand/shallow";
 import { Connection } from "./Connection";
 import { useGesture } from "react-use-gesture";

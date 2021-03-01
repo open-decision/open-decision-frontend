@@ -1,10 +1,11 @@
 import create from "zustand";
 import produce from "immer";
-import { edge, edges } from "../types";
+import type { edge, edges } from "@internalTypes/types";
 import { devtools } from "zustand/middleware";
 
 export type EdgesState = {
   /**
+   *
    * The data about all the edges between nodes in the editor.
    */
   edges: edges;

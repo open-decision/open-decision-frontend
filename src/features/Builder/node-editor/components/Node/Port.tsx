@@ -3,7 +3,7 @@ import React from "react";
 import { Portal } from "react-portal";
 import { pipe, prop } from "remeda";
 import { useEdgesStore } from "../../globalState";
-import { coordinates } from "../../types";
+import type { coordinates } from "@internalTypes/types";
 import { calculateCurve } from "../../utilities";
 import { Connection } from "../Connections/Connection";
 

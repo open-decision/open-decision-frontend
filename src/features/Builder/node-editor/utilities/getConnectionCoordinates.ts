@@ -1,8 +1,8 @@
-import {
+import type {
   connectionCoordinates,
   coordinates,
   nodePositionalData,
-} from "../types";
+} from "@internalTypes/types";
 
 /**
  * Gets the **input** port coordinate of a Node.

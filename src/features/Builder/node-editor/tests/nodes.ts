@@ -1,4 +1,4 @@
-import { edges, nodes, nodeTypes, portTypes } from "../types";
+import type { edges, nodes, nodeTypes, portTypes } from "@internalTypes/types";
 
 export const exampleNodes: nodes = {
   node1: {

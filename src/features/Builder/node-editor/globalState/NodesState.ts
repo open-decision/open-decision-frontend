@@ -1,7 +1,13 @@
 import produce from "immer";
 import { devtools } from "zustand/middleware";
 import create from "zustand";
-import { coordinates, node, nodes, nodeTypes, portTypes } from "../types";
+import type {
+  coordinates,
+  node,
+  nodes,
+  nodeTypes,
+  portTypes,
+} from "@internalTypes/types";
 import { merge } from "remeda";
 
 export type NodesState = {

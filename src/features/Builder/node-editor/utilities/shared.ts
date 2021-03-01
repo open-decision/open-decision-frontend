@@ -1,5 +1,5 @@
 import { curveBasis, line } from "d3-shape";
-import { connectionCoordinates } from "../types";
+import type { connectionCoordinates } from "@internalTypes/types";
 
 const minimumDistanceFromPort = 15;
 

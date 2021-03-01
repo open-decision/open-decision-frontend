@@ -1,5 +1,4 @@
 import React from "react";
-import { FunctionComponent } from "react";
 import { Button } from "@components/index";
 import { useAuthMethods } from "./AuthContext";
 
@@ -11,7 +10,7 @@ type SignupButton = {
   password2: string;
 };
 
-export const SignupButton: FunctionComponent<SignupButton> = ({
+export const SignupButton: React.FC<SignupButton> = ({
   className,
   email,
   username,

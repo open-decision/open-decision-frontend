@@ -1,10 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { FunctionComponent } from "react";
+
 import { Button } from "@components/index";
 import { useAuthMethods } from "./AuthContext";
 
-export const LogoutButton: FunctionComponent<{ className?: string }> = ({
+export const LogoutButton: React.FC<{ className?: string }> = ({
   className,
 }) => {
   const { logout } = useAuthMethods();

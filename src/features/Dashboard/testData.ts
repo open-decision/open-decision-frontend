@@ -1,4 +1,4 @@
-import { All_TreesQuery } from "@internalTypes/generated/graphql";
+import type { All_TreesQuery } from "@internalTypes/generated/graphql";
 
 export const data: All_TreesQuery = {
   allDecisionTrees: {

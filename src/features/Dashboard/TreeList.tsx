@@ -8,7 +8,7 @@ import {
 } from "@graywolfai/react-heroicons";
 import { fuzzySearch, Search, sortByKey } from "./Filter";
 import { motion } from "framer-motion";
-import { ValidTreeNode } from "./types";
+import type { ValidTreeNode } from "./types";
 
 type TreeCard = { tree: ValidTreeNode };
 

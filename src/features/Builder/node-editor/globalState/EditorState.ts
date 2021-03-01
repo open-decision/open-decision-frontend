@@ -2,7 +2,7 @@ import produce from "immer";
 import { clamp } from "remeda";
 import { devtools } from "zustand/middleware";
 import create from "zustand";
-import { coordinates } from "../types";
+import type { coordinates } from "@internalTypes/types";
 
 export const editorZoomMinimum = 0.5;
 export const editorZoomMaximum = 3;

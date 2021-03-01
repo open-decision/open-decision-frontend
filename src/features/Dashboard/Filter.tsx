@@ -3,7 +3,7 @@ import { matchSorter } from "match-sorter";
 import { readableDate } from "./utils";
 import { parseISO } from "date-fns/esm";
 import { Field } from "@components/index";
-import { Tag, ValidTreeNode } from "./types";
+import type { Tag, ValidTreeNode } from "./types";
 
 type GlobalFilter = {
   className?: string;

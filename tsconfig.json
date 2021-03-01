@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "baseUrl": "./src",
     "paths": {
       "@internalTypes/*": ["types/*"],
@@ -9,20 +9,18 @@
       "@features/*": ["features/*"],
       "@utils/*": ["utils/*"]
     },
-    "module": "ESNext",
+    "module": "esnext",
     "types": [],
     "sourceMap": true,
-    "target": "ES2018",
+    "target": "esnext",
     "strict": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noImplicitReturns": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "noEmit": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -3,7 +3,7 @@ import { pick } from "remeda";
 import { useEdgesStore, useNodesStore } from "../../globalState";
 import { NewspaperOutline } from "@graywolfai/react-heroicons";
 import clsx from "clsx";
-import { coordinates } from "../../types";
+import type { coordinates } from "@internalTypes/types";
 import { nanoid } from "nanoid/non-secure";
 import { useModal } from "./useModal";
 

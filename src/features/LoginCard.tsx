@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Field, Logo, Tabs } from "@components/index";
-import { LocationState } from "@internalTypes/types";
+import type { LocationState } from "@internalTypes/types";
 import { useAuthMethods } from "./Auth/AuthContext";
 import { useHistory, useLocation } from "react-router-dom";
 

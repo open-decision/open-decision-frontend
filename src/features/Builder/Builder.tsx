@@ -8,7 +8,7 @@ import {
   exampleNodeTypes,
   examplePortTypes,
 } from "./node-editor/tests/nodes";
-import { edges, nodes } from "./node-editor/types";
+import type { edges, nodes } from "@internalTypes/types";
 
 const randomProperty = (obj: any) => {
   const keys = Object.keys(obj);
