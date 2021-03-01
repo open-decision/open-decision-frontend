@@ -1,15 +1,13 @@
 import React from "react";
 import { EditorState, NodeEditor } from "./node-editor";
-import { Button, FileInput, Header } from "@components/index";
+import { Button, FileInput, Header, Input } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "@utils/index";
 import {
   // exampleNodes,
   exampleNodeTypes,
   examplePortTypes,
-  exampleEdges,
 } from "./node-editor/tests/nodes";
-import { nanoid } from "nanoid/non-secure";
 import { edges, nodes } from "./node-editor/types";
 
 const randomProperty = (obj: any) => {
@@ -75,7 +73,7 @@ export const Builder: React.FC = () => {
         <div className="flex space-x-4 flex-1 justify-between">
           {data ? (
             <>
-              <input
+              <Input
                 className="shadow-none border-none max-w-2xl text-xl px-4 bg-gray-50"
                 value={data.treeName}
                 onChange={(event) =>
@@ -96,25 +94,24 @@ export const Builder: React.FC = () => {
           <Editor state={data} setState={(value) => setData(value)} />
         ) : (
           <div className="h-full w-full flex justify-center items-center flex-col">
-            <div>
+            <div className="space-y-10">
               <h1 className="text-5xl">Starte mit Testen!</h1>
-              <p className="mt-6 text-xl">
-                Um den Builder auszuprobieren klicke auf{" "}
-                <input
+
+              <div className="flex space-x-4">
+                <Input
+                  className=""
                   type="number"
                   value={number}
                   onChange={(event) => setNumber(Number(event.target.value))}
                 />
-                <Button
-                  onClick={() => setData(initialEditorState(number))}
-                  className="mx-2"
-                >
+                <Button onClick={() => setData(initialEditorState(number))}>
                   <ChevronRightOutline className="w-6" />
                   Starten
                 </Button>
-              </p>
-              <p className="text-lg mt-12">
-                Alternativ kann ein bestehender Datensatz importiert werden.
+              </div>
+
+              <p className="text-lg">
+                Es kann ein bestehender Datensatz importiert werden.
                 <FileInput
                   className="mt-4"
                   name="file"
