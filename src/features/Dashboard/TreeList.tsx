@@ -33,7 +33,11 @@ const TreeCard: React.FC<TreeCard> = ({ tree }) => (
         </span>
       </div>
       <div className="flex self-end">
-        <Button kind="ghost" className="text-gray-500 hover:text-red-700 mr-4">
+        <Button
+          kind="ghost"
+          // className="text-gray-500 hover:text-red-700 mr-4"
+          tw="text-gray-500 hover:text-red-700 mr-4"
+        >
           Archivieren
         </Button>
         <Button kind="outlined">Öffnen</Button>

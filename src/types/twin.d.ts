@@ -8,6 +8,8 @@ declare module "twin.macro" {
   const css: typeof cssImport;
 }
 
+import {} from "@emotion/react/types/css-prop";
+
 // The 'as' prop on styled components
 declare global {
   namespace JSX {

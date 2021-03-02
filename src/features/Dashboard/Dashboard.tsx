@@ -32,7 +32,8 @@ export const Dashboard: React.FunctionComponent = () => {
         <h2 className="text-5xl">Hallo Dirk_laywer23</h2>
         <Button
           kind="outlined"
-          className="my-8"
+          tw="my-8"
+          // className="my-8"
           size="large"
           onClick={() =>
             createTree({

@@ -66,7 +66,8 @@ const LoginForm: React.FunctionComponent = () => {
       </div>
       <Button
         rounded={false}
-        className="h-20"
+        tw="h-20"
+        // className="h-20"
         type="submit"
         onClick={(event) => {
           event.preventDefault();
@@ -138,7 +139,8 @@ const SignupForm: React.FunctionComponent = () => {
       </div>
       <Button
         kind="filled"
-        className="h-20"
+        tw="h-20"
+        // className="h-20"
         rounded={false}
         type="submit"
         onClick={(event) => {
