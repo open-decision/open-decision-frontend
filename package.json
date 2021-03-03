@@ -48,6 +48,7 @@
     "typescript": "^4.2.2"
   },
   "dependencies": {
+    "@canarise/snowpack-eslint-plugin": "^0.1.0",
     "@graywolfai/react-heroicons": "^1.2.3",
     "@urql/devtools": "^2.0.3",
     "clsx": "^1.1.1",

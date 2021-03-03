@@ -6,6 +6,7 @@ module.exports = {
     "@snowpack/plugin-postcss",
     "@snowpack/plugin-react-refresh",
     "@snowpack/plugin-typescript",
+    "@canarise/snowpack-eslint-plugin",
   ],
   optimize: {
     bundle: true,
