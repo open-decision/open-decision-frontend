@@ -21,7 +21,7 @@ export const Dropdown: React.FunctionComponent<Dropdown> = ({
       <Button
         className="relative z-20"
         size="filled"
-        kind="icon"
+        variant="icon"
         onClick={() => setOpen(!open)}
       >
         {icon}

@@ -31,7 +31,7 @@ export const LoginButton: FunctionComponent<Props> = ({
   //This is the Button that is shown in the UI. onClick is called when the user clicks the Button.
   return (
     <Button
-      kind="filled"
+      variant="filled"
       className={className}
       onClick={(e) => login({ email, password }, () => history.replace(from))}
     >

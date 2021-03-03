@@ -23,7 +23,7 @@ export const SignupButton: FunctionComponent<SignupButton> = ({
   //TODO handle Auth Failure in UI
   return (
     <Button
-      kind="filled"
+      variant="filled"
       onClick={() => signup({ email, username, password1, password2 })}
       className={className}
     >

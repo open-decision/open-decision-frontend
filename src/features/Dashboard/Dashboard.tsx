@@ -31,7 +31,7 @@ export const Dashboard: React.FunctionComponent = () => {
       <div className="col-start-2 mt-24 mx-4 md:mx-8 flex flex-col justify-end items-start">
         <h2 className="text-5xl">Hallo Dirk_laywer23</h2>
         <Button
-          kind="outlined"
+          variant="outlined"
           className="my-8"
           size="large"
           onClick={() =>
