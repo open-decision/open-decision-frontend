@@ -1,7 +1,7 @@
 import { Badge, Button } from "@components/index";
 import React from "react";
 import { parseISO, formatWithOptions } from "date-fns/esm/fp";
-import { de } from "date-fns/locale";
+import de from "date-fns/locale/de";
 import {
   ChevronDownSolid,
   PlusCircleOutline,
