@@ -1,4 +1,3 @@
-import { pluck } from "@utils/index";
 import clsx from "clsx";
 import React from "react";
 import { Link as RouterLink, LinkProps } from "react-router-dom";
@@ -25,11 +24,7 @@ export const InternalLink: InternalLink = ({
 }) => {
   return (
     <RouterLink
-      className={clsx(
-        pluck([variant], variants),
-        className,
-        "no-underline text-base"
-      )}
+      className={clsx(variants[variant], className, "no-underline text-base")}
       {...props}
     >
       {children}
@@ -51,11 +46,7 @@ export const Link: Link = ({
   ...props
 }) => (
   <a
-    className={clsx(
-      pluck([variant], variants),
-      className,
-      "no-underline text-base"
-    )}
+    className={clsx(variants[variant], className, "no-underline text-base")}
     {...props}
   >
     {children}

@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { pluck } from "@utils/index";
 import { badgeColors } from "@internalTypes/types";
 
 export type BadgeColors = keyof typeof badgeColors;
@@ -18,7 +17,7 @@ export const Badge: React.FC<React.HTMLAttributes<HTMLSpanElement> & Badge> = ({
       className={clsx(
         className,
         "px-3 rounded-md font-semibold text-sm",
-        pluck([color], badgeColors)
+        badgeColors[color]
       )}
       {...props}
     >

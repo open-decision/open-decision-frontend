@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { pluck } from "@utils/index";
 
 const inputVariants = {
   default:
@@ -17,10 +16,7 @@ type Input = React.FC<
 >;
 
 export const Input: Input = ({ className, variant = "default", ...props }) => (
-  <input
-    className={clsx(pluck([variant], inputVariants), className)}
-    {...props}
-  />
+  <input className={clsx(inputVariants[variant], className)} {...props} />
 );
 
 export const FileInput: Input = ({ className, children, ...props }) => (
