@@ -137,7 +137,7 @@ const SignupForm: React.FunctionComponent = () => {
         </div>
       </div>
       <Button
-        kind="filled"
+        variant="filled"
         className="h-20"
         rounded={false}
         type="submit"
