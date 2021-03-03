@@ -114,7 +114,7 @@ export const TreeList: React.FC<TreeList> = ({ data }) => {
       : null;
 
     setFilteredData(modifiedData);
-  }, [data, filter, sort]);
+  }, [data, filter, filteredData, sort]);
 
   return (
     <div className="space-y-8 my-12">

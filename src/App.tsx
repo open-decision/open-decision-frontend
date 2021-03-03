@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Layout } from "@components/index";
-import { Dashboard, ProtectedRoute, LoginCard, Builder } from "@features/index";
+import { Builder } from "@features/index";
 import "./index.css";
 
 export const App: React.FC = () => {

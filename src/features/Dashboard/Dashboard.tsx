@@ -24,7 +24,7 @@ export const Dashboard: React.FunctionComponent = () => {
   const error = false;
 
   const [, createTree] = useCreate_TreeMutation();
-  const { invalidData, validData } = validateTreeData(data);
+  const { invalidData: _invalidData, validData } = validateTreeData(data);
 
   return (
     <div className="dashboard-grid">

@@ -58,7 +58,7 @@ const LoginForm: React.FunctionComponent = () => {
         <div className="flex justify-center">
           <a
             className="block font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
+            href="/reset-password"
           >
             Passwort vergessen?
           </a>
@@ -129,7 +129,7 @@ const SignupForm: React.FunctionComponent = () => {
           Indem Sie auf registrieren klicken akzeptieren Sie unsere{" "}
           <a
             className="font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
+            href="/agb"
           >
             AGB
           </a>

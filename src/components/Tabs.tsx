@@ -24,7 +24,7 @@ export const Tabs: React.FunctionComponent<Tabs> = ({
               "flex-grow flex-basis-0 p-4 border-b-2 hover:bg-green-200 focus:bg-green-100 focus:outline-none",
               { ["border-green-500 bg-green-50"]: active === Tab.label }
             )}
-            onClick={(e) => setActive(Tab.label)}
+            onClick={() => setActive(Tab.label)}
           >
             {Tab.label}
           </button>

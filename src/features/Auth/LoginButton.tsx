@@ -33,7 +33,7 @@ export const LoginButton: FunctionComponent<Props> = ({
     <Button
       variant="filled"
       className={className}
-      onClick={(e) => login({ email, password }, () => history.replace(from))}
+      onClick={() => login({ email, password }, () => history.replace(from))}
     >
       Login
     </Button>

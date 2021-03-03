@@ -14,7 +14,7 @@ export const LogoutButton: FunctionComponent<{ className?: string }> = ({
   return (
     <Button
       variant="filled"
-      onClick={(e) => logout(() => history.push("/"))}
+      onClick={() => logout(() => history.push("/"))}
       className={className}
     >
       Logout

@@ -81,28 +81,3 @@ export const NodeEditingSidebar: NodeEditingSidebar = ({
     </div>
   );
 };
-
-// Hook
-function useOnClickOutside(
-  ref: React.RefObject<HTMLDivElement>,
-  handler: (event: PointerEvent) => void
-) {
-  React.useEffect(() => {
-    const listener = (event: PointerEvent) => {
-      // Do nothing if clicking ref's element or descendent elements
-      if (!(event.target instanceof Node)) return;
-      if (!ref.current || ref.current.contains(event.target)) {
-        return;
-      }
-
-      event.stopPropagation();
-      handler(event);
-    };
-
-    document.addEventListener("pointerdown", listener);
-
-    return () => {
-      document.removeEventListener("pointerdown", listener);
-    };
-  }, [ref, handler]);
-}
