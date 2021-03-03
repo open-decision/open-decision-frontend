@@ -10,43 +10,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "todo-tree.highlights.defaultHighlight": {
-    "icon": "alert",
-    "type": "text",
-    "foreground": "red",
-    "background": "white",
-    "opacity": 50,
-    "iconColour": "blue",
-    "gutterIcon": true
-  },
-  "todo-tree.highlights.customHighlight": {
-    "TODO": {
-      "icon": "check",
-      "type": "line",
-      "iconColour": "green",
-      "foreground": "white",
-      "background": "green"
-    },
-    "TALK": {
-      "icon": "comment-discussion",
-      "type": "line",
-      "iconColour": "#8a8507",
-      "foreground": "black",
-      "background": "#fff70f"
-    },
-    "FIXME": {
-      "type": "line",
-      "iconColour": "#FA8743",
-      "foreground": "black",
-      "background": "#FA8743"
-    },
-    "BUG": {
-      "type": "line",
-      "foreground": "black",
-      "background": "red",
-      "iconColour": "red"
-    }
-  },
   "todo-tree.general.tags": [
     "XXX",
     "TODO",
@@ -64,10 +27,6 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
-    "**/.vscode": true
-  },
-  "explorerExclude.backup": null,
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#5d93ff"
+    "**/.vscode": false
   }
 }
