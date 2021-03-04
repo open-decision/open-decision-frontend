@@ -9,6 +9,8 @@ module.exports = {
   purge: ["./src/**/*.tsx", "./src/**/*.ts"],
   theme: {
     colors: {
+      primary: colors.emerald,
+      secondary: colors.amber,
       gray: colors.warmGray,
       green: colors.emerald,
       red: colors.rose,
