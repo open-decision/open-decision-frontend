@@ -3,20 +3,20 @@ import clsx from "clsx";
 
 const variantClasses = {
   filled:
-    "bg-green-300 hover:bg-green-400 text-green-800 shadow hover:shadow-lg",
+    "bg-primary-300 hover:bg-primary-400 text-primary-800 shadow hover:shadow-lg",
   outlined:
-    "border-2 border-green-400 hover:bg-green-200 text-green-800 shadow hover:shadow-lg",
-  text: "text-green-900 hover:text-green-700",
+    "border-2 border-primary-400 hover:bg-primary-200 text-primary-800 shadow hover:shadow-lg",
+  text: "text-primary-900 hover:text-primary-700",
   ghost: "text-gray-600 hover:text-gray-800",
   icon: "rounded-full w-10 h-10 overflow-hidden",
-} as const;
+};
 
 const sizeClasses = {
   small: "py-1 px-2 text-sm",
   normal: "py-2 px-4",
   large: "text-xl py-3 px-5 md:text-2xl md:py-6 md:px-8",
   filled: "p-0",
-} as const;
+};
 
 type buttonTypes = keyof typeof variantClasses;
 type buttonSizes = keyof typeof sizeClasses;
@@ -47,7 +47,7 @@ export const Button: Button = ({
       sizeClasses[size],
       variantClasses[variant],
       rounded && "rounded",
-      active && "border-b-2 border-green-500"
+      active && "border-b-2 border-primary-500"
     )}
     {...props}
   >

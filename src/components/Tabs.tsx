@@ -21,8 +21,8 @@ export const Tabs: React.FunctionComponent<Tabs> = ({
           <button
             key={Tab.label}
             className={clsx(
-              "flex-grow flex-basis-0 p-4 border-b-2 hover:bg-green-200 focus:bg-green-100 focus:outline-none",
-              { ["border-green-500 bg-green-50"]: active === Tab.label }
+              "flex-grow flex-basis-0 p-4 border-b-2 hover:bg-primary-200 focus:bg-primary-100 focus:outline-none",
+              { ["border-primary-500 bg-primary-50"]: active === Tab.label }
             )}
             onClick={() => setActive(Tab.label)}
           >

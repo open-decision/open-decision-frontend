@@ -13,7 +13,7 @@ import { ValidTreeNode } from "./types";
 type TreeCard = { tree: ValidTreeNode };
 
 const TreeCard: React.FC<TreeCard> = ({ tree }) => (
-  <div className="bg-gray-50 rounded-md shadow-md space-y-2 hover:shadow-lg transition-all duration-100 border-l-4 border-green-500">
+  <div className="bg-gray-50 rounded-md shadow-md space-y-2 hover:shadow-lg transition-all duration-100 border-l-4 border-primary-500">
     <div className="space-x-4 px-4 py-2 flex items-center">
       {tree.tags.map((tag) => (
         <Badge key={tag.name} color={tag.color} className="shadow-sm">

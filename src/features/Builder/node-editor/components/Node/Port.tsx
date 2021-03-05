@@ -10,7 +10,7 @@ import { Connection } from "../Connections/Connection";
 const portVariants = {
   connected: "h-4 w-4 bg-blue-500",
   unconnected: "h-7 w-7 bg-red-500 clickable",
-  target: "h-4 w-4 bg-green-500",
+  target: "h-4 w-4 bg-primary-500",
 };
 
 type Port = React.FC<

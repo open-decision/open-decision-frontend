@@ -7,7 +7,7 @@ const variants = {
   icon:
     "rounded-full w-10 h-10 overflow-hidden flex justify-center items-center clickable",
   button:
-    "bg-green-300 hover:bg-green-400 text-green-800 shadow hover:shadow-lg py-2 px-4 rounded font-bold",
+    "bg-primary-300 hover:bg-primary-400 text-primary-800 shadow hover:shadow-lg py-2 px-4 rounded font-bold",
 } as const;
 
 type linkVariants = keyof typeof variants;
