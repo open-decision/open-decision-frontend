@@ -25,8 +25,12 @@ module.exports = {
       minWidth: { "1/4": "25%", "1/2": "50%", "3/4": "75%" },
     },
   },
-  variants: { backgroundColor: ["responsive", "hover", "focus", "active"] },
+  variants: {
+    backgroundColor: ["responsive", "hover", "focus", "active"],
+    ringColor: ["valid", "invalid"],
+  },
   plugins: [
+    require("tailwindcss-pseudo-selectors"),
     plugin(function ({ addUtilities }) {
       const newUtilities = {
         ".clickable:active": {
