@@ -39,7 +39,7 @@ const TreeCard: React.FC<TreeCard> = ({ tree }) => (
         >
           Archivieren
         </Button>
-        <Button variant="outlined">Öffnen</Button>
+        <Button variant="outlinedPrimary">Öffnen</Button>
       </div>
     </div>
   </div>

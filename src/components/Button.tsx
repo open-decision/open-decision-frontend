@@ -2,11 +2,11 @@ import React from "react";
 import clsx from "clsx";
 
 const variantClasses = {
-  filled:
+  filledPrimary:
     "bg-primary-300 hover:bg-primary-400 text-primary-800 shadow hover:shadow-lg",
-  outlined:
+  outlinedPrimary:
     "border-2 border-primary-400 hover:bg-primary-200 text-primary-800 shadow hover:shadow-lg",
-  text: "text-primary-900 hover:text-primary-700",
+  textPrimary: "text-primary-900 hover:text-primary-700",
   ghost: "text-gray-600 hover:text-gray-800",
   icon: "rounded-full w-10 h-10 overflow-hidden",
 };
@@ -34,7 +34,7 @@ type Button = React.FC<
 export const Button: Button = ({
   className = "",
   children,
-  variant = "filled",
+  variant = "filledPrimary",
   size = "normal",
   rounded = true,
   active = false,
