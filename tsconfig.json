@@ -4,10 +4,10 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
-      "@internalTypes/*": ["types/*"],
-      "@components/*": ["components/*"],
-      "@features/*": ["features/*"],
-      "@utils/*": ["utils/*"]
+      "internalTypes*": ["types*", "types"],
+      "components*": ["components*", "components"],
+      "features*": ["features*", "features"],
+      "utils*": ["utils*", "utils"]
     },
     "module": "ESNext",
     "types": [],
