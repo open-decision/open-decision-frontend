@@ -65,6 +65,7 @@
     "clsx": "^1.1.1",
     "d3-shape": "^2.0.0",
     "date-fns": "^2.18.0",
+    "focus-trap-react": "^8.4.2",
     "fp-ts": "^2.9.5",
     "framer-motion": "^3.9.1",
     "graphql": "^15.5.0",

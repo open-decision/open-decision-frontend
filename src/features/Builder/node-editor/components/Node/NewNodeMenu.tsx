@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { coordinates } from "../../types";
 import { nanoid } from "nanoid/non-secure";
 import { useNewNodeMenu } from "./useModal";
+import FocusTrap from "focus-trap-react";
 
 type NewNodeMenuProps = {
   className?: string;
@@ -24,33 +25,35 @@ export const NewNodeMenu: React.FC<NewNodeMenuProps> = ({ className }) => {
   );
 
   return (
-    <div
-      className={clsx(
-        "bg-gray-100 rounded shadow-2xl border-gray-300 border-2 min-w-max absolute z-50",
-        className
-      )}
-      style={{ left: coordinates[0], top: coordinates[1] }}
-      ref={ref}
-    >
-      <h2 className="text-lg border-b-2 border-gray-30 p-2">
-        Neuen Knoten hinzufügen
-      </h2>
-      <div className="pt-3 p-2 space-y-2">
-        {options.map((option) => (
-          <MenuEntry
-            key={option.label}
-            color={option.color}
-            nodeType={option.type}
-            coordinates={nodeCoordinates}
-            width={option.width}
-            close={closeModal}
-            nodeId={nodeId}
-          >
-            {option.label}
-          </MenuEntry>
-        ))}
+    <FocusTrap>
+      <div
+        className={clsx(
+          "bg-gray-100 rounded shadow-2xl border-gray-300 border-2 min-w-max absolute z-50",
+          className
+        )}
+        style={{ left: coordinates[0], top: coordinates[1] }}
+        ref={ref}
+      >
+        <h2 className="text-lg border-b-2 border-gray-30 p-2">
+          Neuen Knoten hinzufügen
+        </h2>
+        <div className="pt-3 p-2 space-y-2">
+          {options.map((option) => (
+            <MenuEntry
+              key={option.label}
+              color={option.color}
+              nodeType={option.type}
+              coordinates={nodeCoordinates}
+              width={option.width}
+              close={closeModal}
+              nodeId={nodeId}
+            >
+              {option.label}
+            </MenuEntry>
+          ))}
+        </div>
       </div>
-    </div>
+    </FocusTrap>
   );
 };
 
