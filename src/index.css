@@ -6,7 +6,7 @@ body {
 @tailwind base;
 @tailwind components;
 
-:is(button, a, input):focus {
+:is(a, input):focus {
   @apply outline-none ring;
 }
 
