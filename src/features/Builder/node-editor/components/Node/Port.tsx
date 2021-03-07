@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { Portal } from "react-portal";
+import Portal from "@reach/portal";
 import { pipe, prop } from "remeda";
 import { useEdgesStore } from "../../globalState";
 import { coordinates } from "../../types";

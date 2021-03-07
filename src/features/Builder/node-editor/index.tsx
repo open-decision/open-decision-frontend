@@ -21,7 +21,7 @@ import {
 import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
 import { useNewNodeMenu } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
-import { Portal } from "react-portal";
+import Portal from "@reach/portal";
 import shallow from "zustand/shallow";
 import { useSidebarState } from "./components/Node/useSidebar";
 import { NodeEditingSidebar } from "./components/Node/NodeEditingSidebar";
