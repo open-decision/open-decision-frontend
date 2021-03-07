@@ -5,8 +5,10 @@ import { NewspaperOutline } from "@graywolfai/react-heroicons";
 import clsx from "clsx";
 import { coordinates } from "../../types";
 import { nanoid } from "nanoid/non-secure";
-import { useNewNodeMenu } from "./useModal";
+import { useNewNodeMenu } from "./useNewNodeMenu";
 import FocusTrap from "focus-trap-react";
+import { FilledButton } from "components";
+import { GhostButton } from "components/Buttons/GhostButton";
 
 type NewNodeMenuProps = {
   className?: string;
@@ -88,7 +90,7 @@ const MenuEntry: MenuEntry = ({
   ];
 
   return (
-    <button
+    <GhostButton
       {...props}
       className="min-w-max w-full flex justify-start p-1 items-center rounded"
       onClick={() => {
@@ -100,6 +102,6 @@ const MenuEntry: MenuEntry = ({
     >
       <NewspaperOutline className="h-4 w-4 mr-2" style={{ color: color }} />
       {children}
-    </button>
+    </GhostButton>
   );
 };

@@ -9,7 +9,7 @@ import shallow from "zustand/shallow";
 import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
-import { useNewNodeMenu } from "./useModal";
+import { useNewNodeMenu } from "./useNewNodeMenu";
 import { useSidebarState } from "./useSidebar";
 import clsx from "clsx";
 

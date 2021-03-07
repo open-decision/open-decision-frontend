@@ -19,7 +19,7 @@ import {
   portTypes,
 } from "./types";
 import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
-import { useNewNodeMenu } from "./components/Node/useModal";
+import { useNewNodeMenu } from "./components/Node/useNewNodeMenu";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
 import Portal from "@reach/portal";
 import shallow from "zustand/shallow";
