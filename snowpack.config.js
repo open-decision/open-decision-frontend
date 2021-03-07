@@ -9,8 +9,8 @@ module.exports = {
     [
       "@snowpack/plugin-run-script",
       {
-        cmd: "postcss src/index.css -o src/compiled.css",
-        watch: "postcss src/index.css -o src/compiled.css -w",
+        cmd: "postcss src/index.css -o src/index.css",
+        watch: "postcss src/index.css -o src/index.css -w",
       },
     ],
   ],

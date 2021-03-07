@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Layout } from "components";
 import { Builder } from "features";
-import "./compiled.css";
+import "./index.css";
 
 export const App: React.FC = () => {
   return (
