@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { buttonBase, CommonButtonProps } from "./shared";
+import { defaultButtonBase, CommonButtonProps } from "./shared";
 
 const sizes = {
   small: "p-1",
@@ -22,7 +22,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   <button
     className={clsx(
       className,
-      buttonBase,
+      defaultButtonBase,
       "rounded-full overflow-hidden border-2",
       sizes[size],
       active ? "border-primary-500" : "border-gray-200"

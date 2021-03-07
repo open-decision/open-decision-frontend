@@ -12,6 +12,7 @@ import { Port } from "./Port";
 import { useNewNodeMenu } from "./useNewNodeMenu";
 import { useSidebarState } from "./useSidebar";
 import clsx from "clsx";
+import { GhostButton } from "components/Buttons/GhostButton";
 
 type NodeProps = {
   /**
@@ -76,7 +77,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
       {...boxGestures()}
     >
       {/* This is the body of the Node. */}
-      <button
+      <GhostButton
         className={clsx(
           "bg-gray-100 rounded shadow-lg flex flex-col select-none border-l-4 hover:shadow-xl transition-shadow duration-200 col-start-2 col-end-5 row-span-full",
           dragging ? "opacity-100" : "opacity-80"
@@ -92,7 +93,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           />
           <h2 className="font-semibold flex-1 text-left">{node.name}</h2>
         </div>
-      </button>
+      </GhostButton>
       {/* These are the Ports of the Nodes. There is only one Port on each side. The Output Port can also be an unconnected port. This port looks different and has a menu to create a new Node. Above we get the outputConnections and here we use them to decide which port to render. */}
       <Port
         nodeId={id}

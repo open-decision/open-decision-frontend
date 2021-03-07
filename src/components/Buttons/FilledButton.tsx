@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import {
-  buttonBase,
+  defaultButtonBase,
   CommonButtonProps,
   buttonSizes,
   buttonVariants,
@@ -43,7 +43,7 @@ export const FilledButton: React.FC<FilledButtonProps> = ({
   <button
     className={clsx(
       className,
-      buttonBase,
+      defaultButtonBase,
       variants[variant],
       buttonSizes[size],
       rounded && "rounded",

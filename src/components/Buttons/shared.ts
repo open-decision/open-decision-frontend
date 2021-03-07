@@ -1,5 +1,7 @@
 export const buttonBase =
-  "font-bold transition-all duration-100 inline-flex items-center clickable justify-center shadow hover:shadow-lg focus:outline-none focus:ring";
+  "font-bold transition-all duration-100 clickable focus:outline-none focus:ring";
+
+export const defaultButtonBase = `${buttonBase} inline-flex items-center justify-center shadow hover:shadow-lg`;
 
 export const buttonVariants = {
   ghost: "text-gray-600 hover:text-gray-800",

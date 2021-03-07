@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import {
-  buttonBase,
+  defaultButtonBase,
   buttonSizes,
   buttonVariants,
   CommonButtonProps,
@@ -31,7 +31,7 @@ export const OutlinedButton: React.FC<OutlinedButtonProps> = ({
   <button
     className={clsx(
       className,
-      buttonBase,
+      defaultButtonBase,
       variants[variant],
       buttonSizes[size],
       rounded && "rounded",
