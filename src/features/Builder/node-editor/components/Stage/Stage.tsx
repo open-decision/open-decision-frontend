@@ -58,7 +58,13 @@ export const Stage: Stage = ({
       // We track the mousewheel and zoom in and out of the Stage.
       onWheel: ({ delta: [, y] }) => setZoom(y),
       // We track the drag and pan the Stage based on the previous coordinates and the delta (change) in the coordinates.
-      onDrag: ({ movement }) => setCoordinates(movement),
+      onDrag: ({ movement, buttons, cancel }) => {
+        //The panning should not work on right mouse click.
+        const isValidClick = buttons === 1 || buttons === 4;
+
+        // We cancel the event when the wrong button has been used. Otherwise we perform the operation
+        isValidClick ? setCoordinates(movement) : cancel();
+      },
       //This gesture enables panning of the Stage when the mouse is moved. We need this to make the Stage pannable when the Space key is pressed.
       onMove: ({ movement }) => setCoordinates(movement),
     },
