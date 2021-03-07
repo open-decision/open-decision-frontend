@@ -1,16 +1,16 @@
 import React from "react";
-import { LogoutButton } from "@features/index";
-import { Logo, Dropdown } from "@components/index";
-import { useAuth } from "@features/Auth/AuthContext";
-import { InternalLink } from "./Links";
+import { LogoutButton } from "features";
+import { Logo, Dropdown } from "components";
+import { useAuth } from "features/Auth/AuthContext";
+import { Link } from "./Links";
 import { UserCircleOutline } from "@graywolfai/react-heroicons";
 
 export const Header: React.FC = ({ children }) => {
   const { token } = useAuth();
 
   return (
-    <div className="bg-gray-100 px-4 md:px-8 shadow-md z-50">
-      <div className="flex justify-between items-stretch space-x-8">
+    <div className="bg-gray-100 px-4 md:px-8 shadow-md z-50 py-2">
+      <div className="flex justify-between items-center space-x-8">
         <Logo className="my-4" />
         {children}
         <Dropdown
@@ -26,12 +26,12 @@ export const Header: React.FC = ({ children }) => {
             )
           }
         >
-          <InternalLink to="./profile" className="menu-link">
+          <Link to="./profile" className="menu-link">
             Profil
-          </InternalLink>
-          <InternalLink to="./settings" className="menu-link">
+          </Link>
+          <Link to="./settings" className="menu-link">
             Einstellungen
-          </InternalLink>
+          </Link>
           <div className="flex space-x-6 border-t-2 pt-3 mt-6 border-gray-400">
             <LogoutButton />
           </div>

@@ -1,30 +1,27 @@
 import clsx from "clsx";
 import React from "react";
-import { Link as RouterLink, LinkProps } from "react-router-dom";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
 
-const variants = {
-  default: "",
-  icon:
-    "rounded-full w-10 h-10 overflow-hidden flex justify-center items-center clickable",
-  button:
-    "bg-primary-300 hover:bg-primary-400 text-primary-800 shadow hover:shadow-lg py-2 px-4 rounded font-bold",
-} as const;
+type CommonLinkProps = {
+  /**
+   * Styles the link tag.
+   */
+  className?: string;
+};
 
-type linkVariants = keyof typeof variants;
+type InternalLinkProps = CommonLinkProps & RouterLinkProps;
 
-type InternalLink = React.FC<
-  LinkProps & { variant?: linkVariants; className?: string }
->;
-
-export const InternalLink: InternalLink = ({
+const InternalLink: React.FC<InternalLinkProps> = ({
   children,
   className,
-  variant = "default",
   ...props
 }) => {
   return (
     <RouterLink
-      className={clsx(variants[variant], className, "no-underline text-base")}
+      className={clsx(className, "no-underline text-base")}
       {...props}
     >
       {children}
@@ -32,23 +29,30 @@ export const InternalLink: InternalLink = ({
   );
 };
 
-type Link = React.FC<
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    variant?: linkVariants;
-    className?: string;
-  }
->;
+type ExternalLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  CommonLinkProps;
 
-export const Link: Link = ({
+const ExternalLink: React.FC<ExternalLinkProps> = ({
   children,
-  variant = "default",
   className,
   ...props
 }) => (
-  <a
-    className={clsx(variants[variant], className, "no-underline text-base")}
-    {...props}
-  >
+  <a className={clsx(className, "no-underline text-base")} {...props}>
     {children}
   </a>
 );
+
+const hasHref = (
+  props: InternalLinkProps | ExternalLinkProps
+): props is ExternalLinkProps => "href" in props;
+
+export type LinkProps = InternalLinkProps | ExternalLinkProps;
+
+/**
+ * Should be used as a replacement for `a` tags and react router links. Renders the right element depending on the `href` or `to` prop.
+ */
+export const Link: React.FC<LinkProps> = (props) => {
+  if (hasHref(props)) return <ExternalLink {...props} />;
+
+  return <InternalLink {...props} />;
+};

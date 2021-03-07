@@ -1,8 +1,17 @@
 import clsx from "clsx";
 import React from "react";
-import { Input } from "./Input";
+import { InputProps } from "./Input";
 
-export const FileInput: Input = ({ className, children, ...props }) => (
+export type FileInputProps = InputProps;
+
+/**
+ * A custom Form element wrapping the native file input type.
+ */
+export const FileInput: React.FC<FileInputProps> = ({
+  className,
+  children,
+  ...props
+}) => (
   <label
     className={clsx(
       className,
