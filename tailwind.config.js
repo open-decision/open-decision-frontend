@@ -2,10 +2,6 @@ const plugin = require("@tailwindcss/postcss7-compat/plugin");
 const colors = require("@tailwindcss/postcss7-compat/colors");
 
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: ["./src/**/*.tsx", "./src/**/*.ts"],
   theme: {
     colors: {
@@ -27,10 +23,8 @@ module.exports = {
   },
   variants: {
     backgroundColor: ["responsive", "hover", "focus", "active"],
-    ringColor: ["valid", "invalid"],
   },
   plugins: [
-    require("tailwindcss-pseudo-selectors"),
     plugin(function ({ addUtilities }) {
       const newUtilities = {
         ".clickable:active": {

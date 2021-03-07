@@ -7,10 +7,11 @@ module.exports = {
     "@snowpack/plugin-typescript",
     "@canarise/snowpack-eslint-plugin",
     [
-      "@snowpack/plugin-run-script",
+      "@snowpack/plugin-build-script",
       {
-        cmd: "postcss src/index.css -o src/index.css",
-        watch: "postcss src/index.css -o src/index.css -w",
+        cmd: "postcss",
+        input: [".css"],
+        output: [".css"],
       },
     ],
   ],
