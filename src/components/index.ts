@@ -4,6 +4,7 @@ export * from "./Links";
 export * from "./Buttons/FilledButton";
 export * from "./Buttons/IconButton";
 export * from "./Buttons/OutlinedButton";
+export * from "./Buttons/GhostButton";
 export * from "./Logo";
 export * from "./Dropdown";
 export * from "./Field";

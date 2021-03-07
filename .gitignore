@@ -10,6 +10,7 @@ dist
 generated
 tsconfig.tsbuildinfo
 compiled.css
+storybook-static
 
 # misc
 .DS_Store

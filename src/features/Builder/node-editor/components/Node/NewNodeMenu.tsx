@@ -7,8 +7,7 @@ import { coordinates } from "../../types";
 import { nanoid } from "nanoid/non-secure";
 import { useNewNodeMenu } from "./useNewNodeMenu";
 import FocusTrap from "focus-trap-react";
-import { FilledButton } from "components";
-import { GhostButton } from "components/Buttons/GhostButton";
+import { GhostButton } from "components";
 
 type NewNodeMenuProps = {
   className?: string;
