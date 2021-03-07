@@ -14,7 +14,7 @@
     "lint": "eslint src --ext ts,js,tsx,jsx",
     "clean": "rimraf dist *.tsbuildinfo",
     "storybook": "start-storybook -p 6006 --ci",
-    "build-storybook": "build-storybook"
+    "build-storybook": "npm run codegen && build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
