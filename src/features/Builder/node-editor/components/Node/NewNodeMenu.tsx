@@ -5,14 +5,14 @@ import { NewspaperOutline } from "@graywolfai/react-heroicons";
 import clsx from "clsx";
 import { coordinates } from "../../types";
 import { nanoid } from "nanoid/non-secure";
-import { useModal } from "./useModal";
+import { useNewNodeMenu } from "./useModal";
 
 type NewNodeMenuProps = {
   className?: string;
 };
 
 export const NewNodeMenu: React.FC<NewNodeMenuProps> = ({ className }) => {
-  const { coordinates, closeModal, nodeId, ref } = useModal();
+  const { coordinates, closeMenu: closeModal, nodeId, ref } = useNewNodeMenu();
 
   const nodeTypes = useNodesStore((state) => state.nodeTypes);
   const options = Object.values(nodeTypes).map((nodeType) =>

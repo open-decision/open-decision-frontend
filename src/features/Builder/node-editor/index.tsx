@@ -19,7 +19,7 @@ import {
   portTypes,
 } from "./types";
 import { NewNodeToolbar } from "./components/NewNodeToolbar/NewNodeToolbar";
-import { useModal } from "./components/Node/useModal";
+import { useNewNodeMenu } from "./components/Node/useModal";
 import { NewNodeMenu } from "./components/Node/NewNodeMenu";
 import { Portal } from "react-portal";
 import shallow from "zustand/shallow";
@@ -101,8 +101,8 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
   const setNodes = useNodesStore((state) => state.setNodes, shallow);
   const setEdges = useEdgesStore((state) => state.setEdges, shallow);
 
-  const { open: openMenu } = useModal();
-  const openSidebar = useSidebarState((state) => state.open);
+  const { isMenuOpen } = useNewNodeMenu();
+  const isSidebarOpen = useSidebarState((state) => state.open);
 
   React.useEffect(() => {
     setZoom(state.zoom);
@@ -141,13 +141,13 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({
       >
         <ConnectionsWrapper />
         <Nodes />
-        {openMenu && (
+        {isMenuOpen && (
           <Portal>
             <NewNodeMenu />
           </Portal>
         )}
       </Stage>
-      {openSidebar && (
+      {isSidebarOpen && (
         <NodeEditingSidebar
           className="bg-gray-100 z-10"
           style={{ gridColumn: "3 / 4", gridRow: "1" }}

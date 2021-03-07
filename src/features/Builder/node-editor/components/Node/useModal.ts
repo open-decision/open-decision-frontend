@@ -5,41 +5,49 @@ import React from "react";
 
 type useModal = () => ModalState & { ref: React.MutableRefObject<null> };
 
-export const useModal: useModal = () => {
+export const useNewNodeMenu: useModal = () => {
   const [
-    open,
+    isMenuOpen,
     coordinates,
     nodeId,
-    openModal,
-    closeModal,
-  ] = useModalState((state) => [
-    state.open,
+    openMenu,
+    closeMenu,
+  ] = useMenuState((state) => [
+    state.isMenuOpen,
     state.coordinates,
     state.nodeId,
-    state.openModal,
-    state.closeModal,
+    state.openMenu,
+    state.closeMenu,
   ]);
 
   const ref = React.useRef(null);
 
-  useClickAway(ref, () => closeModal());
-  useKeyPressEvent("Escape", () => closeModal());
+  useClickAway(ref, () => closeMenu());
+  useKeyPressEvent("Escape", () => closeMenu());
 
-  return { open, coordinates, nodeId, openModal, closeModal, ref };
+  return {
+    isMenuOpen,
+    coordinates,
+    nodeId,
+    openMenu: openMenu,
+    closeMenu: closeMenu,
+    ref,
+  };
 };
 
 type ModalState = {
-  open: boolean;
+  isMenuOpen: boolean;
   coordinates: coordinates;
   nodeId: string;
-  openModal: (coordinates: coordinates, nodeId: string) => void;
-  closeModal: () => void;
+  openMenu: (coordinates: coordinates, nodeId: string) => void;
+  closeMenu: () => void;
 };
 
-const useModalState = create<ModalState>((set) => ({
-  open: false,
+const useMenuState = create<ModalState>((set) => ({
+  isMenuOpen: false,
   coordinates: [0, 0],
   nodeId: "",
-  openModal: (coordinates, nodeId) => set({ open: true, coordinates, nodeId }),
-  closeModal: () => set({ open: false, coordinates: [0, 0], nodeId: "" }),
+  openMenu: (coordinates, nodeId) =>
+    set({ isMenuOpen: true, coordinates, nodeId }),
+  closeMenu: () => set({ isMenuOpen: false, coordinates: [0, 0], nodeId: "" }),
 }));

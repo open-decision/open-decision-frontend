@@ -9,7 +9,7 @@ import shallow from "zustand/shallow";
 import { ChatOutline, PlusOutline } from "@graywolfai/react-heroicons";
 import { getOutputConnections } from "./utilities";
 import { Port } from "./Port";
-import { useModal } from "./useModal";
+import { useNewNodeMenu } from "./useModal";
 import { useSidebarState } from "./useSidebar";
 import clsx from "clsx";
 
@@ -36,7 +36,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
   );
   const [dragging, setDragging] = React.useState(false);
 
-  const { openModal } = useModal();
+  const { openMenu } = useNewNodeMenu();
   const openSidebar = useSidebarState((state) => state.openSidebar);
 
   //-----------------------------------------------------------------------
@@ -117,7 +117,7 @@ export const Node: React.FC<NodeProps> = ({ id }) => {
           <button
             onClick={(event) => {
               event.stopPropagation();
-              openModal([event.pageX, event.pageY], id);
+              openMenu([event.pageX, event.pageY], id);
             }}
             className="w-full h-full p-1"
           >
