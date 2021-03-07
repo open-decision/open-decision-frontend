@@ -1,10 +1,6 @@
 import React from "react";
 import { PlusCircleOutline } from "@graywolfai/react-heroicons";
-import {
-  useAll_TreesQuery,
-  useCreate_TreeMutation,
-} from "@internalTypes/generated/graphql";
-import { Button } from "@components/index";
+import { useAll_TreesQuery, useCreate_TreeMutation } from "internalTypes";
 import { TreeList } from "./TreeList";
 import { data } from "./testData";
 import { validateTreeData } from "./dataValidation";

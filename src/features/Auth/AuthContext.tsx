@@ -2,7 +2,7 @@ import {
   useLogin_UserMutation,
   useLogout_UserMutation,
   useRegister_UserMutation,
-} from "@internalTypes/generated/graphql";
+} from "internalTypes";
 import React from "react";
 
 type AuthContext = { token: string; expires: number; refreshToken: string };

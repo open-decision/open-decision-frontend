@@ -1,7 +1,7 @@
 import * as T from "io-ts";
 import * as E from "fp-ts/lib/Either";
 import { withMessage } from "io-ts-types/lib/withMessage";
-import { badgeColors } from "@components/Badge";
+import { badgeColors } from "internalTypes";
 
 export const Tag = T.type({
   name: T.string,

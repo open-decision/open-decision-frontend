@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
-import { useAuth } from "@features/Auth/AuthContext";
+import { useAuth } from "features";
 
 export const ProtectedRoute: FunctionComponent<RouteProps> = ({
   children,

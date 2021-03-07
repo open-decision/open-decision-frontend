@@ -1,8 +1,7 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FunctionComponent } from "react";
-import { LocationState } from "@internalTypes/types";
-import { Button } from "@components/index";
+import { LocationState } from "internalTypes";
 import { useAuthMethods } from "./AuthContext";
 
 //This type defines the props the LoginButton component accepts

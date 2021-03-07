@@ -1,8 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Layout } from "@components/index";
-import { Builder } from "@features/index";
-import "./index.css";
+import { Builder } from "features";
 
 export const App: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { EditorState, NodeEditor } from "./node-editor";
 import { Button, FileInput, Header, Input } from "@components/index";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
-import { useFileReader } from "@utils/index";
+import { useFileReader } from "utils";
 import {
   // exampleNodes,
   exampleNodeTypes,

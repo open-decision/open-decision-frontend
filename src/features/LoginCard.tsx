@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Field, Logo, Tabs } from "@components/index";
-import { LocationState } from "@internalTypes/types";
-import { useAuthMethods } from "./Auth/AuthContext";
+import { LocationState } from "internalTypes";
+import { useAuthMethods } from "features";
 import { useHistory, useLocation } from "react-router-dom";
 
 export const LoginCard: React.FunctionComponent = () => {

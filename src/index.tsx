@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "regenerator-runtime/runtime";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
-import { client } from "./features/Data/DataFetchingClient";
+import { client, AuthProvider } from "features";
 import { Provider } from "urql";
 import { AuthProvider } from "./features/Auth/AuthContext";
 
