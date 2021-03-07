@@ -2,7 +2,7 @@ import React from "react";
 import { matchSorter } from "match-sorter";
 import { readableDate } from "./utils";
 import { parseISO } from "date-fns/esm";
-import { Field } from "@components/index";
+import { Field } from "components";
 import { Tag, ValidTreeNode } from "./types";
 
 type GlobalFilter = {
@@ -16,31 +16,17 @@ export const Search: React.FunctionComponent<GlobalFilter> = ({
   setValue,
   className,
   ...props
-}) => {
-  // const debouncedFilter = useAsyncDebounce((value) => {
-  //   setValue(value || undefined);
-  // }, 200);
-
-  // const onChange = (value) => {
-  //   setValue(value);
-  //   // debouncedFilter(value);
-  // };
-
-  return (
-    <Field
-      //FIXME related to Tailwind vs code extension => classNames as a prop does not trigger autocomplete => https://github.com/tailwindlabs/tailwindcss-intellisense/issues/129
-      //class="
-      classNames={{ box: className }}
-      // "
-      layout="inline"
-      name="search"
-      label="Suche: "
-      value={value || ""}
-      onChange={(e) => setValue(e.target.value)}
-      {...props}
-    />
-  );
-};
+}) => (
+  <Field
+    containerClasses={className}
+    variant="inline"
+    name="search"
+    label="Suche: "
+    value={value || ""}
+    onChange={(e) => setValue(e.target.value)}
+    {...props}
+  />
+);
 
 export const fuzzySearch = (
   data: ValidTreeNode[],

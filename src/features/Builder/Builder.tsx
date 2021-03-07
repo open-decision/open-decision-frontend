@@ -1,6 +1,6 @@
 import React from "react";
 import { EditorState, NodeEditor } from "./node-editor";
-import { Button, FileInput, Header, Input } from "@components/index";
+import { FilledButton, FileInput, Header, Input } from "components";
 import { ChevronRightOutline } from "@graywolfai/react-heroicons";
 import { useFileReader } from "utils";
 import {
@@ -81,9 +81,9 @@ export const Builder: React.FC = () => {
                 }
               />
               <div className="space-x-4 self-center py-2">
-                <Button>Preview</Button>
-                <Button>Export</Button>
-                <Button>Speichern</Button>
+                <FilledButton>Preview</FilledButton>
+                <FilledButton>Export</FilledButton>
+                <FilledButton>Speichern</FilledButton>
               </div>
             </>
           ) : null}
@@ -104,10 +104,12 @@ export const Builder: React.FC = () => {
                   value={number}
                   onChange={(event) => setNumber(Number(event.target.value))}
                 />
-                <Button onClick={() => setData(initialEditorState(number))}>
+                <FilledButton
+                  onClick={() => setData(initialEditorState(number))}
+                >
                   <ChevronRightOutline className="w-6" />
                   Starten
-                </Button>
+                </FilledButton>
               </div>
 
               <p className="text-lg">

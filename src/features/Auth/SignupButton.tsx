@@ -1,6 +1,6 @@
 import React from "react";
 import { FunctionComponent } from "react";
-import { Button } from "@components/index";
+import { FilledButton } from "components";
 import { useAuthMethods } from "./AuthContext";
 
 type SignupButton = {
@@ -22,12 +22,11 @@ export const SignupButton: FunctionComponent<SignupButton> = ({
 
   //TODO handle Auth Failure in UI
   return (
-    <Button
-      variant="filled"
+    <FilledButton
       onClick={() => signup({ email, username, password1, password2 })}
       className={className}
     >
       Registrieren
-    </Button>
+    </FilledButton>
   );
 };

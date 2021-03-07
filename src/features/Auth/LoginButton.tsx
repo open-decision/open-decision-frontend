@@ -2,9 +2,10 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FunctionComponent } from "react";
 import { LocationState } from "internalTypes";
+import { FilledButton } from "components";
 import { useAuthMethods } from "./AuthContext";
 
-//This type defines the props the LoginButton component accepts
+//This type defines the props the LoginButton components accepts
 type Props = {
   className?: string;
   email?: string;
@@ -29,12 +30,11 @@ export const LoginButton: FunctionComponent<Props> = ({
   //FIXME handle Errors in UI
   //This is the Button that is shown in the UI. onClick is called when the user clicks the Button.
   return (
-    <Button
-      variant="filled"
+    <FilledButton
       className={className}
       onClick={() => login({ email, password }, () => history.replace(from))}
     >
       Login
-    </Button>
+    </FilledButton>
   );
 };
